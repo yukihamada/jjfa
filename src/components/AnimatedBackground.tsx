@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import Particles from "react-particles";
 import { loadSlim } from "tsparticles-slim";
-import type { Container, Engine } from "tsparticles-engine";
+import type { Engine } from "tsparticles-engine";
 
 const AnimatedBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -21,14 +21,18 @@ const AnimatedBackground = () => {
         fpsLimit: 120,
         particles: {
           color: {
-            value: "#1e293b",
+            value: ["#1e293b", "#334155", "#475569"],
           },
           links: {
             color: "#334155",
-            distance: 150,
+            distance: 200,
             enable: true,
             opacity: 0.3,
             width: 1,
+            triangles: {
+              enable: true,
+              opacity: 0.1
+            }
           },
           move: {
             direction: "none",
@@ -37,11 +41,29 @@ const AnimatedBackground = () => {
               default: "bounce",
             },
             random: true,
-            speed: 3,
+            speed: 2,
             straight: false,
+            path: {
+              enable: true,
+              delay: {
+                value: 0.1
+              },
+              options: {
+                size: 5,
+                draw: false,
+                increment: 0.001
+              }
+            },
+            trail: {
+              enable: true,
+              length: 3,
+              fill: {
+                color: "#f1f5f9"
+              }
+            },
             attract: {
               enable: true,
-              rotateX: 600,
+              rotateX: 1200,
               rotateY: 1200
             }
           },
@@ -50,24 +72,56 @@ const AnimatedBackground = () => {
               enable: true,
               area: 800,
             },
-            value: 60,
+            value: 50,
           },
           opacity: {
             value: 0.4,
+            animation: {
+              enable: true,
+              speed: 0.5,
+              minimumValue: 0.1
+            }
           },
           shape: {
-            type: "circle",
+            type: ["circle", "triangle"],
           },
           size: {
             value: { min: 1, max: 3 },
+            animation: {
+              enable: true,
+              speed: 2,
+              minimumValue: 0.5
+            }
           },
           wobble: {
             enable: true,
-            distance: 10,
-            speed: 10
+            distance: 15,
+            speed: 5
+          },
+          roll: {
+            enable: true,
+            speed: 5
           }
         },
         detectRetina: true,
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onHover: {
+              enable: true,
+              mode: "grab"
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 200,
+              links: {
+                opacity: 0.5
+              }
+            }
+          }
+        }
       }}
       className="absolute inset-0 -z-10"
     />

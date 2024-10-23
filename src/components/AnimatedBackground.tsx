@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
-import type { Engine } from "tsparticles-engine";
+import { Particles } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import type { Engine } from "@tsparticles/engine";
 
 const AnimatedBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -12,118 +12,50 @@ const AnimatedBackground = () => {
     <Particles
       id="tsparticles"
       init={particlesInit}
+      className="absolute inset-0 -z-10"
       options={{
         background: {
           color: {
-            value: "#f8fafc",
+            value: "transparent",
           },
         },
         fpsLimit: 120,
         particles: {
           color: {
-            value: ["#1e293b", "#334155", "#475569"],
+            value: "#6b7280",
           },
           links: {
-            color: "#334155",
-            distance: 200,
+            color: "#6b7280",
+            distance: 150,
             enable: true,
-            opacity: 0.3,
+            opacity: 0.2,
             width: 1,
-            triangles: {
-              enable: true,
-              opacity: 0.1
-            }
           },
           move: {
-            direction: "none",
             enable: true,
-            outModes: {
-              default: "bounce",
-            },
-            random: true,
-            speed: 2,
+            random: false,
+            speed: 1,
             straight: false,
-            path: {
-              enable: true,
-              delay: {
-                value: 0.1
-              },
-              options: {
-                size: 5,
-                draw: false,
-                increment: 0.001
-              }
-            },
-            trail: {
-              enable: true,
-              length: 3,
-              fill: {
-                color: "#f1f5f9"
-              }
-            },
-            attract: {
-              enable: true,
-              rotateX: 1200,
-              rotateY: 1200
-            }
           },
           number: {
             density: {
               enable: true,
               area: 800,
             },
-            value: 50,
+            value: 80,
           },
           opacity: {
-            value: 0.4,
-            animation: {
-              enable: true,
-              speed: 0.5,
-              minimumValue: 0.1
-            }
+            value: 0.2,
           },
           shape: {
-            type: ["circle", "triangle"],
+            type: "circle",
           },
           size: {
-            value: { min: 1, max: 3 },
-            animation: {
-              enable: true,
-              speed: 2,
-              minimumValue: 0.5
-            }
+            value: { min: 1, max: 5 },
           },
-          wobble: {
-            enable: true,
-            distance: 15,
-            speed: 5
-          },
-          roll: {
-            enable: true,
-            speed: 5
-          }
         },
         detectRetina: true,
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onHover: {
-              enable: true,
-              mode: "grab"
-            },
-            resize: true
-          },
-          modes: {
-            grab: {
-              distance: 200,
-              links: {
-                opacity: 0.5
-              }
-            }
-          }
-        }
       }}
-      className="fixed inset-0 -z-10"
     />
   );
 };

@@ -14,6 +14,7 @@ const GlobalNav = () => {
       <div className="bg-white/90 backdrop-blur-md shadow-md w-full transition-all duration-300 ease-in-out">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
+            {/* 左側: ロゴ */}
             <Link 
               to="/" 
               className="text-slate-800 hover:text-slate-600 font-bold text-xl flex items-center gap-2 transition-transform duration-300 hover:scale-105"
@@ -22,6 +23,7 @@ const GlobalNav = () => {
               <span className="hidden sm:inline text-sm text-slate-600">Jiu-Jitsu For ALL</span>
             </Link>
 
+            {/* 中央: メインナビゲーション */}
             <nav className="hidden lg:flex items-center gap-6">
               <Link 
                 to="/whitepaper" 
@@ -35,19 +37,23 @@ const GlobalNav = () => {
               >
                 {t('nav.contact')}
               </a>
-              <LanguageSelector />
             </nav>
 
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 hover:bg-slate-100 rounded-md transition-colors duration-300 ease-in-out"
-              aria-label="Toggle menu"
-            >
-              <Menu className={`h-6 w-6 text-slate-600 transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`} />
-            </button>
+            {/* 右側: 言語切り替えとモバイルメニューボタン */}
+            <div className="flex items-center gap-4">
+              <LanguageSelector />
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden p-2 hover:bg-slate-100 rounded-md transition-colors duration-300 ease-in-out"
+                aria-label="Toggle menu"
+              >
+                <Menu className={`h-6 w-6 text-slate-600 transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`} />
+              </button>
+            </div>
           </div>
         </div>
 
+        {/* モバイルナビゲーション */}
         <div 
           className={`lg:hidden fixed top-16 right-0 w-64 h-screen bg-white/90 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
@@ -68,9 +74,6 @@ const GlobalNav = () => {
             >
               {t('nav.contact')}
             </a>
-            <div className="transform transition-all duration-300 hover:translate-x-2">
-              <LanguageSelector />
-            </div>
           </nav>
         </div>
       </div>

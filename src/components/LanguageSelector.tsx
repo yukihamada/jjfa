@@ -29,13 +29,17 @@ export const LanguageSelector = () => {
 
   return (
     <Select defaultValue={i18n.language} onValueChange={handleLanguageChange}>
-      <SelectTrigger className="w-[140px] bg-transparent border-none hover:bg-slate-100 focus:ring-0">
-        <Globe className="mr-2 h-4 w-4" />
+      <SelectTrigger className="w-[140px] bg-white/80 hover:bg-white border-slate-200 hover:border-slate-300 transition-colors">
+        <Globe className="mr-2 h-4 w-4 text-slate-600" />
         <SelectValue />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent align="end">
         {languages.map((lang) => (
-          <SelectItem key={lang.code} value={lang.code}>
+          <SelectItem 
+            key={lang.code} 
+            value={lang.code}
+            className="cursor-pointer hover:bg-slate-100"
+          >
             {lang.name}
           </SelectItem>
         ))}

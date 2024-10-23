@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Navigation } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { InfoIcon } from "lucide-react";
 
 interface Dojo {
   id: string;
@@ -14,22 +16,23 @@ interface Dojo {
   };
 }
 
+// サンプルデータ
 const SAMPLE_DOJOS: Dojo[] = [
   {
     id: "1",
-    name: "JJFA札幌道場",
+    name: "JJFA札幌道場（サンプル）",
     address: "北海道札幌市中央区南3条西2丁目",
     coordinates: { lat: 43.058434, lng: 141.354271 }
   },
   {
     id: "2",
-    name: "JJFA東京道場",
+    name: "JJFA東京道場（サンプル）",
     address: "東京都渋谷区神南1丁目",
     coordinates: { lat: 35.662158, lng: 139.701447 }
   },
   {
     id: "3",
-    name: "JJFA大阪道場",
+    name: "JJFA大阪道場（サンプル）",
     address: "大阪府大阪市中央区心斎橋筋",
     coordinates: { lat: 34.671654, lng: 135.502165 }
   }
@@ -86,6 +89,15 @@ export const DojoSelector = ({ onSelect }: { onSelect: (dojo: Dojo) => void }) =
 
   return (
     <div className="space-y-4">
+      <Alert className="bg-blue-50 border-blue-200">
+        <InfoIcon className="h-4 w-4 text-blue-600" />
+        <AlertDescription className="text-blue-800">
+          現在、JJFAでは提携道場を募集しています。道場運営者の方は、お問い合わせフォームよりご連絡ください。
+          <br />
+          ※下記は提携道場のサンプル表示です。
+        </AlertDescription>
+      </Alert>
+
       <Button
         onClick={getCurrentLocation}
         className="w-full flex items-center justify-center gap-2"

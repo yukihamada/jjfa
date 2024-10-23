@@ -52,5 +52,16 @@ export default {
     title: "Contato",
     email: "E-mail",
     phone: "Telefone"
+  },
+  whitepaper: {
+    title: "Whitepaper JJFA",
+    subtitle: "Construindo o Futuro do Jiu-Jitsu através do Web3",
+    intro: {
+      title: "1. Introdução",
+      background: "Contexto",
+      backgroundText: "O Jiu-Jitsu Brasileiro tem crescido globalmente tanto como arte marcial quanto como esporte competitivo. No entanto, a comunidade enfrenta vários desafios em termos de crescimento sustentável e distribuição justa de valor.",
+      overview: "Visão Geral do Projeto",
+      overviewText: "O JJFA (Jiu-Jitsu For ALL) visa resolver esses desafios criando uma plataforma descentralizada que conecta praticantes, academias e organizadores de torneios em todo o mundo."
+    }
   }
 };

@@ -52,5 +52,16 @@ export default {
     title: "联系方式",
     email: "邮箱",
     phone: "电话"
+  },
+  whitepaper: {
+    title: "JJFA白皮书",
+    subtitle: "通过Web3构建柔术的未来",
+    intro: {
+      title: "1. 引言",
+      background: "背景",
+      backgroundText: "巴西柔术作为一种武术和竞技运动在全球范围内持续发展。然而，在可持续发展和公平价值分配方面，社区面临着各种挑战。",
+      overview: "项目概述",
+      overviewText: "JJFA（Jiu-Jitsu For ALL）旨在通过创建一个连接全球练习者、道馆和比赛组织者的去中心化平台来解决这些挑战。"
+    }
   }
 };

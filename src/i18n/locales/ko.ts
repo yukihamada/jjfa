@@ -52,5 +52,16 @@ export default {
     title: "문의",
     email: "이메일",
     phone: "전화"
+  },
+  whitepaper: {
+    title: "JJFA 백서",
+    subtitle: "Web3를 통한 주짓수의 미래 구축",
+    intro: {
+      title: "1. 서론",
+      background: "배경",
+      backgroundText: "브라질리언 주짓수는 무술과 경쟁 스포츠로서 전 세계적으로 성장하고 있습니다. 하지만 커뮤니티는 지속 가능한 성장과 공정한 가치 분배 측면에서 다양한 과제에 직면해 있습니다.",
+      overview: "프로젝트 개요",
+      overviewText: "JJFA(Jiu-Jitsu For ALL)는 전 세계의 수련자, 도장, 대회 주최자를 연결하는 분산형 플랫폼을 만들어 이러한 과제를 해결하고자 합니다."
+    }
   }
 };

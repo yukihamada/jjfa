@@ -52,5 +52,16 @@ export default {
     title: "Liên Hệ",
     email: "Email",
     phone: "Điện Thoại"
+  },
+  whitepaper: {
+    title: "Sách Trắng JJFA",
+    subtitle: "Xây Dựng Tương Lai của Jiu-Jitsu thông qua Web3",
+    intro: {
+      title: "1. Giới Thiệu",
+      background: "Bối Cảnh",
+      backgroundText: "Jiu-Jitsu Brazil đang phát triển toàn cầu cả về mặt võ thuật và thể thao thi đấu. Tuy nhiên, cộng đồng đang đối mặt với nhiều thách thức về tăng trưởng bền vững và phân phối giá trị công bằng.",
+      overview: "Tổng Quan Dự Án",
+      overviewText: "JJFA (Jiu-Jitsu For ALL) nhằm giải quyết những thách thức này bằng cách tạo ra một nền tảng phi tập trung kết nối các võ sinh, võ đường và nhà tổ chức giải đấu trên toàn thế giới."
+    }
   }
 };

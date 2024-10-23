@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Brain, Heart, Users, Trophy, ArrowRight } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
 
 const JiujitsuBenefits = () => {
   const { t } = useTranslation();
@@ -78,13 +79,14 @@ const JiujitsuBenefits = () => {
           </Card>
 
           <div className="text-center">
-            <Button 
-              size="lg"
-              className="bg-slate-800 text-white hover:bg-slate-700"
-              onClick={() => window.location.href = 'https://jiufight.com'}
-            >
-              無料体験を予約する <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link to="/trial-class">
+              <Button 
+                size="lg"
+                className="bg-slate-800 text-white hover:bg-slate-700"
+              >
+                無料体験を予約する <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

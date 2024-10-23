@@ -65,9 +65,6 @@ const Whitepaper = () => {
               </ul>
             </section>
 
-            {/* ... 以下、各セクションを同様のフォーマットで実装 */}
-            {/* セクション4から13まで、同様の構造で実装します */}
-
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4">4. JJFAトークンの詳細</h2>
               <h3 className="text-xl font-semibold mb-2">トークンの目的とユースケース</h3>
@@ -93,8 +90,6 @@ const Whitepaper = () => {
                 <li>法務・監査：5%</li>
               </ul>
             </section>
-
-            {/* ... 続く各セクションも同様のフォーマットで実装 */}
 
             <section className="border-t border-slate-200 pt-8 mt-8">
               <h2 className="text-2xl font-bold mb-4">お問い合わせ先</h2>

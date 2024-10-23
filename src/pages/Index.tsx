@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
-      <AnimatedBackground />
-      
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center">
         <div className="relative z-10 text-center px-4">
@@ -131,6 +129,13 @@ const Index = () => {
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
+              <div className="mb-4">
+                <img 
+                  src="/356407976_809626707393076_4635497050248137000_n.jpg" 
+                  alt="Takinishi Kisei" 
+                  className="w-32 h-32 rounded-full mx-auto object-cover"
+                />
+              </div>
               <Trophy className="w-10 h-10 text-slate-800 mb-4" />
               <CardTitle className="text-slate-800">Takinishi Kisei</CardTitle>
               <CardDescription className="text-slate-600">

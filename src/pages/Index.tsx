@@ -79,7 +79,11 @@ const Index = () => {
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
-              <User className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="mb-4">
+                <div className="w-32 h-32 rounded-full mx-auto bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500">No Image</span>
+                </div>
+              </div>
               <CardTitle className="text-slate-800">濱田優貴</CardTitle>
               <CardDescription className="text-slate-600">
                 東京理科大学在学中に起業し、その後メルカリに参画して取締役CPOとして活躍。プロダクトの全体管理や技術分野のリードを行い、同社の成長に貢献。現在は令和トラベルやキャスターなどの社外取締役として、スタートアップの成長支援を続けています。新しいビジネスのデザインに情熱を持ち、常にテクノロジーでの社会問題解決を目指しています。
@@ -89,7 +93,13 @@ const Index = () => {
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
-              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="mb-4">
+                <img 
+                  src="/４-1.jpg" 
+                  alt="Murata Ryozo" 
+                  className="w-32 h-32 rounded-full mx-auto object-cover"
+                />
+              </div>
               <CardTitle className="text-slate-800">村田良蔵</CardTitle>
               <CardDescription className="text-slate-600">
                 ブラジリアン柔術の世界チャンピオンで、日本人初のSJJIF世界選手権での優勝者。北海道を拠点に柔術の普及と指導に力を注ぎ、安全で効果的な技術を通じて、多くの初心者から上級者までをサポートしています。彼の指導スタイルは理論に基づいており、実戦的でありながら生徒に対して丁寧なアプローチを心がけています。
@@ -99,7 +109,11 @@ const Index = () => {
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
-              <Globe className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="mb-4">
+                <div className="w-32 h-32 rounded-full mx-auto bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500">No Image</span>
+                </div>
+              </div>
               <CardTitle className="text-slate-800">堤達生</CardTitle>
               <CardDescription className="text-slate-600">
                 ベンチャーキャピタル「STRIVE」の代表パートナーで、スタートアップ企業の成長を支援するエキスパート。特にアーリーステージの投資に注力し、日本や東南アジア、インドなどでの企業支援に取り組んでいます。彼の理念は、「起業家と共に汗をかき、共に戦う」という姿勢で、社会的な課題解決を目指しています。
@@ -109,7 +123,11 @@ const Index = () => {
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
-              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="mb-4">
+                <div className="w-32 h-32 rounded-full mx-auto bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500">No Image</span>
+                </div>
+              </div>
               <CardTitle className="text-slate-800">立石修也</CardTitle>
               <CardDescription className="text-slate-600">
                 YAWARA柔術アカデミー所属の柔術家。慶應義塾大学経済学部卒業後、2022年から本格的に柔術の世界に参入。わずか2年弱の競技歴ながら、SJJIF世界選手権青帯の部で優勝するなど急成長を遂げています。柔術を「ボディチェス」と表現し、戦略的なスポーツとしての魅力を伝える活動も行っています。2024年には再び世界選手権で優勝を果たし、その実力が注目されています。
@@ -119,7 +137,11 @@ const Index = () => {
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
-              <Briefcase className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="mb-4">
+                <div className="w-32 h-32 rounded-full mx-auto bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500">No Image</span>
+                </div>
+              </div>
               <CardTitle className="text-slate-800">粟田健太郎</CardTitle>
               <CardDescription className="text-slate-600">
                 ライフタイムベンチャーズの代表パートナー。横浜や沖縄を拠点に、プレシードやシード段階のスタートアップ企業への投資に特化。OIST（沖縄科学技術大学院大学）との連携で「OIST-Lifetime Ventures Fund」を設立し、科学技術を活用したスタートアップのエコシステム構築に取り組んでいます。資金提供に加え、事業計画策定や初期の顧客開拓、チームビルディングなど、幅広いサポートを提供しています。
@@ -136,7 +158,6 @@ const Index = () => {
                   className="w-32 h-32 rounded-full mx-auto object-cover"
                 />
               </div>
-              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
               <CardTitle className="text-slate-800">Takinishi Kisei</CardTitle>
               <CardDescription className="text-slate-600">
                 Yawaraアカデミー所属の柔術家で、国内外の大会に積極的に参加する競技者。Blue Master 1カテゴリーでの戦績があり、さまざまな体重クラスで技術を磨いています。彼の競技への情熱と実力は、国内外の柔術コミュニティでも高く評価されています。

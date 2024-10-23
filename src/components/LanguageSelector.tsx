@@ -6,6 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Globe } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const languages = [
   { code: "ja", name: "日本語" },
@@ -20,8 +21,14 @@ const languages = [
 ];
 
 export const LanguageSelector = () => {
+  const { i18n } = useTranslation();
+
+  const handleLanguageChange = (value: string) => {
+    i18n.changeLanguage(value);
+  };
+
   return (
-    <Select defaultValue="ja">
+    <Select defaultValue={i18n.language} onValueChange={handleLanguageChange}>
       <SelectTrigger className="w-[140px] bg-transparent border-none hover:bg-slate-100 focus:ring-0">
         <Globe className="mr-2 h-4 w-4" />
         <SelectValue />

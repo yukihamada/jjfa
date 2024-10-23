@@ -1,6 +1,9 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { useTranslation } from 'react-i18next';
 
 const Whitepaper = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <AnimatedBackground />
@@ -8,25 +11,18 @@ const Whitepaper = () => {
       <div className="container mx-auto py-12 px-4">
         <div className="rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
           <h1 className="text-2xl md:text-4xl font-bold text-center mb-8 text-slate-800 leading-tight">
-            <span className="block mb-2">JJFAトークン</span>
-            <span className="block text-xl md:text-3xl">柔術コミュニティを革新する<br className="md:hidden" />ブロックチェーンソリューション</span>
+            <span className="block mb-2">{t('whitepaper.title')}</span>
+            <span className="block text-xl md:text-3xl">{t('whitepaper.subtitle')}</span>
           </h1>
 
           <div className="prose prose-slate max-w-none">
             <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">1. はじめに</h2>
-              <h3 className="text-xl font-semibold mb-2">背景と目的</h3>
-              <p className="mb-4">
-                柔術は、その技術的深さと精神性から世界中で愛される武道・スポーツとなりました。
-                しかし、その普及とコミュニティの発展にはまだ多くの課題が存在します。
-                JJFA（Jiu-Jitsu For ALL）は、これらの課題を解決し、柔術を全ての人々に届けるために設立されました。
-              </p>
+              <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
+              <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
+              <p className="mb-4">{t('whitepaper.intro.backgroundText')}</p>
               
-              <h3 className="text-xl font-semibold mb-2">ホワイトペーパーの概要</h3>
-              <p className="mb-4">
-                本ホワイトペーパーでは、JJFAが発行する「JJFAトークン」を中心に、
-                ブロックチェーン技術を活用した柔術コミュニティの革新的なエコシステム構築について詳細に説明します。
-              </p>
+              <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.overview')}</h3>
+              <p className="mb-4">{t('whitepaper.intro.overviewText')}</p>
             </section>
 
             <section className="mb-8">

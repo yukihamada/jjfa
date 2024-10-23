@@ -2,6 +2,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/compon
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import { LanguageSelector } from "./LanguageSelector";
 
 const GlobalNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +46,9 @@ const GlobalNav = () => {
                 お問い合わせ
               </a>
             </NavigationMenuItem>
-            {/* 将来的なメニュー項目の追加がしやすいように、十分なスペースを確保 */}
+            <NavigationMenuItem>
+              <LanguageSelector />
+            </NavigationMenuItem>
           </div>
         </NavigationMenuList>
       </NavigationMenu>

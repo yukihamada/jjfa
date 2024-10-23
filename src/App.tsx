@@ -8,6 +8,7 @@ import Whitepaper from "./pages/Whitepaper";
 import Community from "./pages/Community";
 import JiujitsuBenefits from "./pages/JiujitsuBenefits";
 import TrialClass from "./pages/TrialClass";
+import Articles from "./pages/Articles";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/community" element={<Community />} />
           <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
           <Route path="/trial-class" element={<TrialClass />} />
+          <Route path="/articles" element={<Articles />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

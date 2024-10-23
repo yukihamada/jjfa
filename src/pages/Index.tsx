@@ -17,7 +17,7 @@ const Index = () => {
             JJFA - 柔術 for ALL
           </h1>
           <p className="text-xl mb-8 text-slate-600">全ての人々に柔術の魅力を届ける</p>
-          <div className="space-x-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" className="bg-slate-800 text-white hover:bg-slate-700">
               コミュニティに参加
             </Button>

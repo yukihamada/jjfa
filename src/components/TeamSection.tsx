@@ -1,42 +1,45 @@
 import { TeamMember } from "./TeamMember";
+import { useTranslation } from 'react-i18next';
 
 export const TeamSection = () => {
+  const { t } = useTranslation();
+
   const teamMembers = [
     {
-      name: "濱田優貴",
+      name: t('team.members.hamada.name'),
       imagePath: "/406363140_10229571887435619_4554932660817499091_n.jpg",
-      description: "東京理科大学在学中に起業し、その後メルカリに参画して取締役CPOとして活躍。プロダクトの全体管理や技術分野のリードを行い、同社の成長に貢献。現在は令和トラベルやキャスターなどの社外取締役として、スタートアップの成長支援を続けています。新しいビジネスのデザインに情熱を持ち、常にテクノロジーでの社会問題解決を目指しています。"
+      description: t('team.members.hamada.description')
     },
     {
-      name: "村田良蔵",
+      name: t('team.members.murata.name'),
       imagePath: "/４-1.jpg",
-      description: "北海道初のグレイシー直系黒帯を取得したブラジリアン柔術家で、「オーバーリミット札幌」と「Yawara柔術アカデミー」の代表を務めています。スポーツ柔術日本連盟の会長としても活動し、日本の柔術普及に貢献。ブラジル人のクリスチアーノ・カリオカ氏から学んだ理論的な技術と細かいディテールに基づいた指導法を実践。SJJIF世界選手権でマスター2黒帯フェザー級2年連続優勝の実績を持ち、特にクローズドガードの技術は高く評価されています。現在も柔術指導を通じて、技術習得だけでなく、体幹トレーニングや護身術としての柔術の魅力を広め、初心者でも安心して始められる環境作りに尽力しています。"
+      description: t('team.members.murata.description')
     },
     {
-      name: "堤達生",
+      name: t('team.members.tsutsumi.name'),
       imagePath: "/2024-10-23 13.17.34.png",
-      description: "ベンチャーキャピタル「STRIVE」の代表パートナーで、スタートアップ企業の成長を支援するエキスパート。特にアーリーステージの投資に注力し、日本や東南アジア、インドなどでの企業支援に取り組んでいます。彼の理念は、「起業家と共に汗をかき、共に戦う」という姿勢で、社会的な課題解決を目指しています。"
+      description: t('team.members.tsutsumi.description')
     },
     {
-      name: "立石修也",
+      name: t('team.members.tateishi.name'),
       imagePath: "/2024-10-23 13.15.30.png",
-      description: "YAWARA柔術アカデミー所属の柔術家。慶應義塾大学経済学部卒業後、2022年から本格的に柔術の世界に参入。わずか2年弱の競技歴ながら、SJJIF世界選手権青帯の部で優勝するなど急成長を遂げています。柔術を「ボディチェス」と表現し、戦略的なスポーツとしての魅力を伝える活動も行っています。2024年には再び世界選手権で優勝を果たし、その実力が注目されています。"
+      description: t('team.members.tateishi.description')
     },
     {
-      name: "粟田健太郎",
+      name: t('team.members.awata.name'),
       imagePath: "/kPq28fl6_400x400.jpg",
-      description: "ライフタイムベンチャーズの代表パートナー。横浜や沖縄を拠点に、プレシードやシード段階のスタートアップ企業への投資に特化。OIST（沖縄科学技術大学院大学）との連携で「OIST-Lifetime Ventures Fund」を設立し、科学技術を活用したスタートアップのエコシステム構築に取り組んでいます。資金提供に加え、事業計画策定や初期の顧客開拓、チームビルディングなど、幅広いサポートを提供しています。"
+      description: t('team.members.awata.description')
     },
     {
-      name: "Takinishi Kisei",
+      name: t('team.members.takinishi.name'),
       imagePath: "/356407976_809626707393076_4635497050248137000_n.jpg",
-      description: "Yawaraアカデミー所属の柔術家で、国内外の大会に積極的に参加する競技者。Blue Master 1カテゴリーでの戦績があり、さまざまな体重クラスで技術を磨いています。彼の競技への情熱と実力は、国内外の柔術コミュニティでも高く評価されています。"
+      description: t('team.members.takinishi.description')
     }
   ];
 
   return (
     <section className="py-20 px-4 container mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">チームメンバー</h2>
+      <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">{t('team.title')}</h2>
       <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {teamMembers.map((member, index) => (
           <TeamMember

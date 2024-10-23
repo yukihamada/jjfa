@@ -4,6 +4,11 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import ja from './locales/ja';
 import pt from './locales/pt';
 import ko from './locales/ko';
+import zh from './locales/zh';
+import es from './locales/es';
+import fr from './locales/fr';
+import th from './locales/th';
+import vi from './locales/vi';
 
 i18n
   .use(LanguageDetector)
@@ -12,7 +17,12 @@ i18n
     resources: {
       ja: { translation: ja },
       pt: { translation: pt },
-      ko: { translation: ko }
+      ko: { translation: ko },
+      zh: { translation: zh },
+      es: { translation: es },
+      fr: { translation: fr },
+      th: { translation: th },
+      vi: { translation: vi }
     },
     fallbackLng: 'ja',
     interpolation: {

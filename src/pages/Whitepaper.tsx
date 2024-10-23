@@ -1,4 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Whitepaper = () => {
@@ -7,7 +6,7 @@ const Whitepaper = () => {
       <AnimatedBackground />
       
       <div className="container mx-auto py-12 px-4">
-        <ScrollArea className="h-[calc(100vh-200px)] rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
+        <div className="rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
           <h1 className="text-4xl font-bold text-center mb-8 text-slate-800">
             JJFAトークン：柔術コミュニティを革新するブロックチェーンソリューション
           </h1>
@@ -108,7 +107,7 @@ const Whitepaper = () => {
               </p>
             </section>
           </div>
-        </ScrollArea>
+        </div>
       </div>
     </div>
   );

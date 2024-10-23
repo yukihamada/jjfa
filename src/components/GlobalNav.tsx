@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const GlobalNav = () => {
   return (
-    <NavigationMenu className="z-50 bg-white/90 backdrop-blur-md shadow-md">
-      <NavigationMenuList className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
+    <NavigationMenu className="z-50 bg-white/90 backdrop-blur-md shadow-md w-full">
+      <NavigationMenuList className="container mx-auto flex justify-between items-center p-4">
         <NavigationMenuItem>
           <Link to="/" className="text-slate-800 hover:text-slate-600 font-bold text-xl flex items-center gap-2">
             <span className="bg-slate-800 text-white px-2 py-1 rounded">JJFA</span>

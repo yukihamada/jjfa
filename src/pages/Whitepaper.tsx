@@ -3,10 +3,10 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Whitepaper = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative pt-20">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <AnimatedBackground />
       
-      <div className="container mx-auto py-12 px-4 relative z-10">
+      <div className="container mx-auto py-12 px-4">
         <ScrollArea className="h-[calc(100vh-200px)] rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
           <h1 className="text-4xl font-bold text-center mb-8 text-slate-800">
             JJFAトークン：柔術コミュニティを革新するブロックチェーンソリューション

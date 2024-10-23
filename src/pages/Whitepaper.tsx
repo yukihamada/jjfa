@@ -87,22 +87,23 @@ const Whitepaper = () => {
               </ul>
             </section>
 
-          <section className="border-t border-slate-200 pt-8 mt-8">
-            <h2 className="text-2xl font-bold mb-4">お問い合わせ先</h2>
-            <ul className="list-none space-y-2">
-              <li>公式ウェブサイト：www.jjforall.com</li>
-              <li>メールアドレス：info@jjforall.com</li>
-              <li>所在地：〒102-0074 東京都千代田区九段南１丁目６−５ 九段会館テラス</li>
-            </ul>
-          </section>
+            <section className="border-t border-slate-200 pt-8 mt-8">
+              <h2 className="text-2xl font-bold mb-4">お問い合わせ先</h2>
+              <ul className="list-none space-y-2">
+                <li>公式ウェブサイト：www.jjforall.com</li>
+                <li>メールアドレス：info@jjforall.com</li>
+                <li>所在地：〒102-0074 東京都千代田区九段南１丁目６−５ 九段会館テラス</li>
+              </ul>
+            </section>
 
-          <section className="mt-8 text-sm text-slate-600">
-            <h2 className="text-lg font-bold mb-2">免責事項</h2>
-            <p>
-              本ホワイトペーパーは情報提供のみを目的としており、投資勧誘を目的としたものではありません。
-              JJFAトークンの購入や利用にあたっては、関連するリスクと法的義務を十分に理解した上でご判断ください。
-            </p>
-          </section>
+            <section className="mt-8 text-sm text-slate-600">
+              <h2 className="text-lg font-bold mb-2">免責事項</h2>
+              <p>
+                本ホワイトペーパーは情報提供のみを目的としており、投資勧誘を目的としたものではありません。
+                JJFAトークンの購入や利用にあたっては、関連するリスクと法的義務を十分に理解した上でご判断ください。
+              </p>
+            </section>
+          </div>
         </div>
       </div>
     </div>

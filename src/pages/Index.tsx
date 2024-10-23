@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, Users, Video, Globe } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -15,9 +16,16 @@ const Index = () => {
             JJFA - 柔術 for ALL
           </h1>
           <p className="text-xl mb-8 text-gray-300">全ての人々に柔術の魅力を届ける</p>
-          <Button size="lg" className="bg-white text-black hover:bg-white/90">
-            コミュニティに参加
-          </Button>
+          <div className="space-x-4">
+            <Button size="lg" className="bg-white text-black hover:bg-white/90">
+              コミュニティに参加
+            </Button>
+            <Link to="/whitepaper">
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                ホワイトペーパー
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

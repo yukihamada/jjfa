@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Video, Globe } from "lucide-react";
+import { Trophy, Users, Video, Globe, Calendar } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 import { TeamSection } from "@/components/TeamSection";
@@ -27,6 +27,40 @@ const Index = () => {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Event Calendar Section */}
+      <section className="py-20 px-4 container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">upcoming events</h2>
+        <div className="max-w-4xl mx-auto">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20 hover:shadow-lg transition-all">
+            <CardHeader className="flex flex-row items-center gap-4">
+              <Calendar className="w-10 h-10 text-slate-800" />
+              <div>
+                <CardTitle className="text-slate-800">JiuFight 2025</CardTitle>
+                <CardDescription className="text-slate-600">
+                  2025年2月16日
+                </CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-slate-600 mb-4">
+                場所: 大田区産業プラザPiO<br />
+                アクセス: 京浜急行「京急蒲田」駅より徒歩約3分
+              </p>
+              <a 
+                href="https://jiufight.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
+                  大会詳細を見る
+                </Button>
+              </a>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

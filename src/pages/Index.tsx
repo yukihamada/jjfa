@@ -5,7 +5,6 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 import { TeamSection } from "@/components/TeamSection";
 import { useTranslation } from 'react-i18next';
-import { JoinCommunityDialog } from "@/components/JoinCommunityDialog";
 
 const Index = () => {
   const { t } = useTranslation();

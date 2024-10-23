@@ -9,6 +9,60 @@ i18n
     resources: {
       ja: {
         translation: {
+          nav: {
+            whitepaper: "ホワイトペーパー",
+            contact: "お問い合わせ"
+          },
+          hero: {
+            title: "JJFA - 柔術 for ALL",
+            subtitle: "全ての人々に柔術の魅力を届ける",
+            joinCommunity: "コミュニティに参加",
+            whitepaper: "ホワイトペーパー"
+          },
+          events: {
+            title: "イベント情報",
+            viewDetails: "大会詳細を見る",
+            location: "場所",
+            access: "アクセス"
+          },
+          mission: {
+            title: "ミッション",
+            tournament: {
+              title: "JiuFight トーナメント",
+              description: "全てのレベルの選手が参加できる柔術トーナメント"
+            },
+            community: {
+              title: "コミュニティ",
+              description: "互いに学び合い、高め合うプラットフォーム"
+            },
+            education: {
+              title: "教育コンテンツ",
+              description: "レベル別の技術解説と質疑応答"
+            },
+            global: {
+              title: "グローバル展開",
+              description: "国際的な交流と柔術の普及"
+            }
+          },
+          team: {
+            title: "チーム"
+          },
+          token: {
+            title: "JJFAトークンの特典",
+            discount: {
+              title: "大会エントリー割引",
+              description: "トークン保有者は常時早割価格でエントリーが可能です。保有数に応じて追加割引も適用されます。"
+            },
+            content: {
+              title: "限定コンテンツ",
+              description: "トップ選手の技術動画やオンラインセミナーに参加できます。"
+            }
+          },
+          contact: {
+            title: "お問い合わせ",
+            email: "メール",
+            phone: "電話"
+          },
           whitepaper: {
             title: 'JJFAトークン',
             subtitle: '柔術コミュニティを革新するブロックチェーンソリューション',
@@ -24,6 +78,60 @@ i18n
       },
       en: {
         translation: {
+          nav: {
+            whitepaper: "Whitepaper",
+            contact: "Contact"
+          },
+          hero: {
+            title: "JJFA - Jiu-Jitsu for ALL",
+            subtitle: "Bringing the beauty of Jiu-Jitsu to everyone",
+            joinCommunity: "Join Community",
+            whitepaper: "Whitepaper"
+          },
+          events: {
+            title: "Events",
+            viewDetails: "View Tournament Details",
+            location: "Location",
+            access: "Access"
+          },
+          mission: {
+            title: "Mission",
+            tournament: {
+              title: "JiuFight Tournament",
+              description: "Jiu-Jitsu tournaments for athletes of all levels"
+            },
+            community: {
+              title: "Community",
+              description: "A platform where we learn and grow together"
+            },
+            education: {
+              title: "Educational Content",
+              description: "Technical explanations and Q&A by level"
+            },
+            global: {
+              title: "Global Expansion",
+              description: "International exchange and promotion of Jiu-Jitsu"
+            }
+          },
+          team: {
+            title: "Team"
+          },
+          token: {
+            title: "JJFA Token Benefits",
+            discount: {
+              title: "Tournament Entry Discount",
+              description: "Token holders can enter at early bird prices anytime. Additional discounts apply based on holdings."
+            },
+            content: {
+              title: "Exclusive Content",
+              description: "Access to top athletes' technique videos and online seminars."
+            }
+          },
+          contact: {
+            title: "Contact",
+            email: "Email",
+            phone: "Phone"
+          },
           whitepaper: {
             title: 'JJFA Token',
             subtitle: 'Blockchain Solution Revolutionizing the Jiu-Jitsu Community',
@@ -37,8 +145,20 @@ i18n
           }
         }
       },
+      // 他の言語も同様のフォーマットで追加
       pt: {
         translation: {
+          nav: {
+            whitepaper: "Whitepaper",
+            contact: "Contato"
+          },
+          hero: {
+            title: "JJFA - Jiu-Jitsu para TODOS",
+            subtitle: "Levando a beleza do Jiu-Jitsu para todos",
+            joinCommunity: "Juntar-se à Comunidade",
+            whitepaper: "Whitepaper"
+          },
+          // ... 他の翻訳
           whitepaper: {
             title: 'Token JJFA',
             subtitle: 'Solução Blockchain Revolucionando a Comunidade do Jiu-Jitsu',

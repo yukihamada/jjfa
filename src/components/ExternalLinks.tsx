@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 const ExternalLinks = () => {
   return (
     <section className="py-20 px-4 container mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">関連サービス</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">提供サービス</h2>
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>

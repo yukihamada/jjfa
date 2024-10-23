@@ -116,6 +116,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* 提供サービス */}
+      <ExternalLinks />
+
       {/* Coming Soon Section */}
       <section className="py-20 px-4 container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4 text-slate-800">Coming Soon</h2>
@@ -166,8 +169,6 @@ const Index = () => {
           </Card>
         </div>
       </section>
-
-      <ExternalLinks />
 
       <TeamSection />
 

@@ -7,11 +7,11 @@ const Whitepaper = () => {
       <AnimatedBackground />
       
       <div className="container mx-auto py-12 px-4 relative z-10">
-        <h1 className="text-4xl font-bold text-center mb-8 text-slate-800">
-          JJFAトークン：柔術コミュニティを革新するブロックチェーンソリューション
-        </h1>
-
         <ScrollArea className="h-[calc(100vh-200px)] rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
+          <h1 className="text-4xl font-bold text-center mb-8 text-slate-800">
+            JJFAトークン：柔術コミュニティを革新するブロックチェーンソリューション
+          </h1>
+
           <div className="prose prose-slate max-w-none">
             <section className="mb-8">
               <h2 className="text-2xl font-bold mb-4">1. はじめに</h2>
@@ -99,8 +99,8 @@ const Whitepaper = () => {
             <section className="border-t border-slate-200 pt-8 mt-8">
               <h2 className="text-2xl font-bold mb-4">お問い合わせ先</h2>
               <ul className="list-none space-y-2">
-                <li>公式ウェブサイト：www.jjfa.com</li>
-                <li>メールアドレス：info@jjfa.com</li>
+                <li>公式ウェブサイト：www.jjforall.com</li>
+                <li>メールアドレス：info@jjforall.com</li>
                 <li>所在地：〒123-4567 東京都新宿区西新宿1-2-3 新宿ビルディング10F</li>
               </ul>
             </section>

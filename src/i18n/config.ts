@@ -9,6 +9,7 @@ import es from './locales/es';
 import fr from './locales/fr';
 import th from './locales/th';
 import vi from './locales/vi';
+import en from './locales/en';
 
 i18n
   .use(LanguageDetector)
@@ -22,7 +23,8 @@ i18n
       es: { translation: es },
       fr: { translation: fr },
       th: { translation: th },
-      vi: { translation: vi }
+      vi: { translation: vi },
+      en: { translation: en }
     },
     fallbackLng: 'ja',
     interpolation: {

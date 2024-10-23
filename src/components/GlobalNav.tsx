@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const GlobalNav = () => {
   return (
-    <NavigationMenu className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-md">
+    <NavigationMenu className="z-50 bg-white/90 backdrop-blur-md shadow-md">
       <NavigationMenuList className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
         <NavigationMenuItem>
           <Link to="/" className="text-slate-800 hover:text-slate-600 font-bold text-xl flex items-center gap-2">

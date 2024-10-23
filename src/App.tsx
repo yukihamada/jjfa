@@ -6,6 +6,7 @@ import GlobalNav from "./components/GlobalNav";
 import Index from "./pages/Index";
 import Whitepaper from "./pages/Whitepaper";
 import Community from "./pages/Community";
+import JiujitsuBenefits from "./pages/JiujitsuBenefits";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/whitepaper" element={<Whitepaper />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

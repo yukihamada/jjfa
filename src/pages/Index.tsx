@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Globe, Calendar, ExternalLink } from "lucide-react";
+import { Trophy, Users, Globe, Calendar, ExternalLink, Brain, Heart } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 import { TeamSection } from "@/components/TeamSection";
@@ -13,6 +13,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <AnimatedBackground />
       
+      {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center">
         <div className="relative z-10 text-center px-4">
           <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
@@ -34,6 +35,53 @@ const Index = () => {
         </div>
       </section>
 
+      {/* 柔術の魅力セクション */}
+      <section className="py-20 px-4 container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">柔術の魅力</h2>
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Brain className="w-12 h-12 text-slate-800 mb-4" />
+              <CardTitle>戦略的思考</CardTitle>
+              <CardDescription>
+                体格差を技術でカバーできる、身体のチェスとも呼ばれる奥深いスポーツです。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Heart className="w-12 h-12 text-slate-800 mb-4" />
+              <CardTitle>健康的な生活</CardTitle>
+              <CardDescription>
+                全身運動による体力向上と、心身の健康増進に効果的です。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Users className="w-12 h-12 text-slate-800 mb-4" />
+              <CardTitle>コミュニティ</CardTitle>
+              <CardDescription>
+                年齢や性別を問わず、共に学び合える温かいコミュニティです。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+        <div className="text-center">
+          <Link to="/jiujitsu-benefits">
+            <Button 
+              variant="outline" 
+              className="text-slate-800 border-slate-800 hover:bg-slate-100"
+            >
+              もっと詳しく知る
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Events Section */}
       <section className="py-20 px-4 container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">{t('events.title')}</h2>
         <div className="max-w-4xl mx-auto">
@@ -63,71 +111,6 @@ const Index = () => {
                 </Button>
               </a>
             </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      <section className="py-20 px-4 container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">{t('mission.title')}</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <a href="https://jiufight.com" target="_blank" rel="noopener noreferrer" className="group relative">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl overflow-hidden h-full">
-              <div className="absolute top-3 right-3">
-                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
-              </div>
-              <CardHeader>
-                <div className="relative">
-                  <Trophy className="w-12 h-12 text-slate-800 mb-4 transition-transform duration-300 group-hover:scale-110" />
-                </div>
-                <CardTitle className="text-slate-800">{t('mission.tournament.title')}</CardTitle>
-                <CardDescription className="text-slate-600">
-                  {t('mission.tournament.description')}
-                  <div className="mt-4 py-2 px-3 bg-slate-50 rounded-md border border-slate-100 group-hover:border-blue-100 transition-colors">
-                    <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors flex items-center gap-1">
-                      jiufight.com
-                    </span>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </a>
-
-          <a href="https://jjlab.jp" target="_blank" rel="noopener noreferrer" className="group relative">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl overflow-hidden h-full">
-              <div className="absolute top-3 right-3">
-                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
-              </div>
-              <CardHeader>
-                <div className="relative">
-                  <Users className="w-12 h-12 text-slate-800 mb-4 transition-transform duration-300 group-hover:scale-110" />
-                </div>
-                <CardTitle className="text-slate-800">
-                  {t('mission.community.title')} & {t('mission.education.title')}
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  {t('mission.community.description')}
-                  <br />
-                  {t('mission.education.description')}
-                  <div className="mt-4 py-2 px-3 bg-slate-50 rounded-md border border-slate-100 group-hover:border-blue-100 transition-colors">
-                    <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors flex items-center gap-1">
-                      jjlab.jp
-                    </span>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </a>
-
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 hover:shadow-lg h-full">
-            <CardHeader>
-              <div className="relative">
-                <Globe className="w-12 h-12 text-slate-800 mb-4" />
-              </div>
-              <CardTitle className="text-slate-800">{t('mission.global.title')}</CardTitle>
-              <CardDescription className="text-slate-600">
-                {t('mission.global.description')}
-              </CardDescription>
-            </CardHeader>
           </Card>
         </div>
       </section>

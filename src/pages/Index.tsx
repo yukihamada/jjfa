@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Video, Globe, Calendar } from "lucide-react";
+import { Trophy, Users, Video, Globe, Calendar, ExternalLink } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 import { TeamSection } from "@/components/TeamSection";
@@ -70,24 +70,33 @@ const Index = () => {
       <section className="py-20 px-4 container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">{t('mission.title')}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <a href="https://jiufight.com" target="_blank" rel="noopener noreferrer" className="group">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform group-hover:scale-105">
+          <a href="https://jiufight.com" target="_blank" rel="noopener noreferrer" className="group relative">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl overflow-hidden">
+              <div className="absolute top-3 right-3">
+                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+              </div>
               <CardHeader>
-                <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+                <div className="relative">
+                  <Trophy className="w-12 h-12 text-slate-800 mb-4 transition-transform duration-300 group-hover:scale-110" />
+                </div>
                 <CardTitle className="text-slate-800">{t('mission.tournament.title')}</CardTitle>
                 <CardDescription className="text-slate-600">
                   {t('mission.tournament.description')}
-                  <span className="block mt-2 text-blue-600 group-hover:underline">
-                    jiufight.com
-                  </span>
+                  <div className="mt-4 py-2 px-3 bg-slate-50 rounded-md border border-slate-100 group-hover:border-blue-100 transition-colors">
+                    <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors flex items-center gap-1">
+                      jiufight.com
+                    </span>
+                  </div>
                 </CardDescription>
               </CardHeader>
             </Card>
           </a>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 hover:shadow-lg">
             <CardHeader>
-              <Users className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="relative">
+                <Users className="w-12 h-12 text-slate-800 mb-4" />
+              </div>
               <CardTitle className="text-slate-800">{t('mission.community.title')}</CardTitle>
               <CardDescription className="text-slate-600">
                 {t('mission.community.description')}
@@ -95,24 +104,33 @@ const Index = () => {
             </CardHeader>
           </Card>
 
-          <a href="https://jjlab.jp" target="_blank" rel="noopener noreferrer" className="group">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform group-hover:scale-105">
+          <a href="https://jjlab.jp" target="_blank" rel="noopener noreferrer" className="group relative">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl overflow-hidden">
+              <div className="absolute top-3 right-3">
+                <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+              </div>
               <CardHeader>
-                <Video className="w-10 h-10 text-slate-800 mb-4" />
+                <div className="relative">
+                  <Video className="w-12 h-12 text-slate-800 mb-4 transition-transform duration-300 group-hover:scale-110" />
+                </div>
                 <CardTitle className="text-slate-800">{t('mission.education.title')}</CardTitle>
                 <CardDescription className="text-slate-600">
                   {t('mission.education.description')}
-                  <span className="block mt-2 text-blue-600 group-hover:underline">
-                    jjlab.jp
-                  </span>
+                  <div className="mt-4 py-2 px-3 bg-slate-50 rounded-md border border-slate-100 group-hover:border-blue-100 transition-colors">
+                    <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors flex items-center gap-1">
+                      jjlab.jp
+                    </span>
+                  </div>
                 </CardDescription>
               </CardHeader>
             </Card>
           </a>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 hover:shadow-lg">
             <CardHeader>
-              <Globe className="w-10 h-10 text-slate-800 mb-4" />
+              <div className="relative">
+                <Globe className="w-12 h-12 text-slate-800 mb-4" />
+              </div>
               <CardTitle className="text-slate-800">{t('mission.global.title')}</CardTitle>
               <CardDescription className="text-slate-600">
                 {t('mission.global.description')}

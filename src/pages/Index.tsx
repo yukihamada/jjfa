@@ -8,6 +8,8 @@ import { TeamSection } from "@/components/TeamSection";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+      <AnimatedBackground />
+      
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center">
         <div className="relative z-10 text-center px-4">

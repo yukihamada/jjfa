@@ -1,25 +1,16 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar } from "@/components/ui/calendar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
 import { CalendarDays, Users, MessageSquare, Gift, HelpCircle } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import { useState } from "react";
 
-export function JoinCommunityDialog() {
+const Community = () => {
   const { toast } = useToast();
-  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -40,22 +31,19 @@ export function JoinCommunityDialog() {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button size="lg" className="bg-slate-800 text-white hover:bg-slate-700">
-          {t('hero.joinCommunity')}
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>コミュニティに参加する</DialogTitle>
-          <DialogDescription>
-            JJFAコミュニティで柔術の魅力を共有しましょう
-          </DialogDescription>
-        </DialogHeader>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+      <AnimatedBackground />
+      
+      <div className="container mx-auto py-8 px-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">
+          コミュニティに参加する
+        </h1>
+        <p className="text-lg text-center mb-12 text-slate-600">
+          JJFAコミュニティで柔術の魅力を共有しましょう
+        </p>
 
         <Tabs defaultValue="register" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8">
             <TabsTrigger value="register">登録</TabsTrigger>
             <TabsTrigger value="about">概要</TabsTrigger>
             <TabsTrigger value="events">イベント</TabsTrigger>
@@ -72,7 +60,7 @@ export function JoinCommunityDialog() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
                   <div className="space-y-2">
                     <Label htmlFor="name">お名前</Label>
                     <Input
@@ -108,19 +96,21 @@ export function JoinCommunityDialog() {
                   JJFAコミュニティの特徴と活動内容
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <Users className="h-5 w-5 mt-1" />
-                  <div>
-                    <h4 className="font-semibold">活発な交流</h4>
-                    <p>経験豊富な指導者や仲間との交流を通じて、技術と知識を深めることができます。</p>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-start space-x-4">
+                    <Users className="h-5 w-5 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold">活発な交流</h4>
+                      <p>経験豊富な指導者や仲間との交流を通じて、技術と知識を深めることができます。</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <MessageSquare className="h-5 w-5 mt-1" />
-                  <div>
-                    <h4 className="font-semibold">オンラインサポート</h4>
-                    <p>LINEグループやDiscordでいつでも質問や相談が可能です。</p>
+                  <div className="flex items-start space-x-4">
+                    <MessageSquare className="h-5 w-5 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold">オンラインサポート</h4>
+                      <p>LINEグループやDiscordでいつでも質問や相談が可能です。</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -136,9 +126,9 @@ export function JoinCommunityDialog() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex space-x-4">
-                  <Calendar className="w-full" mode="single" />
-                  <div className="space-y-4">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <Calendar className="w-full md:w-1/2" mode="single" />
+                  <div className="space-y-4 w-full md:w-1/2">
                     <div className="border p-4 rounded-lg">
                       <h4 className="font-semibold">技術セミナー</h4>
                       <p className="text-sm text-gray-500">2024年3月15日</p>
@@ -163,19 +153,21 @@ export function JoinCommunityDialog() {
                   コミュニティメンバー限定の特典
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <Gift className="h-5 w-5 mt-1" />
-                  <div>
-                    <h4 className="font-semibold">限定コンテンツ</h4>
-                    <p>トップ選手による技術解説動画や、オンラインセミナーへの優先参加権</p>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-start space-x-4">
+                    <Gift className="h-5 w-5 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold">限定コンテンツ</h4>
+                      <p>トップ選手による技術解説動画や、オンラインセミナーへの優先参加権</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <CalendarDays className="h-5 w-5 mt-1" />
-                  <div>
-                    <h4 className="font-semibold">イベント優待</h4>
-                    <p>各種イベントやトーナメントの優先予約と割引特典</p>
+                  <div className="flex items-start space-x-4">
+                    <CalendarDays className="h-5 w-5 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold">イベント優待</h4>
+                      <p>各種イベントやトーナメントの優先予約と割引特典</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -190,26 +182,30 @@ export function JoinCommunityDialog() {
                   コミュニティについてよくある質問と回答
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <HelpCircle className="h-5 w-5 mt-1" />
-                  <div>
-                    <h4 className="font-semibold">初心者でも参加できますか？</h4>
-                    <p>はい、経験レベルに関係なく参加いただけます。初心者向けのコンテンツも充実しています。</p>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-start space-x-4">
+                    <HelpCircle className="h-5 w-5 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold">初心者でも参加できますか？</h4>
+                      <p>はい、経験レベルに関係なく参加いただけます。初心者向けのコンテンツも充実しています。</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <HelpCircle className="h-5 w-5 mt-1" />
-                  <div>
-                    <h4 className="font-semibold">退会はいつでもできますか？</h4>
-                    <p>はい、いつでも自由に退会が可能です。</p>
+                  <div className="flex items-start space-x-4">
+                    <HelpCircle className="h-5 w-5 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold">退会はいつでもできますか？</h4>
+                      <p>はい、いつでも自由に退会が可能です。</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
-}
+};
+
+export default Community;

@@ -21,7 +21,11 @@ const Index = () => {
           </h1>
           <p className="text-xl mb-8 text-slate-600">{t('hero.subtitle')}</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <JoinCommunityDialog />
+            <Link to="/community">
+              <Button size="lg" className="bg-slate-800 text-white hover:bg-slate-700">
+                {t('hero.joinCommunity')}
+              </Button>
+            </Link>
             <Link to="/whitepaper">
               <Button size="lg" variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
                 {t('hero.whitepaper')}

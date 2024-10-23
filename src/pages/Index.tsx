@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Video, Globe } from "lucide-react";
+import { Trophy, Users, Video, Globe, User } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 
@@ -69,6 +69,52 @@ const Index = () => {
               <CardTitle className="text-slate-800">グローバル展開</CardTitle>
               <CardDescription className="text-slate-600">
                 国際的な交流と柔術の普及
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20 px-4 container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">チームメンバー</h2>
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <User className="w-10 h-10 text-slate-800 mb-4" />
+              <CardTitle className="text-slate-800">濱田優貴</CardTitle>
+              <CardDescription className="text-slate-600">
+                東京理科大学在学中に起業し、その後メルカリに参画して取締役CPOとして活躍。プロダクトの全体管理や技術分野のリードを行い、同社の成長に貢献。現在は令和トラベルやキャスターなどの社外取締役として、スタートアップの成長支援を続けています。新しいビジネスのデザインに情熱を持ち、常にテクノロジーでの社会問題解決を目指しています。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+              <CardTitle className="text-slate-800">村田良蔵</CardTitle>
+              <CardDescription className="text-slate-600">
+                ブラジリアン柔術の世界チャンピオンで、日本人初のSJJIF世界選手権での優勝者。北海道を拠点に柔術の普及と指導に力を注ぎ、安全で効果的な技術を通じて、多くの初心者から上級者までをサポートしています。彼の指導スタイルは理論に基づいており、実戦的でありながら生徒に対して丁寧なアプローチを心がけています。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Globe className="w-10 h-10 text-slate-800 mb-4" />
+              <CardTitle className="text-slate-800">堤達生</CardTitle>
+              <CardDescription className="text-slate-600">
+                ベンチャーキャピタル「STRIVE」の代表パートナーで、スタートアップ企業の成長を支援するエキスパート。特にアーリーステージの投資に注力し、日本や東南アジア、インドなどでの企業支援に取り組んでいます。彼の理念は、「起業家と共に汗をかき、共に戦う」という姿勢で、社会的な課題解決を目指しています。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+              <CardTitle className="text-slate-800">Takinishi Kisei</CardTitle>
+              <CardDescription className="text-slate-600">
+                Yawaraアカデミー所属の柔術家で、国内外の大会に積極的に参加する競技者。Blue Master 1カテゴリーでの戦績があり、さまざまな体重クラスで技術を磨いています。彼の競技への情熱と実力は、国内外の柔術コミュニティでも高く評価されています。
               </CardDescription>
             </CardHeader>
           </Card>

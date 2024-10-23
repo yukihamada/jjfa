@@ -7,8 +7,9 @@ const Whitepaper = () => {
       
       <div className="container mx-auto py-12 px-4">
         <div className="rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
-          <h1 className="text-4xl font-bold text-center mb-8 text-slate-800">
-            JJFAトークン：柔術コミュニティを革新するブロックチェーンソリューション
+          <h1 className="text-2xl md:text-4xl font-bold text-center mb-8 text-slate-800 leading-tight">
+            <span className="block mb-2">JJFAトークン</span>
+            <span className="block text-xl md:text-3xl">柔術コミュニティを革新する<br className="md:hidden" />ブロックチェーンソリューション</span>
           </h1>
 
           <div className="prose prose-slate max-w-none">

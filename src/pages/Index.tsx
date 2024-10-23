@@ -197,15 +197,22 @@ const Index = () => {
 
       <section className="py-20 px-4 container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8 text-slate-800">{t('contact.title')}</h2>
-        <p className="mb-4 text-slate-600">{t('contact.email')}: info@jjfa.com</p>
-        <p className="mb-4 text-slate-600">{t('contact.phone')}: 03-1234-5678</p>
-        <div className="flex justify-center gap-4">
-          <Button variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
-            Twitter
-          </Button>
-          <Button variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
-            Facebook
-          </Button>
+        <div className="max-w-2xl mx-auto space-y-4">
+          <p className="mb-4 text-slate-600">{t('contact.email')}: info@jjfa.com</p>
+          <p className="mb-4 text-slate-600">{t('contact.phone')}: 03-1234-5678</p>
+          <p className="mb-6 text-slate-600">
+            〒102-0074<br />
+            東京都千代田区九段南１丁目６−５<br />
+            九段会館テラス
+          </p>
+          <div className="flex justify-center gap-4">
+            <Button variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
+              Twitter
+            </Button>
+            <Button variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
+              Facebook
+            </Button>
+          </div>
         </div>
       </section>
     </div>

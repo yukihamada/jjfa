@@ -77,7 +77,8 @@ export default {
   contact: {
     title: "お問い合わせ",
     email: "メール",
-    phone: "電話"
+    phone: "電話",
+    address: "所在地"
   },
   whitepaper: {
     title: "JJFAホワイトペーパー",

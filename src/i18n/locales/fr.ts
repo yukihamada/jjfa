@@ -35,7 +35,33 @@ export default {
     }
   },
   team: {
-    title: "Équipe"
+    title: "Équipe",
+    members: {
+      hamada: {
+        name: "Yuki Hamada",
+        description: "A créé une entreprise pendant ses études à l'Université des Sciences de Tokyo puis a rejoint Mercari en tant que Directeur CPO. A dirigé les domaines de la gestion de produits et techniques, contribuant à la croissance de l'entreprise. Soutient actuellement la croissance des startups en tant qu'administrateur externe pour des entreprises comme Reiwa Travel et Caster. Passionné par la conception de nouvelles entreprises et vise à résoudre les problèmes sociaux par la technologie."
+      },
+      murata: {
+        name: "Ryozo Murata",
+        description: "Pratiquant de Jiu-Jitsu Brésilien qui a obtenu la première ceinture noire Gracie directe de Hokkaido, représentant 'Overlimit Sapporo' et 'Académie Yawara de Jiu-Jitsu'. En tant que président de la Fédération de Jiu-Jitsu Sportif du Japon, il contribue à promouvoir le Jiu-Jitsu au Japon. Sa méthode d'enseignement est basée sur des techniques théoriques et une instruction détaillée apprise du Brésilien Cristiano Carioca. Il est double champion consécutif du Championnat du Monde SJJIF Master 2 Ceinture Noire Poids Plume, particulièrement connu pour ses techniques de garde fermée. Il continue de diffuser l'attrait du Jiu-Jitsu par l'instruction, en se concentrant sur l'entraînement de base et l'auto-défense, créant un environnement où les débutants peuvent commencer confortablement."
+      },
+      tsutsumi: {
+        name: "Tatsuo Tsutsumi",
+        description: "Associé gérant de la société de capital-risque 'STRIVE', expert en soutien à la croissance des startups. Se concentre sur les investissements en phase précoce, soutenant les entreprises au Japon, en Asie du Sud-Est et en Inde. Sa philosophie est de 'transpirer et combattre avec les entrepreneurs', visant à résoudre les problèmes sociaux."
+      },
+      tateishi: {
+        name: "Shuya Tateishi",
+        description: "Pratiquant de Jiu-Jitsu de l'Académie YAWARA de Jiu-Jitsu. Après avoir obtenu son diplôme de la Faculté d'Économie de l'Université Keio, il est entré pleinement dans le monde du Jiu-Jitsu en 2022. Malgré moins de deux ans d'expérience en compétition, il a montré une croissance rapide, remportant le Championnat du Monde SJJIF dans la division ceinture bleue. Il décrit le Jiu-Jitsu comme des 'Échecs Corporels', promouvant son attrait en tant que sport stratégique. En 2024, il a obtenu une autre victoire au championnat du monde, soulignant sa compétence croissante."
+      },
+      awata: {
+        name: "Kentaro Awata",
+        description: "Associé gérant de Lifetime Ventures. Basé à Yokohama et Okinawa, spécialisé dans les investissements en startups en phase pré-amorçage et amorçage. A établi le 'OIST-Lifetime Ventures Fund' en collaboration avec OIST (Institut des Sciences et Technologies d'Okinawa), travaillant à construire un écosystème pour les startups scientifiques et technologiques. Fournit un soutien complet incluant la planification d'entreprise, le développement initial de clients et la construction d'équipe, en plus du financement."
+      },
+      takinishi: {
+        name: "Kisei Takinishi",
+        description: "Pratiquant de Jiu-Jitsu de l'Académie Yawara, participant activement aux compétitions nationales et internationales. Avec des réalisations dans la catégorie Master 1 Bleue, il a affiné ses compétences dans diverses catégories de poids. Sa passion pour la compétition et son habileté sont hautement respectées dans les communautés de Jiu-Jitsu nationales et internationales."
+      }
+    }
   },
   token: {
     title: "Avantages du Token JJFA",

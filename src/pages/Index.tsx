@@ -5,6 +5,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 import { TeamSection } from "@/components/TeamSection";
 import { useTranslation } from 'react-i18next';
+import { JoinCommunityDialog } from "@/components/JoinCommunityDialog";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -20,9 +21,7 @@ const Index = () => {
           </h1>
           <p className="text-xl mb-8 text-slate-600">{t('hero.subtitle')}</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="bg-slate-800 text-white hover:bg-slate-700">
-              {t('hero.joinCommunity')}
-            </Button>
+            <JoinCommunityDialog />
             <Link to="/whitepaper">
               <Button size="lg" variant="outline" className="text-slate-800 border-slate-800 hover:bg-slate-100">
                 {t('hero.whitepaper')}

@@ -5,6 +5,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 import { TeamSection } from "@/components/TeamSection";
 import { useTranslation } from 'react-i18next';
+import ExternalLinks from "@/components/ExternalLinks";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -165,6 +166,8 @@ const Index = () => {
           </Card>
         </div>
       </section>
+
+      <ExternalLinks />
 
       <TeamSection />
 

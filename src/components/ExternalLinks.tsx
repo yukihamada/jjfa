@@ -35,7 +35,7 @@ const ExternalLinks = () => {
 
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>
-            <CardTitle className="text-slate-800">jjlab.jp</CardTitle>
+            <CardTitle className="text-slate-800">JiuJitsu Lab</CardTitle>
             <CardDescription>
               柔術の技術解説や最新情報を発信。
               初心者から上級者まで、学びを深めるための総合情報サイト。
@@ -43,7 +43,7 @@ const ExternalLinks = () => {
           </CardHeader>
           <CardContent>
             <a 
-              href="https://jjlab.jp" 
+              href="https://jiujitsu-lab.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block w-full"

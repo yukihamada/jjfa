@@ -10,7 +10,7 @@ const Articles = () => {
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
-            <h1 className="text-3xl font-bold mb-8 text-center">JJFA合同会社 定款</h1>
+            <h1 className="text-3xl font-bold mb-8 text-center">合同会社JJFA 定款</h1>
             
             <ScrollArea className="h-[calc(100vh-200px)] pr-4">
               <div className="prose prose-slate max-w-none">

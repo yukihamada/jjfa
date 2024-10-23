@@ -70,13 +70,16 @@ const Index = () => {
       <section className="py-20 px-4 container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">{t('mission.title')}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <a href="https://jiufight.com" target="_blank" rel="noopener noreferrer">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform hover:scale-105">
+          <a href="https://jiufight.com" target="_blank" rel="noopener noreferrer" className="group">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform group-hover:scale-105">
               <CardHeader>
                 <Trophy className="w-10 h-10 text-slate-800 mb-4" />
                 <CardTitle className="text-slate-800">{t('mission.tournament.title')}</CardTitle>
                 <CardDescription className="text-slate-600">
                   {t('mission.tournament.description')}
+                  <span className="block mt-2 text-blue-600 group-hover:underline">
+                    jiufight.com
+                  </span>
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -92,13 +95,16 @@ const Index = () => {
             </CardHeader>
           </Card>
 
-          <a href="https://jjlab.jp" target="_blank" rel="noopener noreferrer">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform hover:scale-105">
+          <a href="https://jjlab.jp" target="_blank" rel="noopener noreferrer" className="group">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform group-hover:scale-105">
               <CardHeader>
                 <Video className="w-10 h-10 text-slate-800 mb-4" />
                 <CardTitle className="text-slate-800">{t('mission.education.title')}</CardTitle>
                 <CardDescription className="text-slate-600">
                   {t('mission.education.description')}
+                  <span className="block mt-2 text-blue-600 group-hover:underline">
+                    jjlab.jp
+                  </span>
                 </CardDescription>
               </CardHeader>
             </Card>

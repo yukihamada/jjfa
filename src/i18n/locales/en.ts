@@ -78,5 +78,16 @@ export default {
     title: "Contact",
     email: "Email",
     phone: "Phone"
+  },
+  whitepaper: {
+    title: "JJFA Whitepaper",
+    subtitle: "Building the Future of Jiu-Jitsu through Web3",
+    intro: {
+      title: "1. Introduction",
+      background: "Background",
+      backgroundText: "Brazilian Jiu-Jitsu has been growing globally as both a martial art and a competitive sport. However, the community faces various challenges in terms of sustainable growth and fair value distribution.",
+      overview: "Project Overview",
+      overviewText: "JJFA (Jiu-Jitsu For ALL) aims to solve these challenges by creating a decentralized platform that connects practitioners, academies, and tournament organizers worldwide."
+    }
   }
 };

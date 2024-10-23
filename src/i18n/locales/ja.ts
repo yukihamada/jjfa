@@ -52,5 +52,16 @@ export default {
     title: "お問い合わせ",
     email: "メール",
     phone: "電話"
+  },
+  whitepaper: {
+    title: "JJFAホワイトペーパー",
+    subtitle: "Web3で創る柔術の未来",
+    intro: {
+      title: "1. はじめに",
+      background: "背景",
+      backgroundText: "ブラジリアン柔術は、武道としても競技スポーツとしても世界的に成長を続けています。しかし、持続可能な成長と公平な価値分配の面で、コミュニティはさまざまな課題に直面しています。",
+      overview: "プロジェクト概要",
+      overviewText: "JJFA（Jiu-Jitsu For ALL）は、世界中の練習者、道場、大会主催者をつなぐ分散型プラットフォームを作ることで、これらの課題を解決することを目指しています。"
+    }
   }
 };

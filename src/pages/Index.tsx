@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative pt-20">
       <AnimatedBackground />
       
       {/* Hero Section */}

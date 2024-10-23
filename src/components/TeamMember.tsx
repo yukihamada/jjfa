@@ -15,7 +15,7 @@ export const TeamMember = ({ name, description, imagePath }: TeamMemberProps) =>
             <img 
               src={imagePath} 
               alt={name} 
-              className="w-32 h-32 rounded-full mx-auto object-cover"
+              className="w-32 h-32 rounded-full mx-auto object-cover object-top"
             />
           ) : (
             <div className="w-32 h-32 rounded-full mx-auto bg-gray-200 flex items-center justify-center">

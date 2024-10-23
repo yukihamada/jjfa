@@ -128,6 +128,16 @@ const Index = () => {
               </CardDescription>
             </CardHeader>
           </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+              <CardTitle className="text-slate-800">Takinishi Kisei</CardTitle>
+              <CardDescription className="text-slate-600">
+                Yawaraアカデミー所属の柔術家で、国内外の大会に積極的に参加する競技者。Blue Master 1カテゴリーでの戦績があり、さまざまな体重クラスで技術を磨いています。彼の競技への情熱と実力は、国内外の柔術コミュニティでも高く評価されています。
+              </CardDescription>
+            </CardHeader>
+          </Card>
         </div>
       </section>
 

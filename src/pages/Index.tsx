@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Video, Globe, User } from "lucide-react";
+import { Trophy, Users, Video, Globe, User, Briefcase } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Link } from "react-router-dom";
 
@@ -112,9 +112,19 @@ const Index = () => {
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
               <Trophy className="w-10 h-10 text-slate-800 mb-4" />
-              <CardTitle className="text-slate-800">Takinishi Kisei</CardTitle>
+              <CardTitle className="text-slate-800">立石修也</CardTitle>
               <CardDescription className="text-slate-600">
-                Yawaraアカデミー所属の柔術家で、国内外の大会に積極的に参加する競技者。Blue Master 1カテゴリーでの戦績があり、さまざまな体重クラスで技術を磨いています。彼の競技への情熱と実力は、国内外の柔術コミュニティでも高く評価されています。
+                YAWARA柔術アカデミー所属の柔術家。慶應義塾大学経済学部卒業後、2022年から本格的に柔術の世界に参入。わずか2年弱の競技歴ながら、SJJIF世界選手権青帯の部で優勝するなど急成長を遂げています。柔術を「ボディチェス」と表現し、戦略的なスポーツとしての魅力を伝える活動も行っています。2024年には再び世界選手権で優勝を果たし、その実力が注目されています。
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <CardHeader>
+              <Briefcase className="w-10 h-10 text-slate-800 mb-4" />
+              <CardTitle className="text-slate-800">粟田健太郎</CardTitle>
+              <CardDescription className="text-slate-600">
+                ライフタイムベンチャーズの代表パートナー。横浜や沖縄を拠点に、プレシードやシード段階のスタートアップ企業への投資に特化。OIST（沖縄科学技術大学院大学）との連携で「OIST-Lifetime Ventures Fund」を設立し、科学技術を活用したスタートアップのエコシステム構築に取り組んでいます。資金提供に加え、事業計画策定や初期の顧客開拓、チームビルディングなど、幅広いサポートを提供しています。
               </CardDescription>
             </CardHeader>
           </Card>

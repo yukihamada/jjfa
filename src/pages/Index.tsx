@@ -34,15 +34,17 @@ const Index = () => {
       <section className="py-20 px-4 container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">ミッション</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardHeader>
-              <Trophy className="w-10 h-10 text-slate-800 mb-4" />
-              <CardTitle className="text-slate-800">JiuFight トーナメント</CardTitle>
-              <CardDescription className="text-slate-600">
-                全てのレベルの選手が参加できる柔術トーナメント
-              </CardDescription>
-            </CardHeader>
-          </Card>
+          <a href="https://jiufight.com" target="_blank" rel="noopener noreferrer">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform hover:scale-105">
+              <CardHeader>
+                <Trophy className="w-10 h-10 text-slate-800 mb-4" />
+                <CardTitle className="text-slate-800">JiuFight トーナメント</CardTitle>
+                <CardDescription className="text-slate-600">
+                  全てのレベルの選手が参加できる柔術トーナメント
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </a>
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
@@ -54,15 +56,17 @@ const Index = () => {
             </CardHeader>
           </Card>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardHeader>
-              <Video className="w-10 h-10 text-slate-800 mb-4" />
-              <CardTitle className="text-slate-800">教育コンテンツ</CardTitle>
-              <CardDescription className="text-slate-600">
-                レベル別の技術解説と質疑応答
-              </CardDescription>
-            </CardHeader>
-          </Card>
+          <a href="https://jjlab.jp" target="_blank" rel="noopener noreferrer">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-transform hover:scale-105">
+              <CardHeader>
+                <Video className="w-10 h-10 text-slate-800 mb-4" />
+                <CardTitle className="text-slate-800">教育コンテンツ</CardTitle>
+                <CardDescription className="text-slate-600">
+                  レベル別の技術解説と質疑応答
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </a>
 
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>

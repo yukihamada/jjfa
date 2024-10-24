@@ -14,16 +14,16 @@ const JiujitsuBenefits = () => {
       
       <div className="container mx-auto px-4 py-20">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
-          柔術の魅力を知る
+          Discover the Benefits of Jiu-Jitsu
         </h1>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
               <Brain className="w-12 h-12 text-slate-800 mb-4" />
-              <CardTitle>戦略的思考</CardTitle>
+              <CardTitle>Strategic Thinking</CardTitle>
               <CardDescription>
-                柔術は「身体のチェス」とも呼ばれ、戦略的思考力を養います。体格差を技術でカバーできる奥深いスポーツです。
+                Jiu-Jitsu is often called "Physical Chess". It develops strategic thinking and allows you to overcome physical differences through technique.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -31,9 +31,9 @@ const JiujitsuBenefits = () => {
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
               <Heart className="w-12 h-12 text-slate-800 mb-4" />
-              <CardTitle>健康的な生活</CardTitle>
+              <CardTitle>Healthy Lifestyle</CardTitle>
               <CardDescription>
-                全身運動による体力向上、柔軟性の向上、ストレス解消など、心身の健康に貢献します。
+                Full-body workout improves fitness, flexibility, and helps reduce stress, contributing to both physical and mental health.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -41,9 +41,9 @@ const JiujitsuBenefits = () => {
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
               <Users className="w-12 h-12 text-slate-800 mb-4" />
-              <CardTitle>コミュニティ</CardTitle>
+              <CardTitle>Community</CardTitle>
               <CardDescription>
-                年齢や性別、国籍を問わず、共に学び合える温かいコミュニティです。生涯の友人と出会えます。
+                A warm community where people of all ages, genders, and nationalities learn together. Make lifelong friends through training.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -51,9 +51,9 @@ const JiujitsuBenefits = () => {
           <Card className="bg-white/10 backdrop-blur-md border-white/20">
             <CardHeader>
               <Trophy className="w-12 h-12 text-slate-800 mb-4" />
-              <CardTitle>目標達成</CardTitle>
+              <CardTitle>Achievement</CardTitle>
               <CardDescription>
-                帯の昇級や大会での成績など、明確な目標設定と達成による自己成長を実感できます。
+                Experience personal growth through clear goals like belt promotions and competition results.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -62,18 +62,18 @@ const JiujitsuBenefits = () => {
         <div className="max-w-4xl mx-auto">
           <Card className="bg-white/10 backdrop-blur-md border-white/20 mb-8">
             <CardHeader>
-              <CardTitle>柔術を始めるには</CardTitle>
+              <CardTitle>Getting Started with Jiu-Jitsu</CardTitle>
               <CardDescription>
-                柔術は誰でも始められます。初心者向けのクラスも充実しており、経験豊富な指導者がサポートします。
+                Anyone can start Jiu-Jitsu. We have beginner-friendly classes with experienced instructors to support you.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p>推奨する準備：</p>
+              <p>Recommended preparation:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li>動きやすい服装（Tシャツ、ハーフパンツなど）</li>
-                <li>水分補給用の飲み物</li>
-                <li>タオル</li>
-                <li>やる気と好奇心！</li>
+                <li>Comfortable clothing (T-shirt, shorts, etc.)</li>
+                <li>Water bottle for hydration</li>
+                <li>Towel</li>
+                <li>Enthusiasm and curiosity!</li>
               </ul>
             </CardContent>
           </Card>
@@ -84,7 +84,7 @@ const JiujitsuBenefits = () => {
                 size="lg"
                 className="bg-slate-800 text-white hover:bg-slate-700"
               >
-                無料体験を予約する <ArrowRight className="ml-2 h-4 w-4" />
+                Book a Free Trial Class <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>

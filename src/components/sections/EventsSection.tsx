@@ -18,14 +18,14 @@ export const EventsSection = () => {
             <div>
               <CardTitle className="text-slate-800">JiuFight 2025</CardTitle>
               <CardDescription className="text-slate-600">
-                2025年2月16日
+                February 16, 2025
               </CardDescription>
             </div>
           </CardHeader>
           <CardContent>
             <p className="text-slate-600 mb-4">
-              {t('events.location')}: 大田区産業プラザPiO<br />
-              {t('events.access')}: 京浜急行「京急蒲田」駅より徒歩約3分
+              {t('events.location')}: PiO Ota Industrial Plaza<br />
+              {t('events.access')}: 3-minute walk from Keikyu Kamata Station
             </p>
             <a 
               href="https://jiufight.com" 

@@ -1,4 +1,3 @@
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
@@ -9,8 +8,6 @@ const Whitepaper = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
-      <AnimatedBackground />
-      
       <div className="container mx-auto py-12 px-4">
         <div className="rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
           <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-center mb-8 text-slate-800 leading-tight">

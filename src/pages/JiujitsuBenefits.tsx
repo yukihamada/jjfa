@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import { HealthBenefits } from "@/components/jiujitsu-benefits/HealthBenefits";
@@ -13,8 +12,6 @@ const JiujitsuBenefits = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
-      <AnimatedBackground />
-      
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
           柔術の魅力を知る

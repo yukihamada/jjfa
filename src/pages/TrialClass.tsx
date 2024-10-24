@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -50,8 +49,6 @@ const TrialClass = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
-      <AnimatedBackground />
-      
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
           <Card className="bg-white/90 backdrop-blur-md">

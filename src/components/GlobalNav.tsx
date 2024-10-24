@@ -18,8 +18,8 @@ const GlobalNav = () => {
               to="/" 
               className="text-slate-800 hover:text-slate-600 font-bold text-xl flex items-center gap-2 transition-transform duration-300 hover:scale-105"
             >
-              <span className="bg-slate-800 text-white px-2 py-1 rounded">JJFA</span>
-              <span className="hidden sm:inline text-sm text-slate-600">Jiu-Jitsu For ALL</span>
+              <span className="bg-slate-800 text-white px-2 py-1 rounded">JJ Lab</span>
+              <span className="hidden sm:inline text-sm text-slate-600">Jiu-Jitsu Laboratory</span>
             </Link>
 
             <nav className="hidden lg:flex items-center gap-6">

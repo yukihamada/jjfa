@@ -17,9 +17,9 @@ export const ContactSection = () => {
           {t('contact.phone')}: 03-1234-5678
         </p>
         <p className="mb-6 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-300">
-          〒102-0074<br />
-          東京都千代田区九段南１丁目６−５<br />
-          九段会館テラス
+          2F Kudankai Terrace<br />
+          1-6-5 Kudanminami, Chiyoda-ku<br />
+          Tokyo 102-0074, Japan
         </p>
         <div className="flex justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 delay-400">
           <Button 

@@ -9,12 +9,12 @@ export const Chapter2 = () => {
           <li>社員権トークン（JJFA-MEMBER）
             <ul className="list-disc pl-6 mt-2">
               <li>総発行上限：1,000個</li>
-              <li>初期発行：100個（2024年4月）</li>
+              <li>初期発行：100個（2024年11月）</li>
               <li>段階的追加発行：
                 <ul className="list-disc pl-6">
-                  <li>2024年Q3：200個</li>
-                  <li>2024年Q4：300個</li>
-                  <li>2025年Q1：400個</li>
+                  <li>2024年Q4：200個</li>
+                  <li>2025年Q1：300個</li>
+                  <li>2025年Q2：400個</li>
                 </ul>
               </li>
             </ul>

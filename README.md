@@ -1,73 +1,50 @@
-# JJFA - Jiu-Jitsu For ALL
+# React + TypeScript + Vite
 
-JJFAは、柔術の魅力を世界中の人々に届けることを目指すプロジェクトです。Web3技術を活用して、柔術コミュニティの持続可能な成長と公平な価値分配を実現します。
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 主な機能
+Currently, two official plugins are available:
 
-- 🥋 柔術大会の情報共有と参加登録
-- 👥 グローバルなコミュニティプラットフォーム
-- 📚 レベル別の技術解説とQ&A
-- 🌏 国際交流の促進
-- 🎯 トークンを活用したインセンティブシステム
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 技術スタック
+## Expanding the ESLint configuration
 
-- React + TypeScript + Vite
-- Tailwind CSS
-- shadcn/ui
-- Supabase (認証・データベース)
-- i18n (多言語対応)
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-## 開発環境のセットアップ
+- Configure the top-level `parserOptions` property like this:
 
-1. リポジトリのクローン:
-```bash
-git clone https://github.com/your-username/jjfa.git
-cd jjfa
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-2. 依存関係のインストール:
-```bash
-npm install
-# または
-yarn install
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
 ```
-
-3. 環境変数の設定:
-`.env.example`をコピーして`.env`を作成し、必要な環境変数を設定します:
-```bash
-cp .env.example .env
-```
-
-4. 開発サーバーの起動:
-```bash
-npm run dev
-# または
-yarn dev
-```
-
-## 環境変数
-
-| 変数名 | 説明 |
-|--------|------|
-| VITE_SUPABASE_URL | SupabaseのプロジェクトURL |
-| VITE_SUPABASE_ANON_KEY | Supabaseの匿名キー |
-
-## コントリビューション
-
-プロジェクトへの貢献を歓迎します！以下の手順で参加できます：
-
-1. このリポジトリをフォーク
-2. 新しいブランチを作成 (`git checkout -b feature/amazing-feature`)
-3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
-4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
-5. プルリクエストを作成
-
-## ライセンス
-
-このプロジェクトはMITライセンスの下で公開されています。
-
-## お問い合わせ
-
-- Website: [https://jjforall.com](https://jjforall.com)
-- Email: info@jjforall.com

@@ -4,72 +4,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export const RegistrationForm = () => {
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password || !name) {
+    if (!name || !email) {
       toast({
         title: "エラー",
-        description: "すべての項目を入力してください。",
+        description: "名前とメールアドレスを入力してください。",
         variant: "destructive",
       });
       return;
     }
-
-    setIsLoading(true);
-    try {
-      // Supabase Authで新規ユーザー登録
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            name: name,
-          }
-        }
-      });
-
-      if (authError) throw authError;
-
-      // community_membersテーブルにも登録
-      const { error: dbError } = await supabase
-        .from('community_members')
-        .insert([
-          { 
-            user_id: authData.user?.id,
-            name, 
-            email 
-          }
-        ]);
-
-      if (dbError) throw dbError;
-
-      toast({
-        title: "登録完了",
-        description: "確認メールを送信しました。メールを確認して登録を完了してください。",
-      });
-      
-      // フォームをリセット
-      setName("");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      toast({
-        title: "エラー",
-        description: "登録に失敗しました。もう一度お試しください。",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    toast({
+      title: "登録完了",
+      description: "コミュニティへの参加申請を受け付けました。",
+    });
   };
 
   return (
@@ -89,7 +43,6 @@ export const RegistrationForm = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="山田 太郎"
-              disabled={isLoading}
             />
           </div>
           <div className="space-y-2">
@@ -100,23 +53,10 @@ export const RegistrationForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@email.com"
-              disabled={isLoading}
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">パスワード</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="8文字以上で入力してください"
-              disabled={isLoading}
-              minLength={8}
-            />
-          </div>
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "登録中..." : "登録する"}
+          <Button type="submit" className="w-full">
+            登録する
           </Button>
         </form>
       </CardContent>

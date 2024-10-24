@@ -19,23 +19,21 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <Toaster />
       <BrowserRouter>
-        <Toaster />
         <GlobalNav />
-        <main className="min-h-screen w-full">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/whitepaper" element={<Whitepaper />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
-            <Route path="/trial-class" element={<TrialClass />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/operating-rules" element={<OperatingRules />} />
-            <Route path="/token-rules" element={<TokenRules />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/careers" element={<Careers />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
+          <Route path="/trial-class" element={<TrialClass />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/operating-rules" element={<OperatingRules />} />
+          <Route path="/token-rules" element={<TokenRules />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/careers" element={<Careers />} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

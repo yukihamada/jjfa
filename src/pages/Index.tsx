@@ -12,16 +12,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <AnimatedBackground />
-      <div className="pt-16">
-        <HeroSection />
-        <JiujitsuBenefitsSection />
-        <EventsSection />
-        <ExternalLinks />
-        <ComingSoonSection />
-        <TeamSection />
-        <TokenSection />
-        <ContactSection />
-      </div>
+      <HeroSection />
+      <JiujitsuBenefitsSection />
+      <EventsSection />
+      <ExternalLinks />
+      <ComingSoonSection />
+      <TeamSection />
+      <TokenSection />
+      <ContactSection />
     </div>
   );
 };

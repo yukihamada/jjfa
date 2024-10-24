@@ -52,7 +52,7 @@ export const ContactForm = () => {
               id="email" 
               type="email" 
               required 
-              placeholder="example@email.com"
+              placeholder="example@jjforall.com"
               className="bg-white"
             />
           </div>

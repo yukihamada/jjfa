@@ -1,6 +1,6 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Home, Users, Star, FileText, Book, Scroll, Coins, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,16 @@ import { useTranslation } from 'react-i18next';
 const GlobalNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
+
+  const menuItems = [
+    { to: "/", label: "トップページ", icon: Home },
+    { to: "/community", label: "コミュニティに参加", icon: Users },
+    { to: "/jiujitsu-benefits", label: "柔術の魅力", icon: Star },
+    { to: "/whitepaper", label: t('nav.whitepaper'), icon: FileText },
+    { to: "/articles", label: "定款", icon: Book },
+    { to: "/operating-rules", label: "運営規程", icon: Scroll },
+    { to: "/token-rules", label: "トークン規程", icon: Coins },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50">
@@ -23,53 +33,25 @@ const GlobalNav = () => {
             </Link>
 
             <nav className="hidden lg:flex items-center gap-6">
-              <Link 
-                to="/" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                トップページ
-              </Link>
-              <Link 
-                to="/community" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                コミュニティに参加
-              </Link>
-              <Link 
-                to="/jiujitsu-benefits" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                柔術の魅力
-              </Link>
-              <Link 
-                to="/whitepaper" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                {t('nav.whitepaper')}
-              </Link>
-              <Link 
-                to="/articles" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                定款
-              </Link>
-              <Link 
-                to="/operating-rules" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                運営規程
-              </Link>
-              <Link 
-                to="/token-rules" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                トークン規程
-              </Link>
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link 
+                    key={item.to}
+                    to={item.to} 
+                    className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-2 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
               <a 
                 href="#contact" 
-                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+                className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-2 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
               >
-                {t('nav.contact')}
+                <MessageCircle className="w-4 h-4" />
+                <span>{t('nav.contact')}</span>
               </a>
             </nav>
 
@@ -92,61 +74,27 @@ const GlobalNav = () => {
           }`}
         >
           <nav className="flex flex-col p-4 gap-4">
-            <Link 
-              to="/" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              トップページ
-            </Link>
-            <Link 
-              to="/community" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              コミュニティに参加
-            </Link>
-            <Link 
-              to="/jiujitsu-benefits" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              柔術の魅力
-            </Link>
-            <Link 
-              to="/whitepaper" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t('nav.whitepaper')}
-            </Link>
-            <Link 
-              to="/articles" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              定款
-            </Link>
-            <Link 
-              to="/operating-rules" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              運営規程
-            </Link>
-            <Link 
-              to="/token-rules" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              トークン規程
-            </Link>
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link 
+                  key={item.to}
+                  to={item.to} 
+                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-slate-50 p-2 rounded-md"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
             <a 
               href="#contact" 
-              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
+              className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-slate-50 p-2 rounded-md"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('nav.contact')}
+              <MessageCircle className="w-5 h-5" />
+              <span>{t('nav.contact')}</span>
             </a>
           </nav>
         </div>

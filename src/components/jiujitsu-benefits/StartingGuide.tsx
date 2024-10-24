@@ -33,7 +33,7 @@ export const StartingGuide = () => {
               <CheckCircle2 className="w-5 h-5 mt-1 text-green-500" />
               <div>
                 <h4 className="font-semibold">年齢制限がある？</h4>
-                <p className="text-sm text-slate-600">6歳から70代まで、幅広い年齢層が実践中！</p>
+                <p className="text-sm text-slate-600">6歳から80代まで幅広い年齢層が実践中！実際に80代の方がマスター部門で優勝した実績もあります</p>
               </div>
             </div>
             <div className="flex items-start gap-3">

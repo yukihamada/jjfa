@@ -1,5 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
-
 export const TokenRulesHeader = () => {
   return (
     <div className="text-center mb-8">

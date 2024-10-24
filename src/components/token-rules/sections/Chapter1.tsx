@@ -15,6 +15,14 @@ export const Chapter1 = () => {
               <li>コミュニティの持続的な発展</li>
             </ul>
           </li>
+          <li>本規程の解釈・運用にあたっては、以下の原則を重視する。
+            <ul className="list-disc pl-6 mt-2">
+              <li>公平性：全てのステークホルダーの平等な取扱い</li>
+              <li>透明性：全ての重要情報の適時適切な開示</li>
+              <li>説明責任：意思決定プロセスの明確化</li>
+              <li>持続可能性：長期的な発展を考慮した設計</li>
+            </ul>
+          </li>
         </ol>
       </TokenRulesArticle>
 
@@ -25,6 +33,7 @@ export const Chapter1 = () => {
             <ul className="list-disc pl-6 mt-2">
               <li>分類：非代替性トークン（NFT）</li>
               <li>規格：ERC-721</li>
+              <li>コントラクトアドレス：[アドレスを記載]</li>
               <li>主な機能：
                 <ul className="list-disc pl-6">
                   <li>議決権（1トークン＝1票）</li>
@@ -35,7 +44,7 @@ export const Chapter1 = () => {
               </li>
             </ul>
           </li>
-          {/* ... 他のトークン定義も同様に実装 */}
+          {/* ... 他のトークン定義 */}
         </ol>
       </TokenRulesArticle>
     </TokenRulesSection>

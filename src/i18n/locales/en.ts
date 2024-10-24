@@ -72,6 +72,7 @@ export default {
   },
   contact: {
     title: "Contact",
+    email: "Email: info@jjforall.com",
     address: "2F Kudankai Terrace, 1-6-5 Kudanminami, Chiyoda-ku, Tokyo 102-0074, Japan"
   },
   services: {

@@ -39,6 +39,7 @@ export default {
   },
   contact: {
     title: "お問い合わせ",
+    email: "メールアドレス: info@jjforall.com",
     address: "〒102-0074 東京都千代田区九段南1-6-5 九段会館テラス2F"
   },
   team: {

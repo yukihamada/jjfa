@@ -10,6 +10,9 @@ export const ContactSection = () => {
         {t('contact.title')}
       </h2>
       <div className="max-w-2xl mx-auto space-y-4">
+        <p className="mb-4 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-100">
+          {t('contact.email')}
+        </p>
         <p className="mb-6 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-300">
           {t('contact.address')}
         </p>

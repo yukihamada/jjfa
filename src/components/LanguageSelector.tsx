@@ -31,7 +31,7 @@ export const LanguageSelector = () => {
     <Select defaultValue={i18n.language} onValueChange={handleLanguageChange}>
       <SelectTrigger className="w-[140px] bg-white/80 hover:bg-white border-slate-200 hover:border-slate-300 transition-colors">
         <Globe className="mr-2 h-4 w-4 text-slate-600" />
-        <SelectValue placeholder="Language" />
+        <SelectValue placeholder="言語" />
       </SelectTrigger>
       <SelectContent align="end">
         {languages.map((lang) => (

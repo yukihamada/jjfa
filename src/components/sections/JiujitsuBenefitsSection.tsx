@@ -2,23 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Brain, Heart, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 export const JiujitsuBenefitsSection = () => {
-  const { t } = useTranslation();
-
   return (
     <section className="py-20 px-4 container mx-auto">
       <h2 className="text-3xl font-bold text-center mb-12 text-slate-800 animate-in fade-in slide-in-from-bottom-4">
-        Benefits of Jiu-Jitsu
+        柔術の魅力
       </h2>
       <div className="grid md:grid-cols-3 gap-8 mb-8">
         <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4">
           <CardHeader>
             <Brain className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>Strategic Thinking</CardTitle>
+            <CardTitle>戦略的思考</CardTitle>
             <CardDescription>
-              A deep sport often called "Physical Chess" where technique can overcome physical differences.
+              体格差を技術でカバーできる、身体のチェスとも呼ばれる奥深いスポーツです。
             </CardDescription>
           </CardHeader>
         </Card>
@@ -26,9 +23,9 @@ export const JiujitsuBenefitsSection = () => {
         <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4 delay-100">
           <CardHeader>
             <Heart className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>Healthy Lifestyle</CardTitle>
+            <CardTitle>健康的な生活</CardTitle>
             <CardDescription>
-              Full-body workout that improves physical fitness and promotes both mental and physical health.
+              全身運動による体力向上と、心身の健康増進に効果的です。
             </CardDescription>
           </CardHeader>
         </Card>
@@ -36,9 +33,9 @@ export const JiujitsuBenefitsSection = () => {
         <Card className="bg-white/10 backdrop-blur-md border-white/20 transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4 delay-200">
           <CardHeader>
             <Users className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>Community</CardTitle>
+            <CardTitle>コミュニティ</CardTitle>
             <CardDescription>
-              A warm community where people of all ages and genders learn together.
+              年齢や性別を問わず、共に学び合える温かいコミュニティです。
             </CardDescription>
           </CardHeader>
         </Card>
@@ -49,7 +46,7 @@ export const JiujitsuBenefitsSection = () => {
             variant="outline" 
             className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
           >
-            Learn More
+            もっと詳しく知る
           </Button>
         </Link>
       </div>

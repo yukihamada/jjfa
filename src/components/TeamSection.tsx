@@ -7,37 +7,37 @@ export const TeamSection = () => {
   const teamMembers = [
     {
       name: t('team.members.hamada.name'),
-      role: "Technology Advisor & BJJ Blue Belt",
+      role: t('team.members.hamada.role'),
       imagePath: "/406363140_10229571887435619_4554932660817499091_n.jpg",
       description: t('team.members.hamada.description')
     },
     {
       name: t('team.members.murata.name'),
-      role: "BJJ Academy Representative & Instructor",
+      role: t('team.members.murata.role'),
       imagePath: "/４-1.jpg",
       description: t('team.members.murata.description')
     },
     {
       name: t('team.members.tsutsumi.name'),
-      role: "Venture Capitalist & BJJ Blue Belt",
+      role: t('team.members.tsutsumi.role'),
       imagePath: "/2024-10-23 13.17.34.png",
       description: t('team.members.tsutsumi.description')
     },
     {
       name: t('team.members.tateishi.name'),
-      role: "BJJ Athlete",
+      role: t('team.members.tateishi.role'),
       imagePath: "/2024-10-23 13.15.30.png",
       description: t('team.members.tateishi.description')
     },
     {
       name: t('team.members.awata.name'),
-      role: "HR Support Company CEO & BJJ Blue Belt",
+      role: t('team.members.awata.role'),
       imagePath: "/kPq28fl6_400x400.jpg",
       description: t('team.members.awata.description')
     },
     {
       name: t('team.members.takinishi.name'),
-      role: "BJJ Athlete & Blue Belt",
+      role: t('team.members.takinishi.role'),
       imagePath: "/356407976_809626707393076_4635497050248137000_n.jpg",
       description: t('team.members.takinishi.description')
     }

@@ -5,14 +5,14 @@ import { ExternalLink } from "lucide-react";
 const ExternalLinks = () => {
   return (
     <section className="py-20 px-4 container mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">Our Services</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 text-slate-800">関連サービス</h2>
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>
             <CardTitle className="text-slate-800">JiuFight</CardTitle>
             <CardDescription>
-              Streamlined tournament entry and management platform.
-              A user-friendly tournament management system for both athletes and organizers.
+              効率的な大会エントリーと運営プラットフォーム。
+              選手と主催者の両方にとって使いやすい大会運営システムです。
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -26,7 +26,7 @@ const ExternalLinks = () => {
                 variant="outline" 
                 className="w-full text-slate-800 border-slate-800 hover:bg-slate-100"
               >
-                Visit Website
+                ウェブサイトへ
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
             </a>
@@ -37,8 +37,8 @@ const ExternalLinks = () => {
           <CardHeader>
             <CardTitle className="text-slate-800">JiuJitsu Lab</CardTitle>
             <CardDescription>
-              Technical explanations and latest updates in Jiu-Jitsu.
-              A comprehensive information platform for practitioners of all levels.
+              技術解説と柔術の最新情報。
+              全てのレベルの練習者のための総合的な情報プラットフォームです。
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -52,7 +52,7 @@ const ExternalLinks = () => {
                 variant="outline" 
                 className="w-full text-slate-800 border-slate-800 hover:bg-slate-100"
               >
-                Visit Website
+                ウェブサイトへ
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
             </a>

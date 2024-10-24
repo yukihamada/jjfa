@@ -60,6 +60,11 @@ export default {
       takinishi: {
         name: "Kisei Takinishi",
         description: "Practicante de Jiu-Jitsu de la Academia Yawara, participando activamente en competencias nacionales e internacionales. Con logros en la categoría Master 1 Azul, ha perfeccionado sus habilidades en varias categorías de peso. Su pasión por la competencia y habilidad es altamente respetada en las comunidades de Jiu-Jitsu tanto nacionales como internacionales."
+      },
+      iwase: {
+        name: "Makoto Iwase",
+        role: "Abogado y Practicante de Jiu-Jitsu Cinturón Blanco",
+        description: "Después de graduarse de la Facultad de Derecho de la Universidad de Tokio y completar sus estudios en la Escuela de Derecho de la Universidad de Tokio, se registró como abogado en 2020. En el bufete de abogados Eiwa, destaca en diversos campos, incluyendo derecho corporativo, apoyo a startups y litigios civiles. Como cinturón blanco en Jiu-Jitsu, cultiva conocimientos y habilidades equilibradas a través del derecho y el Jiu-Jitsu. Su enfoque combina el pensamiento estratégico del Jiu-Jitsu con la capacidad de resolución de problemas legales para apoyar el éxito de los clientes."
       }
     }
   },

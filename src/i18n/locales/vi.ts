@@ -60,6 +60,11 @@ export default {
       takinishi: {
         name: "Kisei Takinishi",
         description: "Võ sĩ Jiu-Jitsu từ Học viện Yawara, tích cực tham gia các giải đấu trong nước và quốc tế. Với thành tích trong hạng Master 1 Đai xanh, anh đã trau dồi kỹ năng qua nhiều hạng cân. Niềm đam mê thi đấu và kỹ năng của anh được đánh giá cao trong cộng đồng Jiu-Jitsu cả trong nước và quốc tế."
+      },
+      iwase: {
+        name: "Makoto Iwase",
+        role: "Luật sư & Võ sinh Jiu-Jitsu Đai trắng",
+        description: "Sau khi tốt nghiệp Khoa Luật Đại học Tokyo và hoàn thành chương trình tại Trường Luật Đại học Tokyo, anh đã đăng ký hành nghề luật sư vào năm 2020. Tại Văn phòng Luật Eiwa, anh xuất sắc trong nhiều lĩnh vực bao gồm luật doanh nghiệp, hỗ trợ khởi nghiệp và tranh tụng dân sự. Là võ sinh đai trắng Jiu-Jitsu, anh trau dồi kiến thức và kỹ năng cân bằng thông qua cả luật pháp và Jiu-Jitsu. Cách tiếp cận của anh kết hợp tư duy chiến lược từ Jiu-Jitsu với khả năng giải quyết vấn đề pháp lý để hỗ trợ thành công của khách hàng."
       }
     }
   },

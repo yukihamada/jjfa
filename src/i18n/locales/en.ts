@@ -58,13 +58,18 @@ export default {
         description: "Managing Partner at Lifetime Ventures. Based in Yokohama and Okinawa, specializing in pre-seed and seed-stage startup investments. Established the 'OIST-Lifetime Ventures Fund' in collaboration with OIST (Okinawa Institute of Science and Technology), working to build an ecosystem for science and technology startups. Provides comprehensive support including business planning, initial customer development, and team building, in addition to funding."
       },
       takinishi: {
-        name: "Motoki Takinishi",
+        name: "Kiei Takinishi",
         description: "A Jiu-Jitsu practitioner from Yawara Academy, actively participating in domestic and international competitions. With achievements in the Blue Master 1 category, he has honed his skills across various weight classes. His passion for competition and skill is highly regarded in both domestic and international Jiu-Jitsu communities."
       },
       iwase: {
         name: "Makoto Iwase",
         role: "Attorney at Law & Jiu-Jitsu Practitioner White Belt",
         description: "After graduating from the University of Tokyo's Faculty of Law and completing his studies at the University of Tokyo Law School, he registered as an attorney in 2020. At Eiwa Law Office, he excels in various fields including corporate law, startup support, and civil litigation. As a white belt in Jiu-Jitsu, he cultivates balanced knowledge and skills through both law and Jiu-Jitsu. His approach combines strategic thinking from Jiu-Jitsu with legal problem-solving abilities to support client success."
+      },
+      recruitment: {
+        name: "Join Our Team!",
+        role: "Shape the Future of Jiu-Jitsu Together",
+        description: "JJFA is looking for passionate individuals to help shape the future of Jiu-Jitsu and Web3. Whether you're experienced or just starting out, if you share our passion for Jiu-Jitsu, we'd love to hear from you."
       }
     }
   },

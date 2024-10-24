@@ -1,5 +1,6 @@
 import { TeamMember } from "./TeamMember";
 import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
 
 export const TeamSection = () => {
   const { t } = useTranslation();
@@ -46,6 +47,13 @@ export const TeamSection = () => {
       role: t('team.members.iwase.role'),
       imagePath: "/ganchan.png",
       description: t('team.members.iwase.description')
+    },
+    {
+      name: t('team.members.recruitment.name'),
+      role: t('team.members.recruitment.role'),
+      description: t('team.members.recruitment.description'),
+      isRecruitment: true,
+      link: "/careers"
     }
   ];
 
@@ -54,13 +62,24 @@ export const TeamSection = () => {
       <h2 className="text-3xl font-bold text-center mb-12 text-slate-800">{t('team.title')}</h2>
       <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {teamMembers.map((member, index) => (
-          <TeamMember
-            key={index}
-            name={member.name}
-            role={member.role}
-            description={member.description}
-            imagePath={member.imagePath}
-          />
+          member.isRecruitment ? (
+            <Link to={member.link} key={index} className="transition-transform hover:scale-105">
+              <TeamMember
+                name={member.name}
+                role={member.role}
+                description={member.description}
+                imagePath={member.imagePath}
+              />
+            </Link>
+          ) : (
+            <TeamMember
+              key={index}
+              name={member.name}
+              role={member.role}
+              description={member.description}
+              imagePath={member.imagePath}
+            />
+          )
         ))}
       </div>
     </section>

@@ -12,10 +12,10 @@ const JiujitsuBenefits = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <AnimatedBackground />
       
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
           柔術の魅力を知る
         </h1>

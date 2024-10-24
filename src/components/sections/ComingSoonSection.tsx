@@ -1,58 +1,47 @@
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Building2, Database, Lock } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
+import { Timer, BookOpen, Users } from "lucide-react";
 
 export const ComingSoonSection = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: <BookOpen className="w-8 h-8 text-slate-800" />,
+      title: t('comingSoon.features.0'),
+    },
+    {
+      icon: <Users className="w-8 h-8 text-slate-800" />,
+      title: t('comingSoon.features.1'),
+    },
+    {
+      icon: <Timer className="w-8 h-8 text-slate-800" />,
+      title: t('comingSoon.features.2'),
+    },
+  ];
+
   return (
     <section className="py-20 px-4 container mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-4 text-slate-800 animate-in fade-in slide-in-from-bottom-4">
-        Coming Soon
-      </h2>
-      <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 delay-100">
-        JJFAは柔術界の未来を創造します。最新のテクノロジーを活用し、
-        より透明で効率的な柔術コミュニティの構築を目指しています。
-      </p>
-      
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 relative group transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4 delay-200">
-          <div className="absolute top-4 right-4">
-            <Lock className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
+      <Card className="bg-white/10 backdrop-blur-md border-white/20">
+        <CardHeader className="text-center">
+          <CardTitle className="text-3xl font-bold text-slate-800">
+            {t('comingSoon.title')}
+          </CardTitle>
+          <CardDescription className="text-lg">
+            {t('comingSoon.description')}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="flex flex-col items-center text-center space-y-4">
+                {feature.icon}
+                <h3 className="font-semibold text-slate-800">{feature.title}</h3>
+              </div>
+            ))}
           </div>
-          <CardHeader>
-            <Building2 className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>道場運営システム</CardTitle>
-            <CardDescription>
-              会員管理、スケジュール管理、出席管理など、道場運営に必要な機能を
-              オールインワンで提供。モバイルアプリでいつでもどこでも簡単アクセス。
-              <ul className="mt-4 space-y-2 text-left">
-                <li>・ 会員管理システム</li>
-                <li>・ クラススケジュール管理</li>
-                <li>・ 出席記録と分析</li>
-                <li>・ 会費管理</li>
-              </ul>
-            </CardDescription>
-          </CardHeader>
-        </Card>
-
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 relative group transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4 delay-300">
-          <div className="absolute top-4 right-4">
-            <Lock className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
-          </div>
-          <CardHeader>
-            <Database className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>ブロックチェーン認証システム</CardTitle>
-            <CardDescription>
-              帯の昇級記録や大会成績をブロックチェーンで安全に記録・管理。
-              改ざん不可能な実績証明システムで、柔術家のキャリアを正確に記録。
-              <ul className="mt-4 space-y-2 text-left">
-                <li>・ 帯の昇級記録の電子認証</li>
-                <li>・ 大会成績のブロックチェーン記録</li>
-                <li>・ NFTメダルと称号</li>
-                <li>・ グローバルな実績証明</li>
-              </ul>
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </div>
+        </CardContent>
+      </Card>
     </section>
   );
 };

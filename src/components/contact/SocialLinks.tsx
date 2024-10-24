@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Discord, MessageCircle, Send } from "lucide-react";
+import { MessageCircle, Send, Share2 } from "lucide-react";
 
 export const SocialLinks = () => {
   return (
@@ -17,7 +17,7 @@ export const SocialLinks = () => {
           className="w-full justify-start gap-2"
           onClick={() => window.open('https://discord.gg/jjfa', '_blank')}
         >
-          <Discord className="w-5 h-5" />
+          <Share2 className="w-5 h-5" />
           Discordサーバーに参加
         </Button>
         

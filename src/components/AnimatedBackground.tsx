@@ -1,23 +1,67 @@
+import { useCallback } from "react";
+import { loadSlim } from "@tsparticles/slim";
+import Particles from "@tsparticles/react";
+import type { Container, Engine } from "@tsparticles/engine";
+
 const AnimatedBackground = () => {
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadSlim(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container: Container | undefined) => {
+    console.log(container);
+  }, []);
+
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-slate-100/50">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-slate-400/10 animate-float-slow"
-            style={{
-              width: `${Math.random() * 100 + 20}px`,
-              height: `${Math.random() * 100 + 20}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${10 + Math.random() * 10}s`
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    <Particles
+      id="tsparticles"
+      init={particlesInit}
+      loaded={particlesLoaded}
+      className="fixed inset-0 -z-10"
+      options={{
+        background: {
+          color: {
+            value: "#f8fafc",
+          },
+        },
+        fpsLimit: 120,
+        particles: {
+          color: {
+            value: "#64748b",
+          },
+          links: {
+            color: "#64748b",
+            distance: 150,
+            enable: true,
+            opacity: 0.3,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            random: true,
+            speed: 1,
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+              area: 800,
+            },
+            value: 80,
+          },
+          opacity: {
+            value: 0.3,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            value: { min: 1, max: 3 },
+          },
+        },
+        detectRetina: true,
+      }}
+    />
   );
 };
 

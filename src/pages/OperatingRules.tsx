@@ -1,4 +1,3 @@
-<lov-code>
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from 'react-i18next';
@@ -172,3 +171,12 @@ const OperatingRules = () => {
                     </ul>
                   </li>
                
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default OperatingRules;

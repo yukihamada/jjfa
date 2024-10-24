@@ -41,6 +41,12 @@ const GlobalNav = () => {
               >
                 運営規程
               </Link>
+              <Link 
+                to="/token-rules" 
+                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+              >
+                トークン規程
+              </Link>
               <a 
                 href="#contact" 
                 className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
@@ -88,6 +94,13 @@ const GlobalNav = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               運営規程
+            </Link>
+            <Link 
+              to="/token-rules" 
+              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              トークン規程
             </Link>
             <a 
               href="#contact" 

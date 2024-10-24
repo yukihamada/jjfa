@@ -1,65 +1,9 @@
 export default {
-  nav: {
-    home: "Home",
-    community: "Community",
-    benefits: "Benefits",
-    whitepaper: "Whitepaper",
-    contact: "Contact"
-  },
-  hero: {
-    title: "JJFA - Jiu-Jitsu For ALL",
-    subtitle: "Bringing the beauty of Jiu-Jitsu to everyone",
-    joinCommunity: "Join Community",
-    whitepaper: "Whitepaper"
-  },
-  events: {
-    title: "Events",
-    viewDetails: "View Tournament Details",
-    location: "Location",
-    access: "Access",
-    upcoming: {
-      jiufight: {
-        title: "JiuFight 2025",
-        date: "February 16, 2025",
-        location: "PiO Ota Industrial Plaza",
-        access: "3-minute walk from Keikyu Kamata Station"
-      }
-    }
-  },
-  community: {
-    title: "Join Our Community",
-    subtitle: "Share the joy of Jiu-Jitsu in the JJFA community",
-    benefits: {
-      title: "Member Benefits",
-      content: {
-        title: "Exclusive Content",
-        description: "Technical instruction videos by top athletes and priority access to online seminars"
-      },
-      events: {
-        title: "Event Privileges",
-        description: "Priority booking and discounts for various events and tournaments"
-      }
-    },
-    events: {
-      title: "Event Information",
-      upcoming: {
-        seminar: {
-          title: "Black Belt Adult Champion Group Lesson",
-          date: "November 8, 2024 12:00-"
-        },
-        camp: {
-          title: "Hawaii Training Camp",
-          date: "February 28 - March 13, 2024",
-          description: "Intensive training with World Champions"
-        }
-      }
-    }
-  },
   benefits: {
     title: "Discover the Benefits of Jiu-Jitsu",
     health: {
       title: "Health Benefits",
-      scientificTitle: "Scientifically Proven Benefits",
+      scientificTitle: "Scientifically Proven Health Benefits",
       scientificList: {
         calories: "Burn up to 800kcal in a one-hour session",
         metabolism: "Increased basal metabolism (due to muscle gain)",
@@ -74,7 +18,7 @@ export default {
     },
     skills: {
       title: "Comprehensive Skills",
-      mentalTitle: "Mental Development",
+      mentalTitle: "Mental Strength Development",
       mentalList: {
         confidence: "Improved self-confidence",
         stress: "Enhanced stress resilience",
@@ -116,7 +60,7 @@ export default {
         },
         age: {
           title: "Age restrictions?",
-          description: "We welcome practitioners from 6 to 80+ years old! We even have octogenarians winning in master divisions"
+          description: "We welcome practitioners from 6 to 80+ years old! We even have 80+ year-olds winning in master divisions"
         },
         athletic: {
           title: "Not naturally athletic?",
@@ -125,17 +69,6 @@ export default {
       }
     },
     bookTrial: "Book a Free Trial Class"
-  },
-  token: {
-    title: "JJFA Token Benefits",
-    discount: {
-      title: "Tournament Entry Discounts",
-      description: "Token holders can enter tournaments at early bird prices anytime"
-    },
-    content: {
-      title: "Exclusive Content",
-      description: "Access to technical videos from top athletes and online seminars"
-    }
   },
   contact: {
     title: "Contact",

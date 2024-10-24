@@ -1,6 +1,5 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Mail, Brain, Users, MessageSquare, Dumbbell, Bot, Code, Sparkles, Clock, BookOpen } from "lucide-react";
@@ -74,7 +73,7 @@ const Careers = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <AnimatedBackground />
       
-      <div className="container mx-auto py-12 px-4">
+      <div className="container mx-auto py-24 px-4">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">

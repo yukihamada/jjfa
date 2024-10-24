@@ -16,14 +16,18 @@ export const CommunityEvents = () => {
           <Calendar className="w-full md:w-1/2" mode="single" />
           <div className="space-y-4 w-full md:w-1/2">
             <div className="border p-4 rounded-lg">
-              <h4 className="font-semibold">技術セミナー</h4>
-              <p className="text-sm text-gray-500">2024年3月15日</p>
-              <p>基本テクニックの解説と実践</p>
+              <h4 className="font-semibold">JiuFight 2025</h4>
+              <p className="text-sm text-gray-500">2025年2月16日</p>
+              <p>場所: 大田区産業プラザPiO</p>
             </div>
             <div className="border p-4 rounded-lg">
-              <h4 className="font-semibold">オンライン質問会</h4>
-              <p className="text-sm text-gray-500">2024年3月20日</p>
-              <p>経験者との質疑応答セッション</p>
+              <h4 className="font-semibold">ハワイ合宿</h4>
+              <p className="text-sm text-gray-500">2024年2月28日 - 3月13日</p>
+              <p>世界チャンピオンと出稽古強化トレーニング</p>
+            </div>
+            <div className="border p-4 rounded-lg">
+              <h4 className="font-semibold">黒帯アダルトチャンピオングループレッスン</h4>
+              <p className="text-sm text-gray-500">2024年11月8日 12:00-</p>
             </div>
           </div>
         </div>

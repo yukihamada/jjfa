@@ -1,5 +1,7 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 
 const Whitepaper = () => {
   const { t } = useTranslation();
@@ -15,14 +17,55 @@ const Whitepaper = () => {
             <span className="block text-xl md:text-3xl">{t('whitepaper.subtitle')}</span>
           </h1>
 
+          <div className="flex flex-wrap gap-4 justify-center mb-8">
+            <Link 
+              to="/articles" 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              定款を見る
+            </Link>
+            <Link 
+              to="/operating-rules" 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              運営規程を見る
+            </Link>
+            <Link 
+              to="/token-rules" 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              トークン規程を見る
+            </Link>
+          </div>
+
           <div className="prose prose-slate max-w-none">
             <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
-              <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
-              <p className="mb-4">{t('whitepaper.intro.backgroundText')}</p>
+              <h2 className="text-2xl font-bold mb-4">1. はじめに</h2>
+              <h3 className="text-xl font-semibold mb-2">背景</h3>
+              <p className="mb-4">ブラジリアン柔術は、武道としても競技スポーツとしても世界的に成長を続けています。しかし、持続可能な成長と公平な価値分配の面で、コミュニティはさまざまな課題に直面しています。</p>
               
-              <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.overview')}</h3>
-              <p className="mb-4">{t('whitepaper.intro.overviewText')}</p>
+              <h3 className="text-xl font-semibold mb-2">プロジェクト概要</h3>
+              <p className="mb-4">JJFA（Jiu-Jitsu For ALL）は、世界中の練習者、道場、大会主催者をつなぐ分散型プラットフォームを作ることで、これらの課題を解決することを目指しています。</p>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-bold mb-4">5. ガバナンス構造</h2>
+              <p className="mb-4">
+                JJFAは、Web3技術を活用した分散型自律組織（DAO）として運営されます。
+                詳細な運営方針については、
+                <Link to="/operating-rules" className="text-blue-600 hover:underline">運営規程</Link>
+                をご確認ください。
+              </p>
+              <p className="mb-4">
+                また、組織としての基本的な枠組みについては
+                <Link to="/articles" className="text-blue-600 hover:underline">定款</Link>
+                に、トークンに関する詳細は
+                <Link to="/token-rules" className="text-blue-600 hover:underline">トークン規程</Link>
+                にそれぞれ定められています。
+              </p>
             </section>
 
             <section className="mb-8">

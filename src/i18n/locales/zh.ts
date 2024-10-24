@@ -63,7 +63,7 @@ export default {
         description: "在多家企业担任外部董事，支持初创企业的成长。"
       },
       takinishi: {
-        name: "泷西贵诚",
+        name: "泷西基生",
         role: "柔术家・运动员 青带",
         description: "积极参加国内外比赛，磨练技术，受到高度评价。"
       },

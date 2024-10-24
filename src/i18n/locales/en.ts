@@ -58,7 +58,7 @@ export default {
         description: "Managing Partner at Lifetime Ventures. Based in Yokohama and Okinawa, specializing in pre-seed and seed-stage startup investments. Established the 'OIST-Lifetime Ventures Fund' in collaboration with OIST (Okinawa Institute of Science and Technology), working to build an ecosystem for science and technology startups. Provides comprehensive support including business planning, initial customer development, and team building, in addition to funding."
       },
       takinishi: {
-        name: "Kisei Takinishi",
+        name: "Motoki Takinishi",
         description: "A Jiu-Jitsu practitioner from Yawara Academy, actively participating in domestic and international competitions. With achievements in the Blue Master 1 category, he has honed his skills across various weight classes. His passion for competition and skill is highly regarded in both domestic and international Jiu-Jitsu communities."
       },
       iwase: {

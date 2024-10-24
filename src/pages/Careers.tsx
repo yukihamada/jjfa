@@ -11,42 +11,42 @@ const Careers = () => {
   const isJapanese = i18n.language === 'ja';
 
   const requiredSkills = [
-    "TypeScript/React",
-    "AI/機械学習の実装経験",
-    "ブロックチェーン技術",
-    "Web3.js/Ethers.js",
-    "スマートコントラクト開発",
-    "API設計",
-    "AWS/クラウドインフラ",
+    "TypeScript/React の深い理解と実務経験",
+    "AI/機械学習の実装経験：自然言語処理、画像認識など",
+    "ブロックチェーン技術（EthereumやEVM互換チェーンの知識）",
+    "Web3.js/Ethers.js の実務経験",
+    "スマートコントラクト開発（Solidity）",
+    "API設計：RESTfulおよびGraphQL",
+    "AWS/クラウドインフラ の設定・管理経験",
   ];
 
   const preferredSkills = [
-    "Solidity",
-    "Next.js",
-    "GraphQL",
-    "CI/CD",
-    "コンテナ技術",
-    "アジャイル開発経験",
+    "Solidity での高度なコントラクト設計・開発経験",
+    "Next.js を用いた高性能なWebアプリ開発",
+    "GraphQL の深い知識と実装スキル",
+    "CI/CD の導入・管理経験",
+    "コンテナ技術（Docker、Kubernetes）",
+    "アジャイル開発経験：スクラムマスター経験があれば尚可",
     "オープンソースへの貢献経験",
   ];
 
   const responsibilities = [
-    "Web3プロダクトの設計・開発",
-    "AIを活用した開発効率化の推進",
-    "ブロックチェーン関連機能の実装",
-    "技術選定・アーキテクチャ設計",
-    "チーム開発・コードレビュー",
-    "技術文書の作成・管理",
+    "Web3プロダクトの設計・開発：分散型プラットフォームの構築",
+    "AIを活用した開発効率化の推進：自動化、パフォーマンス改善",
+    "ブロックチェーン関連機能の実装：トークンエコノミーやデジタル資産管理",
+    "技術選定・アーキテクチャ設計：最新の技術トレンドを取り入れた設計",
+    "チーム開発・コードレビュー：チームと協力し高品質なコードを維持",
+    "技術文書の作成・管理：知識共有とドキュメント管理",
   ];
 
   const benefits = [
-    "リモートワーク可能",
-    "フレックスタイム制",
-    "書籍購入支援",
-    "カンファレンス参加支援",
-    "最新技術スタック",
-    "JJFAトークン付与",
-    "柔術練習環境の提供",
+    "リモートワーク可能：自由な働き方を支援",
+    "フレックスタイム制：ライフスタイルに合わせて柔軟な勤務時間",
+    "書籍購入支援：スキルアップのための書籍代をサポート",
+    "カンファレンス参加支援：国内外の技術イベント参加をサポート",
+    "最新技術スタック：常に最前線の技術環境を提供",
+    "JJFAトークン付与：プロジェクトの成功と共に報酬を受け取るチャンス",
+    "柔術練習環境の提供：JJFA専用のトレーニング施設を利用可能",
   ];
 
   return (
@@ -71,20 +71,20 @@ const Careers = () => {
               <CardTitle>
                 {isJapanese ? "シニアフルスタックエンジニア" : "Senior Full-Stack Engineer"}
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-base mt-2">
                 {isJapanese 
-                  ? "Web3とAIを活用した柔術コミュニティプラットフォームの開発" 
-                  : "Development of Jiu-Jitsu community platform utilizing Web3 and AI"}
+                  ? "Web3とAIを活用した次世代柔術コミュニティプラットフォームの開発に挑戦し、共に新たな柔術の価値を生み出しましょう。" 
+                  : "Join us in developing a next-generation Jiu-Jitsu community platform utilizing Web3 and AI, creating new value in the world of Jiu-Jitsu."}
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-8">
               <div>
-                <h3 className="font-semibold mb-3">
+                <h3 className="font-semibold text-lg mb-4">
                   {isJapanese ? "必須スキル" : "Required Skills"}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {requiredSkills.map((skill) => (
-                    <Badge key={skill} variant="default">
+                    <Badge key={skill} variant="default" className="text-sm py-1">
                       {skill}
                     </Badge>
                   ))}
@@ -92,12 +92,12 @@ const Careers = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-3">
+                <h3 className="font-semibold text-lg mb-4">
                   {isJapanese ? "歓迎スキル" : "Preferred Skills"}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {preferredSkills.map((skill) => (
-                    <Badge key={skill} variant="secondary">
+                    <Badge key={skill} variant="secondary" className="text-sm py-1">
                       {skill}
                     </Badge>
                   ))}
@@ -105,10 +105,10 @@ const Careers = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-3">
+                <h3 className="font-semibold text-lg mb-4">
                   {isJapanese ? "主な責任" : "Responsibilities"}
                 </h3>
-                <ul className="list-disc pl-5 space-y-2">
+                <ul className="list-disc pl-5 space-y-3">
                   {responsibilities.map((item) => (
                     <li key={item} className="text-slate-600">
                       {item}
@@ -118,12 +118,12 @@ const Careers = () => {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-3">
+                <h3 className="font-semibold text-lg mb-4">
                   {isJapanese ? "福利厚生" : "Benefits"}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {benefits.map((benefit) => (
-                    <Badge key={benefit} variant="outline">
+                    <Badge key={benefit} variant="outline" className="text-sm py-1">
                       {benefit}
                     </Badge>
                   ))}
@@ -132,7 +132,7 @@ const Careers = () => {
 
               <div className="pt-6">
                 <Link to="/contact">
-                  <Button className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto bg-slate-800 hover:bg-slate-700">
                     <Mail className="mr-2 h-4 w-4" />
                     {isJapanese ? "応募する" : "Apply Now"}
                   </Button>

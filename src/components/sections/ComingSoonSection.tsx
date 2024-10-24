@@ -8,8 +8,8 @@ export const ComingSoonSection = () => {
         Coming Soon
       </h2>
       <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 delay-100">
-        JJFAは柔術界の未来を創造します。最新のテクノロジーを活用し、
-        より透明で効率的な柔術コミュニティの構築を目指しています。
+        JJFA is shaping the future of the Jiu-Jitsu world. Using the latest technology,
+        we aim to build a more transparent and efficient Jiu-Jitsu community.
       </p>
       
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -19,15 +19,14 @@ export const ComingSoonSection = () => {
           </div>
           <CardHeader>
             <Building2 className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>道場運営システム</CardTitle>
+            <CardTitle>Dojo Management System</CardTitle>
             <CardDescription>
-              会員管理、スケジュール管理、出席管理など、道場運営に必要な機能を
-              オールインワンで提供。モバイルアプリでいつでもどこでも簡単アクセス。
+              All-in-one solution for dojo operations with mobile app access anytime, anywhere.
               <ul className="mt-4 space-y-2 text-left">
-                <li>・ 会員管理システム</li>
-                <li>・ クラススケジュール管理</li>
-                <li>・ 出席記録と分析</li>
-                <li>・ 会費管理</li>
+                <li>・ Member Management System</li>
+                <li>・ Class Schedule Management</li>
+                <li>・ Attendance Tracking and Analytics</li>
+                <li>・ Payment Management</li>
               </ul>
             </CardDescription>
           </CardHeader>
@@ -39,15 +38,15 @@ export const ComingSoonSection = () => {
           </div>
           <CardHeader>
             <Database className="w-12 h-12 text-slate-800 mb-4" />
-            <CardTitle>ブロックチェーン認証システム</CardTitle>
+            <CardTitle>Blockchain Certification System</CardTitle>
             <CardDescription>
-              帯の昇級記録や大会成績をブロックチェーンで安全に記録・管理。
-              改ざん不可能な実績証明システムで、柔術家のキャリアを正確に記録。
+              Securely record and manage belt promotions and tournament results on blockchain.
+              Tamper-proof achievement verification system for accurate career tracking.
               <ul className="mt-4 space-y-2 text-left">
-                <li>・ 帯の昇級記録の電子認証</li>
-                <li>・ 大会成績のブロックチェーン記録</li>
-                <li>・ NFTメダルと称号</li>
-                <li>・ グローバルな実績証明</li>
+                <li>・ Digital Belt Promotion Certification</li>
+                <li>・ Blockchain Tournament Records</li>
+                <li>・ NFT Medals and Titles</li>
+                <li>・ Global Achievement Verification</li>
               </ul>
             </CardDescription>
           </CardHeader>

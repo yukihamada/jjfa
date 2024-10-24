@@ -40,6 +40,12 @@ export const TeamSection = () => {
       role: t('team.members.takinishi.role'),
       imagePath: "/356407976_809626707393076_4635497050248137000_n.jpg",
       description: t('team.members.takinishi.description')
+    },
+    {
+      name: t('team.members.iwase.name'),
+      role: t('team.members.iwase.role'),
+      imagePath: "/ganchan.png",
+      description: t('team.members.iwase.description')
     }
   ];
 

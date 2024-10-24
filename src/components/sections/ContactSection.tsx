@@ -1,40 +1,30 @@
-import { Button } from "@/components/ui/button";
-import { useTranslation } from 'react-i18next';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 
 export const ContactSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 px-4 container mx-auto text-center">
-      <h2 className="text-3xl font-bold mb-8 text-slate-800 animate-in fade-in slide-in-from-bottom-4">
-        {t('contact.title')}
-      </h2>
-      <div className="max-w-2xl mx-auto space-y-4">
-        <p className="mb-4 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-100">
-          {t('contact.email')}: info@jjfa.com
-        </p>
-        <p className="mb-4 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-200">
-          {t('contact.phone')}: 03-1234-5678
-        </p>
-        <p className="mb-6 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-300">
-          〒102-0074<br />
-          東京都千代田区九段南１丁目６−５<br />
-          九段会館テラス
-        </p>
-        <div className="flex justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 delay-400">
-          <Button 
-            variant="outline" 
-            className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
-          >
-            Twitter
-          </Button>
-          <Button 
-            variant="outline" 
-            className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
-          >
-            Facebook
-          </Button>
-        </div>
+    <section id="contact" className="py-20 px-4">
+      <div className="container mx-auto">
+        <Card className="bg-white/10 backdrop-blur-md border-white/20">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold text-center">{t('contact.title')}</CardTitle>
+            <CardDescription className="text-center text-lg">
+              Get in touch with us
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid md:grid-cols-2 gap-6">
+            <div className="text-center">
+              <h3 className="text-xl font-semibold mb-2">{t('contact.email')}</h3>
+              <p className="text-slate-600">contact@jjfa.com</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-semibold mb-2">{t('contact.phone')}</h3>
+              <p className="text-slate-600">+81 (0)3-1234-5678</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

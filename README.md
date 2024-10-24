@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# JJFA - Jiu-Jitsu For ALL
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JJFAは、柔術の普及とコミュニティの発展を目指すプロジェクトです。Web3技術を活用して、世界中の柔術愛好家をつなぎ、より良いコミュニティを作ることを目指しています。
 
-Currently, two official plugins are available:
+## 主な機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🥋 柔術の魅力を伝えるコンテンツ
+- 🌏 多言語対応（日本語、英語、中国語、ベトナム語など）
+- 🎯 大会情報の共有
+- 👥 コミュニティ機能
+- 💎 JJFAトークンによる特典
 
-## Expanding the ESLint configuration
+## 技術スタック
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React + TypeScript + Vite
+- Tailwind CSS
+- shadcn/ui
+- i18next（多言語対応）
+- React Query
+- React Router
 
-- Configure the top-level `parserOptions` property like this:
+## 開発環境のセットアップ
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+# リポジトリのクローン
+git clone [repository-url]
+cd jjfa-web
+
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## ビルドとデプロイ
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+# プロダクションビルド
+npm run build
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# ビルドのプレビュー
+npm run preview
 ```
+
+## コントリビューション
+
+プロジェクトへの貢献を歓迎します！以下の手順で参加できます：
+
+1. このリポジトリをフォーク
+2. 新しいブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+5. プルリクエストを作成
+
+## ライセンス
+
+このプロジェクトは [MIT License](LICENSE) の下で公開されています。
+
+## お問い合わせ
+
+- Website: [jjforall.com](https://jjforall.com)
+- Email: info@jjforall.com

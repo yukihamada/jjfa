@@ -9,15 +9,16 @@ import { supabase } from "@/lib/supabase";
 export const RegistrationForm = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email) {
+    if (!email || !password || !name) {
       toast({
         title: "エラー",
-        description: "名前とメールアドレスを入力してください。",
+        description: "すべての項目を入力してください。",
         variant: "destructive",
       });
       return;
@@ -25,22 +26,41 @@ export const RegistrationForm = () => {
 
     setIsLoading(true);
     try {
-      const { error } = await supabase
+      // Supabase Authで新規ユーザー登録
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name: name,
+          }
+        }
+      });
+
+      if (authError) throw authError;
+
+      // community_membersテーブルにも登録
+      const { error: dbError } = await supabase
         .from('community_members')
         .insert([
-          { name, email }
+          { 
+            user_id: authData.user?.id,
+            name, 
+            email 
+          }
         ]);
 
-      if (error) throw error;
+      if (dbError) throw dbError;
 
       toast({
         title: "登録完了",
-        description: "コミュニティへの参加申請を受け付けました。",
+        description: "確認メールを送信しました。メールを確認して登録を完了してください。",
       });
       
       // フォームをリセット
       setName("");
       setEmail("");
+      setPassword("");
     } catch (error) {
       toast({
         title: "エラー",
@@ -81,6 +101,18 @@ export const RegistrationForm = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@email.com"
               disabled={isLoading}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="password">パスワード</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="8文字以上で入力してください"
+              disabled={isLoading}
+              minLength={8}
             />
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Mail, Brain, Users, MessageSquare, Dumbbell, Bot, Code, Sparkles, Clock, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BackgroundGradient } from "@/components/BackgroundGradient";
 
 const Careers = () => {
   const { t, i18n } = useTranslation();
@@ -71,7 +72,7 @@ const Careers = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
-      <AnimatedBackground />
+      <BackgroundGradient />
       
       <div className="container mx-auto py-24 px-4">
         <div className="max-w-4xl mx-auto space-y-8">

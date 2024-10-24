@@ -1,4 +1,3 @@
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { TokenRulesHeader } from "@/components/token-rules/TokenRulesHeader";
 import { Chapter1 } from "@/components/token-rules/sections/Chapter1";
@@ -7,12 +6,12 @@ import { Chapter3 } from "@/components/token-rules/sections/Chapter3";
 import { Chapter4 } from "@/components/token-rules/sections/Chapter4";
 import { Chapter5 } from "@/components/token-rules/sections/Chapter5";
 import { Appendix } from "@/components/token-rules/sections/Appendix";
+import { BackgroundGradient } from "@/components/BackgroundGradient";
 
 const TokenRules = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
-      <AnimatedBackground />
-      
+    <div className="min-h-screen">
+      <BackgroundGradient />
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">

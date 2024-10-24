@@ -14,22 +14,22 @@ const JiujitsuBenefits = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
-          Discover the Benefits of Jiu-Jitsu
+          {t('benefits.title')}
         </h1>
 
         <div className="max-w-6xl mx-auto">
           <section>
-            <h2 className="text-2xl font-bold mb-6 text-center">Health Benefits</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">{t('benefits.health.title')}</h2>
             <HealthBenefits />
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-6 text-center">Comprehensive Skills</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">{t('benefits.skills.title')}</h2>
             <SkillBenefits />
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-6 text-center">Community</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">{t('benefits.community.title')}</h2>
             <CommunityBenefits />
           </section>
 
@@ -42,7 +42,7 @@ const JiujitsuBenefits = () => {
                   size="lg"
                   className="bg-slate-800 text-white hover:bg-slate-700"
                 >
-                  Book a Free Trial Class <ArrowRight className="ml-2 h-4 w-4" />
+                  {t('benefits.bookTrial')} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>

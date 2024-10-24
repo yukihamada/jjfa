@@ -5,7 +5,7 @@ import { CommunityBenefits } from "@/components/community/CommunityBenefits";
 
 const Community = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <AnimatedBackground />
       
       <div className="container mx-auto py-8 px-4">

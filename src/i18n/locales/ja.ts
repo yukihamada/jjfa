@@ -1,5 +1,8 @@
 export default {
   nav: {
+    home: "トップページ",
+    community: "コミュニティ",
+    benefits: "柔術の魅力",
     whitepaper: "ホワイトペーパー",
     contact: "お問い合わせ"
   },

@@ -1,5 +1,8 @@
 export default {
   nav: {
+    home: "Home",
+    community: "Community",
+    benefits: "Benefits of Jiu-Jitsu",
     whitepaper: "Whitepaper",
     contact: "Contact"
   },

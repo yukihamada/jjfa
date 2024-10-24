@@ -9,11 +9,11 @@ const GlobalNav = () => {
   const { t } = useTranslation();
 
   const menuItems = [
-    { to: "/", label: "トップページ", icon: Home },
-    { to: "/community", label: "コミュニティ", icon: Users },
-    { to: "/jiujitsu-benefits", label: "柔術の魅力", icon: Star },
+    { to: "/", label: t('nav.home'), icon: Home },
+    { to: "/community", label: t('nav.community'), icon: Users },
+    { to: "/jiujitsu-benefits", label: t('nav.benefits'), icon: Star },
     { to: "/whitepaper", label: t('nav.whitepaper'), icon: FileText },
-    { to: "/contact", label: "お問い合わせ", icon: MessageCircle },
+    { to: "/contact", label: t('nav.contact'), icon: MessageCircle },
   ];
 
   const handleMenuClick = () => {
@@ -59,7 +59,7 @@ const GlobalNav = () => {
                 onClick={handleMenuClick}
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>お問い合わせ</span>
+                <span>{t('nav.contact')}</span>
               </Link>
             </nav>
 

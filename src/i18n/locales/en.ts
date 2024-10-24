@@ -70,6 +70,10 @@ export default {
     },
     bookTrial: "Book a Free Trial Class"
   },
+  contact: {
+    title: "Contact",
+    address: "2F Kudankai Terrace, 1-6-5 Kudanminami, Chiyoda-ku, Tokyo 102-0074, Japan"
+  },
   services: {
     title: "Our Services",
     visitWebsite: "Visit Website",

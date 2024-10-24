@@ -7,46 +7,49 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <AnimatedBackground />
       
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            お問い合わせ
+            {t('contact.title')}
           </h1>
           <p className="text-lg text-center mb-12 text-slate-600">
-            JJFAに関するご質問・ご相談はこちらから
+            {t('contact.subtitle')}
           </p>
 
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">よくある質問</h2>
+            <h2 className="text-2xl font-bold mb-6">{t('contact.faq.title')}</h2>
             <Accordion type="single" collapsible className="bg-white rounded-lg p-4">
               <AccordionItem value="item-1">
-                <AccordionTrigger>JJFAトークンとは何ですか？</AccordionTrigger>
+                <AccordionTrigger>{t('contact.faq.q1')}</AccordionTrigger>
                 <AccordionContent>
-                  JJFAトークンは、柔術コミュニティの価値交換とガバナンス参加を可能にするユーティリティトークンです。大会エントリー割引や限定コンテンツへのアクセス、運営への参加権などが付与されます。
+                  {t('contact.faq.a1')}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
-                <AccordionTrigger>トークンはどうやって取得できますか？</AccordionTrigger>
+                <AccordionTrigger>{t('contact.faq.q2')}</AccordionTrigger>
                 <AccordionContent>
-                  トークンは、大会への参加、コミュニティへの貢献、公式セールなど、様々な方法で取得することができます。詳細は公式Discordにてご案内しています。
+                  {t('contact.faq.a2')}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger>大会の参加方法を教えてください</AccordionTrigger>
+                <AccordionTrigger>{t('contact.faq.q3')}</AccordionTrigger>
                 <AccordionContent>
-                  大会への参加は、公式ウェブサイトからエントリーが可能です。参加には事前の会員登録が必要となります。トーナメント規定や必要書類などの詳細は、各大会の案内ページをご確認ください。
+                  {t('contact.faq.a3')}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
-                <AccordionTrigger>コミュニティに参加するにはどうすればいいですか？</AccordionTrigger>
+                <AccordionTrigger>{t('contact.faq.q4')}</AccordionTrigger>
                 <AccordionContent>
-                  公式Discordサーバーに参加することで、コミュニティの一員となることができます。また、各種SNSでも最新情報を発信していますので、ぜひフォローをお願いします。
+                  {t('contact.faq.a4')}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

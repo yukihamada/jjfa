@@ -75,9 +75,19 @@ export default {
     }
   },
   contact: {
-    title: "Contact",
-    email: "Email",
-    phone: "Phone"
+    title: "Contact Us",
+    subtitle: "Get in touch with us for any questions about JJFA",
+    faq: {
+      title: "Frequently Asked Questions",
+      q1: "What is the JJFA Token?",
+      a1: "The JJFA Token is a utility token that enables value exchange and governance participation within the Jiu-Jitsu community. It provides benefits such as tournament entry discounts, access to exclusive content, and participation rights in operations.",
+      q2: "How can I acquire tokens?",
+      a2: "Tokens can be obtained through various methods including tournament participation, community contributions, and official sales. For more details, please check our official Discord server.",
+      q3: "How do I participate in tournaments?",
+      a3: "You can register for tournaments through our official website. Prior membership registration is required. Please check each tournament's information page for details about tournament regulations and required documents.",
+      q4: "How can I join the community?",
+      a4: "You can become a member of the community by joining our official Discord server. We also share the latest updates on various social media platforms, so please follow us there as well."
+    }
   },
   whitepaper: {
     title: "JJFA Whitepaper",

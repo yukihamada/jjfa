@@ -76,12 +76,22 @@ export default {
   },
   contact: {
     title: "Contacto",
-    email: "Correo",
-    phone: "Teléfono"
+    subtitle: "Contáctanos para cualquier pregunta sobre JJFA",
+    faq: {
+      title: "Preguntas Frecuentes",
+      q1: "¿Qué es el Token JJFA?",
+      a1: "El Token JJFA es un token de utilidad que permite el intercambio de valor y la participación en la gobernanza dentro de la comunidad de Jiu-Jitsu. Proporciona beneficios como descuentos en la inscripción a torneos, acceso a contenido exclusivo y derechos de participación en las operaciones.",
+      q2: "¿Cómo puedo adquirir tokens?",
+      a2: "Los tokens se pueden obtener a través de varios métodos, incluyendo la participación en torneos, contribuciones a la comunidad y ventas oficiales. Para más detalles, consulta nuestro servidor oficial de Discord.",
+      q3: "¿Cómo participo en los torneos?",
+      a3: "Puedes registrarte para los torneos a través de nuestro sitio web oficial. Se requiere registro previo como miembro. Consulta la página de información de cada torneo para detalles sobre las regulaciones del torneo y los documentos requeridos.",
+      q4: "¿Cómo puedo unirme a la comunidad?",
+      a4: "Puedes convertirte en miembro de la comunidad uniéndote a nuestro servidor oficial de Discord. También compartimos las últimas actualizaciones en varias plataformas de redes sociales, así que síguenos allí también."
+    }
   },
   whitepaper: {
     title: "Libro Blanco JJFA",
-    subtitle: "Construyendo el Futuro del Jiu-Jitsu a través de Web3",
+    subtitle: "Construyendo el Futuro del Jiu-Jitsu a través del Web3",
     intro: {
       title: "1. Introducción",
       background: "Antecedentes",

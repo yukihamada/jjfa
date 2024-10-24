@@ -1,4 +1,3 @@
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
 import { Menu, Home, Users, Star, FileText, Book, Scroll, Coins, MessageCircle } from "lucide-react";
 import { useState } from "react";
@@ -11,7 +10,7 @@ const GlobalNav = () => {
 
   const menuItems = [
     { to: "/", label: "トップページ", icon: Home },
-    { to: "/community", label: "コミュニティに参加", icon: Users },
+    { to: "/community", label: "コミュニティ", icon: Users },
     { to: "/jiujitsu-benefits", label: "柔術の魅力", icon: Star },
     { to: "/whitepaper", label: t('nav.whitepaper'), icon: FileText },
     { to: "/articles", label: "定款", icon: Book },
@@ -33,20 +32,46 @@ const GlobalNav = () => {
               <span className="hidden sm:inline text-sm text-slate-600">Jiu-Jitsu For ALL</span>
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-6">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link 
-                    key={item.to}
-                    to={item.to} 
-                    className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-2 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
+            <nav className="hidden lg:flex items-center gap-2">
+              <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1">
+                {menuItems.slice(0, 3).map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link 
+                      key={item.to}
+                      to={item.to} 
+                      className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-white transition-all duration-200"
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1 ml-2">
+                {menuItems.slice(3, 7).map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link 
+                      key={item.to}
+                      to={item.to} 
+                      className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-white transition-all duration-200"
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <Link 
+                to="/contact"
+                className="ml-2 bg-slate-800 text-white hover:bg-slate-700 font-medium flex items-center gap-1.5 px-4 py-1.5 rounded-md transition-colors duration-200"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>お問い合わせ</span>
+              </Link>
             </nav>
 
             <div className="flex items-center gap-4">

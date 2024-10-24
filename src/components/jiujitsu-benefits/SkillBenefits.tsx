@@ -7,20 +7,20 @@ export const SkillBenefits = () => {
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <Brain className="w-12 h-12 text-slate-800 mb-4" />
-          <CardTitle>メンタル面の強化</CardTitle>
+          <CardTitle>Mental Strength Development</CardTitle>
           <CardDescription>
             <ul className="space-y-2 mt-4">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                自己肯定感の向上
+                Improved self-confidence
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                ストレス耐性の向上
+                Enhanced stress resilience
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                集中力と判断力の向上
+                Better focus and decision-making
               </li>
             </ul>
           </CardDescription>
@@ -30,20 +30,20 @@ export const SkillBenefits = () => {
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <BookOpen className="w-12 h-12 text-slate-800 mb-4" />
-          <CardTitle>ビジネススキルとの相乗効果</CardTitle>
+          <CardTitle>Business Skill Synergy</CardTitle>
           <CardDescription>
             <ul className="space-y-2 mt-4">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                戦略的思考力
+                Strategic thinking
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                リーダーシップ
+                Leadership
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                コミュニケーション力
+                Communication skills
               </li>
             </ul>
           </CardDescription>

@@ -5,9 +5,9 @@ export const StartingGuide = () => {
   return (
     <Card className="bg-white/10 backdrop-blur-md border-white/20 mb-8">
       <CardHeader>
-        <CardTitle>始める前の不安を解消！</CardTitle>
+        <CardTitle>Address Your Concerns!</CardTitle>
         <CardDescription>
-          よくある心配と解決策
+          Common Worries and Solutions
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -16,15 +16,15 @@ export const StartingGuide = () => {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 mt-1 text-green-500" />
               <div>
-                <h4 className="font-semibold">体力に自信がない</h4>
-                <p className="text-sm text-slate-600">段階的なプログラムで無理なく始められます</p>
+                <h4 className="font-semibold">Not confident about fitness?</h4>
+                <p className="text-sm text-slate-600">Start gradually with our step-by-step program</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 mt-1 text-green-500" />
               <div>
-                <h4 className="font-semibold">怪我が心配</h4>
-                <p className="text-sm text-slate-600">安全第一の指導で、初心者の怪我率は一般的なスポーツより低いことが統計で判明</p>
+                <h4 className="font-semibold">Worried about injuries?</h4>
+                <p className="text-sm text-slate-600">Statistics show beginners have lower injury rates than in most common sports, thanks to our safety-first approach</p>
               </div>
             </div>
           </div>
@@ -32,15 +32,15 @@ export const StartingGuide = () => {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 mt-1 text-green-500" />
               <div>
-                <h4 className="font-semibold">年齢制限がある？</h4>
-                <p className="text-sm text-slate-600">6歳から80代まで幅広い年齢層が実践中！実際に80代の方がマスター部門で優勝した実績もあります</p>
+                <h4 className="font-semibold">Age restrictions?</h4>
+                <p className="text-sm text-slate-600">We welcome practitioners from 6 to 80+ years old! We even have 80+ year-olds winning in master divisions</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 mt-1 text-green-500" />
               <div>
-                <h4 className="font-semibold">運動音痴でも大丈夫？</h4>
-                <p className="text-sm text-slate-600">基本から丁寧に指導。多くの方が3ヶ月で基礎を習得</p>
+                <h4 className="font-semibold">Not naturally athletic?</h4>
+                <p className="text-sm text-slate-600">Our detailed instruction helps most people master the basics within 3 months</p>
               </div>
             </div>
           </div>

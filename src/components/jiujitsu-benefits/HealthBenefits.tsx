@@ -7,20 +7,20 @@ export const HealthBenefits = () => {
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <Activity className="w-12 h-12 text-slate-800 mb-4" />
-          <CardTitle>科学的に実証された健康効果</CardTitle>
+          <CardTitle>Scientifically Proven Health Benefits</CardTitle>
           <CardDescription>
             <ul className="space-y-2 mt-4">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                1時間の練習で最大800kcalの消費が可能
+                Burn up to 800kcal in a one-hour session
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                基礎代謝の向上（筋肉量増加による）
+                Increased basal metabolism (due to muscle gain)
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                内臓脂肪の減少（研究により実証）
+                Reduction in visceral fat (proven by research)
               </li>
             </ul>
           </CardDescription>
@@ -30,20 +30,20 @@ export const HealthBenefits = () => {
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <Heart className="w-12 h-12 text-slate-800 mb-4" />
-          <CardTitle>医学的なメリット</CardTitle>
+          <CardTitle>Medical Benefits</CardTitle>
           <CardDescription>
             <ul className="space-y-2 mt-4">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                心血管系の健康維持
+                Cardiovascular health maintenance
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                骨密度の向上
+                Improved bone density
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                認知機能の向上
+                Enhanced cognitive function
               </li>
             </ul>
           </CardDescription>

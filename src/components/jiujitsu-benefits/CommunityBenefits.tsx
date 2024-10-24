@@ -7,20 +7,20 @@ export const CommunityBenefits = () => {
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <Users className="w-12 h-12 text-slate-800 mb-4" />
-          <CardTitle>多様な出会いの場</CardTitle>
+          <CardTitle>Diverse Networking</CardTitle>
           <CardDescription>
             <ul className="space-y-2 mt-4">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                経営者から学生まで幅広い交流
+                Connect with people from CEOs to students
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                国際的なネットワークの形成
+                Build international networks
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                年齢や性別を超えた絆づくり
+                Form bonds beyond age and gender
               </li>
             </ul>
           </CardDescription>
@@ -30,20 +30,20 @@ export const CommunityBenefits = () => {
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <Trophy className="w-12 h-12 text-slate-800 mb-4" />
-          <CardTitle>イベント＆コミュニティ</CardTitle>
+          <CardTitle>Events & Community</CardTitle>
           <CardDescription>
             <ul className="space-y-2 mt-4">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                定期的な技術セミナー
+                Regular technical seminars
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                国内外の大会参加機会
+                Domestic and international competition opportunities
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-500" />
-                交流会・懇親会の開催
+                Social gatherings and networking events
               </li>
             </ul>
           </CardDescription>

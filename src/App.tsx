@@ -11,6 +11,7 @@ import TrialClass from "./pages/TrialClass";
 import Articles from "./pages/Articles";
 import OperatingRules from "./pages/OperatingRules";
 import TokenRules from "./pages/TokenRules";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/articles" element={<Articles />} />
           <Route path="/operating-rules" element={<OperatingRules />} />
           <Route path="/token-rules" element={<TokenRules />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

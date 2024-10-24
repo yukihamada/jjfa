@@ -17,6 +17,7 @@ const GlobalNav = () => {
     { to: "/articles", label: "定款", icon: Book },
     { to: "/operating-rules", label: "運営規程", icon: Scroll },
     { to: "/token-rules", label: "トークン規程", icon: Coins },
+    { to: "/contact", label: "お問い合わせ", icon: MessageCircle },
   ];
 
   return (
@@ -46,13 +47,6 @@ const GlobalNav = () => {
                   </Link>
                 );
               })}
-              <a 
-                href="#contact" 
-                className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-2 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>{t('nav.contact')}</span>
-              </a>
             </nav>
 
             <div className="flex items-center gap-4">
@@ -88,14 +82,6 @@ const GlobalNav = () => {
                 </Link>
               );
             })}
-            <a 
-              href="#contact" 
-              className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-slate-50 p-2 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>{t('nav.contact')}</span>
-            </a>
           </nav>
         </div>
       </div>

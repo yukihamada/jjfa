@@ -150,27 +150,33 @@ const OperatingRules = () => {
                   <li>{isJapanese ? '委任状はブロックチェーン上で管理' : 'Delegations will be managed on the blockchain.'}</li>
                 </ol>
 
-                <h2 className="text-xl font-bold mt-8 mb-4">{isJapanese ? '第4章 業務執行' : 'Chapter 4: Business Execution (Japanese Original)'}</h2>
+              <h2 className="text-xl font-bold mt-8 mb-4">
+                {isJapanese ? '第4章 業務執行' : 'Chapter 4: Business Execution (Japanese Original)'}
+              </h2>
 
-                <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第9条（業務執行の区分と決定プロセス）' : 'Article 9 (Classification of Business Execution and Decision Process) (Japanese Original)'}</h3>
-                <ol className="list-decimal pl-6 mb-4">
-                  <li>{isJapanese ? '日常的業務（業務執行社員が単独で決定可能）' : 'Routine Business (can be decided by executive employees alone) (Japanese Original)'}
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>{isJapanese ? '100万円未満の支出' : 'Expenditures under 1 million yen.'}</li>
-                      <li>{isJapanese ? 'イベントの運営実務' : 'Operational practices for events.'}</li>
-                      <li>{isJapanese ? '広報活動' : 'Public relations activities.'}</li>
-                      <li>{isJapanese ? 'コミュニティ管理' : 'Community management.'}</li>
-                    </ul>
-                  </li>
-                  <li>{isJapanese ? '重要業務（DAO総会の決議必要）' : 'Important Business (requires resolution at the DAO General Assembly) (Japanese Original)'}
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>{isJapanese ? '100万円以上の支出' : 'Expenditures over 1 million yen.'}</li>
-                      <li>{isJapanese ? '新規事業の開始' : 'Initiation of new business.'}</li>
-                      <li>{isJapanese ? '人事施策の策定' : 'Formulation of personnel measures.'}</li>
-                      <li>{isJapanese ? 'トークンエコノミーの変更' : 'Changes to the token economy.'}</li>
-                    </ul>
-                  </li>
-               
+              <h3 className="font-bold mt-6 mb-2">
+                {isJapanese ? '第9条（業務執行の区分と決定プロセス）' : 'Article 9 (Classification of Business Execution and Decision Process) (Japanese Original)'}
+              </h3>
+              <ol className="list-decimal pl-6 mb-4">
+                <li>
+                  {isJapanese ? '日常的業務（業務執行社員が単独で決定可能）' : 'Routine Business (can be decided by executive employees alone) (Japanese Original)'}
+                  <ul className="list-disc pl-6 mt-2">
+                    <li>{isJapanese ? '100万円未満の支出' : 'Expenditures under 1 million yen.'}</li>
+                    <li>{isJapanese ? 'イベントの運営実務' : 'Operational practices for events.'}</li>
+                    <li>{isJapanese ? '広報活動' : 'Public relations activities.'}</li>
+                    <li>{isJapanese ? 'コミュニティ管理' : 'Community management.'}</li>
+                  </ul>
+                </li>
+                <li>
+                  {isJapanese ? '重要業務（DAO総会の決議必要）' : 'Important Business (requires resolution at the DAO General Assembly) (Japanese Original)'}
+                  <ul className="list-disc pl-6 mt-2">
+                    <li>{isJapanese ? '100万円以上の支出' : 'Expenditures over 1 million yen.'}</li>
+                    <li>{isJapanese ? '新規事業の開始' : 'Initiation of new business.'}</li>
+                    <li>{isJapanese ? '人事施策の策定' : 'Formulation of personnel measures.'}</li>
+                    <li>{isJapanese ? 'トークンエコノミーの変更' : 'Changes to the token economy.'}</li>
+                  </ul>
+                </li>
+              </ol>
             </div>
           </CardContent>
         </Card>

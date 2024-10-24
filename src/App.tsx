@@ -22,7 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Toaster />
         <GlobalNav />
-        <main className="min-h-screen pt-16">
+        <main className="min-h-screen w-full">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/whitepaper" element={<Whitepaper />} />

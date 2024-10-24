@@ -1,4 +1,3 @@
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
@@ -71,7 +70,7 @@ const Careers = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+    <div className="min-h-screen">
       <BackgroundGradient />
       
       <div className="container mx-auto py-24 px-4">

@@ -24,6 +24,24 @@ const GlobalNav = () => {
 
             <nav className="hidden lg:flex items-center gap-6">
               <Link 
+                to="/" 
+                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+              >
+                トップページ
+              </Link>
+              <Link 
+                to="/community" 
+                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+              >
+                コミュニティに参加
+              </Link>
+              <Link 
+                to="/jiujitsu-benefits" 
+                className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+              >
+                柔術の魅力
+              </Link>
+              <Link 
                 to="/whitepaper" 
                 className="text-slate-700 hover:text-slate-900 font-medium relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-slate-800 after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
               >
@@ -74,6 +92,27 @@ const GlobalNav = () => {
           }`}
         >
           <nav className="flex flex-col p-4 gap-4">
+            <Link 
+              to="/" 
+              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              トップページ
+            </Link>
+            <Link 
+              to="/community" 
+              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              コミュニティに参加
+            </Link>
+            <Link 
+              to="/jiujitsu-benefits" 
+              className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              柔術の魅力
+            </Link>
             <Link 
               to="/whitepaper" 
               className="text-slate-700 hover:text-slate-900 font-medium transform transition-all duration-300 hover:translate-x-2"

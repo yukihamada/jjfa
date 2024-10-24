@@ -34,33 +34,15 @@ export default {
       description: "International exchange and promotion of Jiu-Jitsu"
     }
   },
-  benefits: {
-    title: "Benefits of Jiu-Jitsu",
-    strategic: {
-      title: "Strategic Thinking",
-      description: "A deep sport often called \"Physical Chess\" where technique can overcome physical differences."
-    },
-    health: {
-      title: "Healthy Lifestyle",
-      description: "Full-body workout that improves physical fitness and promotes both mental and physical health."
-    },
-    community: {
-      title: "Community",
-      description: "A warm community where people of all ages and genders learn together."
-    },
-    learnMore: "Learn More"
-  },
   team: {
     title: "Team Members",
     members: {
       hamada: {
         name: "Yuki Hamada",
-        role: "Technology Advisor & BJJ Blue Belt",
         description: "Started a business while studying at Tokyo University of Science and later joined Mercari as CPO Director. Led product management and technical areas, contributing to the company's growth. Currently supports startup growth as an outside director for companies like Reiwa Travel and Caster. Passionate about designing new businesses and aims to solve social issues through technology."
       },
       murata: {
         name: "Ryozo Murata",
-        role: "BJJ Academy Representative & Instructor",
         description: "A Brazilian Jiu-Jitsu practitioner who obtained Hokkaido's first direct Gracie black belt, representing 'Overlimit Sapporo' and 'Yawara Jiu-Jitsu Academy'. As president of the Sports Jiu-Jitsu Federation of Japan, he contributes to promoting Jiu-Jitsu in Japan. His teaching method is based on theoretical techniques and detailed instruction learned from Brazilian Cristiano Carioca. He is a two-time consecutive SJJIF World Championship Master 2 Black Belt Feather Weight champion, particularly known for his closed guard techniques. He continues to spread the appeal of Jiu-Jitsu through instruction, focusing on core training and self-defense, creating an environment where beginners can start comfortably."
       },
       tsutsumi: {

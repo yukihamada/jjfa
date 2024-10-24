@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Menu, Home, Users, Star, FileText, Book, Scroll, Coins, MessageCircle } from "lucide-react";
+import { Menu, Home, Users, Star, FileText, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
@@ -13,9 +13,6 @@ const GlobalNav = () => {
     { to: "/community", label: "コミュニティ", icon: Users },
     { to: "/jiujitsu-benefits", label: "柔術の魅力", icon: Star },
     { to: "/whitepaper", label: t('nav.whitepaper'), icon: FileText },
-    { to: "/articles", label: "定款", icon: Book },
-    { to: "/operating-rules", label: "運営規程", icon: Scroll },
-    { to: "/token-rules", label: "トークン規程", icon: Coins },
     { to: "/contact", label: "お問い合わせ", icon: MessageCircle },
   ];
 
@@ -34,23 +31,7 @@ const GlobalNav = () => {
 
             <nav className="hidden lg:flex items-center gap-2">
               <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1">
-                {menuItems.slice(0, 3).map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link 
-                      key={item.to}
-                      to={item.to} 
-                      className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-white transition-all duration-200"
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1 ml-2">
-                {menuItems.slice(3, 7).map((item) => {
+                {menuItems.slice(0, 4).map((item) => {
                   const Icon = item.icon;
                   return (
                     <Link 

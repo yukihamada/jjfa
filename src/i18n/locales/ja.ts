@@ -169,5 +169,39 @@ export default {
       }
     },
     bookTrial: "無料体験を予約する"
+  },
+  services: {
+    title: "関連サービス",
+    visitWebsite: "ウェブサイトへ",
+    jiufight: {
+      description: "効率的な大会エントリーと運営プラットフォーム。選手と主催者の両方にとって使いやすい大会運営システムです。"
+    },
+    jiujitsulab: {
+      description: "技術解説と柔術の最新情報。全てのレベルの練習者のための総合的な情報プラットフォームです。"
+    }
+  },
+  comingSoon: {
+    title: "開発中のサービス",
+    description: "JJFAは柔術界の未来を形作っています。最新のテクノロジーを活用し、より透明性が高く効率的な柔術コミュニティの構築を目指しています。",
+    dojo: {
+      title: "道場管理システム",
+      description: "いつでもどこでもモバイルアプリでアクセスできる、道場運営のためのオールインワンソリューション。",
+      features: {
+        members: "会員管理システム",
+        schedule: "クラススケジュール管理",
+        attendance: "出席管理と分析",
+        payment: "支払い管理"
+      }
+    },
+    blockchain: {
+      title: "ブロックチェーン認証システム",
+      description: "帯の昇級や大会結果をブロックチェーンで安全に記録・管理。改ざん防止機能付きの実績認証システムで正確なキャリアトラッキングを実現。",
+      features: {
+        belt: "デジタル帯昇級認証",
+        tournament: "ブロックチェーン大会記録",
+        nft: "NFTメダルとタイトル",
+        verification: "グローバル実績認証"
+      }
+    }
   }
 };

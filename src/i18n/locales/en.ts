@@ -69,5 +69,39 @@ export default {
       }
     },
     bookTrial: "Book a Free Trial Class"
+  },
+  services: {
+    title: "Our Services",
+    visitWebsite: "Visit Website",
+    jiufight: {
+      description: "Streamlined tournament entry and management platform. A user-friendly tournament management system for both athletes and organizers."
+    },
+    jiujitsulab: {
+      description: "Technical explanations and latest updates in Jiu-Jitsu. A comprehensive information platform for practitioners of all levels."
+    }
+  },
+  comingSoon: {
+    title: "Coming Soon",
+    description: "JJFA is shaping the future of the Jiu-Jitsu world. Using the latest technology, we aim to build a more transparent and efficient Jiu-Jitsu community.",
+    dojo: {
+      title: "Dojo Management System",
+      description: "All-in-one solution for dojo operations with mobile app access anytime, anywhere.",
+      features: {
+        members: "Member Management System",
+        schedule: "Class Schedule Management",
+        attendance: "Attendance Tracking and Analytics",
+        payment: "Payment Management"
+      }
+    },
+    blockchain: {
+      title: "Blockchain Certification System",
+      description: "Securely record and manage belt promotions and tournament results on blockchain. Tamper-proof achievement verification system for accurate career tracking.",
+      features: {
+        belt: "Digital Belt Promotion Certification",
+        tournament: "Blockchain Tournament Records",
+        nft: "NFT Medals and Titles",
+        verification: "Global Achievement Verification"
+      }
+    }
   }
 };

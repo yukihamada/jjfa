@@ -1,5 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
-
 interface TokenRulesSectionProps {
   title: string;
   children: React.ReactNode;

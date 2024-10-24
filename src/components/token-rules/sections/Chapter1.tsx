@@ -1,0 +1,43 @@
+import { TokenRulesSection } from "../TokenRulesSection";
+import { TokenRulesArticle } from "../TokenRulesArticle";
+
+export const Chapter1 = () => {
+  return (
+    <TokenRulesSection title="第1章 総則">
+      <TokenRulesArticle title="第1条（目的）">
+        <ol className="list-decimal pl-6 mb-4">
+          <li>本規程は、合同会社JJFA（以下「当会社」という）が発行するトークンの種類、性質、発行方法、管理方法等について定め、以下の実現を目的とする。
+            <ul className="list-disc pl-6 mt-2">
+              <li>柔術の普及促進に向けた効果的なインセンティブ設計</li>
+              <li>透明で民主的なガバナンスの実現</li>
+              <li>トークン保有者の権利保護</li>
+              <li>健全なトークンエコノミーの構築</li>
+              <li>コミュニティの持続的な発展</li>
+            </ul>
+          </li>
+        </ol>
+      </TokenRulesArticle>
+
+      <TokenRulesArticle title="第2条（定義）">
+        <p>本規程において使用する用語の定義は、以下の通りとする。</p>
+        <ol className="list-decimal pl-6 mb-4">
+          <li>「社員権トークン（JJFA-MEMBER）」
+            <ul className="list-disc pl-6 mt-2">
+              <li>分類：非代替性トークン（NFT）</li>
+              <li>規格：ERC-721</li>
+              <li>主な機能：
+                <ul className="list-disc pl-6">
+                  <li>議決権（1トークン＝1票）</li>
+                  <li>配当請求権（出資額上限）</li>
+                  <li>残余財産分配請求権（出資額上限）</li>
+                  <li>新規事業提案権</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          {/* ... 他のトークン定義も同様に実装 */}
+        </ol>
+      </TokenRulesArticle>
+    </TokenRulesSection>
+  );
+};

@@ -2,8 +2,12 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TokenRulesHeader } from "@/components/token-rules/TokenRulesHeader";
-import { TokenRulesSection } from "@/components/token-rules/TokenRulesSection";
-import { TokenRulesArticle } from "@/components/token-rules/TokenRulesArticle";
+import { Chapter1 } from "@/components/token-rules/sections/Chapter1";
+import { Chapter2 } from "@/components/token-rules/sections/Chapter2";
+import { Chapter3 } from "@/components/token-rules/sections/Chapter3";
+import { Chapter4 } from "@/components/token-rules/sections/Chapter4";
+import { Chapter5 } from "@/components/token-rules/sections/Chapter5";
+import { Appendix } from "@/components/token-rules/sections/Appendix";
 
 const TokenRules = () => {
   return (
@@ -17,25 +21,12 @@ const TokenRules = () => {
             
             <ScrollArea className="h-[calc(100vh-200px)] pr-4">
               <div className="prose prose-slate max-w-none">
-                <TokenRulesSection title="第1章 総則">
-                  <TokenRulesArticle title="第1条（目的）">
-                    <ol className="list-decimal pl-6 mb-4">
-                      <li>本規程は、合同会社JJFA（以下「当会社」という）が発行するトークンの種類、性質、発行方法、管理方法等について定め、以下の実現を目的とする。
-                        <ul className="list-disc pl-6 mt-2">
-                          <li>柔術の普及促進に向けた効果的なインセンティブ設計</li>
-                          <li>透明で民主的なガバナンスの実現</li>
-                          <li>トークン保有者の権利保護</li>
-                          <li>健全なトークンエコノミーの構築</li>
-                          <li>コミュニティの持続的な発展</li>
-                        </ul>
-                      </li>
-                    </ol>
-                  </TokenRulesArticle>
-
-                  {/* ... 残りの条文も同様のフォーマットで続く ... */}
-                </TokenRulesSection>
-
-                {/* ... 残りの章も同様のフォーマットで続く ... */}
+                <Chapter1 />
+                <Chapter2 />
+                <Chapter3 />
+                <Chapter4 />
+                <Chapter5 />
+                <Appendix />
 
                 <div className="mt-8 text-sm text-slate-600">
                   <p>本規程は、<a href="https://jpdao.org/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://jpdao.org/</a> にて公開されている日本DAO協会のガイドラインを参考に作成されました。</p>

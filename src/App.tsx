@@ -12,6 +12,7 @@ import Articles from "./pages/Articles";
 import OperatingRules from "./pages/OperatingRules";
 import TokenRules from "./pages/TokenRules";
 import Contact from "./pages/Contact";
+import Careers from "./pages/Careers";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/operating-rules" element={<OperatingRules />} />
           <Route path="/token-rules" element={<TokenRules />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/careers" element={<Careers />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

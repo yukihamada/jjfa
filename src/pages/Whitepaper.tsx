@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 
 const Whitepaper = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isJapanese = i18n.language === 'ja';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
@@ -13,8 +14,8 @@ const Whitepaper = () => {
       <div className="container mx-auto py-12 px-4">
         <div className="rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
           <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-center mb-8 text-slate-800 leading-tight">
-            <span className="block mb-2">{t('whitepaper.title')}</span>
-            <span className="block text-lg sm:text-xl md:text-3xl">{t('whitepaper.subtitle')}</span>
+            <span className="block mb-2">{isJapanese ? 'JJFAホワイトペーパー' : 'JJFA Whitepaper (Japanese Original)'}</span>
+            <span className="block text-lg sm:text-xl md:text-3xl">{isJapanese ? 'Web3で創る柔術の未来' : 'Building the Future of Jiu-Jitsu through Web3'}</span>
           </h1>
 
           <div className="flex flex-wrap gap-4 justify-center mb-8">
@@ -43,9 +44,9 @@ const Whitepaper = () => {
 
           <div className="prose prose-slate max-w-none">
             <section className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">1. はじめに</h2>
-              <h3 className="text-xl font-semibold mb-2">背景</h3>
-              <p className="mb-4">ブラジリアン柔術は、武道としても競技スポーツとしても世界的に成長を続けています。しかし、持続可能な成長と公平な価値分配の面で、コミュニティはさまざまな課題に直面しています。</p>
+              <h2 className="text-2xl font-bold mb-4">{isJapanese ? '1. はじめに' : '1. Introduction (Japanese Original)'}</h2>
+              <h3 className="text-xl font-semibold mb-2">{isJapanese ? '背景' : 'Background'}</h3>
+              <p className="mb-4">{isJapanese ? 'ブラジリアン柔術は、武道としても競技スポーツとしても世界的に成長を続けています。しかし、持続可能な成長と公平な価値分配の面で、コミュニティはさまざまな課題に直面しています。' : 'Brazilian Jiu-Jitsu continues to grow globally both as a martial art and as a competitive sport. However, the community faces various challenges in terms of sustainable growth and fair value distribution. (Japanese Original)'}</p>
               
               <h3 className="text-xl font-semibold mb-2">プロジェクト概要</h3>
               <p className="mb-4">JJFA（Jiu-Jitsu For ALL）は、世界中の練習者、道場、大会主催者をつなぐ分散型プラットフォームを作ることで、これらの課題を解決することを目指しています。</p>

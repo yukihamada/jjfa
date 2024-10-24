@@ -1,4 +1,31 @@
 export default {
+  nav: {
+    home: "Home",
+    community: "Community",
+    benefits: "Benefits",
+    whitepaper: "Whitepaper",
+    contact: "Contact"
+  },
+  hero: {
+    title: "JJFA - Jiu-Jitsu For ALL",
+    subtitle: "Bringing the beauty of Jiu-Jitsu to everyone",
+    joinCommunity: "Join Community",
+    whitepaper: "Whitepaper"
+  },
+  events: {
+    title: "Events",
+    viewDetails: "View Tournament Details",
+    location: "Location",
+    access: "Access",
+    upcoming: {
+      jiufight: {
+        title: "JiuFight 2025",
+        date: "February 16, 2025",
+        location: "PiO Ota Industrial Plaza",
+        access: "3-minute walk from Keikyu Kamata Station"
+      }
+    }
+  },
   benefits: {
     title: "Discover the Benefits of Jiu-Jitsu",
     health: {
@@ -74,39 +101,5 @@ export default {
     title: "Contact",
     email: "Email: info@jjforall.com",
     address: "2F Kudankai Terrace, 1-6-5 Kudanminami, Chiyoda-ku, Tokyo 102-0074, Japan"
-  },
-  services: {
-    title: "Our Services",
-    visitWebsite: "Visit Website",
-    jiufight: {
-      description: "Streamlined tournament entry and management platform. A user-friendly tournament management system for both athletes and organizers."
-    },
-    jiujitsulab: {
-      description: "Technical explanations and latest updates in Jiu-Jitsu. A comprehensive information platform for practitioners of all levels."
-    }
-  },
-  comingSoon: {
-    title: "Coming Soon",
-    description: "JJFA is shaping the future of the Jiu-Jitsu world. Using the latest technology, we aim to build a more transparent and efficient Jiu-Jitsu community.",
-    dojo: {
-      title: "Dojo Management System",
-      description: "All-in-one solution for dojo operations with mobile app access anytime, anywhere.",
-      features: {
-        members: "Member Management System",
-        schedule: "Class Schedule Management",
-        attendance: "Attendance Tracking and Analytics",
-        payment: "Payment Management"
-      }
-    },
-    blockchain: {
-      title: "Blockchain Certification System",
-      description: "Securely record and manage belt promotions and tournament results on blockchain. Tamper-proof achievement verification system for accurate career tracking.",
-      features: {
-        belt: "Digital Belt Promotion Certification",
-        tournament: "Blockchain Tournament Records",
-        nft: "NFT Medals and Titles",
-        verification: "Global Achievement Verification"
-      }
-    }
   }
 };

@@ -1,17 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarDays } from "lucide-react";
-import { useTranslation } from 'react-i18next';
 
 export const CommunityEvents = () => {
-  const { t } = useTranslation();
-
   return (
     <Card className="mb-12">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CalendarDays className="h-6 w-6" />
-          {t('community.events.title')}
+          イベント情報
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -19,18 +16,18 @@ export const CommunityEvents = () => {
           <Calendar className="w-full md:w-1/2" mode="single" />
           <div className="space-y-4 w-full md:w-1/2">
             <div className="border p-4 rounded-lg">
-              <h4 className="font-semibold">{t('events.upcoming.jiufight.title')}</h4>
-              <p className="text-sm text-gray-500">{t('events.upcoming.jiufight.date')}</p>
-              <p>{t('events.upcoming.jiufight.location')}</p>
+              <h4 className="font-semibold">JiuFight 2025</h4>
+              <p className="text-sm text-gray-500">2025年2月16日</p>
+              <p>場所: 大田区産業プラザPiO</p>
             </div>
             <div className="border p-4 rounded-lg">
-              <h4 className="font-semibold">{t('community.events.upcoming.camp.title')}</h4>
-              <p className="text-sm text-gray-500">{t('community.events.upcoming.camp.date')}</p>
-              <p>{t('community.events.upcoming.camp.description')}</p>
+              <h4 className="font-semibold">ハワイ合宿</h4>
+              <p className="text-sm text-gray-500">2024年2月28日 - 3月13日</p>
+              <p>世界チャンピオンと出稽古強化トレーニング</p>
             </div>
             <div className="border p-4 rounded-lg">
-              <h4 className="font-semibold">{t('community.events.upcoming.seminar.title')}</h4>
-              <p className="text-sm text-gray-500">{t('community.events.upcoming.seminar.date')}</p>
+              <h4 className="font-semibold">黒帯アダルトチャンピオングループレッスン</h4>
+              <p className="text-sm text-gray-500">2024年11月8日 12:00-</p>
             </div>
           </div>
         </div>

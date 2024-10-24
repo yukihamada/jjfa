@@ -1,6 +1,5 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const OperatingRules = () => {
   return (
@@ -10,10 +9,9 @@ const OperatingRules = () => {
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
-            <h1 className="text-3xl font-bold mb-8 text-center">合同会社JJFA 運営規程</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-center">合同会社JJFA 運営規程</h1>
             
-            <ScrollArea className="h-[calc(100vh-200px)] pr-4">
-              <div className="prose prose-slate max-w-none">
+            <div className="prose prose-slate max-w-none">
                 <h2 className="text-xl font-bold mt-8 mb-4">第1章 総則</h2>
 
                 <h3 className="font-bold mt-6 mb-2">第1条（目的）</h3>
@@ -366,8 +364,7 @@ const OperatingRules = () => {
                   <li>本規程は2024年4月1日から施行する。</li>
                   <li>本規程の実施に必要な細則は、業務執行社員が別に定める。</li>
                 </ol>
-              </div>
-            </ScrollArea>
+            </div>
           </CardContent>
         </Card>
       </div>

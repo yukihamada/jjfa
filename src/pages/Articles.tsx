@@ -1,6 +1,5 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Articles = () => {
   return (
@@ -10,10 +9,9 @@ const Articles = () => {
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
-            <h1 className="text-3xl font-bold mb-8 text-center">合同会社JJFA 定款</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-center">合同会社JJFA 定款</h1>
             
-            <ScrollArea className="h-[calc(100vh-200px)] pr-4">
-              <div className="prose prose-slate max-w-none">
+            <div className="prose prose-slate max-w-none">
                 <h2 className="text-xl font-bold mt-8 mb-4">第1章　総則</h2>
                 
                 <h3 className="font-bold mt-6 mb-2">（商号）</h3>
@@ -141,8 +139,7 @@ const Articles = () => {
                 <div className="mt-8 text-sm text-slate-600">
                   <p>本定款は、<a href="https://jpdao.org/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://jpdao.org/</a> にて公開されている日本DAO協会の定款の雛形を参考に作成されました。</p>
                 </div>
-              </div>
-            </ScrollArea>
+            </div>
           </CardContent>
         </Card>
       </div>

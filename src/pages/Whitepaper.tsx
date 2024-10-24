@@ -12,9 +12,9 @@ const Whitepaper = () => {
       
       <div className="container mx-auto py-12 px-4">
         <div className="rounded-lg border border-slate-200 bg-white/90 backdrop-blur-md p-6">
-          <h1 className="text-2xl md:text-4xl font-bold text-center mb-8 text-slate-800 leading-tight">
+          <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-center mb-8 text-slate-800 leading-tight">
             <span className="block mb-2">{t('whitepaper.title')}</span>
-            <span className="block text-xl md:text-3xl">{t('whitepaper.subtitle')}</span>
+            <span className="block text-lg sm:text-xl md:text-3xl">{t('whitepaper.subtitle')}</span>
           </h1>
 
           <div className="flex flex-wrap gap-4 justify-center mb-8">

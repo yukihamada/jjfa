@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalNav from "./components/GlobalNav";
+import GlobalFooter from "./components/GlobalFooter";
 import Index from "./pages/Index";
 import Whitepaper from "./pages/Whitepaper";
 import Community from "./pages/Community";
@@ -21,19 +22,24 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <BrowserRouter>
-        <GlobalNav />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/whitepaper" element={<Whitepaper />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
-          <Route path="/trial-class" element={<TrialClass />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/operating-rules" element={<OperatingRules />} />
-          <Route path="/token-rules" element={<TokenRules />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/careers" element={<Careers />} />
-        </Routes>
+        <div className="flex flex-col min-h-screen">
+          <GlobalNav />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/whitepaper" element={<Whitepaper />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
+              <Route path="/trial-class" element={<TrialClass />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/operating-rules" element={<OperatingRules />} />
+              <Route path="/token-rules" element={<TokenRules />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/careers" element={<Careers />} />
+            </Routes>
+          </main>
+          <GlobalFooter />
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -38,7 +38,7 @@ export const EventsSection = () => {
               )}
             </p>
             <a 
-              href="https://jiufight.com" 
+              href="https://jiufight.com/これ" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block"

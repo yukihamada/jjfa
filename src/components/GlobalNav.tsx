@@ -1,39 +1,12 @@
 import { Link } from "react-router-dom";
 import { Menu, Home, Users, Star, FileText, MessageCircle } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
 
 const GlobalNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY) {
-        setIsVisible(false); // Scrolling down
-      } else {
-        setIsVisible(true); // Scrolling up
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', controlNavbar);
-
-    return () => {
-      window.removeEventListener('scroll', controlNavbar);
-    };
-  }, [lastScrollY]);
-
-  const handleMenuClick = () => {
-    setIsMenuOpen(false);
-    window.scrollTo(0, 0);
-  };
 
   const menuItems = [
     { to: "/", label: t('nav.home'), icon: Home },
@@ -43,10 +16,13 @@ const GlobalNav = () => {
     { to: "/contact", label: t('nav.contact'), icon: MessageCircle },
   ];
 
+  const handleMenuClick = () => {
+    setIsMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-transform duration-300 ${
-      isVisible ? 'translate-y-0' : '-translate-y-full'
-    }`}>
+    <header className="fixed top-0 left-0 right-0 w-full z-50">
       <div className="bg-white/90 backdrop-blur-md shadow-md w-full transition-all duration-300 ease-in-out">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">

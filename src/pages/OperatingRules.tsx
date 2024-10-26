@@ -10,10 +10,25 @@ const OperatingRules = () => {
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
-            <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
-              {isJapanese ? '合同会社JJFA 運営規程' : 'Operating Rules of JJFA LLC (Japanese Original)'}
-            </h1>
-            
+            <div className="text-center mb-8">
+              <h1 className="text-2xl sm:text-3xl font-bold mb-4">
+                {isJapanese ? '合同会社JJFA 運営規程' : 'Operating Rules of JJFA LLC'}
+              </h1>
+              <p className="text-slate-600">
+                {isJapanese 
+                  ? '運営規程の詳細は下記のリンクからご確認いただけます：' 
+                  : 'The detailed operating rules can be found at the following link:'}
+              </p>
+              <a 
+                href="https://jjforall.com/operating-rules" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-blue-600 hover:text-blue-800 underline mt-2 inline-block"
+              >
+                https://jjforall.com/operating-rules
+              </a>
+            </div>
+
             <div className="prose prose-slate max-w-none">
                 <h2 className="text-xl font-bold mt-8 mb-4">
                   {isJapanese ? '第1章 総則' : 'Chapter 1: General Provisions (Japanese Original)'}

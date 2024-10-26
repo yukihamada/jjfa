@@ -22,7 +22,7 @@ export const CommunityEvents = () => {
             </div>
             <div className="border p-4 rounded-lg">
               <h4 className="font-semibold">ハワイ合宿</h4>
-              <p className="text-sm text-gray-500">2024年2月28日 - 3月13日</p>
+              <p className="text-sm text-gray-500">2025年2月28日 - 3月13日</p>
               <p>世界チャンピオンと出稽古強化トレーニング</p>
             </div>
             <div className="border p-4 rounded-lg">

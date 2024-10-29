@@ -49,6 +49,11 @@ export const TeamSection = () => {
       description: t('team.members.iwase.description')
     },
     {
+      name: t('team.members.nakayama.name'),
+      role: t('team.members.nakayama.role'),
+      description: t('team.members.nakayama.description')
+    },
+    {
       name: t('team.members.recruitment.name'),
       role: t('team.members.recruitment.role'),
       description: t('team.members.recruitment.description'),

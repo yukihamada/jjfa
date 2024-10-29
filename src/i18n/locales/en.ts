@@ -108,5 +108,55 @@ export default {
         verification: "Global Achievement Verification"
       }
     }
+  },
+  team: {
+    title: "Team",
+    members: {
+      hamada: {
+        name: "Yuki Hamada",
+        role: "Technology Advisor",
+        description: "Started a business while studying at Tokyo University of Science, then joined Mercari as CPO Director. Led product management and technical areas, contributing to the company's growth. Currently supports the growth of startups as an external director for companies like Reiwa Travel and Caster. Passionate about designing new businesses and aims to solve social issues through technology."
+      },
+      murata: {
+        name: "Ryozo Murata",
+        role: "Jiu-Jitsu Academy Representative, Instructor",
+        description: "Brazilian Jiu-Jitsu practitioner who obtained the first Gracie black belt directly from Hokkaido, representing 'Overlimit Sapporo' and 'Yawara Jiu-Jitsu Academy'. As the president of the Japan Sports Jiu-Jitsu Federation, he contributes to promoting Jiu-Jitsu in Japan. His teaching method is based on theoretical techniques and detailed instruction learned from Brazilian Cristiano Carioca."
+      },
+      tsutsumi: {
+        name: "Tatsuo Tsutsumi",
+        role: "Venture Capitalist, Jiu-Jitsu Practitioner",
+        description: "Co-managing partner of the venture capital firm 'STRIVE'. Specializes in supporting the growth of startups, focusing on companies in Japan, Southeast Asia, and India. His philosophy is to 'sweat and fight alongside entrepreneurs', aiming to solve social issues."
+      },
+      tateishi: {
+        name: "Shuya Tateishi",
+        role: "Jiu-Jitsu Practitioner, Athlete",
+        description: "Jiu-Jitsu practitioner from YAWARA Brazilian Jiu-Jitsu Academy. After graduating from Keio University’s Faculty of Economics, he fully entered the world of Jiu-Jitsu in 2022. Despite having less than two years of competition experience, he has shown rapid growth, winning the SJJIF World Championship in the blue belt division."
+      },
+      awata: {
+        name: "Kentaro Awata",
+        role: "HR Support Business Owner, Jiu-Jitsu Practitioner",
+        description: "CEO of Atsume Co., Ltd. With the motto of 'Gathering companions of challengers', he provides multifaceted HR and recruitment support, assisting in corporate transformation and business development."
+      },
+      takinishi: {
+        name: "Kisei Takinishi",
+        role: "Jiu-Jitsu Practitioner, Athlete",
+        description: "Jiu-Jitsu practitioner from Yawara Academy. Actively participates in domestic and international competitions, honing skills across various weight classes."
+      },
+      iwase: {
+        name: "Makoto Iwase",
+        role: "Lawyer, Jiu-Jitsu Practitioner White Belt",
+        description: "Graduated from the University of Tokyo Faculty of Law and completed the University of Tokyo Law School program, registered as a lawyer in 2020. At Eiwa Law Office, he excels in various fields including corporate law, startup support, and civil litigation."
+      },
+      nakayama: {
+        name: "Miwa Nakayama",
+        role: "Sports Entrepreneur, DeNA New Business Development, Blue Belt",
+        description: "Graduate of Hokkaido University's Department of Information and Electronic Engineering. Has launched multiple sports-related businesses, experienced business transfers, and is currently involved in new business development at DeNA. Passionate about judo and sports business, and also involved in the Kagurazaka DAO Entrepreneur Share House, actively working as an entrepreneur in various fields."
+      },
+      recruitment: {
+        name: "Now Hiring!",
+        role: "Creating the Future of Jiu-Jitsu Together",
+        description: "JJFA is looking for companions to create the future of Jiu-Jitsu and Web3 together. We welcome applications from those passionate about Jiu-Jitsu, regardless of experience or skill level."
+      }
+    }
   }
 };

@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
 export const ContactForm = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -14,12 +16,11 @@ export const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // 送信処理をシミュレート
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     toast({
-      title: "送信完了",
-      description: "お問い合わせを受け付けました。担当者からご連絡させていただきます。",
+      title: t('contact.form.success'),
+      description: t('contact.form.successMessage'),
     });
     
     setIsSubmitting(false);
@@ -29,15 +30,15 @@ export const ContactForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>お問い合わせフォーム</CardTitle>
+        <CardTitle>{t('contact.form.title')}</CardTitle>
         <CardDescription>
-          ご質問・ご相談は以下のフォームからお願いします
+          {t('contact.subtitle')}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">お名前 *</Label>
+            <Label htmlFor="name">{t('contact.form.name')} *</Label>
             <Input 
               id="name" 
               required 
@@ -47,7 +48,7 @@ export const ContactForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">メールアドレス *</Label>
+            <Label htmlFor="email">{t('contact.form.email')} *</Label>
             <Input 
               id="email" 
               type="email" 
@@ -58,7 +59,7 @@ export const ContactForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="subject">件名 *</Label>
+            <Label htmlFor="subject">{t('contact.form.subject')} *</Label>
             <Input 
               id="subject" 
               required 
@@ -68,7 +69,7 @@ export const ContactForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">お問い合わせ内容 *</Label>
+            <Label htmlFor="message">{t('contact.form.message')} *</Label>
             <Textarea 
               id="message" 
               required
@@ -82,7 +83,7 @@ export const ContactForm = () => {
             className="w-full bg-slate-800 text-white hover:bg-slate-700"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "送信中..." : "送信する"}
+            {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
           </Button>
         </form>
       </CardContent>

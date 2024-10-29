@@ -6,7 +6,6 @@ import { PageTitle } from "@/components/PageTitle";
 const Whitepaper = () => {
   const { t } = useTranslation();
 
-  // Helper function to safely handle array translations
   const getTranslatedArray = (key: string): string[] => {
     const items = t(key, { returnObjects: true });
     return Array.isArray(items) ? items : [];
@@ -43,6 +42,13 @@ const Whitepaper = () => {
             >
               <ExternalLink className="w-4 h-4" />
               {t('whitepaper.links.tokenRules')}
+            </Link>
+            <Link 
+              to="/roadmap" 
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              ロードマップ
             </Link>
           </div>
 

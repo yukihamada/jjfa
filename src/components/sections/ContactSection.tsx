@@ -30,7 +30,7 @@ export const ContactSection = () => {
             </Button>
           </a>
           <a 
-            href="https://facebook.com/JJFA.official"
+            href="https://discord.gg/jjfa"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -38,7 +38,7 @@ export const ContactSection = () => {
               variant="outline" 
               className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
             >
-              Facebook
+              Discord
             </Button>
           </a>
         </div>

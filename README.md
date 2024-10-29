@@ -2,24 +2,52 @@
 
 JJFAは、柔術の普及とコミュニティの発展を目指すプロジェクトです。Web3技術を活用して、世界中の柔術愛好家をつなぎ、より良いコミュニティを作ることを目指しています。
 
-## 主な機能
+## 🌟 主な機能
 
 - 🥋 柔術の魅力を伝えるコンテンツ
-- 🌏 多言語対応（日本語、英語、中国語、ベトナム語など）
-- 🎯 大会情報の共有
+  - 健康効果や技術的メリットの解説
+  - 実践者のストーリー共有
+  - 技術解説動画へのアクセス
+- 🌏 多言語対応
+  - 日本語
+  - 英語
+  - ポルトガル語
+  - 韓国語
+  - 中国語
+  - スペイン語
+  - フランス語
+  - タイ語
+  - ベトナム語
+- 🎯 大会情報
+  - 大会エントリーシステム連携
+  - 結果のブロックチェーン記録
+  - リアルタイムな大会情報更新
 - 👥 コミュニティ機能
-- 💎 JJFAトークンによる特典
+  - オンラインイベント参加
+  - 道場検索システム
+  - メンバー間のコミュニケーション
+- 💎 JJFAトークン
+  - ガバナンス参加権
+  - 特別イベントへのアクセス
+  - 各種特典の提供
 
-## 技術スタック
+## 🛠 技術スタック
 
-- React + TypeScript + Vite
-- Tailwind CSS
-- shadcn/ui
-- i18next（多言語対応）
-- React Query
-- React Router
+- **フロントエンド**
+  - React + TypeScript
+  - Vite（高速な開発環境）
+  - Tailwind CSS（モダンなUIデザイン）
+  - shadcn/ui（再利用可能なUIコンポーネント）
+  - Framer Motion（スムーズなアニメーション）
 
-## 開発環境のセットアップ
+- **状態管理・データフェッチ**
+  - TanStack Query（データフェッチング）
+  - React Router（ルーティング）
+
+- **国際化**
+  - i18next（多言語対応）
+
+## 🚀 開発環境のセットアップ
 
 ```bash
 # リポジトリのクローン
@@ -33,7 +61,7 @@ npm install
 npm run dev
 ```
 
-## ビルドとデプロイ
+## 📦 ビルドとデプロイ
 
 ```bash
 # プロダクションビルド
@@ -43,7 +71,7 @@ npm run build
 npm run preview
 ```
 
-## コントリビューション
+## 🤝 コントリビューション
 
 プロジェクトへの貢献を歓迎します！以下の手順で参加できます：
 
@@ -53,11 +81,34 @@ npm run preview
 4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
 5. プルリクエストを作成
 
-## ライセンス
+### コーディング規約
 
-このプロジェクトは [MIT License](LICENSE) の下で公開されています。
+- ESLintとPrettierの設定に従ってください
+- コンポーネントは小さく保ち、再利用可能にしてください
+- 適切なTypeScriptの型定義を行ってください
+- コメントは日本語で記述してください
+- テストを書くことを推奨します
 
-## お問い合わせ
+## 📝 ドキュメント
+
+詳細なドキュメントは以下で確認できます：
+
+- [プロジェクトの概要](https://jjforall.com/whitepaper)
+- [トークン規程](https://jjforall.com/token-rules)
+- [運営規程](https://jjforall.com/operating-rules)
+- [定款](https://jjforall.com/articles)
+
+## 📞 お問い合わせ
 
 - Website: [jjforall.com](https://jjforall.com)
 - Email: info@jjforall.com
+- Discord: [JJFA Discord](https://discord.gg/jjfa)
+- X (Twitter): [@JJFA_official](https://x.com/JJFA_official)
+
+## 📜 ライセンス
+
+このプロジェクトは [MIT License](LICENSE) の下で公開されています。
+
+## 🙏 謝辞
+
+このプロジェクトは、多くの柔術愛好家、開発者、アドバイザーの方々の協力によって成り立っています。皆様のサポートに心より感謝申し上げます。

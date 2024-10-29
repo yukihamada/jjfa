@@ -6,6 +6,7 @@ import { services } from './ja/services';
 import { team } from './ja/team';
 import { token } from './ja/token';
 import { comingSoon } from './ja/comingSoon';
+import { whitepaper } from './ja/whitepaper';
 
 export default {
   nav,
@@ -16,6 +17,7 @@ export default {
   team,
   token,
   comingSoon,
+  whitepaper,
   hero: {
     title: "JJFA - 柔術をすべての人に",
     subtitle: "柔術の魅力をすべての人に届ける",

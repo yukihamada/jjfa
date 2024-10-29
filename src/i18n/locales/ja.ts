@@ -3,6 +3,9 @@ import { footer } from './ja/footer';
 import { contact } from './ja/contact';
 import { benefits } from './ja/benefits';
 import { services } from './ja/services';
+import { team } from './ja/team';
+import { token } from './ja/token';
+import { comingSoon } from './ja/comingSoon';
 
 export default {
   nav,
@@ -10,6 +13,9 @@ export default {
   contact,
   benefits,
   services,
+  team,
+  token,
+  comingSoon,
   hero: {
     title: "JJFA - 柔術をすべての人に",
     subtitle: "柔術の魅力をすべての人に届ける",

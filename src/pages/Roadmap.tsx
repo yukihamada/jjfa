@@ -20,7 +20,7 @@ const Roadmap = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
-      <PageTitle title={t('roadmap.title')} />
+      <PageTitle title="ロードマップ" />
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">

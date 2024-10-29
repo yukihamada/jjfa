@@ -16,6 +16,7 @@ export const contact = {
     a4: "公式サイトから簡単に会員登録いただけます。詳しい手順はお問い合わせください。"
   },
   form: {
+    title: "お問い合わせフォーム",
     name: "お名前",
     email: "メールアドレス",
     subject: "件名",

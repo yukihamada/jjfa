@@ -12,7 +12,7 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <div className="container mx-auto py-12 px-4">
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
           {t('contact.title')}

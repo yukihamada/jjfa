@@ -19,7 +19,7 @@ const ExternalLinks = () => {
           </CardHeader>
           <CardContent>
             <a 
-              href="https://jiufight.jjforall.com" 
+              href="https://www.jiufight.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block w-full"

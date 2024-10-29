@@ -92,10 +92,10 @@ npm run preview
 
 詳細なドキュメントは以下で確認できます：
 
-- [プロジェクトの概要](/whitepaper)
-- [トークン規程](/token-rules)
-- [運営規程](/operating-rules)
-- [定款](/articles)
+- [プロジェクトの概要](https://jjforall.com/whitepaper)
+- [トークン規程](https://jjforall.com/token-rules)
+- [運営規程](https://jjforall.com/operating-rules)
+- [定款](https://jjforall.com/articles)
 
 ## 📞 お問い合わせ
 

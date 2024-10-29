@@ -1,12 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { PageTitle } from "@/components/PageTitle";
 
 const OperatingRules = () => {
   const { t, i18n } = useTranslation();
   const isJapanese = i18n.language === 'ja';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+    <div className="min-h-screen">
+      <PageTitle title={isJapanese ? "運営規程" : "Operating Rules"} />
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">

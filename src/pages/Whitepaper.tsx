@@ -6,6 +6,12 @@ import { PageTitle } from "@/components/PageTitle";
 const Whitepaper = () => {
   const { t } = useTranslation();
 
+  // Helper function to safely handle array translations
+  const getTranslatedArray = (key: string): string[] => {
+    const items = t(key, { returnObjects: true });
+    return Array.isArray(items) ? items : [];
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
       <PageTitle title={t('whitepaper.title')} />
@@ -54,14 +60,14 @@ const Whitepaper = () => {
               <h2 className="text-2xl font-bold mb-4">{t('whitepaper.currentState.title')}</h2>
               <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.globalSpread.title')}</h3>
               <ul className="list-disc pl-6 mb-4">
-                {t('whitepaper.currentState.globalSpread.items', { returnObjects: true }).map((item: string, index: number) => (
+                {getTranslatedArray('whitepaper.currentState.globalSpread.items').map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>
 
               <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.currentIssues.title')}</h3>
               <ul className="list-disc pl-6 mb-4">
-                {t('whitepaper.currentState.currentIssues.items', { returnObjects: true }).map((item: string, index: number) => (
+                {getTranslatedArray('whitepaper.currentState.currentIssues.items').map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>
@@ -77,7 +83,7 @@ const Whitepaper = () => {
 
               <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.longTermGoals.title')}</h3>
               <ul className="list-disc pl-6 mb-4">
-                {t('whitepaper.vision.longTermGoals.items', { returnObjects: true }).map((item: string, index: number) => (
+                {getTranslatedArray('whitepaper.vision.longTermGoals.items').map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>
@@ -91,7 +97,7 @@ const Whitepaper = () => {
               <h3 className="text-xl font-semibold mb-2">{t('whitepaper.token.types.title')}</h3>
               <p className="mb-4">{t('whitepaper.token.types.description')}</p>
               <ul className="list-disc pl-6 mb-4">
-                {t('whitepaper.token.types.items', { returnObjects: true }).map((item: string, index: number) => (
+                {getTranslatedArray('whitepaper.token.types.items').map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>

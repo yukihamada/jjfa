@@ -1,12 +1,31 @@
 import { Link } from "react-router-dom";
 import { Menu, Home, Users, Star, FileText, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
 
 const GlobalNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
+
+  // メニュー外クリック時の処理を追加
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuButton = document.getElementById('menu-button');
+      
+      if (isMenuOpen && mobileMenu && menuButton) {
+        if (!mobileMenu.contains(event.target as Node) && !menuButton.contains(event.target as Node)) {
+          setIsMenuOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   const menuItems = [
     { to: "/", label: t('nav.home'), icon: Home },
@@ -66,6 +85,7 @@ const GlobalNav = () => {
             <div className="flex items-center gap-4">
               <LanguageSelector />
               <button 
+                id="menu-button"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden p-2 hover:bg-slate-100 rounded-md transition-colors duration-300 ease-in-out"
                 aria-label="Toggle menu"
@@ -76,7 +96,9 @@ const GlobalNav = () => {
           </div>
         </div>
 
+        {/* モバイルメニュー */}
         <div 
+          id="mobile-menu"
           className={`lg:hidden fixed top-16 right-0 w-64 h-screen bg-white/90 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}

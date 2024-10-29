@@ -108,5 +108,50 @@ export default {
         verification: "Global Achievement Verification"
       }
     }
+  },
+  team: {
+    title: "Team",
+    members: {
+      hamada: {
+        name: "Yuki Hamada",
+        role: "Technical Advisor・Jiu-Jitsu Blue Belt",
+        description: "Started a business while studying at Tokyo University of Science, later joined Mercari as CPO. Led product management and technology, contributing to company growth. Currently supports startups as an external director at Reiwa Travel and Caster. Passionate about designing new businesses and solving social issues through technology."
+      },
+      murata: {
+        name: "Ryozo Murata",
+        role: "Jiu-Jitsu Academy Representative・Instructor",
+        description: "A Brazilian Jiu-Jitsu practitioner who received Hokkaido's first Gracie direct black belt, representing 'Overlimit Sapporo' and 'Jiu-Jitsu Academy'. As a representative of the Japan Sports Jiu-Jitsu Federation, contributes to the popularization of Jiu-Jitsu in Japan. His teaching method is based on theoretical techniques and detailed guidance learned from Brazilian Cristiano Carioca."
+      },
+      tsutsumi: {
+        name: "Tatsuo Tsutsumi",
+        role: "Venture Capitalist・Jiu-Jitsu Blue Belt",
+        description: "Managing Partner at venture capital firm 'STRIVE', focused on supporting startup growth and solving social issues."
+      },
+      tateishi: {
+        name: "Shuya Tateishi",
+        role: "Jiu-Jitsu Practitioner・Athlete",
+        description: "A Jiu-Jitsu practitioner from Yawara Jiu-Jitsu Academy, actively participating in domestic and international competitions, demonstrating excellent technique."
+      },
+      awata: {
+        name: "Kentaro Awata",
+        role: "HR Support Business Owner・Jiu-Jitsu Blue Belt",
+        description: "Supports startup growth as an external director at multiple companies."
+      },
+      takinishi: {
+        name: "Motoki Takinishi",
+        role: "Jiu-Jitsu Practitioner・Athlete Blue Belt",
+        description: "Actively participates in domestic and international competitions, refining techniques and receiving high evaluations."
+      },
+      iwase: {
+        name: "Makoto Iwase",
+        role: "Lawyer・Jiu-Jitsu White Belt",
+        description: "After graduating from the University of Tokyo's Faculty of Law and completing graduate studies at the University of Tokyo's Law School, registered as a lawyer in 2020. Works at Eiwa Law Office, excelling in corporate law, startup support, and civil litigation. As a Jiu-Jitsu white belt, he hones balanced knowledge and skills in both legal and Jiu-Jitsu fields. His strength lies in combining Jiu-Jitsu's strategic thinking with legal problem-solving abilities to support client success."
+      },
+      nakayama: {
+        name: "Miwa Nakayama",
+        role: "Marketing Director・Jiu-Jitsu Blue Belt",
+        description: "With over 10 years of experience in digital marketing and brand strategy, Miwa brings a unique perspective to promoting Jiu-Jitsu globally. She has successfully led marketing campaigns for major sports brands and actively contributes to growing the Jiu-Jitsu community through innovative digital initiatives."
+      }
+    }
   }
 };

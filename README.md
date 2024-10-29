@@ -1,5 +1,4 @@
-# JJFA - Jiu-Jitsu For ALL
-
+# JJFA
 JJFAは、柔術の普及とコミュニティの発展を目指すプロジェクトです。Web3技術を活用して、世界中の柔術愛好家をつなぎ、より良いコミュニティを作ることを目指しています。
 
 ## 🌟 主な機能
@@ -51,8 +50,8 @@ JJFAは、柔術の普及とコミュニティの発展を目指すプロジェ�
 
 ```bash
 # リポジトリのクローン
-git clone [repository-url]
-cd jjfa-web
+git clone https://github.com/yourusername/jjfa.git
+cd jjfa
 
 # 依存関係のインストール
 npm install
@@ -75,8 +74,8 @@ npm run preview
 
 プロジェクトへの貢献を歓迎します！以下の手順で参加できます：
 
-1. このリポジトリをフォーク
-2. 新しいブランチを作成 (`git checkout -b feature/amazing-feature`)
+1. プロジェクトをフォーク
+2. 機能追加用のブランチを作成 (`git checkout -b feature/amazing-feature`)
 3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
 4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
 5. プルリクエストを作成
@@ -93,10 +92,10 @@ npm run preview
 
 詳細なドキュメントは以下で確認できます：
 
-- [プロジェクトの概要](https://jjforall.com/whitepaper)
-- [トークン規程](https://jjforall.com/token-rules)
-- [運営規程](https://jjforall.com/operating-rules)
-- [定款](https://jjforall.com/articles)
+- [プロジェクトの概要](/whitepaper)
+- [トークン規程](/token-rules)
+- [運営規程](/operating-rules)
+- [定款](/articles)
 
 ## 📞 お問い合わせ
 

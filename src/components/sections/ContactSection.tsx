@@ -17,18 +17,30 @@ export const ContactSection = () => {
           {t('contact.address')}
         </p>
         <div className="flex justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 delay-400">
-          <Button 
-            variant="outline" 
-            className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
+          <a 
+            href="https://x.com/JJFA_official"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Twitter
-          </Button>
-          <Button 
-            variant="outline" 
-            className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
+            <Button 
+              variant="outline" 
+              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
+            >
+              X
+            </Button>
+          </a>
+          <a 
+            href="https://facebook.com/JJFA.official"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Facebook
-          </Button>
+            <Button 
+              variant="outline" 
+              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
+            >
+              Facebook
+            </Button>
+          </a>
         </div>
       </div>
     </section>

@@ -51,6 +51,7 @@ export const TeamSection = () => {
     {
       name: t('team.members.nakayama.name'),
       role: t('team.members.nakayama.role'),
+      imagePath: "/6AoYIy16_400x400.jpg",
       description: t('team.members.nakayama.description')
     },
     {

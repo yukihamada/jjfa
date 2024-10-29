@@ -63,12 +63,12 @@ const GlobalFooter = () => {
             </div>
             <div className="flex gap-4">
               <a 
-                href="https://twitter.com/JJFA_official" 
+                href="https://x.com/JJFA_official" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors duration-200"
               >
-                Twitter
+                X
               </a>
               <a 
                 href="https://discord.gg/jjfa" 

@@ -110,22 +110,21 @@ const Whitepaper = () => {
                 ガバナンス参加を可能にするユーティリティトークンです。
               </p>
 
-              <h3 className="text-xl font-semibold mb-2">トークンエコノミーの設計</h3>
+              <h3 className="text-xl font-semibold mb-2">トークンの種類と配布計画</h3>
+              <p className="mb-4">
+                JJFAでは、以下の3種類のトークンを発行します：
+              </p>
               <ul className="list-disc pl-6 mb-4">
-                <li>インセンティブ構造：活動への参加度合いに応じた報酬</li>
-                <li>持続可能性：トークンの循環と価値の維持</li>
-                <li>エコシステムの拡大：多様なユースケースの提供</li>
+                <li>MASTER NFT：ガバナンス参加権と収益分配請求権を持つNFT</li>
+                <li>VOTE Token：日常的な運営への参加権を持つトークン</li>
+                <li>BJJ Token：プラットフォーム内での支払いに使用するトークン</li>
               </ul>
-
-              <h3 className="text-xl font-semibold mb-2">トークン配布計画</h3>
-              <p className="mb-2">総発行量：100,000,000 JJFA</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>コミュニティリワード：50%</li>
-                <li>開発・運営チーム：20%</li>
-                <li>マーケティング・提携：15%</li>
-                <li>リザーブ：10%</li>
-                <li>法務・監査：5%</li>
-              </ul>
+              
+              <p className="mb-4">
+                各トークンの詳細な発行計画、権利内容、配布条件については、
+                <Link to="/token-rules" className="text-blue-600 hover:underline">トークン規程</Link>
+                をご確認ください。
+              </p>
             </section>
 
             <section className="border-t border-slate-200 pt-8 mt-8">

@@ -3,6 +3,7 @@ export const contact = {
   subtitle: "ご質問・ご相談はこちらから",
   email: "メールアドレス",
   phone: "電話番号",
+  address: "〒102-0074 東京都千代田区九段南1-6-5 九段会テラス2F",
   faq: {
     title: "よくある質問",
     q1: "JJFAとは何ですか？",

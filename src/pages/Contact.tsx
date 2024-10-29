@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/contact/ContactForm";
 import { SocialLinks } from "@/components/contact/SocialLinks";
+import { PageTitle } from "@/components/PageTitle";
 import {
   Accordion,
   AccordionContent,
@@ -13,6 +14,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
+      <PageTitle title={t('contact.title')} />
       <div className="container mx-auto py-12 px-4">
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
           {t('contact.title')}

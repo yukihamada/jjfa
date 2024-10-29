@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { DojoSelector } from "@/components/DojoSelector";
+import { PageTitle } from "@/components/PageTitle";
 
 interface Dojo {
   id: string;
@@ -49,6 +50,7 @@ const TrialClass = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
+      <PageTitle title="無料体験予約" />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
           <Card className="bg-white/90 backdrop-blur-md">

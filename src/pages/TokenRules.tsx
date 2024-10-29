@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { TokenRulesHeader } from "@/components/token-rules/TokenRulesHeader";
+import { PageTitle } from "@/components/PageTitle";
 import { Chapter1 } from "@/components/token-rules/sections/Chapter1";
 import { Chapter2 } from "@/components/token-rules/sections/Chapter2";
 import { Chapter3 } from "@/components/token-rules/sections/Chapter3";
@@ -11,6 +12,7 @@ import { BackgroundGradient } from "@/components/BackgroundGradient";
 const TokenRules = () => {
   return (
     <div className="min-h-screen">
+      <PageTitle title="トークン規程" />
       <BackgroundGradient />
       <div className="container mx-auto py-12 px-4">
         <Card className="bg-white/90 backdrop-blur-md">

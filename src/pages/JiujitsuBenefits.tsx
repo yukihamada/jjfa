@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
+import { PageTitle } from "@/components/PageTitle";
 import { HealthBenefits } from "@/components/jiujitsu-benefits/HealthBenefits";
 import { SkillBenefits } from "@/components/jiujitsu-benefits/SkillBenefits";
 import { CommunityBenefits } from "@/components/jiujitsu-benefits/CommunityBenefits";
@@ -12,6 +13,7 @@ const JiujitsuBenefits = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
+      <PageTitle title={t('benefits.title')} />
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
           {t('benefits.title')}

@@ -14,6 +14,7 @@ import OperatingRules from "./pages/OperatingRules";
 import TokenRules from "./pages/TokenRules";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
+import Roadmap from "./pages/Roadmap";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/token-rules" element={<TokenRules />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
+              <Route path="/roadmap" element={<Roadmap />} />
             </Routes>
           </main>
           <GlobalFooter />

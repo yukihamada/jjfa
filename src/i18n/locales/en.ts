@@ -130,7 +130,7 @@ export default {
       tateishi: {
         name: "Shuya Tateishi",
         role: "Jiu-Jitsu Practitioner, Athlete",
-        description: "Jiu-Jitsu practitioner from YAWARA Brazilian Jiu-Jitsu Academy. After graduating from Keio University’s Faculty of Economics, he fully entered the world of Jiu-Jitsu in 2022. Despite having less than two years of competition experience, he has shown rapid growth, winning the SJJIF World Championship in the blue belt division."
+        description: "Jiu-Jitsu practitioner from YAWARA Brazilian Jiu-Jitsu Academy. After graduating from Keio University's Faculty of Economics, he fully entered the world of Jiu-Jitsu in 2022. Despite having less than two years of competition experience, he has shown rapid growth, winning the SJJIF World Championship in the blue belt division."
       },
       awata: {
         name: "Kentaro Awata",
@@ -151,6 +151,11 @@ export default {
         name: "Miwa Nakayama",
         role: "Sports Entrepreneur, DeNA New Business Development, Blue Belt",
         description: "Graduate of Hokkaido University's Department of Information and Electronic Engineering. Has launched multiple sports-related businesses, experienced business transfers, and is currently involved in new business development at DeNA. Passionate about judo and sports business, and also involved in the Kagurazaka DAO Entrepreneur Share House, actively working as an entrepreneur in various fields."
+      },
+      watanuki: {
+        name: "Tomoya Watanuki",
+        role: "Education & Gamification Specialist",
+        description: "After graduating from Tokyo University of Science's Faculty of Engineering, he worked at DeNA in game planning and promotion. Through his experience in educational ventures, he has gained attention for his innovative approach combining education and gamification. He has authored books including 'New Exam Guru's Guide: Gamification Study Methods to Motivate Children' and continues to develop his activities in the education field."
       },
       recruitment: {
         name: "Now Hiring!",

@@ -15,36 +15,46 @@ import TokenRules from "./pages/TokenRules";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Roadmap from "./pages/Roadmap";
+import { useState } from "react";
+import { PasswordProtection } from "./components/PasswordProtection";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          <GlobalNav />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/whitepaper" element={<Whitepaper />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
-              <Route path="/trial-class" element={<TrialClass />} />
-              <Route path="/articles" element={<Articles />} />
-              <Route path="/operating-rules" element={<OperatingRules />} />
-              <Route path="/token-rules" element={<TokenRules />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/roadmap" element={<Roadmap />} />
-            </Routes>
-          </main>
-          <GlobalFooter />
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  if (!isAuthenticated) {
+    return <PasswordProtection onAuthenticated={() => setIsAuthenticated(true)} />;
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <BrowserRouter>
+          <div className="flex flex-col min-h-screen">
+            <GlobalNav />
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/whitepaper" element={<Whitepaper />} />
+                <Route path="/community" element={<Community />} />
+                <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
+                <Route path="/trial-class" element={<TrialClass />} />
+                <Route path="/articles" element={<Articles />} />
+                <Route path="/operating-rules" element={<OperatingRules />} />
+                <Route path="/token-rules" element={<TokenRules />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/roadmap" element={<Roadmap />} />
+              </Routes>
+            </main>
+            <GlobalFooter />
+          </div>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

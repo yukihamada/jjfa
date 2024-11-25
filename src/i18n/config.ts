@@ -16,7 +16,11 @@ i18n
       pt: { translation: pt },
       es: { translation: es }
     },
-    fallbackLng: 'ja',
+    fallbackLng: 'en',
+    detection: {
+      order: ['navigator'],
+      lookupFromPathIndex: 0,
+    },
     interpolation: {
       escapeValue: false,
     },

@@ -115,5 +115,29 @@ export default {
       overview: "Project Overview",
       overviewText: "JJFA (Jiu-Jitsu For ALL) aims to address these challenges by creating a decentralized platform that connects practitioners, academies, and tournament organizers worldwide."
     }
+  },
+  comingSoon: {
+    title: "Coming Soon",
+    description: "JJFA is shaping the future of Jiu-Jitsu. We aim to build a more transparent and efficient Jiu-Jitsu community using the latest technology.",
+    dojo: {
+      title: "Dojo Management System",
+      description: "An all-in-one solution for managing your dojo anytime, anywhere with our mobile app.",
+      features: {
+        members: "Member Management System",
+        schedule: "Class Schedule Management",
+        attendance: "Attendance Tracking and Analytics",
+        payment: "Payment Management"
+      }
+    },
+    blockchain: {
+      title: "Blockchain Certification System",
+      description: "Securely record and manage belt promotions and tournament results on the blockchain. Our tamper-proof verification system enables accurate career tracking.",
+      features: {
+        belt: "Digital Belt Promotion Certification",
+        tournament: "Blockchain Tournament Records",
+        nft: "NFT Medals and Titles",
+        verification: "Global Achievement Verification"
+      }
+    }
   }
 };

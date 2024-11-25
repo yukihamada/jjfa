@@ -14,7 +14,7 @@ const OperatingRules = () => {
           <CardContent className="p-6">
             <div className="text-center mb-8">
               <h1 className="text-2xl sm:text-3xl font-bold mb-4">
-                合同会社JJFA 運営規程
+                JJFA合同会社 運営規程
               </h1>
             </div>
 
@@ -23,145 +23,200 @@ const OperatingRules = () => {
                 <h2 className="text-xl font-bold mt-8 mb-4">第1章 総則</h2>
 
                 <h3 className="font-bold mt-6 mb-2">第1条（目的）</h3>
-                <p>本規程は、合同会社JJFA（以下「当会社」という）の運営に関する基本的事項を定め、柔術の普及と啓蒙という当会社の目的達成に向け、効率的かつ透明性のある組織運営を確保することを目的とする。</p>
+                <p>本運営規程は、JJFA合同会社（以下「当会社」）が発行するトークンおよびDAO（分散型自律組織）の運営方針を定め、透明性、公平性、効率性、セキュリティを高め、トークン保有者全員が信頼と安心の中でコミュニティ活動を行えるエコシステムを構築することを目的とする。</p>
 
                 <h3 className="font-bold mt-6 mb-2">第2条（適用範囲）</h3>
-                <p>本規程は、<strong>当会社の業務執行社員、社員（MASTER NFTホルダー）、およびガバナンストークンホルダー（VOTE Tokenホルダー）</strong>に適用され、当会社の運営に関わる全てのメンバーに対して効力を持つものとする。</p>
-                <p>本規程は、Discord上で公開され、常時参照可能な状態を維持する。</p>
-
-                <h3 className="font-bold mt-6 mb-2">第3条（基本理念）</h3>
-                <p>当会社は、次の基本理念に基づき運営される。</p>
-                <ul className="list-disc pl-6 mb-4">
-                  <li>オープン性：誰もが参加可能である開かれた組織運営</li>
-                  <li>透明性：意思決定プロセスと実行内容の可視化</li>
-                  <li>公平性：全てのステークホルダーの権利を尊重</li>
-                  <li>持続可能性：長期的発展を見据えた運営</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2 className="text-xl font-bold mt-8 mb-4">第2章 組織構造とロールの定義</h2>
-
-                <h3 className="font-bold mt-6 mb-2">第4条（ロールの種類と権限）</h3>
+                <p>本規程は、当会社が発行する以下のトークンおよび関連活動に適用される。</p>
                 <ol className="list-decimal pl-6 mb-4">
-                  <li>業務執行社員（コアホルダー）
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>法的代表権を持ち、当会社の意思決定に参加する権限</li>
-                      <li>年間報酬：基本給＋業績連動報酬（上限：年間売上の10%）</li>
-                      <li>トレジャリー管理権：単独で100万円未満の資金執行が可能</li>
-                    </ul>
-                  </li>
-                  <li>社員（MASTER NFTホルダー）
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>議決権：1つのMASTER NFTにつき1票の議決権</li>
-                      <li>収益分配請求権（出資額を上限とする）</li>
-                      <li>新規事業提案権</li>
-                      <li>四半期報告書の閲覧権</li>
-                    </ul>
-                  </li>
-                  <li>ガバナンストークンホルダー（VOTE Tokenホルダー）
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>議決権：保有するVOTE Token数に応じた投票力を有する</li>
-                      <li>運営方針提案権</li>
-                      <li>月次活動報告の閲覧権</li>
-                    </ul>
-                  </li>
-                  <li>コントリビューター
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>活動提案権</li>
-                      <li>貢献度に応じたリワードトークンの取得</li>
-                      <li>コミュニティチャンネルへのアクセス権</li>
-                    </ul>
-                  </li>
+                  <li>社員権トークン（Equity Token）</li>
+                  <li>ガバナンストークン（Governance Token）</li>
                 </ol>
 
-                <h3 className="font-bold mt-6 mb-2">第5条（ロールの取得と喪失）</h3>
+                <h3 className="font-bold mt-6 mb-2">第3条（用語の定義）</h3>
                 <ol className="list-decimal pl-6 mb-4">
-                  <li>ロール取得条件
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>業務執行社員：DAO総会での賛成票75%以上の承認が必要</li>
-                      <li>社員（MASTER NFTホルダー）：規定の出資額でMASTER NFTを取得すること</li>
-                      <li>ガバナンストークンホルダー（VOTE Tokenホルダー）：公式サイトにてKYC（本人確認）完了</li>
-                      <li>コントリビューター：Discordで30日以上の活動実績</li>
-                    </ul>
-                  </li>
-                  <li>ロール喪失事由
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>自主的な退会</li>
-                      <li>規約違反による資格剥奪（DAO総会での議決が必要）</li>
-                      <li>60日以上の活動実績なし</li>
-                      <li>トークンの移転または喪失</li>
-                    </ul>
-                  </li>
+                  <li>提案：トークン保有者または運営チームがDAO総会に提出する改善案、予算案、または新規プロジェクト案を指す。</li>
+                  <li>スマートコントラクト：トークン発行・管理および投票プロセスを技術的に実現するためのブロックチェーンプログラム。</li>
+                  <li>公式プラットフォーム：DAO総会の管理、提案の公開、進捗報告を行うオンラインシステム。</li>
                 </ol>
               </section>
 
               <section>
-                <h2 className="text-xl font-bold mt-8 mb-4">第3章 DAO総会</h2>
+                <h2 className="text-xl font-bold mt-8 mb-4">第2章 運営体制</h2>
 
-                <h3 className="font-bold mt-6 mb-2">第6条（DAO総会の種類と開催）</h3>
+                <h3 className="font-bold mt-6 mb-2">第4条（運営組織の構成）</h3>
                 <ol className="list-decimal pl-6 mb-4">
-                  <li>定期総会
+                  <li>DAO総会
                     <ul className="list-disc pl-6 mt-2">
-                      <li>四半期に1回開催</li>
-                      <li>開催日の14日前までに告知し、アジェンダを7日前までに公開</li>
+                      <li>役割：最高意思決定機関であり、トークン保有者全員で構成される。</li>
+                      <li>議題の例：トークンの総発行量変更、新規プロジェクトの採択、規程改定の承認。</li>
+                      <li>開催頻度：四半期ごと（必要に応じて臨時開催）。</li>
+                      <li>議事録公開：議事録は総会終了後7日以内に公式プラットフォームで公開する。</li>
                     </ul>
                   </li>
-                  <li>臨時総会
+                  <li>運営チーム
                     <ul className="list-disc pl-6 mt-2">
-                      <li>業務執行社員が必要と認めた場合</li>
-                      <li>トークンホルダーの30%以上の請求があった場合</li>
-                      <li>開催日の7日前までに告知</li>
+                      <li>構成と役割：以下の専門チームで構成される。</li>
+                      <li>技術チーム：スマートコントラクト運用、トークンセキュリティ監視。
+                        <ul className="list-disc pl-6">
+                          <li>例：スマートコントラクトのバグ報告対応、外部監査依頼。</li>
+                        </ul>
+                      </li>
+                      <li>コミュニティチーム：意見収集、保有者間の調整、広報活動。
+                        <ul className="list-disc pl-6">
+                          <li>例：SNSを活用した提案の意見収集キャンペーン。</li>
+                        </ul>
+                      </li>
+                      <li>財務チーム：予算編成、利益配分の管理。
+                        <ul className="list-disc pl-6">
+                          <li>例：トークン配分の進捗報告書の作成と公開。</li>
+                        </ul>
+                      </li>
+                      <li>法務チーム：規程改定案作成、規制遵守確認。
+                        <ul className="list-disc pl-6">
+                          <li>例：各国の暗号資産規制に基づく運営方針の助言。</li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
                 </ol>
 
-                <h3 className="font-bold mt-6 mb-2">第7条（議決権行使）</h3>
+                <h3 className="font-bold mt-6 mb-2">第5条（責任と権限の分担）</h3>
                 <ol className="list-decimal pl-6 mb-4">
-                  <li>投票方法
+                  <li>DAO総会：
                     <ul className="list-disc pl-6 mt-2">
-                      <li>Snapshot.orgによるオンライン投票を利用</li>
-                      <li>投票期間は最低72時間</li>
-                      <li>結果はブロックチェーン上に記録</li>
+                      <li>責任：重要事項の審議・決議。</li>
+                      <li>権限：提案採択、新規プロジェクトの承認、規程改定の承認。</li>
                     </ul>
                   </li>
-                  <li>定足数
+                  <li>運営チーム：
                     <ul className="list-disc pl-6 mt-2">
-                      <li>重要事項：総議決権の66%以上の参加</li>
-                      <li>通常事項：総議決権の51%以上の参加</li>
-                    </ul>
-                  </li>
-                  <li>議決要件
-                    <ul className="list-disc pl-6 mt-2">
-                      <li>定款変更：75%以上の賛成</li>
-                      <li>重要事項：66%以上の賛成</li>
-                      <li>通常事項：51%以上の賛成</li>
+                      <li>責任：決議内容の実行と進捗管理。</li>
+                      <li>権限：日常業務の遂行、トークン管理、トラブル対応。</li>
                     </ul>
                   </li>
                 </ol>
-
-                <h3 className="font-bold mt-6 mb-2">第8条（委任投票）</h3>
-                <p>トークンホルダーは他のホルダーに投票を委任可能。委任は個別議案ごとに設定でき、委任状はブロックチェーン上で管理する。</p>
               </section>
 
               <section>
-                <h2 className="text-xl font-bold mt-8 mb-4">第4章 業務執行</h2>
+                <h2 className="text-xl font-bold mt-8 mb-4">第3章 提案および意思決定プロセス</h2>
 
-                <h3 className="font-bold mt-6 mb-2">第9条（業務執行の区分と決定プロセス）</h3>
+                <h3 className="font-bold mt-6 mb-2">第6条（提案の要件と審査）</h3>
                 <ol className="list-decimal pl-6 mb-4">
-                  <li>日常的業務（業務執行社員が単独で決定可能）
+                  <li>提案の要件
                     <ul className="list-disc pl-6 mt-2">
-                      <li>100万円未満の支出</li>
-                      <li>イベント運営や広報活動、コミュニティ管理など</li>
+                      <li>提案は以下の要素を含む必要がある：</li>
+                      <li>提案名：簡潔で内容を端的に表現した名称。</li>
+                      <li>目的と背景：提案の動機、解決すべき課題。</li>
+                      <li>詳細内容：実行方法、期待される成果、リスク管理策。</li>
+                      <li>必要な予算：金額と具体的な用途。</li>
+                      <li>担当者またはチーム：実行を担う人物またはグループの詳細。</li>
                     </ul>
                   </li>
-                  <li>重要業務（DAO総会の決議が必要）
+                  <li>審査プロセス
                     <ul className="list-disc pl-6 mt-2">
-                      <li>100万円以上の支出</li>
-                      <li>新規事業の開始、人事施策の策定、トークンエコノミーの変更</li>
+                      <li>提出後、運営チームの各専門チームが以下の観点で審査を行う：</li>
+                      <li>技術的妥当性（技術チーム）：スマートコントラクトの変更が必要か。</li>
+                      <li>財務的実現可能性（財務チーム）：予算の適切性とリソースの妥当性。</li>
+                      <li>法的適合性（法務チーム）：関連法令に違反しないか。</li>
+                    </ul>
+                  </li>
+                  <li>提案公開
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>審査後、提案は公式プラットフォームに公開され、全保有者に通知する。</li>
                     </ul>
                   </li>
                 </ol>
+
+                <h3 className="font-bold mt-6 mb-2">第7条（投票および決議の詳細）</h3>
+                <ol className="list-decimal pl-6 mb-4">
+                  <li>投票システム
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>スマートコントラクト上で実施し、以下の方式を採用する：</li>
+                      <li>投票は保有トークン数に基づく重み付け（例：社員権トークン1枚＝1票）。</li>
+                      <li>投票結果はブロックチェーン上で公開され、改ざん不可能。</li>
+                    </ul>
+                  </li>
+                  <li>投票期間
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>投票期間は7日間とし、意見収集期間（1週間）後に開始する。</li>
+                    </ul>
+                  </li>
+                  <li>決議条件
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>特別決議：全投票数の3分の2以上の賛成を要する。</li>
+                      <li>例：トークン総量の変更、規程改定。</li>
+                      <li>普通決議：全投票数の過半数の賛成を要する。</li>
+                      <li>例：プロジェクト予算の承認、改善提案の採択。</li>
+                    </ul>
+                  </li>
+                  <li>実施と報告
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>承認された提案は運営チームが実施を開始し、進捗状況を四半期ごとに公式プラットフォームで報告する。</li>
+                    </ul>
+                  </li>
+                </ol>
+              </section>
+
+              <section>
+                <h2 className="text-xl font-bold mt-8 mb-4">第4章 トークン管理とセキュリティ</h2>
+
+                <h3 className="font-bold mt-6 mb-2">第8条（トークンの発行および管理）</h3>
+                <ol className="list-decimal pl-6 mb-4">
+                  <li>トークンの発行・配分・再発行は、スマートコントラクトに基づき実施する。</li>
+                  <li>発行状況、取引履歴、保有者分布は公式プラットフォーム上でリアルタイムで公開される。</li>
+                </ol>
+
+                <h3 className="font-bold mt-6 mb-2">第9条（紛失および不正利用の対応）</h3>
+                <ol className="list-decimal pl-6 mb-4">
+                  <li>紛失時の対応
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>保有者がウォレット紛失を申請する場合、以下のプロセスを経る：</li>
+                      <li>本人確認（例：ID提出とビデオ認証）。</li>
+                      <li>DAO総会の承認後、紛失トークンを無効化し新しいトークンを発行。</li>
+                    </ul>
+                  </li>
+                  <li>不正利用時の対応
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>不正使用が確認された場合、運営チームは以下を実施する：</li>
+                      <li>該当トークンの凍結：スマートコントラクトで即時凍結。</li>
+                      <li>法的措置：被害者救済および加害者に対する追及措置。</li>
+                    </ul>
+                  </li>
+                </ol>
+              </section>
+
+              <section>
+                <h2 className="text-xl font-bold mt-8 mb-4">第5章 ガバナンスおよび透明性</h2>
+
+                <h3 className="font-bold mt-6 mb-2">第10条（運営報告の具体化）</h3>
+                <ol className="list-decimal pl-6 mb-4">
+                  <li>四半期ごとの運営報告
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>各専門チームは、以下を含む報告書を作成する：</li>
+                      <li>トークン発行状況と取引履歴。</li>
+                      <li>DAO総会の決議事項と進捗状況。</li>
+                      <li>利益配分の詳細および予算執行状況。</li>
+                    </ul>
+                  </li>
+                  <li>報告の公開と質疑応答
+                    <ul className="list-disc pl-6 mt-2">
+                      <li>報告書は公式プラットフォームで公開され、保有者からの質疑に対応するセッションを設ける。</li>
+                    </ul>
+                  </li>
+                </ol>
+              </section>
+
+              <section>
+                <h2 className="text-xl font-bold mt-8 mb-4">第6章 附則</h2>
+
+                <h3 className="font-bold mt-6 mb-2">第11条（規程改定の手続き）</h3>
+                <ol className="list-decimal pl-6 mb-4">
+                  <li>規程改定案はDAO総会での特別決議によって承認される。</li>
+                  <li>改定内容は即時施行され、公式プラットフォームに公開する。</li>
+                </ol>
+
+                <h3 className="font-bold mt-6 mb-2">第12条（施行日）</h3>
+                <p>本規程は、2024年●月●日より施行する。</p>
               </section>
             </div>
           </CardContent>

@@ -3,28 +3,26 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter4 = () => {
   return (
-    <TokenRulesSection title="第4章 初期配布とロックアップ">
-      <TokenRulesArticle title="第7条（初期配布の条件）">
+    <TokenRulesSection title="第4章 紛失・不正利用への対応">
+      <TokenRulesArticle title="第9条（紛失時の対応）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>コアチーム向け配布条件
+          <li>ウォレットの秘密鍵を紛失した場合、以下の手順を経てトークンを再発行する：
             <ul className="list-disc pl-6 mt-2">
-              <li>初年度：完全ロック（譲渡不可）</li>
-              <li>2年目以降：四半期ごとに25%を解放</li>
-              <li>最低1年のコミットメント（活動に専念する義務）</li>
+              <li>本人確認書類の提出および審査。</li>
+              <li>DAO総会の承認後、紛失トークンを無効化し、新トークンを発行。</li>
             </ul>
           </li>
-          <li>アドバイザー向け配布条件
+          <li>再発行には合理的な手数料を請求する場合がある。</li>
+        </ol>
+      </TokenRulesArticle>
+
+      <TokenRulesArticle title="第10条（不正利用への対策）">
+        <ol className="list-decimal pl-6 mb-4">
+          <li>不正利用が確認された場合、当会社は以下の措置を講じる：
             <ul className="list-disc pl-6 mt-2">
-              <li>初めの6ヶ月間はロック</li>
-              <li>その後1年間：毎月均等に解放</li>
-              <li>月次ミーティング参加が必須条件</li>
-            </ul>
-          </li>
-          <li>パートナー道場向け配布条件
-            <ul className="list-disc pl-6 mt-2">
-              <li>最初の3ヶ月間はロック</li>
-              <li>その後6ヶ月間で均等に解放</li>
-              <li>システムの導入が必須条件</li>
+              <li>スマートコントラクトによる不正トークンの一時停止または無効化。</li>
+              <li>被害者に対するトークン回復措置を実施。</li>
+              <li>必要に応じて法的措置を講じる。</li>
             </ul>
           </li>
         </ol>

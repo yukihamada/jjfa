@@ -3,30 +3,27 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter5 = () => {
   return (
-    <TokenRulesSection title="第5章 セキュリティとリスク管理">
-      <TokenRulesArticle title="第8条（セキュリティ対策）">
+    <TokenRulesSection title="第5章 ガバナンスと規程改定">
+      <TokenRulesArticle title="第11条（DAOガバナンス）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>スマートコントラクト
+          <li>議決方法
             <ul className="list-disc pl-6 mt-2">
-              <li>外部監査の実施：四半期ごと</li>
-              <li>脆弱性診断：毎月実施</li>
-              <li>アップグレードが容易な設計</li>
-              <li>非常停止機能（問題発生時に一時停止できる機能）</li>
+              <li>特別決議（議決権の3分の2以上の賛成）：トークン総量変更、規程改定、会社解散など。</li>
+              <li>普通決議（過半数の賛成）：プロジェクト提案、資金配分、新規イベント計画など。</li>
+            </ul>
+          </li>
+          <li>投票システムの透明性
+            <ul className="list-disc pl-6 mt-2">
+              <li>スマートコントラクトにより投票プロセスを管理し、結果を即時公開。</li>
             </ul>
           </li>
         </ol>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第9条（緊急時対応）">
+      <TokenRulesArticle title="第12条（規程改定手続き）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>緊急事態の定義
-            <ul className="list-disc pl-6 mt-2">
-              <li>スマートコントラクトに脆弱性が発見された場合</li>
-              <li>価格の大幅な変動</li>
-              <li>システム障害が発生した場合</li>
-              <li>法規制の急な変更が発生した場合</li>
-            </ul>
-          </li>
+          <li>規程改定案は、公式ウェブサイトで全保有者に公開し、1週間の意見募集期間を設ける。</li>
+          <li>改定案はDAO総会で承認後、直ちに施行される。</li>
         </ol>
       </TokenRulesArticle>
     </TokenRulesSection>

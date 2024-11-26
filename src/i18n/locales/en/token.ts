@@ -1,14 +1,11 @@
 export const token = {
-  title: "JJFA Token",
-  description: "The future of Jiu-Jitsu community engagement",
-  features: {
-    governance: "Community Governance",
-    rewards: "Rewards Program",
-    access: "Exclusive Access",
-    events: "Event Participation"
+  title: "JJFA Token Benefits",
+  discount: {
+    title: "Tournament Entry Discount",
+    description: "Token holders can always register at early bird prices."
   },
-  learn: {
-    more: "Learn More",
-    whitepaper: "Read Whitepaper"
+  content: {
+    title: "Exclusive Content",
+    description: "Access to technical videos from top athletes and online seminars."
   }
 };

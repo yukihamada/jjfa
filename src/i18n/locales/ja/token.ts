@@ -1,11 +1,11 @@
 export const token = {
   title: "JJFAトークンの特典",
   discount: {
-    title: "登録料の割引",
-    description: "トークン保有者は常に割引価格で登録できます。"
+    title: "大会エントリー割引",
+    description: "トークン保有者は常にアーリーバード価格で参加できます"
   },
   content: {
-    title: "独占コンテンツ",
-    description: "トップアスリートの技術動画やオンラインセミナーにアクセスできます。"
+    title: "限定コンテンツ",
+    description: "トップアスリートの技術動画やオンラインセミナーにアクセスできます"
   }
 };

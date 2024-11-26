@@ -2,8 +2,7 @@ export const contact = {
   title: "お問い合わせ",
   subtitle: "ご質問・ご相談はこちらから",
   email: "メールアドレス：info@jjforall.com",
-  phone: "電話番号",
-  address: "〒102-0074 東京都千代田区九段南1-6-5 九段会テラス2F",
+  address: "〒102-0074 東京都千代田区九段南1-6-5 九段会館テラス",
   faq: {
     title: "よくある質問",
     q1: "JJFAとは何ですか？",

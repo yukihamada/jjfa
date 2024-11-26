@@ -41,6 +41,16 @@ export const RegistrationForm = () => {
 
       if (registrationError) throw registrationError;
 
+      // Send welcome email
+      const { error: emailError } = await supabase.functions.invoke('send-welcome-email', {
+        body: { to: email, name }
+      });
+
+      if (emailError) {
+        console.error('Error sending welcome email:', emailError);
+        // Don't throw here, as the registration was successful
+      }
+
       toast.success("コミュニティへの参加申請を受け付けました。メールをご確認ください。");
       setName("");
       setEmail("");

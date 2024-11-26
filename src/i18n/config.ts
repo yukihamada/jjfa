@@ -16,7 +16,7 @@ i18n
       pt: { translation: pt },
       es: { translation: es }
     },
-    fallbackLng: 'en',
+    fallbackLng: 'ja',
     detection: {
       order: ['navigator', 'htmlTag', 'path', 'localStorage'],
       lookupFromPathIndex: 0,

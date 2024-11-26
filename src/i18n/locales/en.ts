@@ -20,6 +20,12 @@ export default {
   comingSoon,
   whitepaper,
   roadmap,
+  hero: {
+    title: "JJFA - Jiu-Jitsu for ALL",
+    subtitle: "Bringing the beauty of Jiu-Jitsu to everyone",
+    joinCommunity: "Join Community",
+    whitepaper: "White Paper"
+  },
   community: {
     title: "Community",
     joinTitle: "Join Our Community",

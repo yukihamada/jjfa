@@ -10,9 +10,9 @@ const GlobalFooter = () => {
       links: [
         { to: "/", label: t('nav.home') },
         { to: "/whitepaper", label: t('nav.whitepaper') },
-        { to: "/roadmap", label: "ロードマップ" },
-        { to: "/operating-rules", label: "運営規程" },
-        { to: "/token-rules", label: "トークン規程" },
+        { to: "/roadmap", label: "Roadmap" },
+        { to: "/operating-rules", label: "Operating Rules" },
+        { to: "/token-rules", label: "Token Rules" },
       ]
     },
     {

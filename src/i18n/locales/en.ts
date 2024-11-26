@@ -135,30 +135,94 @@ export default {
       backgroundText: "Brazilian Jiu-Jitsu is experiencing global growth as a martial art and competitive sport. However, the community faces various challenges in terms of sustainable growth and fair distribution of value.",
       overview: "Project Overview",
       overviewText: "JJFA (Jiu-Jitsu For ALL) aims to address these challenges by creating a decentralized platform that connects practitioners, academies, and tournament organizers worldwide."
-    }
-  },
-  comingSoon: {
-    title: "Coming Soon",
-    description: "JJFA is shaping the future of Jiu-Jitsu. We aim to build a more transparent and efficient Jiu-Jitsu community using the latest technology.",
-    dojo: {
-      title: "Dojo Management System",
-      description: "An all-in-one solution for managing your dojo anytime, anywhere with our mobile app.",
-      features: {
-        members: "Member Management System",
-        schedule: "Class Schedule Management",
-        attendance: "Attendance Tracking and Analytics",
-        payment: "Payment Management"
+    },
+    links: {
+      articles: "View Articles",
+      operatingRules: "View Operating Rules",
+      tokenRules: "View Token Rules"
+    },
+    governance: {
+      title: "5. Governance Structure",
+      description: "JJFA operates as a Decentralized Autonomous Organization (DAO) utilizing Web3 technology. For detailed operational policies, please refer to the Operating Rules.",
+      additionalInfo: "The basic organizational framework is defined in the Articles of Incorporation, while token-specific details are outlined in the Token Rules."
+    },
+    currentState: {
+      title: "2. Current State and Challenges of the Jiu-Jitsu Community",
+      globalSpread: {
+        title: "Global Spread of Jiu-Jitsu",
+        items: [
+          "Growing Market: Increasing number of Jiu-Jitsu academies and tournaments worldwide",
+          "Diverse Participants: Participation from children to adults, regardless of gender"
+        ]
+      },
+      currentIssues: {
+        title: "Current Issues",
+        items: [
+          "Funding Challenges: Lack of funds for tournament operations and academy management",
+          "Community Fragmentation: Insufficient sharing of information and techniques",
+          "Early Supporter Recognition: Early supporters not receiving proper recognition"
+        ]
       }
     },
-    blockchain: {
-      title: "Blockchain Certification System",
-      description: "Securely record and manage belt promotions and tournament results on the blockchain. Our tamper-proof verification system enables accurate career tracking.",
-      features: {
-        belt: "Digital Belt Promotion Certification",
-        tournament: "Blockchain Tournament Records",
-        nft: "NFT Medals and Titles",
-        verification: "Global Achievement Verification"
+    vision: {
+      title: "3. JJFA Vision and Mission",
+      overview: {
+        title: "Organization Overview",
+        description: "JJFA is a limited liability company dedicated to promoting Jiu-Jitsu and developing its community."
+      },
+      mission: {
+        title: "Mission Statement",
+        description: "'Jiu-Jitsu for ALL' - We aim to bring Jiu-Jitsu's techniques and spirit to people worldwide while strengthening community bonds."
+      },
+      longTermGoals: {
+        title: "Long-term Goals",
+        items: [
+          "Expand Jiu-Jitsu Population: Increase Jiu-Jitsu enthusiasts worldwide",
+          "Strengthen Community: Build global networks",
+          "Preserve Technique and Culture: Pass on to next generations through education"
+        ]
       }
+    }
+  },
+  roadmap: {
+    title: "JJFA Roadmap",
+    phase1: {
+      title: "November-December 2024: Corporate Registration and Preparation",
+      registration: "Corporate Registration Complete: Finalization of Articles of Incorporation and Operating Rules, registration complete.",
+      infrastructure: "Web3 Infrastructure Development: Preparing blockchain foundation for DAO launch.",
+      whitepaper: "White Paper Release: Release detailed white paper including vision and token use cases, conduct briefings for members and investors."
+    },
+    phase2: {
+      title: "January 2025: DAO Launch and Fundraising",
+      dao: "DAO Launch: Official launch of JJFA DAO, recruitment of initial members and establishment of governance rights.",
+      funding: "Start Fundraising: Initial fundraising through token sale (JJFA Token, MASTER NFT, VOTE Token) and crowdfunding."
+    },
+    phase3: {
+      title: "February 2025: Token Issuance and Tournament Preparation",
+      token: "JJFA Token Issuance: Issue tokens functioning as BJJ community utility. Utilize for governance, payments, and incentives.",
+      tournament: "Tournament Preparation: Prepare for JiuFight 2025 (operational support, entry registration, etc.), prepare blockchain certification."
+    },
+    phase4: {
+      title: "February 16, 2025: JiuFight 2025 Event",
+      event: "Tournament Operation and Community Expansion: Hold tournament at Ota City Industrial Plaza PiO, provide benefits to DAO participants and investors, enhance tournament value with NFT medals.",
+      records: "Blockchain Certification of Achievements: Support career development globally recognized through blockchain certification of results and promotions."
+    },
+    phase5: {
+      title: "March 2025 Onwards: Service Enhancement and International Expansion",
+      management: "Launch Academy Management System: Begin providing management system for all academies via mobile app (member management, class scheduling, attendance/payment tracking).",
+      blockchain: "Expand Global Certification Service: Promote transparent management of promotion records and tournament results in cooperation with academies and tournaments worldwide."
+    },
+    phase6: {
+      title: "Late 2025: JJFA Ecosystem and Global Network Formation",
+      international: "Host International Tournaments: Host international tournaments centered in Asia, expand recognition of JJFA tokens and NFT medals.",
+      community: "Strengthen Community: Advance partnerships with academies worldwide, introduce incentive and reward systems to promote DAO participation.",
+      governance: "Evolution of DAO Governance: Hold regular member meetings and votes, adjust DAO direction and strategy with community input."
+    },
+    phase7: {
+      title: "2026 and Beyond: DAO Maturity and Future of Jiu-Jitsu",
+      ecosystem: "Expand Web3 × Jiu-Jitsu Ecosystem: Increase DAO participants through new member and academy partnerships. Establish sustainable community support system with token economy growth.",
+      global: "Promote Global DAO: Launch regional JJFA DAOs in each country, hold international conferences with regional DAO representatives. Promote international exchange through Jiu-Jitsu.",
+      evolution: "Refine Governance and Community Operations: Optimize platform improvements, expand token use cases, and optimize overall ecosystem."
     }
   }
 };

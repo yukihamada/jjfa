@@ -11,6 +11,7 @@ const corsHeaders = {
 interface EmailRequest {
   to: string;
   name: string;
+  host: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -20,7 +21,8 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { to, name }: EmailRequest = await req.json();
+    const { to, name, host }: EmailRequest = await req.json();
+    const verifyUrl = `${host}/verify-email`;
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -29,7 +31,7 @@ const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "JJFA <noreply@jjforall.com>", // Please update this with your verified domain
+        from: "JJFA <noreply@jjforall.com>",
         to: [to],
         subject: "JJFAコミュニティへようこそ！",
         html: `
@@ -37,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
           <p>JJFAコミュニティへのご登録ありがとうございます。</p>
           <p>このメールは、あなたのメールアドレスを確認するために送信されています。</p>
           <p>以下のリンクをクリックして、メールアドレスを確認してください：</p>
-          <p><a href="https://jjforall.com/verify-email">メールアドレスを確認する</a></p>
+          <p><a href="${verifyUrl}">メールアドレスを確認する</a></p>
           <p>このメールに心当たりがない場合は、お手数ですが破棄してください。</p>
           <p>よろしくお願いいたします。</p>
           <p>JJFA運営チーム</p>

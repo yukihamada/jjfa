@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -19,7 +19,6 @@ type FormValues = z.infer<typeof formSchema>;
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
-  const { toast } = useToast();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,7 +29,11 @@ export const RegistrationForm = () => {
 
   async function onSubmit(values: FormValues) {
     try {
-      const { error } = await supabase
+      // Show loading toast
+      toast.loading("Sending registration...");
+
+      // First, insert into community_registrations
+      const { error: dbError } = await supabase
         .from('community_registrations')
         .insert({
           name: values.name,
@@ -38,9 +41,14 @@ export const RegistrationForm = () => {
           status: 'pending'
         });
 
-      if (error) throw error;
+      if (dbError) {
+        console.error("Database error:", dbError);
+        toast.error(t('community.form.error.database'));
+        return;
+      }
 
-      const { error: emailError } = await supabase.functions.invoke('send-welcome-email', {
+      // Then, invoke the welcome email function
+      const { error: emailError, data } = await supabase.functions.invoke('send-welcome-email', {
         body: { 
           email: values.email,
           name: values.name,
@@ -48,19 +56,22 @@ export const RegistrationForm = () => {
         }
       });
 
-      if (emailError) throw emailError;
+      if (emailError) {
+        console.error("Email error:", emailError);
+        toast.error(t('community.form.error.email'));
+        return;
+      }
 
-      toast({
-        title: t('community.form.success.title'),
-        description: t('community.form.success.description'),
+      // If everything succeeded
+      toast.success(t('community.form.success.title'), {
+        description: t('community.form.success.description')
       });
 
       form.reset();
     } catch (error) {
-      toast({
-        title: t('community.form.error.title'),
-        description: t('community.form.error.description'),
-        variant: "destructive",
+      console.error("Submission error:", error);
+      toast.error(t('community.form.error.title'), {
+        description: t('community.form.error.description')
       });
     }
   }

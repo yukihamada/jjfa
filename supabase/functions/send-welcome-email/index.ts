@@ -9,7 +9,7 @@ const corsHeaders = {
 };
 
 interface EmailRequest {
-  to: string;
+  email: string;
   name: string;
   host: string;
 }
@@ -21,7 +21,14 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { to, name, host }: EmailRequest = await req.json();
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
+      throw new Error("Email service configuration error");
+    }
+
+    const { email, name, host }: EmailRequest = await req.json();
+    console.log(`Sending welcome email to ${email} for ${name}`);
+
     const verifyUrl = `${host}/verify-email`;
 
     const res = await fetch("https://api.resend.com/emails", {
@@ -32,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "JJFA <noreply@jjforall.com>",
-        to: [to],
+        to: [email],
         subject: "JJFAコミュニティへようこそ！",
         html: `
           <h1>こんにちは、${name}さん</h1>
@@ -47,20 +54,17 @@ const handler = async (req: Request): Promise<Response> => {
       }),
     });
 
+    const responseData = await res.json();
+    console.log("Resend API response:", responseData);
+
     if (res.ok) {
-      const data = await res.json();
-      console.log("Email sent successfully:", data);
-      return new Response(JSON.stringify(data), {
+      return new Response(JSON.stringify(responseData), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     } else {
-      const error = await res.text();
-      console.error("Error sending email:", error);
-      return new Response(JSON.stringify({ error }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      console.error("Resend API error:", responseData);
+      throw new Error(responseData.message || "Failed to send email");
     }
   } catch (error) {
     console.error("Error in send-welcome-email function:", error);

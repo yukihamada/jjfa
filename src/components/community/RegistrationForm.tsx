@@ -10,10 +10,12 @@ const formSchema = z.object({
   email: z.string().email("Invalid email format"),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 export const RegistrationForm = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -21,11 +23,15 @@ export const RegistrationForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormValues) {
     try {
       const { error } = await supabase
         .from('community_registrations')
-        .insert(values);
+        .insert({
+          name: values.name,
+          email: values.email,
+          status: 'pending'
+        });
 
       if (error) throw error;
 
@@ -42,7 +48,6 @@ export const RegistrationForm = () => {
       toast({
         title: t('community.form.success.title'),
         description: t('community.form.success.description'),
-        variant: "default",
       });
 
       form.reset();

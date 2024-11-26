@@ -4,6 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Send } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -61,33 +66,81 @@ export const RegistrationForm = () => {
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-          {t('community.form.name')}
-        </label>
-        <input
-          id="name"
-          {...form.register("name")}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-        />
-        {form.formState.errors.name && <p className="text-red-600">{form.formState.errors.name.message}</p>}
-      </div>
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          {t('community.form.email')}
-        </label>
-        <input
-          id="email"
-          type="email"
-          {...form.register("email")}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-        />
-        {form.formState.errors.email && <p className="text-red-600">{form.formState.errors.email.message}</p>}
-      </div>
-      <button type="submit" className="mt-4 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500">
-        {t('community.form.submit')}
-      </button>
-    </form>
+    <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-bottom-4">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-2xl font-bold text-center text-slate-800">
+          {t('community.joinTitle')}
+        </CardTitle>
+        <CardDescription className="text-center text-slate-600">
+          {t('community.joinSubtitle')}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-2">
+            <Label 
+              htmlFor="name" 
+              className="text-sm font-medium text-slate-700"
+            >
+              {t('community.form.name')}
+            </Label>
+            <Input
+              id="name"
+              {...form.register("name")}
+              className={`w-full transition-all duration-200 focus:ring-2 focus:ring-slate-400 ${
+                form.formState.errors.name ? 'border-red-500 focus:ring-red-200' : 'border-slate-200'
+              }`}
+              placeholder="山田 太郎"
+            />
+            {form.formState.errors.name && (
+              <p className="text-sm text-red-500 animate-in fade-in slide-in-from-top-1">
+                {form.formState.errors.name.message}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label 
+              htmlFor="email" 
+              className="text-sm font-medium text-slate-700"
+            >
+              {t('community.form.email')}
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              {...form.register("email")}
+              className={`w-full transition-all duration-200 focus:ring-2 focus:ring-slate-400 ${
+                form.formState.errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-200'
+              }`}
+              placeholder="example@email.com"
+            />
+            {form.formState.errors.email && (
+              <p className="text-sm text-red-500 animate-in fade-in slide-in-from-top-1">
+                {form.formState.errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <Button 
+            type="submit" 
+            className="w-full bg-slate-800 hover:bg-slate-700 text-white transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? (
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>{t('community.form.submitting')}</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center space-x-2">
+                <Send className="w-4 h-4" />
+                <span>{t('community.form.submit')}</span>
+              </div>
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };

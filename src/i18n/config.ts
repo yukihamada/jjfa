@@ -18,8 +18,10 @@ i18n
     },
     fallbackLng: 'en',
     detection: {
-      order: ['navigator'],
+      order: ['navigator', 'htmlTag', 'path', 'localStorage'],
       lookupFromPathIndex: 0,
+      caches: ['localStorage'],
+      htmlTag: document.documentElement,
     },
     interpolation: {
       escapeValue: false,

@@ -1,15 +1,10 @@
 export const services = {
   title: "Our Services",
-  training: {
-    title: "Training Programs",
-    description: "Comprehensive Jiu-Jitsu training for all skill levels"
+  visitWebsite: "Visit Website",
+  jiufight: {
+    description: "A platform that simplifies tournament entry and management. A user-friendly tournament management system for athletes and organizers."
   },
-  events: {
-    title: "Events & Tournaments",
-    description: "Regular competitions and community gatherings"
-  },
-  education: {
-    title: "Educational Content",
-    description: "Online resources and learning materials"
+  jiujitsulab: {
+    description: "Technical explanations and latest Jiu-Jitsu information. A comprehensive information platform for practitioners of all levels."
   }
 };

@@ -51,7 +51,7 @@ const GlobalNav = () => {
               onClick={handleMenuClick}
             >
               <span className="bg-slate-800 text-white px-2 py-1 rounded">JJFA</span>
-              <span className="hidden sm:inline text-sm text-slate-600">Jiu-Jitsu For ALL</span>
+              <span className="hidden sm:inline text-sm text-slate-600">{t('hero.title')}</span>
             </Link>
 
             <nav className="hidden lg:flex items-center gap-2">

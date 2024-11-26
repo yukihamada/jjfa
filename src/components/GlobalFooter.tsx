@@ -11,8 +11,8 @@ const GlobalFooter = () => {
         { to: "/", label: t('nav.home') },
         { to: "/whitepaper", label: t('nav.whitepaper') },
         { to: "/roadmap", label: "Roadmap" },
-        { to: "/operating-rules", label: "Operating Rules" },
-        { to: "/token-rules", label: "Token Rules" },
+        { to: "/operating-rules", label: t('nav.operatingRules') },
+        { to: "/token-rules", label: t('nav.tokenRules') },
       ]
     },
     {

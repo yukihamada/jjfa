@@ -1,7 +1,18 @@
 export default {
   nav: {
+    home: "Home",
     whitepaper: "White Paper",
+    community: "Community",
+    benefits: "Benefits of Jiu-Jitsu",
+    trial: "Trial Class",
+    articles: "Articles",
+    careers: "Careers",
     contact: "Contact"
+  },
+  footer: {
+    about: "About JJFA",
+    community: "Community",
+    company: "Company Information"
   },
   hero: {
     title: "JJFA - Jiu-Jitsu for ALL",

@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const CommunityEvents = () => {
+  const { t } = useTranslation();
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -30,7 +33,7 @@ export const CommunityEvents = () => {
             variants={item}
             className="text-3xl font-bold text-center mb-12"
           >
-            イベント
+            {t('community.events.title')}
           </motion.h2>
           
           <motion.div 
@@ -41,36 +44,36 @@ export const CommunityEvents = () => {
               variants={item}
               className="border p-4 rounded-lg"
             >
-              <h4 className="font-semibold">月例トーナメント</h4>
-              <p className="text-sm text-gray-500">毎月第3土曜日</p>
-              <p>白帯から黒帯まで参加可能な公式トーナメント</p>
+              <h4 className="font-semibold">{t('community.events.tournament.title')}</h4>
+              <p className="text-sm text-gray-500">{t('community.events.tournament.date')}</p>
+              <p>{t('community.events.tournament.description')}</p>
             </motion.div>
             
             <motion.div 
               variants={item}
               className="border p-4 rounded-lg"
             >
-              <h4 className="font-semibold">ハワイ合宿</h4>
-              <p className="text-sm text-gray-500">2025年2月28日 - 3月13日</p>
-              <p>世界チャンピオンと出稽古強化トレーニング</p>
+              <h4 className="font-semibold">{t('community.events.camp.title')}</h4>
+              <p className="text-sm text-gray-500">{t('community.events.camp.date')}</p>
+              <p>{t('community.events.camp.description')}</p>
             </motion.div>
             
             <motion.div 
               variants={item}
               className="border p-4 rounded-lg"
             >
-              <h4 className="font-semibold">セミナー</h4>
-              <p className="text-sm text-gray-500">毎週日曜日</p>
-              <p>様々な技術を学べるテクニカルセミナー</p>
+              <h4 className="font-semibold">{t('community.events.seminar.title')}</h4>
+              <p className="text-sm text-gray-500">{t('community.events.seminar.date')}</p>
+              <p>{t('community.events.seminar.description')}</p>
             </motion.div>
             
             <motion.div 
               variants={item}
               className="border p-4 rounded-lg"
             >
-              <h4 className="font-semibold">オープンマット</h4>
-              <p className="text-sm text-gray-500">毎週土曜日</p>
-              <p>自由に練習できる時間帯を提供</p>
+              <h4 className="font-semibold">{t('community.events.openmat.title')}</h4>
+              <p className="text-sm text-gray-500">{t('community.events.openmat.date')}</p>
+              <p>{t('community.events.openmat.description')}</p>
             </motion.div>
           </motion.div>
         </motion.div>

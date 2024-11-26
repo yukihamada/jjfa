@@ -1,89 +1,88 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabaseClient";
+
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email format"),
+});
 
 export const RegistrationForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const { t } = useTranslation();
+  const toast = useToast();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      // Generate a random password
-      const password = Math.random().toString(36).slice(-8);
+      const { error } = await supabase
+        .from('community_registrations')
+        .insert([values]);
 
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      if (error) throw error;
 
-      if (signUpError) throw signUpError;
-
-      const { error: registrationError } = await supabase.from("community_registrations").insert([
-        {
-          name,
-          email,
-        },
-      ]);
-
-      if (registrationError) throw registrationError;
-
-      // Send welcome email with current host
       const { error: emailError } = await supabase.functions.invoke('send-welcome-email', {
         body: { 
-          to: email, 
-          name,
-          host: window.location.origin 
+          email: values.email,
+          name: values.name,
+          host: window.location.origin
         }
       });
 
-      if (emailError) {
-        console.error('Error sending welcome email:', emailError);
-        // Don't throw here, as the registration was successful
-      }
+      if (emailError) throw emailError;
 
-      toast.success("コミュニティへの参加申請を受け付けました。メールをご確認ください。");
-      setName("");
-      setEmail("");
-    } catch (error: any) {
-      console.error("Registration error:", error);
-      toast.error(error.message || "登録中にエラーが発生しました。");
-    } finally {
-      setIsLoading(false);
+      toast.toast({
+        title: t('community.form.success.title'),
+        description: t('community.form.success.description'),
+        variant: "default",
+      });
+
+      form.reset();
+    } catch (error) {
+      toast.toast({
+        title: t('community.form.error.title'),
+        description: t('community.form.error.description'),
+        variant: "destructive",
+      });
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
       <div>
-        <Input
-          type="text"
-          placeholder="お名前"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="w-full"
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          {t('community.form.name')}
+        </label>
+        <input
+          id="name"
+          {...form.register("name")}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
         />
+        {form.formState.errors.name && <p className="text-red-600">{form.formState.errors.name.message}</p>}
       </div>
       <div>
-        <Input
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          {t('community.form.email')}
+        </label>
+        <input
+          id="email"
           type="email"
-          placeholder="メールアドレス"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full"
+          {...form.register("email")}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
         />
+        {form.formState.errors.email && <p className="text-red-600">{form.formState.errors.email.message}</p>}
       </div>
-      <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? "送信中..." : "登録する"}
-      </Button>
+      <button type="submit" className="mt-4 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500">
+        {t('community.form.submit')}
+      </button>
     </form>
   );
 };

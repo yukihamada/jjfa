@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -12,7 +12,7 @@ const formSchema = z.object({
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
-  const toast = useToast();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,7 +39,7 @@ export const RegistrationForm = () => {
 
       if (emailError) throw emailError;
 
-      toast.toast({
+      toast({
         title: t('community.form.success.title'),
         description: t('community.form.success.description'),
         variant: "default",
@@ -47,7 +47,7 @@ export const RegistrationForm = () => {
 
       form.reset();
     } catch (error) {
-      toast.toast({
+      toast({
         title: t('community.form.error.title'),
         description: t('community.form.error.description'),
         variant: "destructive",

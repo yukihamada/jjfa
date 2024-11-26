@@ -7,16 +7,16 @@ export const TeamSection = () => {
 
   const teamMembers = [
     {
-      name: t('team.members.hamada.name'),
-      role: t('team.members.hamada.role'),
-      imagePath: "/406363140_10229571887435619_4554932660817499091_n.jpg",
-      description: t('team.members.hamada.description')
-    },
-    {
       name: t('team.members.murata.name'),
       role: t('team.members.murata.role'),
       imagePath: "/４-1.jpg",
       description: t('team.members.murata.description')
+    },
+    {
+      name: t('team.members.hamada.name'),
+      role: t('team.members.hamada.role'),
+      imagePath: "/406363140_10229571887435619_4554932660817499091_n.jpg",
+      description: t('team.members.hamada.description')
     },
     {
       name: t('team.members.tsutsumi.name'),

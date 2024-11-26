@@ -2,6 +2,19 @@ export const community = {
   title: "コミュニティ",
   joinTitle: "コミュニティに参加する",
   joinSubtitle: "JJFAコミュニティで柔術の素晴らしさを共有しましょう",
+  form: {
+    name: "お名前",
+    email: "メールアドレス",
+    submit: "送信する",
+    success: {
+      title: "登録完了",
+      description: "コミュニティへの参加ありがとうございます。追ってご連絡させていただきます。"
+    },
+    error: {
+      title: "登録エラー",
+      description: "登録処理中にエラーが発生しました。お手数ですが、再度お試しください。"
+    }
+  },
   events: {
     title: "コミュニティイベント",
     tournament: {

@@ -2,6 +2,19 @@ export const community = {
   title: "Community",
   joinTitle: "Join Our Community",
   joinSubtitle: "Share the beauty of Jiu-Jitsu in the JJFA community",
+  form: {
+    name: "Name",
+    email: "Email",
+    submit: "Submit",
+    success: {
+      title: "Registration Successful",
+      description: "Thank you for joining our community. We'll be in touch soon!"
+    },
+    error: {
+      title: "Registration Failed",
+      description: "There was an error processing your registration. Please try again."
+    }
+  },
   events: {
     title: "Community Events",
     tournament: {

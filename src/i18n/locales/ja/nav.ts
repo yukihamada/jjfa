@@ -6,5 +6,7 @@ export const nav = {
   contact: "お問い合わせ",
   trial: "体験申し込み",
   articles: "定款",
-  careers: "採用情報"
+  careers: "採用情報",
+  operatingRules: "運営規則",
+  tokenRules: "トークン規程"
 };

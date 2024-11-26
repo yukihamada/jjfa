@@ -25,7 +25,7 @@ export const RegistrationForm = () => {
     try {
       const { error } = await supabase
         .from('community_registrations')
-        .insert([values]);
+        .insert(values);
 
       if (error) throw error;
 

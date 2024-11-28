@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import PageTitle from "@/components/PageTitle";
+import { PageTitle } from "@/components/PageTitle";
 
 const TournamentRules = () => {
   const { t } = useTranslation();

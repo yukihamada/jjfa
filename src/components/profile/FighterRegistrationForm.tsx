@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -17,7 +17,7 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const [belts, setBelts] = useState<any[]>([]);
 
   // Fetch dojos and belts on component mount
-  useState(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const { data: dojosData } = await supabase
         .from('dojos')

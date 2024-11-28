@@ -43,9 +43,9 @@ const DiscussionCard = ({ discussion }: { discussion: any }) => {
           <div className="space-y-1">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="text-xl font-semibold text-slate-900">{discussion.title}</h3>
-              {discussion.discussion_tags?.map(({ tags }: any) => (
-                <Badge key={tags.id} variant="secondary" className="text-xs bg-indigo-100 text-indigo-700">
-                  {tags.name}
+              {discussion.tags?.map((tag: any) => (
+                <Badge key={tag.id} variant="secondary" className="text-xs bg-indigo-100 text-indigo-700">
+                  {tag.name}
                 </Badge>
               ))}
             </div>
@@ -92,32 +92,26 @@ export const DiscussionList = () => {
   const { data: discussions, isLoading, error } = useQuery({
     queryKey: ['discussions'],
     queryFn: async () => {
-      console.log('Starting discussions fetch...'); 
-      try {
-        const { data, error } = await supabase
-          .from('discussions')
-          .select(`
-            *,
-            profiles (username, avatar_url),
-            likes (user_id),
-            comments (id),
-            discussion_tags (
-              tags (*)
-            )
-          `)
-          .order('created_at', { ascending: false });
+      const { data, error } = await supabase
+        .from('discussions')
+        .select(`
+          *,
+          profiles (username, avatar_url),
+          likes (user_id),
+          comments (id),
+          tags (
+            id,
+            name
+          )
+        `)
+        .order('created_at', { ascending: false });
 
-        if (error) {
-          console.error('Supabase error:', error);
-          throw error;
-        }
-
-        console.log('Fetch successful, data:', data);
-        return data;
-      } catch (err) {
-        console.error('Fetch error:', err);
-        throw err;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
       }
+
+      return data;
     },
   });
 

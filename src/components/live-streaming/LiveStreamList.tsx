@@ -20,6 +20,12 @@ interface LiveStream {
   viewer_count: number;
   thumbnail_url: string | null;
   profiles: Profile;
+  created_at: string;
+  updated_at: string;
+  stream_key: string;
+  started_at: string | null;
+  ended_at: string | null;
+  user_id: string;
 }
 
 export const LiveStreamList = () => {
@@ -32,7 +38,7 @@ export const LiveStreamList = () => {
         .from('live_streams')
         .select(`
           *,
-          profiles (
+          profiles:user_id (
             username,
             avatar_url
           )
@@ -40,7 +46,7 @@ export const LiveStreamList = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as LiveStream[];
+      return data as unknown as LiveStream[];
     },
   });
 

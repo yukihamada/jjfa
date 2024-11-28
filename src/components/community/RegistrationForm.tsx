@@ -48,7 +48,7 @@ export const RegistrationForm = () => {
                 container: 'space-y-0',
                 divider: 'hidden',
                 button: 'bg-slate-800 hover:bg-slate-700',
-                provider: 'text-white'
+                providers: 'text-white'
               }
             }}
             providers={["google"]}

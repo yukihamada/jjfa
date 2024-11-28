@@ -1,91 +1,80 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const DiscussionForm = () => {
-  const [newPost, setNewPost] = useState("");
-  const [newPostTitle, setNewPostTitle] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const queryClient = useQueryClient();
 
-  const createPost = useMutation({
-    mutationFn: async () => {
+  const createDiscussion = useMutation({
+    mutationFn: async ({ title, content }: { title: string; content: string }) => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("ログインが必要です");
 
-      const { error, data } = await supabase
-        .from('discussions')
+      const { data, error } = await supabase
+        .from("discussions")
         .insert([
           {
-            title: newPostTitle,
-            content: newPost,
-            user_id: user.id
-          }
+            title,
+            content,
+            user_id: user.id,
+          },
         ])
-        .select()
-        .single();
+        .select();
 
       if (error) throw error;
       return data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
-      setNewPost("");
-      setNewPostTitle("");
+      queryClient.invalidateQueries({ queryKey: ["discussions"] });
+      setTitle("");
+      setContent("");
       toast.success("投稿が完了しました");
     },
     onError: (error) => {
-      console.error("Post creation error:", error);
-      toast.error("投稿に失敗しました。もう一度お試しください。");
-    }
+      toast.error(`投稿に失敗しました: ${error.message}`);
+    },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newPostTitle.trim() || !newPost.trim()) {
-      toast.error("タイトルと本文を入力してください");
+    if (!title.trim() || !content.trim()) {
+      toast.error("タイトルと内容を入力してください");
       return;
     }
-    createPost.mutate();
+    createDiscussion.mutate({ title, content });
   };
 
   return (
-    <Card className="bg-white shadow-lg">
-      <CardHeader>
-        <CardTitle>新規投稿</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Input
-              placeholder="タイトルを入力"
-              value={newPostTitle}
-              onChange={(e) => setNewPostTitle(e.target.value)}
-              disabled={createPost.isPending}
-            />
-          </div>
-          <div>
-            <Textarea
-              placeholder="投稿内容を入力"
-              value={newPost}
-              onChange={(e) => setNewPost(e.target.value)}
-              rows={4}
-              disabled={createPost.isPending}
-            />
-          </div>
-          <Button 
-            type="submit" 
-            className="w-full"
-            disabled={createPost.isPending}
-          >
-            {createPost.isPending ? "投稿中..." : "投稿する"}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg shadow">
+      <div className="space-y-2">
+        <Input
+          placeholder="タイトル"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full"
+        />
+      </div>
+      <div className="space-y-2">
+        <Textarea
+          placeholder="内容を入力してください"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="w-full min-h-[100px]"
+        />
+      </div>
+      <Button 
+        type="submit" 
+        className="w-full"
+        disabled={createDiscussion.isPending}
+      >
+        {createDiscussion.isPending ? "投稿中..." : "投稿する"}
+      </Button>
+    </form>
   );
 };

@@ -1,8 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MessageSquare, ThumbsUp, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { formatDistanceToNow } from "date-fns";
-import { ja } from "date-fns/locale";
+import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -27,50 +25,41 @@ export const DiscussionList = () => {
         .from('discussions')
         .select(`
           *,
-          profiles (username, full_name),
-          likes (user_id),
-          comments (
-            id,
-            content,
-            created_at,
-            profiles (username, full_name)
-          )
+          profiles:profiles(username),
+          likes:likes(user_id),
+          comments:comments(*)
         `)
         .order('created_at', { ascending: false });
-      
+
       if (error) throw error;
       return data;
-    }
+    },
   });
 
   const toggleLike = useMutation({
     mutationFn: async (discussionId: string) => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("ログインが必要です");
-
-      const { data: existingLike } = await supabase
+      const { data: existingLike, error: fetchError } = await supabase
         .from('likes')
-        .select()
+        .select('*')
         .eq('discussion_id', discussionId)
-        .eq('user_id', user.id)
+        .eq('user_id', currentUserId)
         .single();
+
+      if (fetchError && fetchError.code !== 'PGRST116') {
+        throw fetchError;
+      }
 
       if (existingLike) {
         const { error } = await supabase
           .from('likes')
           .delete()
           .eq('discussion_id', discussionId)
-          .eq('user_id', user.id);
+          .eq('user_id', currentUserId);
         if (error) throw error;
       } else {
         const { error } = await supabase
           .from('likes')
-          .insert([
-            {
-              discussion_id: discussionId,
-              user_id: user.id
-            }
-          ]);
+          .insert([{ discussion_id: discussionId, user_id: currentUserId }]);
         if (error) throw error;
       }
     },
@@ -78,67 +67,74 @@ export const DiscussionList = () => {
       queryClient.invalidateQueries({ queryKey: ['discussions'] });
     },
     onError: (error) => {
-      console.error("Like toggle error:", error);
-      toast.error("操作に失敗しました。もう一度お試しください。");
-    }
+      toast.error(`いいねの処理に失敗しました: ${error.message}`);
+    },
+  });
+
+  const deleteDiscussion = useMutation({
+    mutationFn: async (discussionId: string) => {
+      const { error } = await supabase
+        .from('discussions')
+        .delete()
+        .eq('id', discussionId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['discussions'] });
+      toast.success('投稿を削除しました');
+    },
+    onError: (error) => {
+      toast.error(`削除に失敗しました: ${error.message}`);
+    },
   });
 
   if (isLoading) {
-    return (
-      <div className="text-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
-        <p className="mt-2 text-gray-600">読み込み中...</p>
-      </div>
-    );
+    return <div className="text-center">読み込み中...</div>;
   }
 
   return (
     <div className="space-y-4">
       {discussions?.map((discussion: any) => (
-        <Card key={discussion.id} className="bg-white shadow-lg">
-          <CardHeader>
-            <div className="flex items-center space-x-2 mb-2">
-              <Avatar className="h-8 w-8">
-                <AvatarFallback>
-                  {discussion.profiles?.username?.[0] || discussion.profiles?.full_name?.[0] || '?'}
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="font-semibold">
-                  {discussion.profiles?.username || discussion.profiles?.full_name || '匿名ユーザー'}
-                </p>
-                <p className="text-sm text-slate-500">
-                  {formatDistanceToNow(new Date(discussion.created_at), { 
-                    addSuffix: true,
-                    locale: ja 
-                  })}
-                </p>
-              </div>
+        <Card key={discussion.id} className="p-4">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h3 className="text-lg font-semibold">{discussion.title}</h3>
+              <p className="text-sm text-slate-500">
+                投稿者: {discussion.profiles?.username || '匿名'}
+              </p>
             </div>
-            <CardTitle>{discussion.title}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="whitespace-pre-wrap mb-4">{discussion.content}</p>
-            <div className="flex items-center justify-between">
+            {discussion.user_id === currentUserId && (
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => toggleLike.mutate(discussion.id)}
-                disabled={toggleLike.isPending}
-                className={`flex items-center space-x-1 ${
-                  discussion.likes?.some((like: any) => like.user_id === currentUserId)
-                    ? 'text-red-500'
-                    : 'text-slate-500'
-                }`}
+                onClick={() => deleteDiscussion.mutate(discussion.id)}
+                disabled={deleteDiscussion.isPending}
               >
-                <span>♥</span>
-                <span>{discussion.likes?.length || 0}</span>
+                <Trash className="h-4 w-4 text-red-500" />
               </Button>
-              <span className="text-sm text-slate-500">
-                コメント {discussion.comments?.length || 0}件
-              </span>
+            )}
+          </div>
+          <p className="mb-4">{discussion.content}</p>
+          <div className="flex items-center space-x-4 text-sm">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => toggleLike.mutate(discussion.id)}
+              disabled={toggleLike.isPending}
+              className={`flex items-center space-x-1 ${
+                discussion.likes?.some((like: any) => like.user_id === currentUserId)
+                  ? 'text-red-500'
+                  : 'text-slate-500'
+              }`}
+            >
+              <ThumbsUp className="h-4 w-4" />
+              <span>{discussion.likes?.length || 0}</span>
+            </Button>
+            <div className="flex items-center space-x-1 text-slate-500">
+              <MessageSquare className="h-4 w-4" />
+              <span>{discussion.comments?.length || 0}</span>
             </div>
-          </CardContent>
+          </div>
         </Card>
       ))}
     </div>

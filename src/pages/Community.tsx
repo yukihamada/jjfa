@@ -11,35 +11,27 @@ import { DiscussionList } from "@/components/community/DiscussionList";
 const Community = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
+      setIsLoading(false);
     };
     getUser();
 
-    // リアルタイム更新のセットアップ
-    const channel = supabase
-      .channel('public:discussions')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'discussions'
-        },
-        () => {
-          // 変更があった場合にキャッシュを更新
-          window.location.reload();
-        }
-      )
-      .subscribe();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setIsLoading(false);
+    });
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    return () => subscription.unsubscribe();
   }, []);
+
+  if (isLoading) {
+    return null; // ローディング中は何も表示しない
+  }
 
   if (!user) {
     return (

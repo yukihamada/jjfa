@@ -3,20 +3,47 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MessageSquare, ThumbsUp, Calendar } from "lucide-react";
+import { MessageSquare, ThumbsUp, Calendar, Heart } from "lucide-react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 
+const CommunityGuidelines = () => (
+  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg mb-6 border border-indigo-100">
+    <h2 className="text-lg font-semibold text-indigo-900 mb-3 flex items-center">
+      <Heart className="w-5 h-5 mr-2 text-pink-500" />
+      コミュニティガイドライン
+    </h2>
+    <ul className="text-sm text-indigo-800 space-y-3">
+      <li className="flex items-start">
+        <span className="text-indigo-400 mr-2">•</span>
+        <span>失敗や困難な経験も大切な学びです。安心して共有できる場所を目指しています</span>
+      </li>
+      <li className="flex items-start">
+        <span className="text-indigo-400 mr-2">•</span>
+        <span>質問は成長のチャンス。どんな質問でも歓迎します</span>
+      </li>
+      <li className="flex items-start">
+        <span className="text-indigo-400 mr-2">•</span>
+        <span>お互いの経験から学び、共に成長していきましょう</span>
+      </li>
+      <li className="flex items-start">
+        <span className="text-indigo-400 mr-2">•</span>
+        <span>相手の気持ちを考え、思いやりのある言葉を心がけましょう</span>
+      </li>
+    </ul>
+  </div>
+);
+
 const DiscussionCard = ({ discussion }: { discussion: any }) => {
   return (
-    <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow">
+    <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow border-l-4 border-l-indigo-500">
       <CardContent className="p-6">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="text-xl font-semibold text-slate-900">{discussion.title}</h3>
               {discussion.discussion_tags?.map(({ tags }: any) => (
-                <Badge key={tags.id} variant="secondary" className="text-xs">
+                <Badge key={tags.id} variant="secondary" className="text-xs bg-indigo-100 text-indigo-700">
                   {tags.name}
                 </Badge>
               ))}
@@ -30,7 +57,7 @@ const DiscussionCard = ({ discussion }: { discussion: any }) => {
                     className="w-6 h-6 rounded-full mr-2"
                   />
                 ) : (
-                  <div className="w-6 h-6 rounded-full bg-slate-200 mr-2" />
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-200 to-purple-200 mr-2" />
                 )}
                 <span>{discussion.profiles?.username || '匿名'}</span>
               </div>
@@ -44,7 +71,7 @@ const DiscussionCard = ({ discussion }: { discussion: any }) => {
             </div>
           </div>
         </div>
-        <p className="mt-4 text-slate-600 whitespace-pre-wrap">{discussion.content}</p>
+        <p className="mt-4 text-slate-600 whitespace-pre-wrap leading-relaxed">{discussion.content}</p>
         <div className="mt-6 flex items-center space-x-4 text-sm text-slate-500">
           <div className="flex items-center">
             <ThumbsUp className="w-4 h-4 mr-1" />
@@ -101,16 +128,7 @@ export const DiscussionList = () => {
 
   return (
     <div className="space-y-4">
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg mb-6">
-        <h2 className="text-lg font-semibold text-indigo-900 mb-2">
-          コミュニティガイドライン
-        </h2>
-        <ul className="text-sm text-indigo-800 space-y-2">
-          <li>• お互いを尊重し、建設的なコミュニケーションを心がけましょう</li>
-          <li>• 質問や失敗は学びの機会です。遠慮なく共有しましょう</li>
-          <li>• 経験をシェアすることで、みんなで成長していきましょう</li>
-        </ul>
-      </div>
+      <CommunityGuidelines />
       {discussions?.map((discussion: any) => (
         <DiscussionCard key={discussion.id} discussion={discussion} />
       ))}

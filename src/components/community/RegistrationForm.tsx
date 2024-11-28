@@ -51,7 +51,6 @@ export const RegistrationForm = () => {
                 anchor: 'text-slate-600 hover:text-slate-800'
               }
             }}
-            providers={["google"]}
             view="sign_up"
             showLinks={true}
             redirectTo={window.location.origin}

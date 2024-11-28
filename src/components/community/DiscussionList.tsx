@@ -8,6 +8,7 @@ import { DiscussionCard } from "./DiscussionCard";
 import { DiscussionSearch } from "./DiscussionSearch";
 import { DiscussionSort } from "./DiscussionSort";
 import { TagFilter } from "./TagFilter";
+import { NFTHoldersSection } from "./NFTHoldersSection";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 
@@ -116,9 +117,10 @@ export const DiscussionList = () => {
       <TagFilter selectedTags={selectedTags} onTagSelect={handleTagSelect} />
 
       <Tabs defaultValue="all" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="all">すべての投稿</TabsTrigger>
           <TabsTrigger value="admin">運営からのお知らせ</TabsTrigger>
+          <TabsTrigger value="nft">NFTホルダー限定</TabsTrigger>
         </TabsList>
         <TabsContent value="all" className="space-y-4">
           {adminDiscussions.map((discussion) => (
@@ -143,6 +145,9 @@ export const DiscussionList = () => {
               運営からのお知らせはまだありません。
             </div>
           )}
+        </TabsContent>
+        <TabsContent value="nft" className="space-y-4">
+          <NFTHoldersSection />
         </TabsContent>
       </Tabs>
     </div>

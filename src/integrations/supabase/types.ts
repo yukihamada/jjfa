@@ -875,6 +875,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_user_nft_status: {
+        Args: {
+          user_uuid: string
+        }
+        Returns: boolean
+      }
       create_profiles_table: {
         Args: Record<PropertyKey, never>
         Returns: undefined

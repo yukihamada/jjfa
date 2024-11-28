@@ -10,7 +10,7 @@ import { DAOCard } from "@/components/profile/DAOCard";
 import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { AccountSettings } from "@/components/profile/AccountSettings";
 import { ProfileForm } from "@/components/profile/ProfileForm";
-import { Profile } from "@/integrations/supabase/types";
+import { Profile } from "@/integrations/supabase/types/profiles";
 
 const ProfilePage = () => {
   const navigate = useNavigate();

@@ -35,16 +35,20 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // セッションの設定（30分）
-    supabase.auth.setSession({
-      expires_in: 1800 // 30分 = 1800秒
-    });
-
     // 初期セッションチェック
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       setIsAuthenticated(!!session);
       setIsLoading(false);
+
+      // セッションが存在する場合、30分後に自動的にログアウト
+      if (session) {
+        setTimeout(() => {
+          supabase.auth.signOut();
+          setIsAuthenticated(false);
+          toast.error("セッションが終了しました。再度ログインしてください。");
+        }, 1800000); // 30分 = 1800000ミリ秒
+      }
     };
     checkSession();
 

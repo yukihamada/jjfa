@@ -130,7 +130,7 @@ const GlobalNav = () => {
                   className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-slate-50 transition-all duration-200"
                 >
                   <User className="w-4 h-4" />
-                  <span>ログイン</span>
+                  <span className="hidden sm:inline">ログイン</span>
                 </Link>
               )}
 

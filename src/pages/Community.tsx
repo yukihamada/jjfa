@@ -27,7 +27,7 @@ const Community = () => {
                 <h1 className="text-3xl md:text-4xl font-bold text-slate-800">
                   {t('community.joinTitle')}
                 </h1>
-                <p className="text-lg text-slate-600">
+                <p className="text-lg text-slate-600 mb-6">
                   {t('community.joinSubtitle')}
                 </p>
               </div>

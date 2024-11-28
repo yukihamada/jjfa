@@ -3,10 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MessageSquare, ThumbsUp, Calendar, Heart } from "lucide-react";
+import { MessageSquare, ThumbsUp, Calendar, Heart, Megaphone } from "lucide-react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const CommunityGuidelines = () => (
   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg mb-6 border border-indigo-100">
@@ -36,15 +37,29 @@ const CommunityGuidelines = () => (
 );
 
 const DiscussionCard = ({ discussion }: { discussion: any }) => {
+  const isAdminPost = discussion.tags?.some((tag: any) => tag.name === '運営');
+
   return (
-    <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow border-l-4 border-l-indigo-500">
+    <Card className={`bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow border-l-4 ${
+      isAdminPost ? 'border-l-orange-500' : 'border-l-indigo-500'
+    }`}>
       <CardContent className="p-6">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2 flex-wrap">
+              {isAdminPost && (
+                <Badge variant="secondary" className="text-xs bg-orange-100 text-orange-700 flex items-center gap-1">
+                  <Megaphone className="w-3 h-3" />
+                  運営からのお知らせ
+                </Badge>
+              )}
               <h3 className="text-xl font-semibold text-slate-900">{discussion.title}</h3>
               {discussion.tags?.map((tag: any) => (
-                <Badge key={tag.id} variant="secondary" className="text-xs bg-indigo-100 text-indigo-700">
+                <Badge key={tag.id} variant="secondary" className={`text-xs ${
+                  tag.name === '運営' 
+                    ? 'bg-orange-100 text-orange-700' 
+                    : 'bg-indigo-100 text-indigo-700'
+                }`}>
                   {tag.name}
                 </Badge>
               ))}
@@ -152,12 +167,37 @@ export const DiscussionList = () => {
     );
   }
 
+  const adminDiscussions = discussions.filter(d => d.tags?.some((tag: any) => tag.name === '運営'));
+  const otherDiscussions = discussions.filter(d => !d.tags?.some((tag: any) => tag.name === '運営'));
+
   return (
     <div className="space-y-4">
       <CommunityGuidelines />
-      {discussions?.map((discussion: any) => (
-        <DiscussionCard key={discussion.id} discussion={discussion} />
-      ))}
+      <Tabs defaultValue="all" className="space-y-4">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="all">すべての投稿</TabsTrigger>
+          <TabsTrigger value="admin">運営からのお知らせ</TabsTrigger>
+        </TabsList>
+        <TabsContent value="all" className="space-y-4">
+          {adminDiscussions.map((discussion: any) => (
+            <DiscussionCard key={discussion.id} discussion={discussion} />
+          ))}
+          {otherDiscussions.map((discussion: any) => (
+            <DiscussionCard key={discussion.id} discussion={discussion} />
+          ))}
+        </TabsContent>
+        <TabsContent value="admin" className="space-y-4">
+          {adminDiscussions.length > 0 ? (
+            adminDiscussions.map((discussion: any) => (
+              <DiscussionCard key={discussion.id} discussion={discussion} />
+            ))
+          ) : (
+            <div className="text-center py-8 text-slate-600">
+              運営からのお知らせはまだありません。
+            </div>
+          )}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

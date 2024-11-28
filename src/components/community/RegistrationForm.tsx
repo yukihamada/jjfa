@@ -46,11 +46,14 @@ export const RegistrationForm = () => {
               },
               className: {
                 container: 'space-y-0',
-                divider: 'hidden'
+                divider: 'hidden',
+                button: 'bg-slate-800 hover:bg-slate-700',
+                provider: 'text-white'
               }
             }}
             providers={["google"]}
-            redirectTo={`${window.location.origin}/dashboard`}
+            view="sign_up"
+            redirectTo={window.location.origin}
             localization={{
               variables: {
                 sign_up: {

@@ -20,6 +20,8 @@ export const RegistrationForm = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  const redirectUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+
   return (
     <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-bottom-4">
       <CardHeader className="space-y-2">
@@ -54,6 +56,7 @@ export const RegistrationForm = () => {
               }
             }}
             providers={['google']}
+            redirectTo={redirectUrl}
             view="sign_up"
             localization={{
               variables: {

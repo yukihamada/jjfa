@@ -19,11 +19,26 @@ export const EventsSection = () => {
             <div>
               <CardTitle className="text-slate-800">JiuFight 2025</CardTitle>
               <CardDescription className="text-slate-600">
-                2025年2月16日
+                2025年2月16日（日）
               </CardDescription>
             </div>
           </CardHeader>
           <CardContent>
+            <p className="text-slate-600 mb-6 leading-relaxed">
+              {isJapanese ? (
+                <>
+                  JiuFightはJJFAが主催する公式トーナメントです。JJFAの厳格なルールのもと、
+                  選手の安全を最優先しながら、観客の皆様にも楽しんでいただける大会を目指しています。
+                  第1回大会では、柔術の技術と精神を存分に披露できる場を提供いたします。
+                </>
+              ) : (
+                <>
+                  JiuFight is JJFA's official tournament. Under JJFA's strict rules,
+                  we aim to create a safe and exciting event for both competitors and spectators.
+                  The inaugural tournament will provide a stage to showcase the art and spirit of Jiu-Jitsu.
+                </>
+              )}
+            </p>
             <p className="text-slate-600 mb-4">
               {isJapanese ? (
                 <>

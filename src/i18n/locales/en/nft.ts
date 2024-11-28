@@ -11,6 +11,6 @@ export const nft = {
   },
   belt: {
     title: "Belt Certification",
-    description: "Digital certificates verifying your belt rank and progression in Brazilian Jiu-Jitsu."
+    description: "Digital certificates verifying your belt rank in Brazilian Jiu-Jitsu, which can be received from black belt instructors participating in JJFA."
   }
 };

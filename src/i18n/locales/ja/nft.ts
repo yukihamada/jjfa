@@ -11,6 +11,6 @@ export const nft = {
   },
   belt: {
     title: "帯証明NFT",
-    description: "柔術の帯の段位を証明するデジタル証明書です。"
+    description: "JJFAに参加している黒帯の先生から受け取ることができる柔術の帯の段位を証明するデジタル証明書です。"
   }
 };

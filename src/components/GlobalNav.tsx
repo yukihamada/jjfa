@@ -1,31 +1,51 @@
 import { Link } from "react-router-dom";
-import { Menu, Home, Users, Star, FileText, MessageCircle } from "lucide-react";
+import { Menu, Home, Users, Star, FileText, MessageCircle, User, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
+import { supabase } from "@/integrations/supabase/client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const GlobalNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const { t } = useTranslation();
 
-  // メニュー外クリック時の処理を追加
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuButton = document.getElementById('menu-button');
-      
-      if (isMenuOpen && mobileMenu && menuButton) {
-        if (!mobileMenu.contains(event.target as Node) && !menuButton.contains(event.target as Node)) {
-          setIsMenuOpen(false);
-        }
-      }
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
     };
+    getUser();
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isMenuOpen]);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("ログアウトに失敗しました");
+    } else {
+      toast.success("ログアウトしました");
+    }
+  };
 
   const menuItems = [
     { to: "/", label: t('nav.home'), icon: Home },
@@ -35,11 +55,6 @@ const GlobalNav = () => {
     { to: "/contact", label: t('nav.contact'), icon: MessageCircle },
   ];
 
-  const handleMenuClick = () => {
-    setIsMenuOpen(false);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50">
       <div className="bg-white/90 backdrop-blur-md shadow-md w-full transition-all duration-300 ease-in-out">
@@ -48,7 +63,7 @@ const GlobalNav = () => {
             <Link 
               to="/" 
               className="text-slate-800 hover:text-slate-600 font-bold text-xl flex items-center gap-2 transition-transform duration-300 hover:scale-105"
-              onClick={handleMenuClick}
+              onClick={() => setIsMenuOpen(false)}
             >
               <span className="bg-slate-800 text-white px-2 py-1 rounded">JJFA</span>
               <span className="hidden sm:inline text-sm text-slate-600">{t('hero.title')}</span>
@@ -63,7 +78,7 @@ const GlobalNav = () => {
                       key={item.to}
                       to={item.to} 
                       className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-white transition-all duration-200"
-                      onClick={handleMenuClick}
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       <Icon className="w-4 h-4" />
                       <span>{item.label}</span>
@@ -75,7 +90,7 @@ const GlobalNav = () => {
               <Link 
                 to="/contact"
                 className="ml-2 bg-slate-800 text-white hover:bg-slate-700 font-medium flex items-center gap-1.5 px-4 py-1.5 rounded-md transition-colors duration-200"
-                onClick={handleMenuClick}
+                onClick={() => setIsMenuOpen(false)}
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>{t('nav.contact')}</span>
@@ -84,6 +99,41 @@ const GlobalNav = () => {
 
             <div className="flex items-center gap-4">
               <LanguageSelector />
+              
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback>
+                          {user.email?.charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile" className="flex items-center">
+                        <User className="mr-2 h-4 w-4" />
+                        <span>プロフィール</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout} className="text-red-600">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>ログアウト</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link 
+                  to="/community" 
+                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-slate-50 transition-all duration-200"
+                >
+                  <User className="w-4 h-4" />
+                  <span>ログイン</span>
+                </Link>
+              )}
+
               <button 
                 id="menu-button"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -111,7 +161,7 @@ const GlobalNav = () => {
                   key={item.to}
                   to={item.to} 
                   className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-slate-50 p-2 rounded-md"
-                  onClick={handleMenuClick}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>

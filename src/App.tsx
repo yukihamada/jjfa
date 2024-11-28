@@ -15,6 +15,7 @@ import TokenRules from "./pages/TokenRules";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Roadmap from "./pages/Roadmap";
+import Profile from "./pages/Profile";
 import { useState } from "react";
 import { PasswordProtection } from "./components/PasswordProtection";
 
@@ -47,6 +48,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/careers" element={<Careers />} />
                 <Route path="/roadmap" element={<Roadmap />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </main>
             <GlobalFooter />

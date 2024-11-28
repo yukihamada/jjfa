@@ -10,7 +10,29 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const [loading, setLoading] = useState(false);
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
-  const [preferredStance, setPreferredStance] = useState("");
+  const [dojoId, setDojoId] = useState("");
+  const [beltId, setBeltId] = useState("");
+  const [instructor, setInstructor] = useState("");
+  const [dojos, setDojos] = useState<any[]>([]);
+  const [belts, setBelts] = useState<any[]>([]);
+
+  // Fetch dojos and belts on component mount
+  useState(() => {
+    const fetchData = async () => {
+      const { data: dojosData } = await supabase
+        .from('dojos')
+        .select('id, name')
+        .order('name');
+      if (dojosData) setDojos(dojosData);
+
+      const { data: beltsData } = await supabase
+        .from('belts')
+        .select('id, name, color')
+        .order('belt_order');
+      if (beltsData) setBelts(beltsData);
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +51,9 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
           user_id: user.id,
           weight: parseFloat(weight),
           height: parseFloat(height),
-          preferred_stance: preferredStance,
+          dojo_id: dojoId,
+          belt_id: beltId,
+          instructor: instructor,
           is_active: true,
         });
 
@@ -47,6 +71,48 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium mb-1">道場</label>
+        <Select value={dojoId} onValueChange={setDojoId} required>
+          <SelectTrigger>
+            <SelectValue placeholder="道場を選択" />
+          </SelectTrigger>
+          <SelectContent>
+            {dojos.map((dojo) => (
+              <SelectItem key={dojo.id} value={dojo.id}>
+                {dojo.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">帯</label>
+        <Select value={beltId} onValueChange={setBeltId} required>
+          <SelectTrigger>
+            <SelectValue placeholder="帯を選択" />
+          </SelectTrigger>
+          <SelectContent>
+            {belts.map((belt) => (
+              <SelectItem key={belt.id} value={belt.id}>
+                <span style={{ color: belt.color }}>{belt.name}</span>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">指導者</label>
+        <Input
+          value={instructor}
+          onChange={(e) => setInstructor(e.target.value)}
+          required
+          placeholder="指導者の名前"
+        />
+      </div>
+
       <div>
         <label className="block text-sm font-medium mb-1">体重 (kg)</label>
         <Input
@@ -69,20 +135,6 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
           required
           placeholder="例: 175.0"
         />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">スタンス</label>
-        <Select value={preferredStance} onValueChange={setPreferredStance}>
-          <SelectTrigger>
-            <SelectValue placeholder="スタンスを選択" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="orthodox">オーソドックス</SelectItem>
-            <SelectItem value="southpaw">サウスポー</SelectItem>
-            <SelectItem value="switch">スイッチ</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       <Button type="submit" className="w-full" disabled={loading}>

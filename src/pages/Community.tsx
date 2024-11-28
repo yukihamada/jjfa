@@ -5,21 +5,12 @@ import { RegistrationForm } from "@/components/community/RegistrationForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, Users, Award, BookOpen, Vote, Coins } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { formatDistanceToNow } from "date-fns";
-import { ja } from "date-fns/locale";
+import { DiscussionForm } from "@/components/community/DiscussionForm";
+import { DiscussionList } from "@/components/community/DiscussionList";
 
 const Community = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState<any>(null);
-  const [newPost, setNewPost] = useState("");
-  const [newPostTitle, setNewPostTitle] = useState("");
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     const getUser = async () => {
@@ -27,99 +18,28 @@ const Community = () => {
       setUser(user);
     };
     getUser();
+
+    // リアルタイム更新のセットアップ
+    const channel = supabase
+      .channel('public:discussions')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'discussions'
+        },
+        () => {
+          // 変更があった場合にキャッシュを更新
+          window.location.reload();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
-
-  const { data: discussions, isLoading } = useQuery({
-    queryKey: ['discussions'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('discussions')
-        .select(`
-          *,
-          profiles (username, full_name),
-          likes (user_id),
-          comments (
-            id,
-            content,
-            created_at,
-            profiles (username, full_name)
-          )
-        `)
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data;
-    }
-  });
-
-  const createPost = useMutation({
-    mutationFn: async () => {
-      const { error } = await supabase
-        .from('discussions')
-        .insert([
-          {
-            title: newPostTitle,
-            content: newPost,
-            user_id: user?.id
-          }
-        ]);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
-      setNewPost("");
-      setNewPostTitle("");
-      toast.success("投稿が完了しました");
-    },
-    onError: () => {
-      toast.error("投稿に失敗しました");
-    }
-  });
-
-  const toggleLike = useMutation({
-    mutationFn: async (discussionId: string) => {
-      const { data: existingLike } = await supabase
-        .from('likes')
-        .select()
-        .eq('discussion_id', discussionId)
-        .eq('user_id', user?.id)
-        .single();
-
-      if (existingLike) {
-        const { error } = await supabase
-          .from('likes')
-          .delete()
-          .eq('discussion_id', discussionId)
-          .eq('user_id', user?.id);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('likes')
-          .insert([
-            {
-              discussion_id: discussionId,
-              user_id: user?.id
-            }
-          ]);
-        if (error) throw error;
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
-    },
-    onError: () => {
-      toast.error("操作に失敗しました");
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newPostTitle.trim() || !newPost.trim()) {
-      toast.error("タイトルと本文を入力してください");
-      return;
-    }
-    createPost.mutate();
-  };
 
   if (!user) {
     return (
@@ -182,90 +102,8 @@ const Community = () => {
       <PageTitle title="コミュニティ掲示板" />
       <div className="container mx-auto py-8 px-4">
         <div className="max-w-3xl mx-auto space-y-8">
-          <Card className="bg-white shadow-lg">
-            <CardHeader>
-              <CardTitle>新規投稿</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Input
-                    placeholder="タイトルを入力"
-                    value={newPostTitle}
-                    onChange={(e) => setNewPostTitle(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    placeholder="投稿内容を入力"
-                    value={newPost}
-                    onChange={(e) => setNewPost(e.target.value)}
-                    rows={4}
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={createPost.isPending}
-                >
-                  投稿する
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          {isLoading ? (
-            <div className="text-center">読み込み中...</div>
-          ) : (
-            <div className="space-y-4">
-              {discussions?.map((discussion: any) => (
-                <Card key={discussion.id} className="bg-white shadow-lg">
-                  <CardHeader>
-                    <div className="flex items-center space-x-2 mb-2">
-                      <Avatar className="h-8 w-8">
-                        <AvatarFallback>
-                          {discussion.profiles?.username?.[0] || discussion.profiles?.full_name?.[0] || '?'}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-semibold">
-                          {discussion.profiles?.username || discussion.profiles?.full_name || '匿名ユーザー'}
-                        </p>
-                        <p className="text-sm text-slate-500">
-                          {formatDistanceToNow(new Date(discussion.created_at), { 
-                            addSuffix: true,
-                            locale: ja 
-                          })}
-                        </p>
-                      </div>
-                    </div>
-                    <CardTitle>{discussion.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="whitespace-pre-wrap mb-4">{discussion.content}</p>
-                    <div className="flex items-center justify-between">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleLike.mutate(discussion.id)}
-                        className={`flex items-center space-x-1 ${
-                          discussion.likes?.some((like: any) => like.user_id === user?.id)
-                            ? 'text-red-500'
-                            : 'text-slate-500'
-                        }`}
-                      >
-                        <span>♥</span>
-                        <span>{discussion.likes?.length || 0}</span>
-                      </Button>
-                      <span className="text-sm text-slate-500">
-                        コメント {discussion.comments?.length || 0}件
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
+          <DiscussionForm />
+          <DiscussionList />
         </div>
       </div>
     </div>

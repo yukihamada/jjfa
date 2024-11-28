@@ -54,27 +54,27 @@ export const RegistrationForm = () => {
               }
             }}
             providers={['google']}
-            view="sign_in"
+            view="sign_up"
             localization={{
               variables: {
                 sign_up: {
                   email_label: t('community.form.email'),
                   password_label: t('community.form.password'),
-                  button_label: t('community.form.signUp'),
-                  link_text: t('community.form.haveAccount'),
+                  button_label: "新規登録",
+                  link_text: "すでにアカウントをお持ちの方",
                   password_input_placeholder: t('community.form.passwordPlaceholder'),
                   email_input_placeholder: t('community.form.emailPlaceholder'),
                 },
                 sign_in: {
                   email_label: t('community.form.email'),
                   password_label: t('community.form.password'),
-                  button_label: t('community.form.signIn'),
-                  link_text: t('community.form.noAccount'),
+                  button_label: "ログイン",
+                  link_text: "アカウントをお持ちでない方",
                   password_input_placeholder: t('community.form.passwordPlaceholder'),
                   email_input_placeholder: t('community.form.emailPlaceholder'),
                 },
                 forgotten_password: {
-                  link_text: t('community.form.forgotPassword'),
+                  link_text: "パスワードをお忘れの方",
                   button_label: t('community.form.resetPassword'),
                   email_label: t('community.form.email'),
                   email_input_placeholder: t('community.form.emailPlaceholder'),

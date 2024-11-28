@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const NFTHoldersSection = () => {
   const { data: isNFTHolder, isLoading, error } = useQuery({
@@ -46,10 +47,17 @@ export const NFTHoldersSection = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-slate-600">
-            このコンテンツはJJFA NFTホルダーのみがアクセスできます。
-            NFTを購入して限定コンテンツにアクセスしましょう。
-          </p>
+          <div className="space-y-4">
+            <p className="text-slate-600">
+              このコンテンツはJJFA NFTホルダーのみがアクセスできます。
+              NFTを購入して限定コンテンツにアクセスしましょう。
+            </p>
+            <p className="text-sm text-slate-500">
+              <Link to="/nft" className="text-blue-600 hover:underline">
+                JJFA NFTについての詳細はこちら
+              </Link>
+            </p>
+          </div>
         </CardContent>
       </Card>
     );

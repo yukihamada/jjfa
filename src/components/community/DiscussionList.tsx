@@ -36,7 +36,6 @@ const CommunityGuidelines = () => (
 );
 
 const DiscussionCard = ({ discussion }: { discussion: any }) => {
-  console.log('Rendering discussion:', discussion); // より詳細なデバッグ情報
   return (
     <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow border-l-4 border-l-indigo-500">
       <CardContent className="p-6">
@@ -93,37 +92,36 @@ export const DiscussionList = () => {
   const { data: discussions, isLoading, error } = useQuery({
     queryKey: ['discussions'],
     queryFn: async () => {
-      console.log('Starting discussions fetch...'); // デバッグ用
+      console.log('Starting discussions fetch...'); 
       try {
         const { data, error } = await supabase
           .from('discussions')
           .select(`
             *,
-            profiles:profiles(username, avatar_url),
-            likes:likes(user_id),
-            comments:comments(id),
-            discussion_tags!discussion_tags(
-              tags:tags(*)
+            profiles (username, avatar_url),
+            likes (user_id),
+            comments (id),
+            discussion_tags (
+              tags (*)
             )
           `)
           .order('created_at', { ascending: false });
 
         if (error) {
-          console.error('Supabase error:', error); // より詳細なエラー情報
+          console.error('Supabase error:', error);
           throw error;
         }
 
-        console.log('Fetch successful, data:', data); // 成功時のデータログ
+        console.log('Fetch successful, data:', data);
         return data;
       } catch (err) {
-        console.error('Fetch error:', err); // エラーハンドリングの詳細
+        console.error('Fetch error:', err);
         throw err;
       }
     },
   });
 
   if (error) {
-    console.error('Query error:', error); // エラー情報の詳細表示
     return (
       <Alert variant="destructive" className="mb-4">
         <AlertDescription>

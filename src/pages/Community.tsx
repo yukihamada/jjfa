@@ -22,13 +22,15 @@ const Community = () => {
       <div className="container mx-auto py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                {t('community.joinTitle')}
-              </h1>
-              <p className="text-lg text-slate-600 mb-6">
-                {t('community.joinSubtitle')}
-              </p>
+            <div className="space-y-6">
+              <div className="prose">
+                <h1 className="text-3xl md:text-4xl font-bold text-slate-800">
+                  {t('community.joinTitle')}
+                </h1>
+                <p className="text-lg text-slate-600">
+                  {t('community.joinSubtitle')}
+                </p>
+              </div>
               <RegistrationForm />
             </div>
             <div>

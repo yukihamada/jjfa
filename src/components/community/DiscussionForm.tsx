@@ -8,6 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { AttachmentUpload } from "./AttachmentUpload";
+import { AttachmentPreview } from "./AttachmentPreview";
 
 const FormTips = () => (
   <div className="bg-green-50 p-4 rounded-lg mb-4">
@@ -24,6 +26,7 @@ export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
+  const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
   const queryClient = useQueryClient();
 
   const { data: tags } = useQuery({
@@ -39,7 +42,12 @@ export const DiscussionForm = () => {
   });
 
   const createDiscussion = useMutation({
-    mutationFn: async ({ title, content, tagId }: { title: string; content: string; tagId: string }) => {
+    mutationFn: async ({ title, content, tagId, attachments }: { 
+      title: string; 
+      content: string; 
+      tagId: string;
+      attachments: { url: string; type: string }[];
+    }) => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("ログインが必要です");
 
@@ -50,6 +58,7 @@ export const DiscussionForm = () => {
             title,
             content,
             user_id: user.id,
+            attachments
           },
         ])
         .select()
@@ -77,6 +86,7 @@ export const DiscussionForm = () => {
       setTitle("");
       setContent("");
       setSelectedTag("");
+      setAttachments([]);
       toast.success("投稿が完了しました！");
     },
     onError: (error) => {
@@ -90,7 +100,15 @@ export const DiscussionForm = () => {
       toast.error("タイトルと内容を入力してください");
       return;
     }
-    createDiscussion.mutate({ title, content, tagId: selectedTag });
+    createDiscussion.mutate({ title, content, tagId: selectedTag, attachments });
+  };
+
+  const handleAttachmentUpload = (newAttachments: { url: string; type: string }[]) => {
+    setAttachments(prev => [...prev, ...newAttachments]);
+  };
+
+  const removeAttachment = (index: number) => {
+    setAttachments(prev => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -131,6 +149,8 @@ export const DiscussionForm = () => {
               className="w-full min-h-[100px]"
             />
           </div>
+          <AttachmentUpload onUploadComplete={handleAttachmentUpload} />
+          <AttachmentPreview attachments={attachments} onRemove={removeAttachment} />
           <Button 
             type="submit" 
             className="w-full"

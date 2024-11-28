@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { MessageSquare, ThumbsUp, Calendar, Heart } from "lucide-react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const CommunityGuidelines = () => (
   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg mb-6 border border-indigo-100">
@@ -35,7 +36,7 @@ const CommunityGuidelines = () => (
 );
 
 const DiscussionCard = ({ discussion }: { discussion: any }) => {
-  console.log('Discussion data:', discussion); // デバッグ用
+  console.log('Rendering discussion:', discussion); // より詳細なデバッグ情報
   return (
     <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow border-l-4 border-l-indigo-500">
       <CardContent className="p-6">
@@ -92,32 +93,46 @@ export const DiscussionList = () => {
   const { data: discussions, isLoading, error } = useQuery({
     queryKey: ['discussions'],
     queryFn: async () => {
-      console.log('Fetching discussions...'); // デバッグ用
-      const { data, error } = await supabase
-        .from('discussions')
-        .select(`
-          *,
-          profiles:profiles(username, avatar_url),
-          likes:likes(user_id),
-          comments:comments(id),
-          discussion_tags!discussion_tags(
-            tags:tags(*)
-          )
-        `)
-        .order('created_at', { ascending: false });
+      console.log('Starting discussions fetch...'); // デバッグ用
+      try {
+        const { data, error } = await supabase
+          .from('discussions')
+          .select(`
+            *,
+            profiles:profiles(username, avatar_url),
+            likes:likes(user_id),
+            comments:comments(id),
+            discussion_tags!discussion_tags(
+              tags:tags(*)
+            )
+          `)
+          .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('Error fetching discussions:', error); // デバッグ用
-        throw error;
+        if (error) {
+          console.error('Supabase error:', error); // より詳細なエラー情報
+          throw error;
+        }
+
+        console.log('Fetch successful, data:', data); // 成功時のデータログ
+        return data;
+      } catch (err) {
+        console.error('Fetch error:', err); // エラーハンドリングの詳細
+        throw err;
       }
-      console.log('Fetched discussions:', data); // デバッグ用
-      return data;
     },
   });
 
   if (error) {
-    console.error('Error in component:', error); // デバッグ用
-    return <div>エラーが発生しました。しばらく経ってから再度お試しください。</div>;
+    console.error('Query error:', error); // エラー情報の詳細表示
+    return (
+      <Alert variant="destructive" className="mb-4">
+        <AlertDescription>
+          データの取得中にエラーが発生しました。({error.message})
+          <br />
+          ページを更新するか、しばらく経ってから再度お試しください。
+        </AlertDescription>
+      </Alert>
+    );
   }
 
   if (isLoading) {

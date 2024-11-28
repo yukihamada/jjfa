@@ -8,7 +8,7 @@ const NFT = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-20"> {/* Added pt-20 for top padding */}
       <PageTitle title={t('nft.title')} />
       <BackgroundGradient />
       

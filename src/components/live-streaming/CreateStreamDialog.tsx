@@ -13,9 +13,10 @@ import { Loader2 } from "lucide-react";
 interface CreateStreamDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onStreamCreated?: (streamKey: string) => void;
 }
 
-export const CreateStreamDialog = ({ open, onOpenChange }: CreateStreamDialogProps) => {
+export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: CreateStreamDialogProps) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -39,11 +40,12 @@ export const CreateStreamDialog = ({ open, onOpenChange }: CreateStreamDialogPro
         .single();
 
       if (error) throw error;
-      return data;
+      return { ...data, streamKey };
     },
     onSuccess: (data) => {
       toast.success("配信を作成しました");
       onOpenChange(false);
+      onStreamCreated?.(data.streamKey);
       navigate(`/live/${data.id}`);
     },
     onError: (error) => {

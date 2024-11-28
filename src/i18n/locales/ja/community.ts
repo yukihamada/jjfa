@@ -7,6 +7,12 @@ export const community = {
     password: "パスワード",
     signUp: "新規登録",
     signIn: "ログイン",
+    forgotPassword: "パスワードをお忘れの方",
+    resetPassword: "パスワードをリセット",
+    haveAccount: "すでにアカウントをお持ちの方",
+    noAccount: "アカウントをお持ちでない方",
+    emailPlaceholder: "メールアドレスを入力",
+    passwordPlaceholder: "パスワードを入力",
     success: {
       title: "登録完了",
       description: "JJFAへようこそ！会員申請を受け付けました。"

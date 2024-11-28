@@ -7,6 +7,12 @@ export const community = {
     password: "Password",
     signUp: "Sign Up",
     signIn: "Sign In",
+    forgotPassword: "Forgot your password?",
+    resetPassword: "Reset Password",
+    haveAccount: "Already have an account?",
+    noAccount: "Don't have an account?",
+    emailPlaceholder: "Enter your email",
+    passwordPlaceholder: "Enter your password",
     success: {
       title: "Registration Successful",
       description: "Welcome to JJFA! Your membership application is being processed."

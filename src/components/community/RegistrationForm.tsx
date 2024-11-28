@@ -53,11 +53,21 @@ export const RegistrationForm = () => {
                   email_label: t('community.form.email'),
                   password_label: t('community.form.password'),
                   button_label: t('community.form.signUp'),
+                  link_text: t('community.form.haveAccount'),
+                  password_input_placeholder: t('community.form.passwordPlaceholder'),
+                  email_input_placeholder: t('community.form.emailPlaceholder'),
                 },
                 sign_in: {
                   email_label: t('community.form.email'),
                   password_label: t('community.form.password'),
                   button_label: t('community.form.signIn'),
+                  link_text: t('community.form.noAccount'),
+                  password_input_placeholder: t('community.form.passwordPlaceholder'),
+                  email_input_placeholder: t('community.form.emailPlaceholder'),
+                },
+                forgotten_password: {
+                  link_text: t('community.form.forgotPassword'),
+                  button_label: t('community.form.resetPassword'),
                 }
               }
             }}

@@ -6,15 +6,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Mail, User, Phone, MapPin, Award, CreditCard, Shield } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 
 const Profile = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
-  const [updating, setUpdating] = useState(false);
+  const [fighter, setFighter] = useState<any>(null);
+  const [member, setMember] = useState<any>(null);
+  const [newEmail, setNewEmail] = useState("");
 
   useEffect(() => {
     const checkUser = async () => {
@@ -24,12 +40,35 @@ const Profile = () => {
         return;
       }
       setUser(user);
+      
+      // Get profile data
       const { data: profile } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
         .single();
       setProfile(profile);
+
+      // Get fighter data
+      const { data: fighter } = await supabase
+        .from("fighters")
+        .select(`
+          *,
+          belt:belts(name, color),
+          dojo:dojos(name)
+        `)
+        .eq("user_id", user.id)
+        .single();
+      setFighter(fighter);
+
+      // Get member data
+      const { data: member } = await supabase
+        .from("jjfa_members")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+      setMember(member);
+
       setLoading(false);
     };
     checkUser();
@@ -59,6 +98,24 @@ const Profile = () => {
     setUpdating(false);
   };
 
+  const handleEmailUpdate = async () => {
+    if (!newEmail) {
+      toast.error("新しいメールアドレスを入力してください");
+      return;
+    }
+
+    setUpdating(true);
+    const { error } = await supabase.auth.updateUser({ email: newEmail });
+    
+    if (error) {
+      toast.error("メールアドレスの更新に失敗しました");
+    } else {
+      toast.success("確認メールを送信しました。メールを確認して更新を完了してください");
+      setNewEmail("");
+    }
+    setUpdating(false);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -68,61 +125,191 @@ const Profile = () => {
   }
 
   return (
-    <div className="container max-w-2xl mx-auto px-4 py-8 mt-16">
+    <div className="container max-w-4xl mx-auto px-4 py-8 mt-16">
       <h1 className="text-2xl font-bold mb-8">プロフィール設定</h1>
-      <form onSubmit={handleUpdate} className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium mb-2">メールアドレス</label>
-          <Input
-            type="email"
-            value={user?.email}
-            disabled
-            className="bg-gray-50"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-2">ユーザーネーム</label>
-          <Input
-            value={profile?.username || ""}
-            onChange={(e) => setProfile({ ...profile, username: e.target.value })}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-2">氏名</label>
-          <Input
-            value={profile?.full_name || ""}
-            onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-2">自己紹介</label>
-          <Textarea
-            value={profile?.bio || ""}
-            onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-            rows={4}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-2">電話番号</label>
-          <Input
-            value={profile?.phone || ""}
-            onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-2">住所</label>
-          <Input
-            value={profile?.address || ""}
-            onChange={(e) => setProfile({ ...profile, address: e.target.value })}
-          />
-        </div>
-        <Button type="submit" disabled={updating}>
-          {updating ? (
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-          ) : null}
-          保存する
-        </Button>
-      </form>
+
+      <Tabs defaultValue="profile" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="profile">基本情報</TabsTrigger>
+          <TabsTrigger value="status">ステータス</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="profile">
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>アカウント情報</CardTitle>
+                <CardDescription>メールアドレスの変更</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">現在のメールアドレス</label>
+                  <Input
+                    type="email"
+                    value={user?.email}
+                    disabled
+                    className="bg-gray-50"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">新しいメールアドレス</label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="email"
+                      value={newEmail}
+                      onChange={(e) => setNewEmail(e.target.value)}
+                      placeholder="新しいメールアドレス"
+                    />
+                    <Button 
+                      onClick={handleEmailUpdate}
+                      disabled={updating}
+                    >
+                      {updating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Mail className="w-4 h-4 mr-2" />}
+                      変更
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <form onSubmit={handleUpdate}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>プロフィール情報</CardTitle>
+                  <CardDescription>基本的な情報を更新</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">ユーザーネーム</label>
+                    <div className="flex gap-2">
+                      <User className="w-4 h-4 mt-3 text-gray-500" />
+                      <Input
+                        value={profile?.username || ""}
+                        onChange={(e) => setProfile({ ...profile, username: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">氏名</label>
+                    <div className="flex gap-2">
+                      <User className="w-4 h-4 mt-3 text-gray-500" />
+                      <Input
+                        value={profile?.full_name || ""}
+                        onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">自己紹介</label>
+                    <Textarea
+                      value={profile?.bio || ""}
+                      onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                      rows={4}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">電話番号</label>
+                    <div className="flex gap-2">
+                      <Phone className="w-4 h-4 mt-3 text-gray-500" />
+                      <Input
+                        value={profile?.phone || ""}
+                        onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">住所</label>
+                    <div className="flex gap-2">
+                      <MapPin className="w-4 h-4 mt-3 text-gray-500" />
+                      <Input
+                        value={profile?.address || ""}
+                        onChange={(e) => setProfile({ ...profile, address: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <Button type="submit" className="w-full" disabled={updating}>
+                    {updating ? (
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    ) : null}
+                    保存する
+                  </Button>
+                </CardContent>
+              </Card>
+            </form>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="status">
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>選手登録情報</CardTitle>
+                <CardDescription>現在の選手としての状態</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {fighter ? (
+                  <>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Award className="w-4 h-4 text-blue-500" />
+                      <span className="font-medium">所属道場:</span>
+                      <span>{fighter.dojo?.name || "未所属"}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Shield className="w-4 h-4 text-purple-500" />
+                      <span className="font-medium">帯:</span>
+                      <span style={{ color: fighter.belt?.color }}>
+                        {fighter.belt?.name || "未設定"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Award className="w-4 h-4 text-yellow-500" />
+                      <span className="font-medium">試合成績:</span>
+                      <span>{fighter.wins}勝 {fighter.losses}敗 {fighter.draws}分</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500">
+                    選手登録がありません
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>会員情報</CardTitle>
+                <CardDescription>JJFA会員としての状態</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {member ? (
+                  <>
+                    <div className="flex items-center gap-2 text-sm">
+                      <CreditCard className="w-4 h-4 text-green-500" />
+                      <span className="font-medium">会員番号:</span>
+                      <span>{member.membership_number}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Shield className="w-4 h-4 text-blue-500" />
+                      <span className="font-medium">会員ステータス:</span>
+                      <span className={`px-2 py-1 rounded-full text-xs ${
+                        member.membership_status === 'active' 
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-yellow-100 text-yellow-800'
+                      }`}>
+                        {member.membership_status === 'active' ? '有効' : '審査中'}
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500">
+                    会員登録がありません
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

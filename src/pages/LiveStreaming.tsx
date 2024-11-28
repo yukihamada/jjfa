@@ -11,7 +11,7 @@ const LiveStreaming = () => {
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
       <div className="flex justify-between items-center">
-        <PageTitle>ライブ配信</PageTitle>
+        <PageTitle title="ライブ配信" />
         <Button onClick={() => setShowCreateDialog(true)} className="gap-2">
           <Plus className="w-4 h-4" />
           配信を始める

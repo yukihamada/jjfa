@@ -7,6 +7,21 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+interface Profile {
+  username: string;
+  avatar_url: string;
+}
+
+interface LiveStream {
+  id: string;
+  title: string;
+  description: string | null;
+  status: 'live' | 'offline' | 'ended';
+  viewer_count: number;
+  thumbnail_url: string | null;
+  profiles: Profile;
+}
+
 export const LiveStreamList = () => {
   const navigate = useNavigate();
   
@@ -25,7 +40,7 @@ export const LiveStreamList = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data;
+      return data as LiveStream[];
     },
   });
 
@@ -81,12 +96,12 @@ export const LiveStreamList = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Avatar className="w-6 h-6">
-                    <AvatarImage src={stream.profiles?.avatar_url} />
+                    <AvatarImage src={stream.profiles.avatar_url} />
                     <AvatarFallback>
-                      {stream.profiles?.username?.[0]?.toUpperCase() || 'U'}
+                      {stream.profiles.username?.[0]?.toUpperCase() || 'U'}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="text-sm">{stream.profiles?.username}</span>
+                  <span className="text-sm">{stream.profiles.username}</span>
                 </div>
                 <div className="flex items-center gap-1 text-sm text-slate-500">
                   <Eye className="w-4 h-4" />

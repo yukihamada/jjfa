@@ -48,12 +48,12 @@ export const RegistrationForm = () => {
                 container: 'space-y-4',
                 button: 'bg-slate-800 hover:bg-slate-700 text-white',
                 anchor: 'text-slate-600 hover:text-slate-800',
-                divider: 'hidden',
+                divider: 'bg-slate-200',
                 message: 'text-slate-600',
                 label: 'text-slate-700'
               }
             }}
-            providers={[]}
+            providers={['google']}
             view="sign_up"
             localization={{
               variables: {

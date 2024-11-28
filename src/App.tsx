@@ -7,6 +7,7 @@ import GlobalFooter from "./components/GlobalFooter";
 import Index from "./pages/Index";
 import Whitepaper from "./pages/Whitepaper";
 import Community from "./pages/Community";
+import CommunityRegistration from "./pages/CommunityRegistration";
 import JiujitsuBenefits from "./pages/JiujitsuBenefits";
 import TrialClass from "./pages/TrialClass";
 import Articles from "./pages/Articles";
@@ -76,7 +77,7 @@ const App = () => {
     
     if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
       toast.error("このページにアクセスするにはログインが必要です");
-      return <Navigate to="/" />;
+      return <Navigate to="/community-registration" />;
     }
     
     return <>{children}</>;
@@ -93,6 +94,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/whitepaper" element={<Whitepaper />} />
+                <Route path="/community-registration" element={<CommunityRegistration />} />
                 <Route 
                   path="/community" 
                   element={

@@ -43,6 +43,10 @@ export const RegistrationForm = () => {
                     brandAccent: '#334155'
                   }
                 }
+              },
+              className: {
+                container: 'space-y-0',
+                divider: 'hidden'
               }
             }}
             providers={["google"]}

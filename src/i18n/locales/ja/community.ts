@@ -9,8 +9,8 @@ export const community = {
     signIn: "ログイン",
     forgotPassword: "パスワードをお忘れの方",
     resetPassword: "パスワードをリセット",
-    haveAccount: "すでにアカウントをお持ちの方",
-    noAccount: "アカウントをお持ちでない方",
+    haveAccount: "アカウントをお持ちでない方",
+    noAccount: "すでにアカウントをお持ちの方",
     emailPlaceholder: "メールアドレスを入力",
     passwordPlaceholder: "パスワードを入力",
     success: {

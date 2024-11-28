@@ -7,27 +7,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2, Globe, Users, GraduationCap, Lock } from "lucide-react";
+import { Loader2, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { AttachmentUpload } from "./AttachmentUpload";
 import { AttachmentPreview } from "./AttachmentPreview";
+import { FormTips } from "./form/FormTips";
+import { VisibilitySelect } from "./form/VisibilitySelect";
+import { PostPreview } from "./form/PostPreview";
 
-const FormTips = () => (
-  <div className="bg-green-50 p-4 rounded-lg mb-4">
-    <h3 className="text-sm font-medium text-green-800 mb-2">投稿のヒント</h3>
-    <ul className="text-sm text-green-700 space-y-1">
-      <li>• 具体的な状況や気持ちを共有すると、より良いアドバイスが得られやすいです</li>
-      <li>• 質問は明確に、そして遠慮なく。誰もが最初は初心者でした</li>
-      <li>• 他の人の経験も参考になります。検索してみましょう</li>
-    </ul>
-  </div>
-);
-
-const visibilityOptions = [
-  { value: 'public', label: '全体に公開', icon: Globe },
-  { value: 'dojo', label: '道場内のみ', icon: Users },
-  { value: 'instructor', label: '先生のみ', icon: GraduationCap },
-  { value: 'private', label: '自分のみ', icon: Lock },
-];
+const MAX_TITLE_LENGTH = 100;
+const MAX_CONTENT_LENGTH = 2000;
 
 export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
@@ -35,6 +24,7 @@ export const DiscussionForm = () => {
   const [selectedTag, setSelectedTag] = useState("");
   const [visibility, setVisibility] = useState("public");
   const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
+  const [showPreview, setShowPreview] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: tags } = useQuery({
@@ -98,6 +88,7 @@ export const DiscussionForm = () => {
       setSelectedTag("");
       setVisibility("public");
       setAttachments([]);
+      setShowPreview(false);
       toast.success("投稿が完了しました！");
     },
     onError: (error) => {
@@ -109,6 +100,14 @@ export const DiscussionForm = () => {
     e.preventDefault();
     if (!title.trim() || !content.trim()) {
       toast.error("タイトルと内容を入力してください");
+      return;
+    }
+    if (title.length > MAX_TITLE_LENGTH) {
+      toast.error(`タイトルは${MAX_TITLE_LENGTH}文字以内で入力してください`);
+      return;
+    }
+    if (content.length > MAX_CONTENT_LENGTH) {
+      toast.error(`本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`);
       return;
     }
     createDiscussion.mutate({ title, content, tagId: selectedTag, visibility, attachments });
@@ -131,12 +130,18 @@ export const DiscussionForm = () => {
         <FormTips />
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Input
-              placeholder="タイトル"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full"
-            />
+            <div className="relative">
+              <Input
+                placeholder="タイトル"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full pr-16"
+                maxLength={MAX_TITLE_LENGTH}
+              />
+              <span className="absolute right-2 top-2 text-sm text-gray-400">
+                {title.length}/{MAX_TITLE_LENGTH}
+              </span>
+            </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             <Select value={selectedTag} onValueChange={setSelectedTag}>
@@ -151,49 +156,68 @@ export const DiscussionForm = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Select value={visibility} onValueChange={setVisibility}>
-              <SelectTrigger>
-                <SelectValue placeholder="公開範囲を選択" />
-              </SelectTrigger>
-              <SelectContent>
-                {visibilityOptions.map((option) => {
-                  const Icon = option.icon;
-                  return (
-                    <SelectItem key={option.value} value={option.value}>
-                      <div className="flex items-center gap-2">
-                        <Icon className="w-4 h-4" />
-                        {option.label}
-                      </div>
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
+            <VisibilitySelect value={visibility} onChange={setVisibility} />
           </div>
           <div className="space-y-2">
-            <Textarea
-              placeholder="内容を入力してください"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="w-full min-h-[100px]"
-            />
+            <div className="relative">
+              <Textarea
+                placeholder="内容を入力してください"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="w-full min-h-[100px] pr-16"
+                maxLength={MAX_CONTENT_LENGTH}
+              />
+              <span className="absolute right-2 top-2 text-sm text-gray-400">
+                {content.length}/{MAX_CONTENT_LENGTH}
+              </span>
+            </div>
           </div>
           <AttachmentUpload onUploadComplete={handleAttachmentUpload} />
           <AttachmentPreview attachments={attachments} onRemove={removeAttachment} />
-          <Button 
-            type="submit" 
-            className="w-full"
-            disabled={createDiscussion.isPending}
-          >
-            {createDiscussion.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                投稿中...
-              </>
-            ) : (
-              "投稿する"
+          
+          <div className="flex items-center gap-2 justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowPreview(!showPreview)}
+              className="gap-2"
+            >
+              <Eye className="w-4 h-4" />
+              プレビュー
+            </Button>
+            <Button 
+              type="submit" 
+              className="min-w-[120px]"
+              disabled={createDiscussion.isPending}
+            >
+              {createDiscussion.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  投稿中...
+                </>
+              ) : (
+                "投稿する"
+              )}
+            </Button>
+          </div>
+
+          <AnimatePresence>
+            {showPreview && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <PostPreview
+                  title={title}
+                  content={content}
+                  tag={tags?.find(t => t.id === selectedTag)?.name}
+                  visibility={visibility}
+                />
+              </motion.div>
             )}
-          </Button>
+          </AnimatePresence>
         </form>
       </CardContent>
     </Card>

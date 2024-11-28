@@ -10,6 +10,9 @@ import { DAOCard } from "@/components/profile/DAOCard";
 import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { AccountSettings } from "@/components/profile/AccountSettings";
 import { ProfileForm } from "@/components/profile/ProfileForm";
+import type { ProfilesTable } from "@/integrations/supabase/types";
+
+type Profile = ProfilesTable['profiles']['Row'];
 
 const Profile = () => {
   const navigate = useNavigate();

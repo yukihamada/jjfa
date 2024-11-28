@@ -94,8 +94,9 @@ const Articles = () => {
                 <ol className="list-decimal pl-6 mb-4">
                   <li>{isJapanese ? '当会社は、以下のトークンを発行する：' : 'The company shall issue the following tokens:'}
                     <ul className="list-disc pl-6 mb-2">
-                      <li>{isJapanese ? '社員権トークン：社員資格を表し、利益配分や議決権を伴う。' : 'Membership tokens: representing membership qualification, including profit distribution and voting rights.'}</li>
-                      <li>{isJapanese ? 'ガバナンストークン：特定の議決権およびDAO内での意思決定をサポートする。' : 'Governance tokens: supporting specific voting rights and decision-making within the DAO.'}</li>
+                      <li>{isJapanese ? 'JJFA Member Token：社員資格を表し、利益配分や議決権を伴う。' : 'JJFA Member Token: representing membership qualification, including profit distribution and voting rights.'}</li>
+                      <li>{isJapanese ? 'Governance Token：特定の議決権およびDAO内での意思決定をサポートする。' : 'Governance Token: supporting specific voting rights and decision-making within the DAO.'}</li>
+                      <li>{isJapanese ? 'JJFAトークン：プラットフォーム内での支払いに使用するトークン。' : 'JJFA Token: token used for payments within the platform.'}</li>
                     </ul>
                   </li>
                   <li>{isJapanese ? 'トークン発行、譲渡、再発行は「トークン規程」に従う。' : 'Token issuance, transfer, and reissuance shall follow the "Token Regulations".'}</li>

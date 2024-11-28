@@ -2,7 +2,7 @@ import { RegistrationForm } from "@/components/community/RegistrationForm";
 import { PageTitle } from "@/components/PageTitle";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Users, Award, BookOpen } from "lucide-react";
+import { Trophy, Users, Award, BookOpen, Vote, Coins } from "lucide-react";
 
 const Community = () => {
   const { t } = useTranslation();
@@ -12,6 +12,8 @@ const Community = () => {
     { icon: BookOpen, title: t('community.benefits.training.title'), description: t('community.benefits.training.description') },
     { icon: Users, title: t('community.benefits.community.title'), description: t('community.benefits.community.description') },
     { icon: Award, title: t('community.benefits.ranking.title'), description: t('community.benefits.ranking.description') },
+    { icon: Vote, title: t('community.benefits.dao.title'), description: t('community.benefits.dao.description') },
+    { icon: Coins, title: t('community.benefits.token.title'), description: t('community.benefits.token.description') },
   ];
 
   return (

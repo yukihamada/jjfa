@@ -39,6 +39,14 @@ export const community = {
     ranking: {
       title: "Official Ranking",
       description: "Get officially recognized JJFA ranking and certifications"
+    },
+    dao: {
+      title: "DAO Participation",
+      description: "Participate in JJFA DAO governance and shape the future of our community"
+    },
+    token: {
+      title: "Token Rewards",
+      description: "Earn JJFA tokens by contributing to the community"
     }
   }
 };

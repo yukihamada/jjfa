@@ -39,6 +39,14 @@ export const community = {
     ranking: {
       title: "公式ランキング",
       description: "JJFA公式ランキングと認定資格の取得"
+    },
+    dao: {
+      title: "DAOへの参加",
+      description: "JJFA DAOの意思決定に参加し、コミュニティの未来を共に創造"
+    },
+    token: {
+      title: "トークン報酬",
+      description: "コミュニティへの貢献に応じてJJFAトークンを獲得"
     }
   }
 };

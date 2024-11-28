@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, Users, Award, BookOpen, Vote, Coins } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const CommunityRegistration = () => {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ const CommunityRegistration = () => {
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
+        toast.success("すでにログインしています");
         navigate('/community');
       }
     };
@@ -22,6 +24,7 @@ const CommunityRegistration = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
+        toast.success("ログインしました");
         navigate('/community');
       }
     });

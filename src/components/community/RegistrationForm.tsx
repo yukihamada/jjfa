@@ -45,15 +45,16 @@ export const RegistrationForm = () => {
                 }
               },
               className: {
-                container: 'space-y-0',
+                container: 'space-y-4',
+                button: 'bg-slate-800 hover:bg-slate-700 text-white',
+                anchor: 'text-slate-600 hover:text-slate-800',
                 divider: 'hidden',
-                button: 'bg-slate-800 hover:bg-slate-700',
-                anchor: 'text-slate-600 hover:text-slate-800'
+                message: 'text-slate-600',
+                label: 'text-slate-700'
               }
             }}
+            providers={[]}
             view="sign_up"
-            showLinks={true}
-            redirectTo={window.location.origin}
             localization={{
               variables: {
                 sign_up: {

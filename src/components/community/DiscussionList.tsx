@@ -6,9 +6,19 @@ import { ja } from "date-fns/locale";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { useState, useEffect } from "react";
 
 export const DiscussionList = () => {
   const queryClient = useQueryClient();
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setCurrentUserId(user?.id || null);
+    };
+    getCurrentUser();
+  }, []);
 
   const { data: discussions, isLoading } = useQuery({
     queryKey: ['discussions'],
@@ -116,7 +126,7 @@ export const DiscussionList = () => {
                 onClick={() => toggleLike.mutate(discussion.id)}
                 disabled={toggleLike.isPending}
                 className={`flex items-center space-x-1 ${
-                  discussion.likes?.some((like: any) => like.user_id === supabase.auth.getUser()?.data?.user?.id)
+                  discussion.likes?.some((like: any) => like.user_id === currentUserId)
                     ? 'text-red-500'
                     : 'text-slate-500'
                 }`}

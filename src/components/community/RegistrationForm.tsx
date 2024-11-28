@@ -54,7 +54,7 @@ export const RegistrationForm = () => {
               }
             }}
             providers={['google']}
-            view="sign_up"
+            view="sign_in"
             localization={{
               variables: {
                 sign_up: {

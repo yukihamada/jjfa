@@ -13,10 +13,12 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
 
 const GlobalNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [liveStreams, setLiveStreams] = useState<number>(0);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -26,12 +28,44 @@ const GlobalNav = () => {
     };
     getUser();
 
+    // Subscribe to live streams
+    const channel = supabase
+      .channel('public:live_streams')
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'live_streams',
+      }, () => {
+        fetchLiveStreams();
+      })
+      .subscribe();
+
+    // Initial fetch of live streams
+    fetchLiveStreams();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      channel.unsubscribe();
+    };
   }, []);
+
+  const fetchLiveStreams = async () => {
+    const { data, error } = await supabase
+      .from('live_streams')
+      .select('*')
+      .eq('status', 'live');
+    
+    if (error) {
+      console.error('Error fetching live streams:', error);
+      return;
+    }
+    
+    setLiveStreams(data.length);
+  };
 
   const handleMenuClick = () => {
     setIsMenuOpen(false);
@@ -83,6 +117,11 @@ const GlobalNav = () => {
                     >
                       <Icon className="w-4 h-4" />
                       <span>{item.label}</span>
+                      {item.to === "/live" && liveStreams > 0 && (
+                        <Badge variant="destructive" className="ml-1">
+                          {liveStreams}
+                        </Badge>
+                      )}
                     </Link>
                   );
                 })}
@@ -162,10 +201,15 @@ const GlobalNav = () => {
                   key={item.to}
                   to={item.to} 
                   className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-slate-50 p-2 rounded-md"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={handleMenuClick}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
+                  {item.to === "/live" && liveStreams > 0 && (
+                    <Badge variant="destructive" className="ml-auto">
+                      {liveStreams}
+                    </Badge>
+                  )}
                 </Link>
               );
             })}

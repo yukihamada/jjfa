@@ -13,6 +13,7 @@ import TrialClass from "./pages/TrialClass";
 import Articles from "./pages/Articles";
 import OperatingRules from "./pages/OperatingRules";
 import TokenRules from "./pages/TokenRules";
+import TournamentRules from "./pages/TournamentRules";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Roadmap from "./pages/Roadmap";
@@ -96,38 +97,18 @@ const App = () => {
                 <Route path="/" element={<Index />} />
                 <Route path="/whitepaper" element={<Whitepaper />} />
                 <Route path="/community-registration" element={<CommunityRegistration />} />
-                <Route 
-                  path="/community" 
-                  element={
-                    <ProtectedRoute>
-                      <Community />
-                    </ProtectedRoute>
-                  } 
-                />
+                <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
                 <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
                 <Route path="/trial-class" element={<TrialClass />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/operating-rules" element={<OperatingRules />} />
                 <Route path="/token-rules" element={<TokenRules />} />
+                <Route path="/tournament-rules" element={<TournamentRules />} />
                 <Route path="/nft" element={<NFT />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/careers" element={<Careers />} />
-                <Route 
-                  path="/roadmap" 
-                  element={
-                    <ProtectedRoute>
-                      <Roadmap />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/profile" 
-                  element={
-                    <ProtectedRoute>
-                      <Profile />
-                    </ProtectedRoute>
-                  } 
-                />
+                <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
+                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               </Routes>
             </main>
             <GlobalFooter />

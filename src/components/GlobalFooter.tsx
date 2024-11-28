@@ -13,6 +13,7 @@ const GlobalFooter = () => {
         { to: "/roadmap", label: "Roadmap" },
         { to: "/operating-rules", label: t('nav.operatingRules') },
         { to: "/token-rules", label: t('nav.tokenRules') },
+        { to: "/tournament-rules", label: "大会ルール" },
       ]
     },
     {

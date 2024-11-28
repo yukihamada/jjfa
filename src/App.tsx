@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import GlobalNav from "./components/GlobalNav";
 import GlobalFooter from "./components/GlobalFooter";
 import Index from "./pages/Index";
@@ -16,17 +16,67 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Roadmap from "./pages/Roadmap";
 import Profile from "./pages/Profile";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PasswordProtection } from "./components/PasswordProtection";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const queryClient = new QueryClient();
 
+// セッションを必要とするルート
+const protectedRoutes = [
+  '/community',
+  '/profile',
+  '/roadmap',
+];
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // セッションの設定（30分）
+    supabase.auth.setSession({
+      expires_in: 1800 // 30分 = 1800秒
+    });
+
+    // 初期セッションチェック
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+      setIsLoading(false);
+    };
+    checkSession();
+
+    // セッション状態の監視
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
+        setIsAuthenticated(!!session);
+        if (!session) {
+          toast.error("セッションが終了しました。再度ログインしてください。");
+        }
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   if (!isAuthenticated) {
     return <PasswordProtection onAuthenticated={() => setIsAuthenticated(true)} />;
   }
+
+  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    const currentPath = window.location.pathname;
+    
+    if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
+      toast.error("このページにアクセスするにはログインが必要です");
+      return <Navigate to="/" />;
+    }
+    
+    return <>{children}</>;
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -39,7 +89,14 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/whitepaper" element={<Whitepaper />} />
-                <Route path="/community" element={<Community />} />
+                <Route 
+                  path="/community" 
+                  element={
+                    <ProtectedRoute>
+                      <Community />
+                    </ProtectedRoute>
+                  } 
+                />
                 <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
                 <Route path="/trial-class" element={<TrialClass />} />
                 <Route path="/articles" element={<Articles />} />
@@ -47,8 +104,22 @@ const App = () => {
                 <Route path="/token-rules" element={<TokenRules />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/careers" element={<Careers />} />
-                <Route path="/roadmap" element={<Roadmap />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route 
+                  path="/roadmap" 
+                  element={
+                    <ProtectedRoute>
+                      <Roadmap />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/profile" 
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  } 
+                />
               </Routes>
             </main>
             <GlobalFooter />

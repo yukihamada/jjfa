@@ -657,26 +657,38 @@ export type Database = {
       }
       profiles: {
         Row: {
+          address: string | null
           bio: string | null
           created_at: string
           full_name: string | null
           id: string
+          membership_number: string | null
+          membership_status: string | null
+          phone: string | null
           updated_at: string
           username: string | null
         }
         Insert: {
+          address?: string | null
           bio?: string | null
           created_at?: string
           full_name?: string | null
           id: string
+          membership_number?: string | null
+          membership_status?: string | null
+          phone?: string | null
           updated_at?: string
           username?: string | null
         }
         Update: {
+          address?: string | null
           bio?: string | null
           created_at?: string
           full_name?: string | null
           id?: string
+          membership_number?: string | null
+          membership_status?: string | null
+          phone?: string | null
           updated_at?: string
           username?: string | null
         }

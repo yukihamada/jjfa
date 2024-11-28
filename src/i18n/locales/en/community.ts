@@ -1,52 +1,38 @@
 export const community = {
   title: "Community",
-  joinTitle: "Join Our Community",
-  joinSubtitle: "Share the beauty of Jiu-Jitsu in the JJFA community",
+  joinTitle: "Join JJFA Community",
+  joinSubtitle: "Register as a JJFA member to participate in tournaments, access exclusive content, and join our vibrant community",
   form: {
-    name: "Name",
     email: "Email",
-    submit: "Submit",
+    password: "Password",
+    signUp: "Sign Up",
+    signIn: "Sign In",
     success: {
       title: "Registration Successful",
-      description: "Thank you for joining our community. We'll be in touch soon!"
+      description: "Welcome to JJFA! Your membership application is being processed."
     },
     error: {
       title: "Registration Failed",
       description: "There was an error processing your registration. Please try again."
     }
   },
-  events: {
-    title: "Community Events",
-    tournament: {
-      title: "Monthly Tournament",
-      date: "Every 3rd Saturday",
-      description: "Official tournament open to all belts from white to black"
-    },
-    camp: {
-      title: "Hawaii Training Camp",
-      date: "February 28 - March 13, 2025",
-      description: "Intensive training with world champions"
-    },
-    seminar: {
-      title: "Technical Seminar",
-      date: "Every Sunday",
-      description: "Learn various techniques through technical seminars"
-    },
-    openmat: {
-      title: "Open Mat",
-      date: "Every Saturday",
-      description: "Free practice time available"
-    }
-  },
   benefits: {
     title: "Member Benefits",
-    exclusive: {
-      title: "Exclusive Content",
-      description: "Access to technique videos by top athletes and priority registration for online seminars"
+    tournament: {
+      title: "Tournament Entry",
+      description: "Participate in official JJFA tournaments and competitions"
     },
-    events: {
-      title: "Event Benefits",
-      description: "Priority booking and discounts for various events and tournaments"
+    training: {
+      title: "Training Programs",
+      description: "Access to special training programs and seminars"
+    },
+    community: {
+      title: "Community Access",
+      description: "Connect with other JJFA members and participate in community events"
+    },
+    ranking: {
+      title: "Official Ranking",
+      description: "Get officially recognized JJFA ranking and certifications"
     }
   }
 };

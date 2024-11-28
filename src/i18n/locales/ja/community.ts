@@ -1,52 +1,38 @@
 export const community = {
   title: "コミュニティ",
-  joinTitle: "コミュニティに参加する",
-  joinSubtitle: "JJFAコミュニティで柔術の素晴らしさを共有しましょう",
+  joinTitle: "JJFA会員登録",
+  joinSubtitle: "JJFA会員として登録すると、大会への参加、限定コンテンツの閲覧、コミュニティ活動への参加が可能になります",
   form: {
-    name: "お名前",
     email: "メールアドレス",
-    submit: "送信する",
+    password: "パスワード",
+    signUp: "新規登録",
+    signIn: "ログイン",
     success: {
       title: "登録完了",
-      description: "コミュニティへの参加ありがとうございます。追ってご連絡させていただきます。"
+      description: "JJFAへようこそ！会員申請を受け付けました。"
     },
     error: {
       title: "登録エラー",
       description: "登録処理中にエラーが発生しました。お手数ですが、再度お試しください。"
     }
   },
-  events: {
-    title: "コミュニティイベント",
-    tournament: {
-      title: "月例トーナメント",
-      date: "毎月第3土曜日",
-      description: "白帯から黒帯まで参加可能な公式トーナメント"
-    },
-    camp: {
-      title: "ハワイトレーニングキャンプ",
-      date: "2025年2月28日〜3月13日",
-      description: "世界チャンピオンと共に行う集中トレーニング"
-    },
-    seminar: {
-      title: "テクニカルセミナー",
-      date: "毎週日曜日",
-      description: "様々な技術を学べるセミナー"
-    },
-    openmat: {
-      title: "オープンマット",
-      date: "毎週土曜日",
-      description: "自由練習の時間を提供"
-    }
-  },
   benefits: {
     title: "会員特典",
-    exclusive: {
-      title: "限定コンテンツ",
-      description: "トップアスリートの技術動画やオンラインセミナーの優先登録"
+    tournament: {
+      title: "大会参加",
+      description: "JJFA公式大会・競技会への参加資格"
     },
-    events: {
-      title: "イベント特典",
-      description: "各種イベントやトーナメントの優先予約と割引"
+    training: {
+      title: "トレーニングプログラム",
+      description: "特別トレーニングプログラムやセミナーへの参加"
+    },
+    community: {
+      title: "コミュニティアクセス",
+      description: "JJFA会員との交流やコミュニティイベントへの参加"
+    },
+    ranking: {
+      title: "公式ランキング",
+      description: "JJFA公式ランキングと認定資格の取得"
     }
   }
 };

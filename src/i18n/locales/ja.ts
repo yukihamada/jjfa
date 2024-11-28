@@ -1,29 +1,33 @@
-import { nav } from './ja/nav';
-import { footer } from './ja/footer';
-import { contact } from './ja/contact';
 import { benefits } from './ja/benefits';
+import { comingSoon } from './ja/comingSoon';
+import { community } from './ja/community';
+import { contact } from './ja/contact';
+import { events } from './ja/events';
+import { footer } from './ja/footer';
+import { hero } from './ja/hero';
+import { nav } from './ja/nav';
+import { roadmap } from './ja/roadmap';
 import { services } from './ja/services';
 import { team } from './ja/team';
 import { token } from './ja/token';
-import { comingSoon } from './ja/comingSoon';
 import { whitepaper } from './ja/whitepaper';
-import { roadmap } from './ja/roadmap';
-import { hero } from './ja/hero';
-import { events } from './ja/events';
-import { community } from './ja/community';
+import { nft } from './ja/nft';
 
-export default {
-  nav,
-  footer,
-  contact,
+const ja = {
   benefits,
+  comingSoon,
+  community,
+  contact,
+  events,
+  footer,
+  hero,
+  nav,
+  roadmap,
   services,
   team,
   token,
-  comingSoon,
   whitepaper,
-  roadmap,
-  hero,
-  events,
-  community
+  nft
 };
+
+export default ja;

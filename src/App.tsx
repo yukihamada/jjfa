@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Roadmap from "./pages/Roadmap";
 import Profile from "./pages/Profile";
+import NFT from "./pages/NFT";
 import { useState, useEffect } from "react";
 import { PasswordProtection } from "./components/PasswordProtection";
 import { supabase } from "@/integrations/supabase/client";
@@ -108,6 +109,7 @@ const App = () => {
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/operating-rules" element={<OperatingRules />} />
                 <Route path="/token-rules" element={<TokenRules />} />
+                <Route path="/nft" element={<NFT />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/careers" element={<Careers />} />
                 <Route 

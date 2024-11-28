@@ -1,29 +1,33 @@
-import { nav } from './en/nav';
-import { footer } from './en/footer';
-import { contact } from './en/contact';
 import { benefits } from './en/benefits';
+import { comingSoon } from './en/comingSoon';
+import { community } from './en/community';
+import { contact } from './en/contact';
+import { events } from './en/events';
+import { footer } from './en/footer';
+import { hero } from './en/hero';
+import { nav } from './en/nav';
+import { roadmap } from './en/roadmap';
 import { services } from './en/services';
 import { team } from './en/team';
 import { token } from './en/token';
-import { comingSoon } from './en/comingSoon';
 import { whitepaper } from './en/whitepaper';
-import { roadmap } from './en/roadmap';
-import { hero } from './en/hero';
-import { events } from './en/events';
-import { community } from './en/community';
+import { nft } from './en/nft';
 
-export default {
-  nav,
-  footer,
-  contact,
+const en = {
   benefits,
+  comingSoon,
+  community,
+  contact,
+  events,
+  footer,
+  hero,
+  nav,
+  roadmap,
   services,
   team,
   token,
-  comingSoon,
   whitepaper,
-  roadmap,
-  hero,
-  events,
-  community
+  nft
 };
+
+export default en;

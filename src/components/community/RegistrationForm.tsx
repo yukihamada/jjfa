@@ -64,6 +64,7 @@ export const RegistrationForm = () => {
                   link_text: "すでにアカウントをお持ちの方",
                   password_input_placeholder: t('community.form.passwordPlaceholder'),
                   email_input_placeholder: t('community.form.emailPlaceholder'),
+                  confirmation_text: "確認メールを送信しました。メールをご確認ください。",
                 },
                 sign_in: {
                   email_label: t('community.form.email'),

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Globe, Users, GraduationCap, Lock } from "lucide-react";
 import { AttachmentUpload } from "./AttachmentUpload";
 import { AttachmentPreview } from "./AttachmentPreview";
 
@@ -22,10 +22,18 @@ const FormTips = () => (
   </div>
 );
 
+const visibilityOptions = [
+  { value: 'public', label: '全体に公開', icon: Globe },
+  { value: 'dojo', label: '道場内のみ', icon: Users },
+  { value: 'instructor', label: '先生のみ', icon: GraduationCap },
+  { value: 'private', label: '自分のみ', icon: Lock },
+];
+
 export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
+  const [visibility, setVisibility] = useState("public");
   const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
   const queryClient = useQueryClient();
 
@@ -42,10 +50,11 @@ export const DiscussionForm = () => {
   });
 
   const createDiscussion = useMutation({
-    mutationFn: async ({ title, content, tagId, attachments }: { 
+    mutationFn: async ({ title, content, tagId, visibility, attachments }: { 
       title: string; 
       content: string; 
       tagId: string;
+      visibility: string;
       attachments: { url: string; type: string }[];
     }) => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -58,6 +67,7 @@ export const DiscussionForm = () => {
             title,
             content,
             user_id: user.id,
+            visibility,
             attachments
           },
         ])
@@ -86,6 +96,7 @@ export const DiscussionForm = () => {
       setTitle("");
       setContent("");
       setSelectedTag("");
+      setVisibility("public");
       setAttachments([]);
       toast.success("投稿が完了しました！");
     },
@@ -100,7 +111,7 @@ export const DiscussionForm = () => {
       toast.error("タイトルと内容を入力してください");
       return;
     }
-    createDiscussion.mutate({ title, content, tagId: selectedTag, attachments });
+    createDiscussion.mutate({ title, content, tagId: selectedTag, visibility, attachments });
   };
 
   const handleAttachmentUpload = (newAttachments: { url: string; type: string }[]) => {
@@ -127,7 +138,7 @@ export const DiscussionForm = () => {
               className="w-full"
             />
           </div>
-          <div className="space-y-2">
+          <div className="grid gap-4 md:grid-cols-2">
             <Select value={selectedTag} onValueChange={setSelectedTag}>
               <SelectTrigger>
                 <SelectValue placeholder="カテゴリを選択" />
@@ -138,6 +149,24 @@ export const DiscussionForm = () => {
                     {tag.name}
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+            <Select value={visibility} onValueChange={setVisibility}>
+              <SelectTrigger>
+                <SelectValue placeholder="公開範囲を選択" />
+              </SelectTrigger>
+              <SelectContent>
+                {visibilityOptions.map((option) => {
+                  const Icon = option.icon;
+                  return (
+                    <SelectItem key={option.value} value={option.value}>
+                      <div className="flex items-center gap-2">
+                        <Icon className="w-4 h-4" />
+                        {option.label}
+                      </div>
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
           </div>

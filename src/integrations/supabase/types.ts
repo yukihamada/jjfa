@@ -313,6 +313,7 @@ export type Database = {
           title: string
           updated_at: string
           user_id: string
+          visibility: string
         }
         Insert: {
           attachments?: Json | null
@@ -323,6 +324,7 @@ export type Database = {
           title: string
           updated_at?: string
           user_id: string
+          visibility?: string
         }
         Update: {
           attachments?: Json | null
@@ -333,6 +335,7 @@ export type Database = {
           title?: string
           updated_at?: string
           user_id?: string
+          visibility?: string
         }
         Relationships: [
           {

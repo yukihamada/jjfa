@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MessageSquare, ThumbsUp, Calendar } from "lucide-react";
@@ -16,7 +17,10 @@ export const DiscussionList = () => {
           *,
           profiles:profiles(username, avatar_url),
           likes:likes(user_id),
-          comments:comments(id)
+          comments:comments(id),
+          discussion_tags!discussion_tags(
+            tags:tags(*)
+          )
         `)
         .order('created_at', { ascending: false });
 
@@ -49,7 +53,14 @@ export const DiscussionList = () => {
           <CardContent className="p-6">
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <h3 className="text-xl font-semibold text-slate-900">{discussion.title}</h3>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-xl font-semibold text-slate-900">{discussion.title}</h3>
+                  {discussion.discussion_tags?.map(({ tags }: any) => (
+                    <Badge key={tags.id} variant="secondary" className="text-xs">
+                      {tags.name}
+                    </Badge>
+                  ))}
+                </div>
                 <div className="flex items-center space-x-2 text-sm text-slate-500">
                   <div className="flex items-center">
                     {discussion.profiles?.avatar_url ? (

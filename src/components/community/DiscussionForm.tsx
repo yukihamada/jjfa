@@ -3,22 +3,36 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
   const queryClient = useQueryClient();
 
+  const { data: tags } = useQuery({
+    queryKey: ['tags'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('tags')
+        .select('*')
+        .order('name');
+      if (error) throw error;
+      return data;
+    },
+  });
+
   const createDiscussion = useMutation({
-    mutationFn: async ({ title, content }: { title: string; content: string }) => {
+    mutationFn: async ({ title, content, tagId }: { title: string; content: string; tagId: string }) => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("ログインが必要です");
 
-      const { data, error } = await supabase
+      const { data: discussion, error: discussionError } = await supabase
         .from("discussions")
         .insert([
           {
@@ -27,15 +41,31 @@ export const DiscussionForm = () => {
             user_id: user.id,
           },
         ])
-        .select();
+        .select()
+        .single();
 
-      if (error) throw error;
-      return data;
+      if (discussionError) throw discussionError;
+
+      if (tagId) {
+        const { error: tagError } = await supabase
+          .from("discussion_tags")
+          .insert([
+            {
+              discussion_id: discussion.id,
+              tag_id: tagId,
+            },
+          ]);
+
+        if (tagError) throw tagError;
+      }
+
+      return discussion;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["discussions"] });
       setTitle("");
       setContent("");
+      setSelectedTag("");
       toast.success("投稿が完了しました");
     },
     onError: (error) => {
@@ -49,7 +79,7 @@ export const DiscussionForm = () => {
       toast.error("タイトルと内容を入力してください");
       return;
     }
-    createDiscussion.mutate({ title, content });
+    createDiscussion.mutate({ title, content, tagId: selectedTag });
   };
 
   return (
@@ -66,6 +96,20 @@ export const DiscussionForm = () => {
               onChange={(e) => setTitle(e.target.value)}
               className="w-full"
             />
+          </div>
+          <div className="space-y-2">
+            <Select value={selectedTag} onValueChange={setSelectedTag}>
+              <SelectTrigger>
+                <SelectValue placeholder="カテゴリを選択" />
+              </SelectTrigger>
+              <SelectContent>
+                {tags?.map((tag) => (
+                  <SelectItem key={tag.id} value={tag.id}>
+                    {tag.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-2">
             <Textarea

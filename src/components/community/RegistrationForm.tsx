@@ -20,6 +20,11 @@ export const RegistrationForm = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  // 開発環境ではHTTP、本番環境ではHTTPSを使用
+  const redirectUrl = import.meta.env.DEV 
+    ? 'http://localhost:5173/community'
+    : `${window.location.origin}/community`;
+
   return (
     <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-bottom-4">
       <CardHeader className="space-y-2">
@@ -54,6 +59,7 @@ export const RegistrationForm = () => {
               }
             }}
             providers={['google']}
+            redirectTo={redirectUrl}
             view="sign_up"
             localization={{
               variables: {

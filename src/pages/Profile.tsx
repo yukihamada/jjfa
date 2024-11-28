@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Loader2, Mail, User, Phone, MapPin, Award, CreditCard, Shield } from "lucide-react";
+import { Loader2, Mail, User, Phone, MapPin } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -20,6 +20,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import { FighterCard } from "@/components/profile/FighterCard";
+import { MembershipCard } from "@/components/profile/MembershipCard";
+import { DAOCard } from "@/components/profile/DAOCard";
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -116,6 +119,11 @@ const Profile = () => {
     setUpdating(false);
   };
 
+  const handlePurchaseNFT = () => {
+    // TODO: Implement NFT purchase logic
+    toast.info("社員権NFTの購入機能は準備中です");
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -131,7 +139,7 @@ const Profile = () => {
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="profile">基本情報</TabsTrigger>
-          <TabsTrigger value="status">ステータス</TabsTrigger>
+          <TabsTrigger value="membership">会員情報</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile">
@@ -239,74 +247,13 @@ const Profile = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="status">
+        <TabsContent value="membership">
           <div className="grid gap-6 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>選手登録情報</CardTitle>
-                <CardDescription>現在の選手としての状態</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {fighter ? (
-                  <>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Award className="w-4 h-4 text-blue-500" />
-                      <span className="font-medium">所属道場:</span>
-                      <span>{fighter.dojo?.name || "未所属"}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Shield className="w-4 h-4 text-purple-500" />
-                      <span className="font-medium">帯:</span>
-                      <span style={{ color: fighter.belt?.color }}>
-                        {fighter.belt?.name || "未設定"}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Award className="w-4 h-4 text-yellow-500" />
-                      <span className="font-medium">試合成績:</span>
-                      <span>{fighter.wins}勝 {fighter.losses}敗 {fighter.draws}分</span>
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-sm text-gray-500">
-                    選手登録がありません
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>会員情報</CardTitle>
-                <CardDescription>JJFA会員としての状態</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {member ? (
-                  <>
-                    <div className="flex items-center gap-2 text-sm">
-                      <CreditCard className="w-4 h-4 text-green-500" />
-                      <span className="font-medium">会員番号:</span>
-                      <span>{member.membership_number}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Shield className="w-4 h-4 text-blue-500" />
-                      <span className="font-medium">会員ステータス:</span>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        member.membership_status === 'active' 
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}>
-                        {member.membership_status === 'active' ? '有効' : '審査中'}
-                      </span>
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-sm text-gray-500">
-                    会員登録がありません
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+            <div className="space-y-6">
+              <FighterCard fighter={fighter} />
+              <MembershipCard member={member} onPurchaseNFT={handlePurchaseNFT} />
+            </div>
+            <DAOCard onPurchaseNFT={handlePurchaseNFT} />
           </div>
         </TabsContent>
       </Tabs>

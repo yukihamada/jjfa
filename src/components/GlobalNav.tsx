@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Menu, Home, Users, Star, FileText, MessageCircle, User, LogOut } from "lucide-react";
+import { Menu, Home, Users, Star, FileText, MessageCircle, User, LogOut, Video } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
@@ -52,6 +52,7 @@ const GlobalNav = () => {
     { to: "/community", label: t('nav.community'), icon: Users },
     { to: "/jiujitsu-benefits", label: t('nav.benefits'), icon: Star },
     { to: "/whitepaper", label: t('nav.whitepaper'), icon: FileText },
+    { to: "/live", label: t('nav.live'), icon: Video },
     { to: "/contact", label: t('nav.contact'), icon: MessageCircle },
   ];
 
@@ -71,7 +72,7 @@ const GlobalNav = () => {
 
             <nav className="hidden lg:flex items-center gap-2">
               <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1">
-                {menuItems.slice(0, 4).map((item) => {
+                {menuItems.slice(0, 5).map((item) => {
                   const Icon = item.icon;
                   return (
                     <Link 

@@ -8,5 +8,6 @@ export const nav = {
   articles: "Articles",
   careers: "Careers",
   operatingRules: "Operating Rules",
-  tokenRules: "Token Rules"
+  tokenRules: "Token Rules",
+  live: "Live Streaming"
 };

@@ -8,5 +8,6 @@ export const nav = {
   articles: "定款",
   careers: "採用情報",
   operatingRules: "運営規則",
-  tokenRules: "トークン規程"
+  tokenRules: "トークン規程",
+  live: "ライブ配信"
 };

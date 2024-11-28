@@ -1,46 +1,13 @@
 import { Database } from './base';
 
-export interface ProfilesTable extends Database['public']['Tables'] {
+export type Profile = Database['public']['Tables']['profiles']['Row'];
+export type ProfileInsert = Database['public']['Tables']['profiles']['Insert'];
+export type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
+
+export interface ProfilesTable {
   profiles: {
-    Row: {
-      id: string;
-      username?: string;
-      full_name?: string;
-      bio?: string;
-      created_at: string;
-      updated_at: string;
-      membership_status?: string;
-      membership_number?: string;
-      phone?: string;
-      address?: string;
-      avatar_url?: string;
-    };
-    Insert: {
-      id: string;
-      username?: string;
-      full_name?: string;
-      bio?: string;
-      created_at?: string;
-      updated_at?: string;
-      membership_status?: string;
-      membership_number?: string;
-      phone?: string;
-      address?: string;
-      avatar_url?: string;
-    };
-    Update: {
-      id?: string;
-      username?: string;
-      full_name?: string;
-      bio?: string;
-      created_at?: string;
-      updated_at?: string;
-      membership_status?: string;
-      membership_number?: string;
-      phone?: string;
-      address?: string;
-      avatar_url?: string;
-    };
-    Relationships: [];
+    Row: Profile;
+    Insert: ProfileInsert;
+    Update: ProfileUpdate;
   };
 }

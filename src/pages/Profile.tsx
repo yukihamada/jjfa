@@ -10,15 +10,13 @@ import { DAOCard } from "@/components/profile/DAOCard";
 import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { AccountSettings } from "@/components/profile/AccountSettings";
 import { ProfileForm } from "@/components/profile/ProfileForm";
-import type { ProfilesTable } from "@/integrations/supabase/types";
+import { Profile } from "@/integrations/supabase/types";
 
-type Profile = ProfilesTable['profiles']['Row'];
-
-const Profile = () => {
+const ProfilePage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [fighter, setFighter] = useState<any>(null);
   const [member, setMember] = useState<any>(null);
 
@@ -75,7 +73,7 @@ const Profile = () => {
     if (error) {
       toast.error("プロフィール写真の更新に失敗しました");
     } else {
-      setProfile({ ...profile, avatar_url: photoUrl });
+      setProfile(profile ? { ...profile, avatar_url: photoUrl } : null);
     }
   };
 
@@ -151,4 +149,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

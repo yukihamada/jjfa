@@ -48,11 +48,12 @@ export const RegistrationForm = () => {
                 container: 'space-y-0',
                 divider: 'hidden',
                 button: 'bg-slate-800 hover:bg-slate-700',
-                providers: 'text-white'
+                anchor: 'text-slate-600 hover:text-slate-800'
               }
             }}
             providers={["google"]}
             view="sign_up"
+            showLinks={true}
             redirectTo={window.location.origin}
             localization={{
               variables: {
@@ -75,6 +76,8 @@ export const RegistrationForm = () => {
                 forgotten_password: {
                   link_text: t('community.form.forgotPassword'),
                   button_label: t('community.form.resetPassword'),
+                  email_label: t('community.form.email'),
+                  email_input_placeholder: t('community.form.emailPlaceholder'),
                 }
               }
             }}

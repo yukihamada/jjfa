@@ -122,48 +122,124 @@ export type Database = {
         }
         Relationships: []
       }
+      competition_entries: {
+        Row: {
+          competition_id: number | null
+          created_at: string
+          entry_status: string | null
+          fighter_id: string | null
+          id: string
+          jjfa_member_id: string | null
+          updated_at: string
+          weight_division: string | null
+        }
+        Insert: {
+          competition_id?: number | null
+          created_at?: string
+          entry_status?: string | null
+          fighter_id?: string | null
+          id?: string
+          jjfa_member_id?: string | null
+          updated_at?: string
+          weight_division?: string | null
+        }
+        Update: {
+          competition_id?: number | null
+          created_at?: string
+          entry_status?: string | null
+          fighter_id?: string | null
+          id?: string
+          jjfa_member_id?: string | null
+          updated_at?: string
+          weight_division?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_entries_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_entries_fighter_id_fkey"
+            columns: ["fighter_id"]
+            isOneToOne: false
+            referencedRelation: "fighters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competition_entries_jjfa_member_id_fkey"
+            columns: ["jjfa_member_id"]
+            isOneToOne: false
+            referencedRelation: "jjfa_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       competitions: {
         Row: {
           created_at: string | null
           date: string
           description: string | null
+          entry_categories: Json | null
+          entry_count: number | null
+          entry_deadline: string | null
           entry_fee: number | null
-          entry_link: string | null
           format: string
           id: number
           location: string
           name: string
           organizer: string
+          registration_deadline: string | null
+          rules_pdf_url: string | null
           team_size: number | null
           team_weight_limit: number | null
+          weigh_in_end: string | null
+          weigh_in_start: string | null
+          weight_classes: string[] | null
         }
         Insert: {
           created_at?: string | null
           date: string
           description?: string | null
+          entry_categories?: Json | null
+          entry_count?: number | null
+          entry_deadline?: string | null
           entry_fee?: number | null
-          entry_link?: string | null
           format?: string
           id?: number
           location: string
           name: string
           organizer: string
+          registration_deadline?: string | null
+          rules_pdf_url?: string | null
           team_size?: number | null
           team_weight_limit?: number | null
+          weigh_in_end?: string | null
+          weigh_in_start?: string | null
+          weight_classes?: string[] | null
         }
         Update: {
           created_at?: string | null
           date?: string
           description?: string | null
+          entry_categories?: Json | null
+          entry_count?: number | null
+          entry_deadline?: string | null
           entry_fee?: number | null
-          entry_link?: string | null
           format?: string
           id?: number
           location?: string
           name?: string
           organizer?: string
+          registration_deadline?: string | null
+          rules_pdf_url?: string | null
           team_size?: number | null
           team_weight_limit?: number | null
+          weigh_in_end?: string | null
+          weigh_in_start?: string | null
+          weight_classes?: string[] | null
         }
         Relationships: []
       }
@@ -310,18 +386,22 @@ export type Database = {
           competition_experience: number | null
           created_at: string
           dojo_id: string | null
+          draws: number | null
           entrance_music: string | null
           height: number | null
           id: string
           is_active: boolean | null
+          losses: number | null
           nickname: string | null
           preferred_stance: string | null
           profile_photo: string | null
           reach: number | null
           social_media_links: Json | null
+          total_matches: number | null
           updated_at: string
           user_id: string | null
           weight: number | null
+          wins: number | null
         }
         Insert: {
           achievements?: string[] | null
@@ -330,18 +410,22 @@ export type Database = {
           competition_experience?: number | null
           created_at?: string
           dojo_id?: string | null
+          draws?: number | null
           entrance_music?: string | null
           height?: number | null
           id?: string
           is_active?: boolean | null
+          losses?: number | null
           nickname?: string | null
           preferred_stance?: string | null
           profile_photo?: string | null
           reach?: number | null
           social_media_links?: Json | null
+          total_matches?: number | null
           updated_at?: string
           user_id?: string | null
           weight?: number | null
+          wins?: number | null
         }
         Update: {
           achievements?: string[] | null
@@ -350,18 +434,22 @@ export type Database = {
           competition_experience?: number | null
           created_at?: string
           dojo_id?: string | null
+          draws?: number | null
           entrance_music?: string | null
           height?: number | null
           id?: string
           is_active?: boolean | null
+          losses?: number | null
           nickname?: string | null
           preferred_stance?: string | null
           profile_photo?: string | null
           reach?: number | null
           social_media_links?: Json | null
+          total_matches?: number | null
           updated_at?: string
           user_id?: string | null
           weight?: number | null
+          wins?: number | null
         }
         Relationships: [
           {
@@ -379,6 +467,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      jjfa_members: {
+        Row: {
+          created_at: string
+          id: string
+          membership_number: string | null
+          membership_status: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          membership_number?: string | null
+          membership_status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          membership_number?: string | null
+          membership_status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
       }
       likes: {
         Row: {
@@ -454,13 +569,17 @@ export type Database = {
       matches: {
         Row: {
           blue_fighter_id: string | null
+          blue_score: number | null
           competition_id: number | null
           created_at: string
           id: string
           match_number: number
+          match_result: string | null
           match_time: string | null
+          notes: string | null
           number_of_rounds: number | null
           red_fighter_id: string | null
+          red_score: number | null
           referee_id: string | null
           round_duration: number | null
           status: string | null
@@ -469,13 +588,17 @@ export type Database = {
         }
         Insert: {
           blue_fighter_id?: string | null
+          blue_score?: number | null
           competition_id?: number | null
           created_at?: string
           id?: string
           match_number: number
+          match_result?: string | null
           match_time?: string | null
+          notes?: string | null
           number_of_rounds?: number | null
           red_fighter_id?: string | null
+          red_score?: number | null
           referee_id?: string | null
           round_duration?: number | null
           status?: string | null
@@ -484,13 +607,17 @@ export type Database = {
         }
         Update: {
           blue_fighter_id?: string | null
+          blue_score?: number | null
           competition_id?: number | null
           created_at?: string
           id?: string
           match_number?: number
+          match_result?: string | null
           match_time?: string | null
+          notes?: string | null
           number_of_rounds?: number | null
           red_fighter_id?: string | null
+          red_score?: number | null
           referee_id?: string | null
           round_duration?: number | null
           status?: string | null
@@ -570,24 +697,6 @@ export type Database = {
         }
         Relationships: []
       }
-      users: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-        }
-        Relationships: []
-      }
       videos: {
         Row: {
           category: string | null
@@ -658,6 +767,7 @@ export type Database = {
         Row: {
           competition_id: number | null
           created_at: string
+          entry_status: string | null
           fighter_id: string | null
           id: string
           status: string | null
@@ -667,6 +777,7 @@ export type Database = {
         Insert: {
           competition_id?: number | null
           created_at?: string
+          entry_status?: string | null
           fighter_id?: string | null
           id?: string
           status?: string | null
@@ -676,6 +787,7 @@ export type Database = {
         Update: {
           competition_id?: number | null
           created_at?: string
+          entry_status?: string | null
           fighter_id?: string | null
           id?: string
           status?: string | null

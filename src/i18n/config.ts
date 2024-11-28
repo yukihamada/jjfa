@@ -17,6 +17,7 @@ i18n
       es: { translation: es }
     },
     fallbackLng: 'ja',
+    lng: 'ja', // Set Japanese as the default language
     detection: {
       order: ['navigator', 'htmlTag', 'path', 'localStorage'],
       lookupFromPathIndex: 0,

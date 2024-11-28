@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Award, Shield } from "lucide-react";
+import { FighterRegistrationForm } from "./FighterRegistrationForm";
 
 interface FighterCardProps {
   fighter: any;
+  onRegistrationSuccess: () => void;
 }
 
-export const FighterCard = ({ fighter }: FighterCardProps) => {
+export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps) => {
   return (
     <Card>
       <CardHeader>
@@ -32,10 +35,28 @@ export const FighterCard = ({ fighter }: FighterCardProps) => {
               <span className="font-medium">試合成績:</span>
               <span>{fighter.wins}勝 {fighter.losses}敗 {fighter.draws}分</span>
             </div>
+            {fighter.weight && (
+              <div className="text-sm">
+                <span className="font-medium">体重:</span> {fighter.weight}kg
+              </div>
+            )}
+            {fighter.height && (
+              <div className="text-sm">
+                <span className="font-medium">身長:</span> {fighter.height}cm
+              </div>
+            )}
+            {fighter.preferred_stance && (
+              <div className="text-sm">
+                <span className="font-medium">スタンス:</span> {fighter.preferred_stance}
+              </div>
+            )}
           </>
         ) : (
-          <div className="text-sm text-gray-500">
-            選手登録がありません
+          <div className="space-y-4">
+            <div className="text-sm text-gray-500 mb-4">
+              選手登録がありません。以下のフォームから登録できます。
+            </div>
+            <FighterRegistrationForm onSuccess={onRegistrationSuccess} />
           </div>
         )}
       </CardContent>

@@ -124,6 +124,21 @@ const Profile = () => {
     toast.info("社員権NFTの購入機能は準備中です");
   };
 
+  const refreshFighterData = async () => {
+    if (!user) return;
+    
+    const { data: fighter } = await supabase
+      .from("fighters")
+      .select(`
+        *,
+        belt:belts(name, color),
+        dojo:dojos(name)
+      `)
+      .eq("user_id", user.id)
+      .single();
+    setFighter(fighter);
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -250,8 +265,14 @@ const Profile = () => {
         <TabsContent value="membership">
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-6">
-              <FighterCard fighter={fighter} />
-              <MembershipCard member={member} onPurchaseNFT={handlePurchaseNFT} />
+              <FighterCard 
+                fighter={fighter} 
+                onRegistrationSuccess={refreshFighterData}
+              />
+              <MembershipCard 
+                member={member} 
+                onPurchaseNFT={handlePurchaseNFT} 
+              />
             </div>
             <DAOCard onPurchaseNFT={handlePurchaseNFT} />
           </div>

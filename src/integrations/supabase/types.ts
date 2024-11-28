@@ -243,6 +243,36 @@ export type Database = {
         }
         Relationships: []
       }
+      dao_memberships: {
+        Row: {
+          created_at: string
+          id: string
+          nft_token_id: string | null
+          purchase_date: string | null
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nft_token_id?: string | null
+          purchase_date?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nft_token_id?: string | null
+          purchase_date?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       discussion_tags: {
         Row: {
           discussion_id: string

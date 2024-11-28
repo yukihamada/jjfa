@@ -5,12 +5,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { CommunityGuidelines } from "./CommunityGuidelines";
 import { DiscussionCard } from "./DiscussionCard";
+import { DiscussionSearch } from "./DiscussionSearch";
+import { DiscussionSort } from "./DiscussionSort";
+import { TagFilter } from "./TagFilter";
+import { useState } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export const DiscussionList = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("newest");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const debouncedSearch = useDebounce(searchQuery, 300);
+
   const { data: discussions, isLoading, error } = useQuery({
-    queryKey: ['discussions'],
+    queryKey: ['discussions', debouncedSearch, sortBy, selectedTags],
     queryFn: async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from('discussions')
         .select(`
           *,
@@ -21,8 +31,31 @@ export const DiscussionList = () => {
             id,
             name
           )
-        `)
-        .order('created_at', { ascending: false });
+        `);
+
+      // Search filter
+      if (debouncedSearch) {
+        query = query.or(`title.ilike.%${debouncedSearch}%,content.ilike.%${debouncedSearch}%`);
+      }
+
+      // Tag filter
+      if (selectedTags.length > 0) {
+        query = query.in('tags.id', selectedTags);
+      }
+
+      // Sort
+      switch (sortBy) {
+        case 'popular':
+          query = query.order('likes.length', { ascending: false });
+          break;
+        case 'comments':
+          query = query.order('comments.length', { ascending: false });
+          break;
+        default:
+          query = query.order('created_at', { ascending: false });
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error('Supabase error:', error);
@@ -32,6 +65,14 @@ export const DiscussionList = () => {
       return data;
     },
   });
+
+  const handleTagSelect = (tagId: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tagId) 
+        ? prev.filter(id => id !== tagId)
+        : [...prev, tagId]
+    );
+  };
 
   if (error) {
     return (
@@ -60,20 +101,20 @@ export const DiscussionList = () => {
     );
   }
 
-  if (!discussions || discussions.length === 0) {
-    return (
-      <div className="text-center py-8 text-slate-600">
-        まだ投稿がありません。最初の投稿を作成してみましょう！
-      </div>
-    );
-  }
-
-  const adminDiscussions = discussions.filter(d => d.tags?.some((tag: any) => tag.name === '運営'));
-  const otherDiscussions = discussions.filter(d => !d.tags?.some((tag: any) => tag.name === '運営'));
+  const adminDiscussions = discussions?.filter(d => d.tags?.some((tag: any) => tag.name === '運営')) || [];
+  const otherDiscussions = discussions?.filter(d => !d.tags?.some((tag: any) => tag.name === '運営')) || [];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <CommunityGuidelines />
+      
+      <div className="grid gap-4 md:grid-cols-[1fr_auto]">
+        <DiscussionSearch onSearch={setSearchQuery} />
+        <DiscussionSort onSort={setSortBy} />
+      </div>
+
+      <TagFilter selectedTags={selectedTags} onTagSelect={handleTagSelect} />
+
       <Tabs defaultValue="all" className="space-y-4">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="all">すべての投稿</TabsTrigger>
@@ -86,6 +127,11 @@ export const DiscussionList = () => {
           {otherDiscussions.map((discussion) => (
             <DiscussionCard key={discussion.id} discussion={discussion} />
           ))}
+          {adminDiscussions.length === 0 && otherDiscussions.length === 0 && (
+            <div className="text-center py-8 text-slate-600">
+              投稿が見つかりませんでした。
+            </div>
+          )}
         </TabsContent>
         <TabsContent value="admin" className="space-y-4">
           {adminDiscussions.length > 0 ? (

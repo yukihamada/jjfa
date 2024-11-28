@@ -12,17 +12,17 @@ export const Chapter1 = () => {
 
       <TokenRulesArticle title="第2条（トークンの種類と機能）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>社員権トークン（Equity Token）
+          <li>JJFAメンバートークン（JJFA Member Token）
             <ul className="list-disc pl-6 mt-2">
-              <li>当会社の社員資格を証するデジタル資産。</li>
+              <li>当会社の会員資格を証するデジタル資産。</li>
               <li>主な機能と権利：
                 <ol className="list-decimal pl-6">
                   <li>利益配分権：事業利益を保有割合に応じて分配する権利。</li>
                   <li>議決権：DAO総会での重要事項に投票する権利。</li>
-                  <li>特典利用権：社員専用イベントや限定サービスへの優先参加権。</li>
+                  <li>特典利用権：会員専用イベントや限定サービスへの優先参加権。</li>
                 </ol>
               </li>
-              <li>トークン譲渡に伴い社員資格が移転する。</li>
+              <li>トークン譲渡に伴い会員資格が移転する。</li>
             </ul>
           </li>
           <li>ガバナンストークン（Governance Token）

@@ -1,11 +1,11 @@
 export const token = {
   title: "JJFA Token Benefits",
-  discount: {
-    title: "Tournament Entry Discount",
-    description: "Token holders can always register at early bird prices."
+  member: {
+    title: "JJFA Member Token",
+    description: "Represents membership rights and enables participation in profit sharing and decision-making."
   },
-  content: {
-    title: "Exclusive Content",
-    description: "Access to technical videos from top athletes and online seminars."
+  governance: {
+    title: "Governance Token",
+    description: "Enables participation in daily operations and community governance."
   }
 };

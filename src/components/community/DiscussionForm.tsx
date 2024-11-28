@@ -9,6 +9,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
+const FormTips = () => (
+  <div className="bg-green-50 p-4 rounded-lg mb-4">
+    <h3 className="text-sm font-medium text-green-800 mb-2">投稿のヒント</h3>
+    <ul className="text-sm text-green-700 space-y-1">
+      <li>• 具体的な状況や気持ちを共有すると、より良いアドバイスが得られやすいです</li>
+      <li>• 質問は明確に、そして遠慮なく。誰もが最初は初心者でした</li>
+      <li>• 他の人の経験も参考になります。検索してみましょう</li>
+    </ul>
+  </div>
+);
+
 export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -66,7 +77,7 @@ export const DiscussionForm = () => {
       setTitle("");
       setContent("");
       setSelectedTag("");
-      toast.success("投稿が完了しました");
+      toast.success("投稿が完了しました！");
     },
     onError: (error) => {
       toast.error(`投稿に失敗しました: ${error.message}`);
@@ -88,6 +99,7 @@ export const DiscussionForm = () => {
         <CardTitle>新しい投稿を作成</CardTitle>
       </CardHeader>
       <CardContent>
+        <FormTips />
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Input

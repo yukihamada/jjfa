@@ -10,6 +10,10 @@ import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
 import { SafetyMeasures } from "@/components/tournament-rules/sections/SafetyMeasures";
 import { TechnologyIntegration } from "@/components/tournament-rules/sections/TechnologyIntegration";
+import { CareerDevelopment } from "@/components/tournament-rules/sections/CareerDevelopment";
+import { GlobalStandards } from "@/components/tournament-rules/sections/GlobalStandards";
+import { CommunityEngagement } from "@/components/tournament-rules/sections/CommunityEngagement";
+import { Sustainability } from "@/components/tournament-rules/sections/Sustainability";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -55,6 +59,10 @@ const TournamentRules = () => {
               <PointSystem />
               <SafetyMeasures />
               <TechnologyIntegration />
+              <CareerDevelopment />
+              <GlobalStandards />
+              <CommunityEngagement />
+              <Sustainability />
             </div>
           </div>
         </div>

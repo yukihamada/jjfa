@@ -6,20 +6,12 @@ export const TableOfContents = () => {
     { id: "match-format", title: "試合形式" },
     { id: "team-rules", title: "団体戦ルール" },
     { id: "point-system", title: "ポイントシステム" },
-    { id: "valid-techniques", title: "有効技" },
-    { id: "prohibited-techniques", title: "禁止技" },
     { id: "safety-measures", title: "安全対策" },
-    { id: "emergency-response", title: "緊急時の対応" },
-    { id: "eligibility", title: "参加資格" },
-    { id: "player-responsibilities", title: "選手の責任" },
-    { id: "manners", title: "マナーと礼儀" },
-    { id: "uniform", title: "ユニフォーム規定" },
-    { id: "referee", title: "レフェリーと試合進行" },
-    { id: "conduct", title: "行動規範" },
-    { id: "ranking", title: "大会チーム・個人ランキング" },
-    { id: "doping", title: "ドーピング管理" },
-    { id: "qualification", title: "資格とチーム移籍" },
-    { id: "awards", title: "表彰とメダル授与" },
+    { id: "technology-integration", title: "テクノロジー統合" },
+    { id: "career-development", title: "選手キャリア開発" },
+    { id: "global-standards", title: "国際標準化" },
+    { id: "community-engagement", title: "コミュニティ参加" },
+    { id: "sustainability", title: "持続可能性への取り組み" }
   ];
 
   return (

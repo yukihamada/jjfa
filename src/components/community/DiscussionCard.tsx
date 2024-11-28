@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, ThumbsUp, Calendar, Heart, Megaphone } from "lucide-react";
+import { MessageSquare, ThumbsUp, Calendar, Heart, Megaphone, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { AttachmentPreview } from "./AttachmentPreview";
@@ -9,6 +9,17 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface DiscussionCardProps {
   discussion: any;
@@ -16,6 +27,7 @@ interface DiscussionCardProps {
 
 export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
   const [isLiking, setIsLiking] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const queryClient = useQueryClient();
   const isAdminPost = discussion.tags?.some((tag: any) => tag.name === '運営');
 
@@ -50,6 +62,31 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
     } finally {
       setIsLiking(false);
     }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+      const { error } = await supabase
+        .from('discussions')
+        .delete()
+        .eq('id', discussion.id);
+
+      if (error) throw error;
+
+      queryClient.invalidateQueries({ queryKey: ['discussions'] });
+      toast.success("投稿を削除しました");
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error("削除に失敗しました");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const canDelete = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    return user?.id === discussion.user_id;
   };
 
   return (
@@ -101,6 +138,37 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
               </div>
             </div>
           </div>
+          {canDelete() && (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-slate-500 hover:text-red-600"
+                  disabled={isDeleting}
+                >
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>投稿を削除しますか？</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    この操作は取り消すことができません。
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>キャンセル</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleDelete}
+                    className="bg-red-500 hover:bg-red-600"
+                  >
+                    削除する
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
         </div>
         <p className="mt-4 text-slate-600 whitespace-pre-wrap leading-relaxed">
           {discussion.content}

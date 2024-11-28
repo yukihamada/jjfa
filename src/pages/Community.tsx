@@ -8,6 +8,7 @@ import { DiscussionList } from "@/components/community/DiscussionList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { NotificationBell } from "@/components/community/NotificationBell";
 
 const Community = () => {
   const { t } = useTranslation();
@@ -47,8 +48,11 @@ const Community = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
-      <PageTitle title="コミュニティ掲示板" />
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center mb-8">
+          <PageTitle title="コミュニティ掲示板" />
+          <NotificationBell />
+        </div>
         <div className="max-w-3xl mx-auto">
           <Tabs defaultValue="discussions" className="space-y-8">
             <TabsList className="grid w-full grid-cols-2">

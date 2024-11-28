@@ -75,3 +75,56 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 2cm;
+  }
+
+  body {
+    background: white;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .prose {
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 24pt;
+    margin-bottom: 1cm;
+  }
+
+  h2 {
+    font-size: 18pt;
+    margin-top: 1cm;
+    margin-bottom: 0.5cm;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14pt;
+    margin-top: 0.5cm;
+    margin-bottom: 0.3cm;
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}

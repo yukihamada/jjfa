@@ -1,31 +1,60 @@
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import { PageTitle } from "@/components/PageTitle";
 import { TableOfContents } from "@/components/tournament-rules/TableOfContents";
 import { RuleSection } from "@/components/tournament-rules/RuleSection";
 import { RuleItem } from "@/components/tournament-rules/RuleItem";
+import { Button } from "@/components/ui/button";
+import { Printer } from "lucide-react";
 
 const TournamentRules = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useReactToPrint({
+    content: () => contentRef.current,
+  });
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <PageTitle title="JJFA公式大会ルール" />
-      
-      <div className="prose prose-slate max-w-none">
-        <p className="text-lg mb-8">
-          JiuFightトーナメントは、柔術の技術と戦略を最大限に引き出すために設計された独自のルールセットを採用しています。
-          このルールセットは、攻撃的な柔術を奨励し、試合のペースを速く保ちながら、選手の安全を確保することを目的としています。
-        </p>
+    <div className="min-h-screen bg-slate-50 py-12">
+      <div className="container mx-auto px-4 max-w-5xl bg-white shadow-lg rounded-lg print:shadow-none">
+        <div className="p-8" ref={contentRef}>
+          <div className="flex justify-between items-center mb-8">
+            <PageTitle title="JJFA公式大会ルール" />
+            <Button
+              onClick={handlePrint}
+              className="print:hidden flex items-center gap-2"
+            >
+              <Printer className="w-4 h-4" />
+              印刷する
+            </Button>
+          </div>
+          
+          <div className="prose prose-slate max-w-none">
+            <div className="text-center mb-12">
+              <img 
+                src="/OGP.png" 
+                alt="JJFA Logo" 
+                className="mx-auto w-32 h-auto mb-6"
+              />
+              <p className="text-lg text-slate-600 mb-8">
+                JiuFightトーナメントは、柔術の技術と戦略を最大限に引き出すために設計された独自のルールセットを採用しています。
+                このルールセットは、攻撃的な柔術を奨励し、試合のペースを速く保ちながら、選手の安全を確保することを目的としています。
+              </p>
+            </div>
 
-        <TableOfContents />
+            <TableOfContents />
 
-        <RuleSection id="introduction" title="はじめに">
-          <RuleItem
-            title="JJFAの理念と目的"
-            description="柔術をすべての人に身近なものとし、コミュニティの持続可能な成長と公正な価値分配を目指します。"
-          />
-          <RuleItem
-            title="JiuFightのコンセプト"
-            description="柔術の新時代を切り開く、技術と競技精神を重視した大会です。"
-          />
-        </RuleSection>
+            <div className="space-y-12">
+              <RuleSection id="introduction" title="はじめに">
+                <RuleItem
+                  title="JJFAの理念と目的"
+                  description="柔術をすべての人に身近なものとし、コミュニティの持続可能な成長と公正な価値分配を目指します。"
+                />
+                <RuleItem
+                  title="JiuFightのコンセプト"
+                  description="柔術の新時代を切り開く、技術と競技精神を重視した大会です。"
+                />
+              </RuleSection>
 
         <RuleSection id="match-format" title="試合形式">
           <RuleItem
@@ -104,6 +133,9 @@ const TournamentRules = () => {
             description="上位3位以内の競技者は表彰台に立ち、セレモニーに参加します。"
           />
         </RuleSection>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

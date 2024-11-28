@@ -23,17 +23,18 @@ export const TableOfContents = () => {
   ];
 
   return (
-    <nav className="bg-slate-50 p-4 rounded-lg mb-8">
-      <h2 className="text-lg font-bold mb-4">目次</h2>
-      <ul className="space-y-2">
+    <nav className="bg-slate-100 p-6 rounded-lg mb-12 print:border print:border-slate-200">
+      <h2 className="text-xl font-bold mb-6 text-center border-b pb-4">目次</h2>
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {sections.map((section) => (
           <li key={section.id}>
             <Link
               to={section.id}
               smooth={true}
               duration={500}
-              className="text-blue-600 hover:text-blue-800 cursor-pointer"
+              className="text-slate-700 hover:text-blue-600 cursor-pointer flex items-center print:cursor-text print:hover:text-slate-700"
             >
+              <span className="mr-2">•</span>
               {section.title}
             </Link>
           </li>

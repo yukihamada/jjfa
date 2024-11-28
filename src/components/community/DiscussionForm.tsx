@@ -4,9 +4,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { supabase } from "@/integrations/supabase/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { Loader2, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AttachmentUpload } from "./AttachmentUpload";
@@ -14,6 +11,9 @@ import { AttachmentPreview } from "./AttachmentPreview";
 import { FormTips } from "./form/FormTips";
 import { VisibilitySelect } from "./form/VisibilitySelect";
 import { PostPreview } from "./form/PostPreview";
+import { useDiscussionSubmit } from "./form/useDiscussionSubmit";
+import { useTagsQuery } from "./form/useTagsQuery";
+import { toast } from "sonner";
 
 const MAX_TITLE_LENGTH = 100;
 const MAX_CONTENT_LENGTH = 2000;
@@ -25,85 +25,9 @@ export const DiscussionForm = () => {
   const [visibility, setVisibility] = useState("public");
   const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
   const [showPreview, setShowPreview] = useState(false);
-  const queryClient = useQueryClient();
 
-  const { data: tags } = useQuery({
-    queryKey: ['tags'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('tags')
-        .select('*')
-        .order('name');
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  const createDiscussion = useMutation({
-    mutationFn: async ({ title, content, tagId, visibility, attachments }: { 
-      title: string; 
-      content: string; 
-      tagId: string;
-      visibility: string;
-      attachments: { url: string; type: string }[];
-    }) => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("ログインが必要です");
-
-      // First create the discussion
-      const { data: discussion, error: discussionError } = await supabase
-        .from("discussions")
-        .insert([
-          {
-            title,
-            content,
-            user_id: user.id,
-            visibility,
-            attachments
-          },
-        ])
-        .select()
-        .single();
-
-      if (discussionError) throw discussionError;
-
-      // Then create the tag association if a tag was selected
-      if (tagId) {
-        const { error: tagError } = await supabase
-          .from("discussion_tags")
-          .insert([
-            {
-              discussion_id: discussion.id,
-              tag_id: tagId,
-            },
-          ]);
-
-        if (tagError) {
-          // If tag insertion fails, delete the discussion to maintain consistency
-          await supabase
-            .from("discussions")
-            .delete()
-            .eq('id', discussion.id);
-          throw new Error("タグの関連付けに失敗しました");
-        }
-      }
-
-      return discussion;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["discussions"] });
-      setTitle("");
-      setContent("");
-      setSelectedTag("");
-      setVisibility("public");
-      setAttachments([]);
-      setShowPreview(false);
-      toast.success("投稿が完了しました！");
-    },
-    onError: (error) => {
-      toast.error(`投稿に失敗しました: ${error.message}`);
-    },
-  });
+  const { data: tags } = useTagsQuery();
+  const createDiscussion = useDiscussionSubmit();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,7 +43,19 @@ export const DiscussionForm = () => {
       toast.error(`本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`);
       return;
     }
-    createDiscussion.mutate({ title, content, tagId: selectedTag, visibility, attachments });
+    createDiscussion.mutate(
+      { title, content, tagId: selectedTag, visibility, attachments },
+      {
+        onSuccess: () => {
+          setTitle("");
+          setContent("");
+          setSelectedTag("");
+          setVisibility("public");
+          setAttachments([]);
+          setShowPreview(false);
+        }
+      }
+    );
   };
 
   const handleAttachmentUpload = (newAttachments: { url: string; type: string }[]) => {

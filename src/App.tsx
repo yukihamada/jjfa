@@ -19,6 +19,7 @@ import Careers from "./pages/Careers";
 import Roadmap from "./pages/Roadmap";
 import Profile from "./pages/Profile";
 import NFT from "./pages/NFT";
+import LiveStreaming from "./pages/LiveStreaming";
 import { useState, useEffect } from "react";
 import { PasswordProtection } from "./components/PasswordProtection";
 import { supabase } from "@/integrations/supabase/client";
@@ -109,6 +110,7 @@ const App = () => {
                 <Route path="/careers" element={<Careers />} />
                 <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                <Route path="/live" element={<LiveStreaming />} />
               </Routes>
             </main>
             <GlobalFooter />

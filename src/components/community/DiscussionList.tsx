@@ -34,17 +34,14 @@ export const DiscussionList = () => {
           )
         `);
 
-      // Search filter
       if (debouncedSearch) {
         query = query.or(`title.ilike.%${debouncedSearch}%,content.ilike.%${debouncedSearch}%`);
       }
 
-      // Tag filter
       if (selectedTags.length > 0) {
         query = query.in('tags.id', selectedTags);
       }
 
-      // Sort
       switch (sortBy) {
         case 'popular':
           query = query.order('likes.length', { ascending: false });
@@ -118,9 +115,9 @@ export const DiscussionList = () => {
 
       <Tabs defaultValue="all" className="space-y-4">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="all">すべての投稿</TabsTrigger>
-          <TabsTrigger value="admin">運営からのお知らせ</TabsTrigger>
-          <TabsTrigger value="nft">NFTホルダー限定</TabsTrigger>
+          <TabsTrigger value="all">全て</TabsTrigger>
+          <TabsTrigger value="admin">運営</TabsTrigger>
+          <TabsTrigger value="nft">NFT限定</TabsTrigger>
         </TabsList>
         <TabsContent value="all" className="space-y-4">
           {adminDiscussions.map((discussion) => (

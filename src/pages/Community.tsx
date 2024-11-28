@@ -7,6 +7,7 @@ import { Trophy, Users, Award, BookOpen, Vote, Coins } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { DiscussionForm } from "@/components/community/DiscussionForm";
 import { DiscussionList } from "@/components/community/DiscussionList";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Community = () => {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ const Community = () => {
   }, []);
 
   if (isLoading) {
-    return null; // ローディング中は何も表示しない
+    return null;
   }
 
   if (!user) {
@@ -93,9 +94,19 @@ const Community = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <PageTitle title="コミュニティ掲示板" />
       <div className="container mx-auto py-8 px-4">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <DiscussionForm />
-          <DiscussionList />
+        <div className="max-w-3xl mx-auto">
+          <Tabs defaultValue="discussions" className="space-y-8">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="discussions">投稿一覧</TabsTrigger>
+              <TabsTrigger value="create">新規投稿</TabsTrigger>
+            </TabsList>
+            <TabsContent value="discussions">
+              <DiscussionList />
+            </TabsContent>
+            <TabsContent value="create">
+              <DiscussionForm />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>

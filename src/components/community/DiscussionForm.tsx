@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
@@ -51,30 +53,44 @@ export const DiscussionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-lg shadow">
-      <div className="space-y-2">
-        <Input
-          placeholder="タイトル"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full"
-        />
-      </div>
-      <div className="space-y-2">
-        <Textarea
-          placeholder="内容を入力してください"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full min-h-[100px]"
-        />
-      </div>
-      <Button 
-        type="submit" 
-        className="w-full"
-        disabled={createDiscussion.isPending}
-      >
-        {createDiscussion.isPending ? "投稿中..." : "投稿する"}
-      </Button>
-    </form>
+    <Card className="bg-white/80 backdrop-blur-sm">
+      <CardHeader>
+        <CardTitle>新しい投稿を作成</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Input
+              placeholder="タイトル"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full"
+            />
+          </div>
+          <div className="space-y-2">
+            <Textarea
+              placeholder="内容を入力してください"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full min-h-[100px]"
+            />
+          </div>
+          <Button 
+            type="submit" 
+            className="w-full"
+            disabled={createDiscussion.isPending}
+          >
+            {createDiscussion.isPending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                投稿中...
+              </>
+            ) : (
+              "投稿する"
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };

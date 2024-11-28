@@ -35,6 +35,7 @@ const CommunityGuidelines = () => (
 );
 
 const DiscussionCard = ({ discussion }: { discussion: any }) => {
+  console.log('Discussion data:', discussion); // デバッグ用
   return (
     <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow border-l-4 border-l-indigo-500">
       <CardContent className="p-6">
@@ -88,9 +89,10 @@ const DiscussionCard = ({ discussion }: { discussion: any }) => {
 };
 
 export const DiscussionList = () => {
-  const { data: discussions, isLoading } = useQuery({
+  const { data: discussions, isLoading, error } = useQuery({
     queryKey: ['discussions'],
     queryFn: async () => {
+      console.log('Fetching discussions...'); // デバッグ用
       const { data, error } = await supabase
         .from('discussions')
         .select(`
@@ -104,10 +106,19 @@ export const DiscussionList = () => {
         `)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching discussions:', error); // デバッグ用
+        throw error;
+      }
+      console.log('Fetched discussions:', data); // デバッグ用
       return data;
     },
   });
+
+  if (error) {
+    console.error('Error in component:', error); // デバッグ用
+    return <div>エラーが発生しました。しばらく経ってから再度お試しください。</div>;
+  }
 
   if (isLoading) {
     return (
@@ -122,6 +133,14 @@ export const DiscussionList = () => {
             </CardContent>
           </Card>
         ))}
+      </div>
+    );
+  }
+
+  if (!discussions || discussions.length === 0) {
+    return (
+      <div className="text-center py-8 text-slate-600">
+        まだ投稿がありません。最初の投稿を作成してみましょう！
       </div>
     );
   }

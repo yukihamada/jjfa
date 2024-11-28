@@ -1,25 +1,40 @@
 import { RuleSection } from "../RuleSection";
-import { RuleItem } from "../RuleItem";
+import { Calendar, Layout, Award } from "lucide-react";
 
 export const MatchFormat = () => {
   return (
     <RuleSection id="match-format" title="試合形式">
-      <RuleItem
-        title="トーナメント方式"
-        description="シングルイリミネーション方式で実施され、敗者は次のラウンドに進めません。"
-      />
-      <RuleItem
-        title="試合時間"
-        description="予選：4分間、準決勝・決勝：6分間。延長戦は2分間で実施されます。"
-      />
-      <RuleItem
-        title="マットエリア"
-        description="競技エリア8m×8m、安全エリア2mを確保します。"
-      />
-      <RuleItem
-        title="デジタルスコアボード"
-        description="リアルタイムでスコアと残り時間を表示し、ブロックチェーンに記録します。"
-      />
+      <div className="space-y-6">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Award className="w-6 h-6 text-blue-500" />
+            トーナメント方式
+          </h3>
+          <p className="text-slate-600">
+            シングルイリミネーション方式で実施され、敗者は次のラウンドに進めません。
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Calendar className="w-6 h-6 text-blue-500" />
+            試合時間
+          </h3>
+          <p className="text-slate-600">
+            試合は2分間の1ラウンドで構成されます。
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Layout className="w-6 h-6 text-blue-500" />
+            マットサイズ
+          </h3>
+          <p className="text-slate-600">
+            マットサイズは6m×6m以上を使用します。
+          </p>
+        </div>
+      </div>
     </RuleSection>
   );
 };

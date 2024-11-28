@@ -45,7 +45,7 @@ export const RegistrationForm = () => {
                 }
               }
             }}
-            providers={["google", "apple"]}
+            providers={["google"]}
             redirectTo={`${window.location.origin}/dashboard`}
             localization={{
               variables: {

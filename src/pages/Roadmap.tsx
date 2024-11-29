@@ -51,7 +51,7 @@ const Roadmap = () => {
                               text.includes("会員登録") ||
                               text.includes("トークン規程") ||
                               text.includes("定款") ||
-                              text.includes("利用規程") ||
+                              text.includes("運用規程") ||
                               text.includes("大会ルール")
                             );
 
@@ -75,10 +75,10 @@ const Roadmap = () => {
                                 `<a href="/articles" class="text-blue-600 hover:underline">定款</a>`
                               );
                             }
-                            if (text.includes("利用規程")) {
+                            if (text.includes("運用規程")) {
                               content = text.replace(
-                                "利用規程",
-                                `<a href="/operating-rules" class="text-blue-600 hover:underline">利用規程</a>`
+                                "運用規程",
+                                `<a href="/operating-rules" class="text-blue-600 hover:underline">運用規程</a>`
                               );
                             }
                             if (text.includes("大会ルール")) {

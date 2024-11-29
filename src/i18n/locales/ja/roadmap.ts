@@ -2,8 +2,9 @@ export const roadmap = {
   title: "JJFAロードマップ",
   phase1: {
     title: "2023年11月: 準備フェーズ",
-    registration: "11月28日: 定款・運営規程・トークン規程の初版完成",
+    registration: "11月28日: 定款・利用規程・トークン規程の初版完成",
     website: "11月30日: Webサイト一般公開",
+    community: "11月末: コミュニティ掲示板オープン",
     infrastructure: "Web3インフラ整備: DAO立ち上げに向けたブロックチェーン基盤の整備。",
     whitepaper: "ホワイトペーパー発表: ビジョン、トークンユースケースを含む詳細なホワイトペーパーをリリースし、メンバー・出資者向けに説明会を実施。"
   },

@@ -28,7 +28,6 @@ const Roadmap = () => {
               {t('roadmap.title')}
             </h1>
 
-            {/* 関連ドキュメントへのリンク */}
             <div className="flex flex-wrap gap-4 justify-center mb-12">
               <Link to="/whitepaper">
                 <Button variant="outline" className="flex items-center gap-2">
@@ -45,13 +44,19 @@ const Roadmap = () => {
               <Link to="/operating-rules">
                 <Button variant="outline" className="flex items-center gap-2">
                   <ExternalLink className="w-4 h-4" />
-                  運営規程
+                  利用規程
                 </Button>
               </Link>
               <Link to="/token-rules">
                 <Button variant="outline" className="flex items-center gap-2">
                   <ExternalLink className="w-4 h-4" />
                   トークン規程
+                </Button>
+              </Link>
+              <Link to="/community">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  コミュニティ
                 </Button>
               </Link>
             </div>
@@ -88,7 +93,6 @@ const Roadmap = () => {
               })}
             </div>
 
-            {/* コミュニティ参加へのCTA */}
             <div className="mt-16 text-center">
               <h3 className="text-xl font-semibold mb-4">JJFAの未来に参加しませんか？</h3>
               <div className="flex gap-4 justify-center">

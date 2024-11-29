@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { PageTitle } from "@/components/PageTitle";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { DiscussionForm } from "@/components/community/DiscussionForm";
 import { DiscussionList } from "@/components/community/DiscussionList";
@@ -9,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { NotificationBell } from "@/components/community/NotificationBell";
+import { OnlineUsersDisplay } from "@/components/community/OnlineUsersDisplay";
 
 const Community = () => {
   const { t } = useTranslation();
@@ -50,7 +50,10 @@ const Community = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <PageTitle title="コミュニティ掲示板" />
+          <div className="flex items-center gap-4">
+            <PageTitle title="コミュニティ掲示板" />
+            <OnlineUsersDisplay />
+          </div>
           <NotificationBell />
         </div>
         <div className="max-w-3xl mx-auto">

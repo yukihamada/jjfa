@@ -1,7 +1,9 @@
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import { PageTitle } from "@/components/PageTitle";
-import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Milestone, Globe, Users, Rocket, Flag, Calendar, Check, Trophy, Building, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Roadmap = () => {
   const { t } = useTranslation();
@@ -48,7 +50,6 @@ const Roadmap = () => {
                             // 完了したタスクの処理
                             const isCompleted = (
                               text.includes("コミュニティ掲示板") ||
-                              text.includes("会員登録") ||
                               text.includes("トークン規程") ||
                               text.includes("定款") ||
                               text.includes("運用規程") ||

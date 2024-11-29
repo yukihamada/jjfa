@@ -15,13 +15,13 @@ export const AwardCeremony = () => {
           <div className="prose prose-slate max-w-none space-y-4">
             <p className="text-slate-600">
               JJFAトーナメントのメダルはNFTとして配布されます。表彰式では写真撮影用の実物のメダルが一時的に貸与されます。
+              メダルの記録はブロックチェーンに永久に刻まれ、その実績は一生残ります。
               <Link to="/nft" className="text-blue-600 hover:underline ml-1">
                 NFTの詳細についてはこちら
               </Link>
             </p>
             <p className="text-slate-600">
-              NFTメダルの保有者は、後日実物のメダルを発注することができます。また、NFTメダルは売買可能で、
-              メダルの価値を換金することもできます。
+              NFTメダルの保有者は、後日実物のメダルを発注することができます。また、NFTメダル保有者限定のイベントやコミュニティへの参加権利が付与されます。
             </p>
           </div>
         </div>

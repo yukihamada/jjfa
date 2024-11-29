@@ -1,9 +1,7 @@
 import { PageTitle } from "@/components/PageTitle";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
-import { Milestone, Globe, Users, Rocket, Flag, Calendar, Check, Trophy, Building, Sparkles, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Milestone, Globe, Users, Rocket, Flag, Calendar, Check, Trophy, Building, Sparkles } from "lucide-react";
 
 const Roadmap = () => {
   const { t } = useTranslation();
@@ -28,39 +26,6 @@ const Roadmap = () => {
               {t('roadmap.title')}
             </h1>
 
-            <div className="flex flex-wrap gap-4 justify-center mb-12">
-              <Link to="/whitepaper">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  ホワイトペーパー
-                </Button>
-              </Link>
-              <Link to="/articles">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  定款
-                </Button>
-              </Link>
-              <Link to="/operating-rules">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  利用規程
-                </Button>
-              </Link>
-              <Link to="/token-rules">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  トークン規程
-                </Button>
-              </Link>
-              <Link to="/community">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  コミュニティ掲示板
-                </Button>
-              </Link>
-            </div>
-
             <div className="space-y-12">
               {[1, 2, 3, 4, 5, 6, 7].map((phase, index) => {
                 const Icon = phases[index].icon;
@@ -78,11 +43,53 @@ const Roadmap = () => {
                       <ul className="list-disc space-y-3 text-slate-600">
                         {Object.keys(t(`roadmap.phase${phase}`, { returnObjects: true }))
                           .filter(key => key !== 'title')
-                          .map(key => (
-                            <li key={key} className="leading-relaxed">
-                              {t(`roadmap.phase${phase}.${key}`)}
-                            </li>
-                          ))}
+                          .map(key => {
+                            const text = t(`roadmap.phase${phase}.${key}`);
+                            // 完了したタスクの処理
+                            const isCompleted = (
+                              text.includes("コミュニティ掲示板") ||
+                              text.includes("会員登録") ||
+                              text.includes("トークン規程") ||
+                              text.includes("定款") ||
+                              text.includes("利用規程")
+                            );
+
+                            // リンクの生成
+                            let content = text;
+                            if (text.includes("コミュニティ掲示板")) {
+                              content = text.replace(
+                                "コミュニティ掲示板",
+                                `<a href="/community" class="text-blue-600 hover:underline">コミュニティ掲示板</a>`
+                              );
+                            }
+                            if (text.includes("トークン規程")) {
+                              content = text.replace(
+                                "トークン規程",
+                                `<a href="/token-rules" class="text-blue-600 hover:underline">トークン規程</a>`
+                              );
+                            }
+                            if (text.includes("定款")) {
+                              content = text.replace(
+                                "定款",
+                                `<a href="/articles" class="text-blue-600 hover:underline">定款</a>`
+                              );
+                            }
+                            if (text.includes("利用規程")) {
+                              content = text.replace(
+                                "利用規程",
+                                `<a href="/operating-rules" class="text-blue-600 hover:underline">利用規程</a>`
+                              );
+                            }
+
+                            return (
+                              <li key={key} className="leading-relaxed flex items-start gap-2">
+                                {isCompleted && (
+                                  <Check className="w-4 h-4 text-green-500 mt-1 flex-shrink-0" />
+                                )}
+                                <span dangerouslySetInnerHTML={{ __html: content }} />
+                              </li>
+                            );
+                          })}
                       </ul>
                     </div>
                     {index < 6 && (
@@ -96,18 +103,9 @@ const Roadmap = () => {
             <div className="mt-16 text-center">
               <h3 className="text-xl font-semibold mb-4">JJFAの未来に参加しませんか？</h3>
               <div className="flex gap-4 justify-center">
-                <Link to="/community">
-                  <Button className="flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    コミュニティに参加
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    お問い合わせ
-                  </Button>
-                </Link>
+                <a href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-slate-800 text-white hover:bg-slate-700 transition-colors">
+                  お問い合わせ
+                </a>
               </div>
             </div>
           </CardContent>

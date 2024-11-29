@@ -61,7 +61,7 @@ export const RefereeBasics = () => {
           <div className="space-y-4">
             <RuleItem
               title="ルールの理解"
-              description="レフェリーは、ルール及び規定の本を読んで勉強し、SJJIFレフェリーセミナーに出席し、必要な認定コースに合格する必要があります。"
+              description="レフェリーは、ルール及び規定の本を読んで勉強し、JJFAレフェリーセミナーに出席し、必要な認定コースに合格する必要があります。"
             />
             <RuleItem
               title="柔術経験"

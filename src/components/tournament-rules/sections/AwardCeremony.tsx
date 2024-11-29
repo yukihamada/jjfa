@@ -1,11 +1,31 @@
 import { RuleSection } from "../RuleSection";
 import { RuleItem } from "../RuleItem";
-import { Medal, Users, AlertTriangle } from "lucide-react";
+import { Medal, Users, AlertTriangle, Trophy, Coins } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const AwardCeremony = () => {
   return (
     <RuleSection id="award-ceremony" title="表彰式" sectionNumber="17">
       <div className="space-y-6">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Trophy className="w-6 h-6 text-yellow-500" />
+            メダルについて
+          </h3>
+          <div className="prose prose-slate max-w-none space-y-4">
+            <p className="text-slate-600">
+              JJFAトーナメントのメダルはNFTとして配布されます。表彰式では写真撮影用の実物のメダルが一時的に貸与されます。
+              <Link to="/nft" className="text-blue-600 hover:underline ml-1">
+                NFTの詳細についてはこちら
+              </Link>
+            </p>
+            <p className="text-slate-600">
+              NFTメダルの保有者は、後日実物のメダルを発注することができます。また、NFTメダルは売買可能で、
+              メダルの価値を換金することもできます。
+            </p>
+          </div>
+        </div>
+
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Medal className="w-6 h-6 text-yellow-500" />

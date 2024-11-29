@@ -3,7 +3,7 @@ import { Users, Weight, Trophy, Calculator } from "lucide-react";
 
 export const TeamRules = () => {
   return (
-    <RuleSection id="team-rules" title="団体戦ルール">
+    <RuleSection id="team-rules" title="団体戦ルール" sectionNumber="10">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

@@ -4,7 +4,7 @@ import { Trophy, Medal, Flag, Users, Calculator } from "lucide-react";
 
 export const Rankings = () => {
   return (
-    <RuleSection id="rankings" title="ランキングシステム">
+    <RuleSection id="rankings" title="ランキングシステム" sectionNumber="4">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
@@ -19,18 +19,22 @@ export const Rankings = () => {
               <RuleItem
                 title="ランキングの分類"
                 description="個人の帯、年齢グループ、及び階級に基づき分類されます。ランキングポイントは帯や年齢カテゴリー間での移行はできません。"
+                ruleNumber="4.1"
               />
               <RuleItem
                 title="ポイント計算（1000人未満の大会）"
                 description="1位：7ポイント、2位：3ポイント、3位：1ポイント"
+                ruleNumber="4.2"
               />
               <RuleItem
                 title="ポイント計算（1000人以上の大会）"
                 description="1位：14ポイント、2位：6ポイント、3位：2ポイント"
+                ruleNumber="4.3"
               />
               <RuleItem
                 title="世界選手権ポイント（3倍）"
                 description="1位：21ポイント、2位：9ポイント、3位：3ポイント"
+                ruleNumber="4.4"
               />
             </div>
           </div>

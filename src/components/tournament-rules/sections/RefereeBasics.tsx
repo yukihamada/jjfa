@@ -4,7 +4,7 @@ import { Gavel, Scale, Shield, Users, Award, Scroll, School, MessageSquare } fro
 
 export const RefereeBasics = () => {
   return (
-    <RuleSection id="referee-basics" title="レフェリーの基本原則">
+    <RuleSection id="referee-basics" title="レフェリーの基本原則" sectionNumber="5">
       <div className="space-y-8">
         {/* 基本原則 */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">

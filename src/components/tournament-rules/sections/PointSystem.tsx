@@ -3,7 +3,7 @@ import { Shield, Swords, Crown, Timer, Award } from "lucide-react";
 
 export const PointSystem = () => {
   return (
-    <RuleSection id="point-system" title="ポイントシステム">
+    <RuleSection id="point-system" title="ポイントシステム" sectionNumber="3">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

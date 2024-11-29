@@ -5,7 +5,7 @@ import { Leaf, Recycle, TreePine, Sprout } from "lucide-react";
 
 export const Sustainability = () => {
   return (
-    <RuleSection id="sustainability" title="持続可能性への取り組み">
+    <RuleSection id="sustainability" title="持続可能性への取り組み" sectionNumber="8">
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-100">
           <CardHeader>
@@ -14,6 +14,7 @@ export const Sustainability = () => {
             <RuleItem
               title="環境負荷削減"
               description="大会運営における環境負荷を最小限に抑え、持続可能な大会運営を実現します。"
+              ruleNumber="8.1"
             />
           </CardHeader>
         </Card>
@@ -25,6 +26,7 @@ export const Sustainability = () => {
             <RuleItem
               title="ペーパーレス化"
               description="ペーパーレス化やデジタルチケッティングの導入により、環境負荷を削減します。"
+              ruleNumber="8.2"
             />
           </CardHeader>
         </Card>
@@ -36,6 +38,7 @@ export const Sustainability = () => {
             <RuleItem
               title="環境配慮製品"
               description="環境に配慮した柔術衣や設備の使用を推進します。"
+              ruleNumber="8.3"
             />
           </CardHeader>
         </Card>
@@ -47,6 +50,7 @@ export const Sustainability = () => {
             <RuleItem
               title="環境貢献"
               description="大会運営に伴う環境負荷を相殺する取り組みを実施します。"
+              ruleNumber="8.4"
             />
           </CardHeader>
         </Card>

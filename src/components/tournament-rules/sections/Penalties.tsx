@@ -3,7 +3,7 @@ import { AlertTriangle, Shield, UserX } from "lucide-react";
 
 export const Penalties = () => {
   return (
-    <RuleSection id="penalties" title="ペナルティ">
+    <RuleSection id="penalties" title="ペナルティ" sectionNumber="2">
       <p className="mb-4 text-slate-600">
         ペナルティの種類と適用について説明します。
       </p>

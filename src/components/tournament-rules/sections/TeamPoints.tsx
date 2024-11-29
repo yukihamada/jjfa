@@ -4,7 +4,7 @@ import { Trophy, Flag, Calculator, Medal } from "lucide-react";
 
 export const TeamPoints = () => {
   return (
-    <RuleSection id="team-points" title="チームポイント">
+    <RuleSection id="team-points" title="チームポイント" sectionNumber="9">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
@@ -15,16 +15,19 @@ export const TeamPoints = () => {
             <RuleItem
               title="チーム登録"
               description="選手は登録時にチームを明確に指定する必要があります。登録後のチーム変更は認められません。"
+              ruleNumber="9.1"
             />
             <RuleItem
               title="ポイント計算方法"
               description="1000人未満の大会：金メダル7点、銀メダル3点、銅メダル1点
 1000人以上の大会：金メダル14点、銀メダル6点、銅メダル2点
 JJFA世界選手権：金メダル21点、銀メダル9点、銅メダル3点"
+              ruleNumber="9.2"
             />
             <RuleItem
               title="同点の場合"
               description="同点の場合、金メダルの数で判定し、それも同数の場合は銀メダル、続いて銅メダルの数で判定します。それでも同点の場合は、最上位の帯のメダル数で決定します。"
+              ruleNumber="9.3"
             />
           </div>
         </div>
@@ -38,10 +41,12 @@ JJFA世界選手権：金メダル21点、銀メダル9点、銅メダル3点"
             <RuleItem
               title="国籍登録"
               description="選手は登録時に国籍/出身国を明確に指定する必要があります。登録後の変更は認められません。"
+              ruleNumber="9.4"
             />
             <RuleItem
               title="ポイント集計"
               description="キッズ（4-5歳から14-15歳）と大人（16歳以上）のカテゴリーで別々に集計されます。"
+              ruleNumber="9.5"
             />
           </div>
         </div>

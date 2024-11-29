@@ -6,11 +6,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@supabase/auth-helpers-react";
 
 interface Message {
   id: string;
   content: string;
   created_at: string;
+  user_id: string;
   profiles: {
     username: string;
     avatar_url: string;
@@ -20,6 +22,7 @@ interface Message {
 export const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const auth = useAuth();
 
   const { data: initialMessages } = useQuery({
     queryKey: ["chat-messages"],
@@ -28,7 +31,7 @@ export const ChatRoom = () => {
         .from("chat_messages")
         .select(`
           *,
-          profiles (
+          profiles:user_id (
             username,
             avatar_url
           )
@@ -37,7 +40,7 @@ export const ChatRoom = () => {
         .limit(50);
 
       if (error) throw error;
-      return data as Message[];
+      return data as unknown as Message[];
     },
   });
 
@@ -62,7 +65,7 @@ export const ChatRoom = () => {
             .from("chat_messages")
             .select(`
               *,
-              profiles (
+              profiles:user_id (
                 username,
                 avatar_url
               )
@@ -87,14 +90,13 @@ export const ChatRoom = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || !auth?.user?.id) return;
 
     try {
-      const { error } = await supabase.from("chat_messages").insert([
-        {
-          content: message.trim(),
-        },
-      ]);
+      const { error } = await supabase.from("chat_messages").insert({
+        content: message.trim(),
+        user_id: auth.user.id,
+      });
 
       if (error) throw error;
       setMessage("");

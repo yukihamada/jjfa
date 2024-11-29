@@ -19,7 +19,7 @@ export const VenueLayout = () => {
               <LayoutGrid className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
               <div>
                 <h4 className="font-semibold">試合エリア</h4>
-                <p className="text-sm text-slate-600">対戦エリア（25㎡）と安全エリア（24㎡）で構成。各試合場は番号で識別。</p>
+                <p className="text-sm text-slate-600">最低サイズ：6m×6m（36㎡）、推奨サイズ：8m×8m（64㎡）。各試合場は番号で識別。</p>
               </div>
             </div>
             <div className="flex items-start gap-2">

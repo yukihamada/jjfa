@@ -13,12 +13,10 @@ export const BracketSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="27.1"
               title="トーナメント方式"
               description="全てのJJFA大会はシングル・エリミネーション方式トーナメントのブラケットシステムで運営されます。"
             />
             <RuleItem
-              ruleNumber="27.2"
               title="ブラケット作成"
               description="各大会において、ブラケットは大会開始前に作成され、大会当日には変更されません。"
             />
@@ -32,12 +30,10 @@ export const BracketSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="27.3"
               title="分類基準"
               description="選手は年齢、スキルレベルグループまたは帯、階級、そして性別によって分けられます。"
             />
             <RuleItem
-              ruleNumber="27.4"
               title="統合ルール"
               description="イベントディレクターとマッチメーカーは試合成立を確実にするために階級を統合させることができます。"
             />
@@ -51,17 +47,14 @@ export const BracketSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="27.5"
               title="オープンブラケット"
               description="5、6、7人の競技者で構成され、不戦勝が含まれます。"
             />
             <RuleItem
-              ruleNumber="27.6"
               title="クローズドブラケット"
               description="2、4、8、16人の競技者で構成され、不戦勝がありません。"
             />
             <RuleItem
-              ruleNumber="27.7"
               title="不戦勝ルール"
               description="不戦勝は1回戦でのみ行われ、準決勝戦や決勝戦では行われません。"
             />
@@ -75,12 +68,10 @@ export const BracketSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="27.8"
               title="競技者1の識別"
               description="ブラケットの上の競技者は緑及び黄色の帯またはアンクルバンドを着用し、スコアボードでは緑の背景で表示されます。"
             />
             <RuleItem
-              ruleNumber="27.9"
               title="競技者2の識別"
               description="ブラケットの下の競技者は追加の帯やアンクルバンドを着用せず、スコアボードでは白の背景で表示されます。"
             />

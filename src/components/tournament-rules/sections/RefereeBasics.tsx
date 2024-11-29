@@ -14,17 +14,14 @@ export const RefereeBasics = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="38.1"
               title="公正性の重要性"
               description="研修を受け、一貫性のあるレフェリーは、個々の試合の結果に影響を与える決定をするので、公正な大会には不可欠です。正確かつ偏見のない振る舞いで、ルールを守り、試合を判断することが期待されています。"
             />
             <RuleItem
-              ruleNumber="38.2"
               title="判定の自信"
               description="レフェリーは、判定に自信を示すべきであり、その特性はルールの理解及び経験から得られるものです。マット上の状況に関わらず、落ち着いた態度を維持することが望まれます。"
             />
             <RuleItem
-              ruleNumber="38.3"
               title="中立性の維持"
               description="レフェリー及びスタッフは、競技エリア内でいかなる競技者も励ましたり、贔屓をしたり、応援したりすることは許可されていません。"
             />
@@ -39,7 +36,6 @@ export const RefereeBasics = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="38.4"
               title="試合の管理"
               description="試合は、一人の主審によって裁かれます。主審は対戦エリアに居続け、競技者の近くに居ることで試合を管理します。"
             />
@@ -64,12 +60,10 @@ export const RefereeBasics = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="38.7"
               title="ルールの理解"
               description="レフェリーは、ルール及び規定の本を読んで勉強し、SJJIFレフェリーセミナーに出席し、必要な認定コースに合格する必要があります。"
             />
             <RuleItem
-              ruleNumber="38.8"
               title="柔術経験"
               description="国際大会で審判するには茶帯または黒帯でなければなりません。新たな柔術技や戦略に精通している必要があります。"
             />

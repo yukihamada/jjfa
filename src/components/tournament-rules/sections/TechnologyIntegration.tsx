@@ -1,6 +1,6 @@
 import { RuleSection } from "../RuleSection";
 import { RuleItem } from "../RuleItem";
-import { Database, Robot, BarChart, Video, HeartPulse } from "lucide-react";
+import { Database, Bot, BarChart, Video, HeartPulse } from "lucide-react";
 
 export const TechnologyIntegration = () => {
   return (
@@ -18,7 +18,7 @@ export const TechnologyIntegration = () => {
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Robot className="w-6 h-6 text-blue-500" />
+            <Bot className="w-6 h-6 text-blue-500" />
             AIアシスタントレフェリー
           </h3>
           <p className="text-slate-600">

@@ -7,11 +7,11 @@ export const MatchDuration = () => {
       <div className="space-y-4">
         <RuleItem
           title="白帯"
-          description="2分1ラウンド。延長戦は1分。"
+          description="2分1ラウンド"
         />
         <RuleItem
           title="青帯以上"
-          description="2分×3ラウンド以上。大会によってラウンド数を調整可能。延長戦は1分。"
+          description="2分×3ラウンド以上。大会によってラウンド数を調整可能。"
         />
         <RuleItem
           title="休憩時間"

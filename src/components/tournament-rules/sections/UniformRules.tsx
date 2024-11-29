@@ -15,7 +15,7 @@ export const UniformRules = () => {
         />
         <RuleItem
           title="パッチとロゴ"
-          description="所属チームのパッチは肩、胸、背中の指定された位置に付けることができます。サイズは10cm×10cm以内。"
+          description="試合に影響を与えない限り、パッチやロゴは自由に配置することができます。"
         />
         <RuleItem
           title="安全性の確認"

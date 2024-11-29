@@ -60,89 +60,63 @@ export const RefereeBasics = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <MessageSquare className="w-6 h-6 text-blue-500" />
-            レフェリーの指示
+            レフェリーの指示と合図
           </h3>
-          <div className="space-y-4">
-            <p className="text-slate-600 font-medium mb-3">一般的な指示：</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <div className="font-semibold text-slate-800">Ação (アサウ)</div>
-                <p className="text-sm text-slate-600 mt-1">アクション</p>
-              </div>
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <div className="font-semibold text-slate-800">Lute (ルーチ)</div>
-                <p className="text-sm text-slate-600 mt-1">戦え</p>
-              </div>
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <div className="font-semibold text-slate-800">More action</div>
-                <p className="text-sm text-slate-600 mt-1">もっと攻めて</p>
-              </div>
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <div className="font-semibold text-slate-800">もっと動いて</div>
-                <p className="text-sm text-slate-600 mt-1">積極的に動くように</p>
-              </div>
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <div className="font-semibold text-slate-800">違反グリップを離して</div>
-                <p className="text-sm text-slate-600 mt-1">不正なグリップの解除</p>
-              </div>
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <div className="font-semibold text-slate-800">続けたい?</div>
-                <p className="text-sm text-slate-600 mt-1">試合継続の意思確認</p>
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <h4 className="font-semibold text-lg text-slate-800">基本的な声による指示</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-slate-50 p-4 rounded-lg">
+                  <p className="font-semibold text-blue-600">コンバッチ (Combate)</p>
+                  <p className="text-slate-600 mt-1">試合開始</p>
+                </div>
+                <div className="bg-slate-50 p-4 rounded-lg">
+                  <p className="font-semibold text-blue-600">パレー (Parou)</p>
+                  <p className="text-slate-600 mt-1">一時停止</p>
+                </div>
+                <div className="bg-slate-50 p-4 rounded-lg">
+                  <p className="font-semibold text-blue-600">ルッチ (Lute)</p>
+                  <p className="text-slate-600 mt-1">積極的に戦うように促す</p>
+                </div>
+                <div className="bg-slate-50 p-4 rounded-lg">
+                  <p className="font-semibold text-blue-600">アカボイ (Acabou)</p>
+                  <p className="text-slate-600 mt-1">試合終了</p>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* レフェリーのジェスチャー */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Users className="w-6 h-6 text-blue-500" />
-            レフェリーのジェスチャー
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h4 className="font-semibold text-lg">基本的なジェスチャー</h4>
-              <div className="space-y-3">
+              <h4 className="font-semibold text-lg text-slate-800">主なジェスチャー</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-semibold text-blue-600 min-w-[100px]">試合開始</span>
-                    <p className="text-slate-600">両腕を肩の高さまで上げ、「ファイト！」と共に下ろす</p>
-                  </div>
+                  <p className="font-semibold text-blue-600">試合開始</p>
+                  <p className="text-slate-600 mt-1">両腕を前に伸ばし、「コンバッチ」と共に下ろす</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-semibold text-blue-600 min-w-[100px]">ポイント付与</span>
-                    <p className="text-slate-600">該当選手の色の手を上げ、指の本数でポイントを示す</p>
-                  </div>
+                  <p className="font-semibold text-blue-600">ポイント付与</p>
+                  <p className="text-slate-600 mt-1">該当選手の色の手を上げ、指の本数でポイントを示す</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-semibold text-blue-600 min-w-[100px]">試合終了</span>
-                    <p className="text-slate-600">両腕を水平に開き、「ストップ！」と宣言</p>
-                  </div>
+                  <p className="font-semibold text-blue-600">一時停止</p>
+                  <p className="text-slate-600 mt-1">「T」の形に手を組み、「パレー」と宣言</p>
+                </div>
+                <div className="bg-slate-50 p-4 rounded-lg">
+                  <p className="font-semibold text-blue-600">試合終了</p>
+                  <p className="text-slate-600 mt-1">両腕を交差させ、「アカボイ」と宣言</p>
                 </div>
               </div>
             </div>
+
             <div className="space-y-4">
-              <h4 className="font-semibold text-lg">特殊なジェスチャー</h4>
-              <div className="space-y-3">
+              <h4 className="font-semibold text-lg text-slate-800">罰則と失格の合図</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-semibold text-blue-600 min-w-[100px]">ペナルティ</span>
-                    <p className="text-slate-600">該当選手の色の拳を上げる</p>
-                  </div>
+                  <p className="font-semibold text-blue-600">ファウル</p>
+                  <p className="text-slate-600 mt-1">該当選手の色の手を挙げ、反則の種類を示す</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-semibold text-blue-600 min-w-[100px]">一時停止</span>
-                    <p className="text-slate-600">手を「T」の形に組み、「タイム」と宣言</p>
-                  </div>
-                </div>
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-semibold text-blue-600 min-w-[100px]">失格</span>
-                    <p className="text-slate-600">腕を頭上で交差させ、該当選手を指す</p>
-                  </div>
+                  <p className="font-semibold text-blue-600">失格</p>
+                  <p className="text-slate-600 mt-1">両腕を頭上で交差させ、該当選手を指す</p>
                 </div>
               </div>
             </div>

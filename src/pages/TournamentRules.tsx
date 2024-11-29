@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 import { PageTitle } from "@/components/PageTitle";
 import { TableOfContents } from "@/components/tournament-rules/TableOfContents";
 import { Button } from "@/components/ui/button";
-import { Printer } from "lucide-react";
+import { Printer, History as HistoryIcon } from "lucide-react";
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
@@ -87,7 +87,7 @@ const TournamentRules = () => {
 
             <div className="mt-16 border-t pt-8">
               <div className="flex items-center gap-2 mb-4">
-                <History className="w-5 h-5 text-slate-600" />
+                <HistoryIcon className="w-5 h-5 text-slate-600" />
                 <h2 className="text-xl font-bold">改訂履歴</h2>
               </div>
               <div className="space-y-2 text-sm text-slate-600">

@@ -13,9 +13,9 @@ interface Message {
   created_at: string;
   user_id: string;
   profiles: {
-    username: string;
+    username: string | null;
     avatar_url: string | null;
-  };
+  } | null;
 }
 
 export const ChatRoom = () => {
@@ -38,13 +38,13 @@ export const ChatRoom = () => {
         .limit(50);
 
       if (error) throw error;
-      return data as Message[];
+      return (data as Message[]).reverse();
     },
   });
 
   useEffect(() => {
     if (initialMessages) {
-      setMessages(initialMessages.reverse());
+      setMessages(initialMessages);
     }
   }, [initialMessages]);
 

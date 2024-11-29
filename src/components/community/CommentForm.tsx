@@ -28,6 +28,7 @@ export const CommentForm = ({ discussionId, onCancel }: CommentFormProps) => {
 
     if (!user) {
       toast.error("コメントするにはログインが必要です");
+      setIsSubmitting(false);
       return;
     }
 
@@ -47,7 +48,11 @@ export const CommentForm = ({ discussionId, onCancel }: CommentFormProps) => {
     } else {
       toast.success("コメントを投稿しました");
       setContent("");
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
+      // Invalidate both the discussions and the specific discussion's comments
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['discussions'] }),
+        queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] })
+      ]);
       if (onCancel) onCancel();
     }
     setIsSubmitting(false);

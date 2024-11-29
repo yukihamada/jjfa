@@ -38,7 +38,7 @@ export const ChatRoom = () => {
         .limit(50);
 
       if (error) throw error;
-      return (data as Message[]).reverse();
+      return (data as unknown as Message[]).reverse();
     },
   });
 
@@ -76,7 +76,7 @@ export const ChatRoom = () => {
             return;
           }
 
-          setMessages((current) => [...current, newMessage as Message]);
+          setMessages((current) => [...current, newMessage as unknown as Message]);
         }
       )
       .subscribe();

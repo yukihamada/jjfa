@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Copy, Info } from "lucide-react";
+import { Copy, Info, Smartphone, Desktop } from "lucide-react";
 import { toast } from "sonner";
 
 interface StreamInstructionsProps {
@@ -26,11 +26,42 @@ export const StreamInstructions = ({ open, onOpenChange, streamKey }: StreamInst
           <DialogTitle>配信方法</DialogTitle>
         </DialogHeader>
 
-        <Tabs defaultValue="obs">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="obs">OBSで配信</TabsTrigger>
-            <TabsTrigger value="mobile">スマートフォンで配信</TabsTrigger>
+        <Tabs defaultValue="browser">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="browser" className="flex items-center gap-2">
+              <Desktop className="w-4 h-4" />
+              ブラウザ
+            </TabsTrigger>
+            <TabsTrigger value="obs">OBS</TabsTrigger>
+            <TabsTrigger value="mobile" className="flex items-center gap-2">
+              <Smartphone className="w-4 h-4" />
+              スマートフォン
+            </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="browser" className="space-y-4">
+            <div className="space-y-4">
+              <h3 className="font-semibold">ブラウザから配信</h3>
+              <ol className="list-decimal list-inside space-y-2">
+                <li>カメラとマイクの使用を許可してください</li>
+                <li>「配信開始」ボタンをクリックして配信を開始します</li>
+                <li>配信を終了する場合は「配信終了」ボタンをクリックします</li>
+              </ol>
+
+              <Alert>
+                <Info className="h-4 w-4" />
+                <AlertDescription>
+                  ブラウザ配信は実験的な機能です。安定した配信にはOBSの使用をお勧めします。
+                </AlertDescription>
+              </Alert>
+
+              <div className="flex justify-center">
+                <Button className="w-full max-w-sm">
+                  配信を開始
+                </Button>
+              </div>
+            </div>
+          </TabsContent>
 
           <TabsContent value="obs" className="space-y-4">
             <div className="space-y-4">
@@ -85,6 +116,7 @@ export const StreamInstructions = ({ open, onOpenChange, streamKey }: StreamInst
                 <h4 className="font-medium">iPhoneの場合</h4>
                 <ul className="list-disc list-inside">
                   <li>Larix Broadcaster（無料）</li>
+                  <li>Streamlabs（無料）</li>
                 </ul>
               </div>
 
@@ -92,14 +124,15 @@ export const StreamInstructions = ({ open, onOpenChange, streamKey }: StreamInst
                 <h4 className="font-medium">Androidの場合</h4>
                 <ul className="list-disc list-inside">
                   <li>Larix Broadcaster（無料）</li>
-                  <li>StreamLabs（無料）</li>
+                  <li>Streamlabs（無料）</li>
+                  <li>Prism Live Studio（無料）</li>
                 </ul>
               </div>
 
               <Alert>
                 <Info className="h-4 w-4" />
                 <AlertDescription>
-                  アプリの設定で、上記のRTMP URLとストリームキーを入力してください。
+                  アプリの設定で、以下のRTMP URLとストリームキーを入力してください。
                 </AlertDescription>
               </Alert>
 

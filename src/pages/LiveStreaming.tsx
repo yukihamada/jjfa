@@ -1,26 +1,96 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LiveStreamList } from "@/components/live-streaming/LiveStreamList";
 import { CreateStreamDialog } from "@/components/live-streaming/CreateStreamDialog";
 import { StreamInstructions } from "@/components/live-streaming/StreamInstructions";
 import { Button } from "@/components/ui/button";
 import { Plus, Video, Users, Trophy } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
 
 const LiveStreaming = () => {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [currentStreamKey, setCurrentStreamKey] = useState("");
+  const [stats, setStats] = useState({
+    liveCount: 0,
+    viewerCount: 0,
+    totalStreamTime: 0
+  });
 
-  const stats = [
-    { label: "ライブ配信中", value: "12", icon: Video },
-    { label: "視聴者数", value: "1,234", icon: Users },
-    { label: "総配信時間", value: "256時間", icon: Trophy },
-  ];
+  useEffect(() => {
+    fetchStreamStats();
+    
+    // Subscribe to live stream changes
+    const channel = supabase
+      .channel('public:live_streams')
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'live_streams',
+      }, () => {
+        fetchStreamStats();
+      })
+      .subscribe();
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }, []);
+
+  const fetchStreamStats = async () => {
+    // Get live stream count
+    const { data: liveStreams } = await supabase
+      .from('live_streams')
+      .select('viewer_count')
+      .eq('status', 'live');
+
+    // Calculate total viewers and stream count
+    const liveCount = liveStreams?.length || 0;
+    const viewerCount = liveStreams?.reduce((sum, stream) => sum + (stream.viewer_count || 0), 0) || 0;
+
+    // Get total stream time (in hours)
+    const { data: completedStreams } = await supabase
+      .from('live_streams')
+      .select('started_at, ended_at')
+      .not('ended_at', 'is', null);
+
+    const totalStreamTime = completedStreams?.reduce((sum, stream) => {
+      const duration = new Date(stream.ended_at).getTime() - new Date(stream.started_at).getTime();
+      return sum + (duration / (1000 * 60 * 60)); // Convert to hours
+    }, 0) || 0;
+
+    setStats({
+      liveCount,
+      viewerCount,
+      totalStreamTime: Math.round(totalStreamTime)
+    });
+  };
 
   const handleStreamCreated = (streamKey: string) => {
     setCurrentStreamKey(streamKey);
     setShowInstructions(true);
   };
+
+  const statsConfig = [
+    { 
+      label: "ライブ配信中", 
+      value: stats.liveCount.toString(), 
+      icon: Video,
+      color: "text-red-600"
+    },
+    { 
+      label: "視聴者数", 
+      value: stats.viewerCount.toLocaleString(), 
+      icon: Users,
+      color: "text-blue-600"
+    },
+    { 
+      label: "総配信時間", 
+      value: `${stats.totalStreamTime}時間`, 
+      icon: Trophy,
+      color: "text-yellow-600"
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -43,15 +113,15 @@ const LiveStreaming = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {stats.map(({ label, value, icon: Icon }) => (
+            {statsConfig.map(({ label, value, icon: Icon, color }) => (
               <Card key={label} className="bg-slate-800 border-slate-700 p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-slate-700 rounded-lg">
-                    <Icon className="w-5 h-5 text-white" />
+                  <div className={`p-2 bg-slate-700 rounded-lg ${color}`}>
+                    <Icon className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-sm text-slate-300">{label}</p>
-                    <p className="text-2xl font-bold">{value}</p>
+                    <p className={`text-2xl font-bold ${color}`}>{value}</p>
                   </div>
                 </div>
               </Card>

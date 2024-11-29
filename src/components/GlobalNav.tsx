@@ -93,18 +93,18 @@ const GlobalNav = () => {
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50">
       <div className="bg-white/90 backdrop-blur-md shadow-md w-full transition-all duration-300 ease-in-out">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center h-16 px-3 sm:px-4">
             <Link 
               to="/" 
-              className="text-slate-800 hover:text-slate-600 font-bold text-xl flex items-center gap-2 transition-transform duration-300 hover:scale-105"
+              className="text-slate-800 hover:text-slate-600 font-bold text-lg flex items-center gap-2 transition-transform duration-300 hover:scale-105 min-w-0"
               onClick={() => setIsMenuOpen(false)}
             >
-              <span className="bg-slate-800 text-white px-2 py-1 rounded">JJFA</span>
-              <span className="hidden sm:inline text-sm text-slate-600">{t('hero.title')}</span>
+              <span className="bg-slate-800 text-white px-2 py-1 rounded text-sm">JJFA</span>
+              <span className="hidden sm:inline text-xs text-slate-600 truncate">{t('hero.title')}</span>
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-2">
+            <nav className="hidden lg:flex items-center gap-1">
               <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1">
                 {menuItems.slice(0, 5).map((item) => {
                   const Icon = item.icon;
@@ -112,7 +112,7 @@ const GlobalNav = () => {
                     <Link 
                       key={item.to}
                       to={item.to} 
-                      className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-white transition-all duration-200"
+                      className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-md hover:bg-white transition-all duration-200 text-sm"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <Icon className="w-4 h-4" />
@@ -129,7 +129,7 @@ const GlobalNav = () => {
 
               <Link 
                 to="/contact"
-                className="ml-2 bg-slate-800 text-white hover:bg-slate-700 font-medium flex items-center gap-1.5 px-4 py-1.5 rounded-md transition-colors duration-200"
+                className="ml-2 bg-slate-800 text-white hover:bg-slate-700 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors duration-200 text-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <MessageCircle className="w-4 h-4" />
@@ -137,7 +137,7 @@ const GlobalNav = () => {
               </Link>
             </nav>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <LanguageSelector />
               
               {user ? (
@@ -151,7 +151,7 @@ const GlobalNav = () => {
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="w-40">
                     <DropdownMenuItem asChild>
                       <Link to="/profile" className="flex items-center">
                         <User className="mr-2 h-4 w-4" />
@@ -167,7 +167,7 @@ const GlobalNav = () => {
               ) : (
                 <Link 
                   to="/community" 
-                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-slate-50 transition-all duration-200"
+                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-md hover:bg-slate-50 transition-all duration-200 text-sm"
                 >
                   <User className="w-4 h-4" />
                   <span className="hidden sm:inline">ログイン</span>
@@ -175,12 +175,11 @@ const GlobalNav = () => {
               )}
 
               <button 
-                id="menu-button"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden p-2 hover:bg-slate-100 rounded-md transition-colors duration-300 ease-in-out"
                 aria-label="Toggle menu"
               >
-                <Menu className={`h-6 w-6 text-slate-600 transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`} />
+                <Menu className={`h-5 w-5 text-slate-600 transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`} />
               </button>
             </div>
           </div>
@@ -188,22 +187,21 @@ const GlobalNav = () => {
 
         {/* モバイルメニュー */}
         <div 
-          id="mobile-menu"
-          className={`lg:hidden fixed top-16 right-0 w-64 h-screen bg-white/90 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out ${
+          className={`lg:hidden fixed top-16 right-0 w-56 h-screen bg-white/90 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <nav className="flex flex-col p-4 gap-4">
+          <nav className="flex flex-col p-4 gap-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
               return (
                 <Link 
                   key={item.to}
                   to={item.to} 
-                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 transform transition-all duration-300 hover:translate-x-2 hover:bg-slate-50 p-2 rounded-md"
-                  onClick={handleMenuClick}
+                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-3 p-2 rounded-md hover:bg-slate-50 transition-all duration-200 text-sm"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4" />
                   <span>{item.label}</span>
                   {item.to === "/live" && liveStreams > 0 && (
                     <Badge variant="destructive" className="ml-auto">

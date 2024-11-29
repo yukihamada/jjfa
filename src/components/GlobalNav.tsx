@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';
 import { supabase } from "@/integrations/supabase/client";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +21,7 @@ const GlobalNav = () => {
   const [user, setUser] = useState<any>(null);
   const [liveStreams, setLiveStreams] = useState<number>(0);
   const { t, i18n } = useTranslation();
+  const isVisible = useScrollDirection();
 
   useEffect(() => {
     const getUser = async () => {
@@ -91,7 +93,9 @@ const GlobalNav = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50">
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       <div className="bg-white/90 backdrop-blur-md shadow-md w-full transition-all duration-300 ease-in-out">
         <div className="container mx-auto">
           <div className="flex justify-between items-center h-16 px-3 sm:px-4">

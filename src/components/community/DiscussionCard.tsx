@@ -9,6 +9,8 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { CommentForm } from "./CommentForm";
+import { CommentList } from "./CommentList";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,6 +30,7 @@ interface DiscussionCardProps {
 export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showCommentForm, setShowCommentForm] = useState(false);
   const queryClient = useQueryClient();
   const isAdminPost = discussion.tags?.some((tag: any) => tag.name === '運営');
 
@@ -188,12 +191,35 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
               <Heart className={`w-4 h-4 mr-1 ${discussion.likes?.length > 0 ? 'fill-current text-pink-500' : ''}`} />
               <span>{discussion.likes?.length || 0}</span>
             </Button>
-            <div className="flex items-center text-slate-500">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-slate-500 hover:text-indigo-600"
+              onClick={() => setShowCommentForm(!showCommentForm)}
+            >
               <MessageSquare className="w-4 h-4 mr-1" />
               <span>{discussion.comments?.length || 0}</span>
-            </div>
+            </Button>
           </div>
         </div>
+
+        {showCommentForm && (
+          <div className="mt-6">
+            <CommentForm
+              discussionId={discussion.id}
+              onCancel={() => setShowCommentForm(false)}
+            />
+          </div>
+        )}
+
+        {discussion.comments && discussion.comments.length > 0 && (
+          <div className="mt-6">
+            <CommentList
+              comments={discussion.comments}
+              discussionId={discussion.id}
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

@@ -4,7 +4,7 @@ import { Medal } from "lucide-react";
 
 export const BlackBeltSystem = () => {
   return (
-    <RuleSection id="black-belt-system" title="黒帯制度">
+    <RuleSection id="black-belt-system" title="黒帯制度" sectionNumber="3">
       <div className="space-y-8">
         <div>
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -15,14 +15,17 @@ export const BlackBeltSystem = () => {
             <RuleItem
               title="年齢要件"
               description="黒帯を与えられるのは19歳以上の選手のみです。"
+              ruleNumber="3.1"
             />
             <RuleItem
               title="所属要件"
               description="黒帯証明書の申請には、JJFAに所属している必要があります。"
+              ruleNumber="3.2"
             />
             <RuleItem
               title="指導者要件"
               description="黒帯の段位を授与されるためには、そのJJFAの正会員であり、JJFA加盟スクールにメインインストラクターまたはアシスタントインストラクターとして登録されている必要があります。"
+              ruleNumber="3.3"
             />
           </div>
         </div>

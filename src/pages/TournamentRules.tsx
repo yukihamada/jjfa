@@ -17,6 +17,8 @@ import { CommunityEngagement } from "@/components/tournament-rules/sections/Comm
 import { Sustainability } from "@/components/tournament-rules/sections/Sustainability";
 import { VenueLayout } from "@/components/tournament-rules/sections/VenueLayout";
 import { StaffResponsibilities } from "@/components/tournament-rules/sections/StaffResponsibilities";
+import { AwardCeremony } from "@/components/tournament-rules/sections/AwardCeremony";
+import { TeamPoints } from "@/components/tournament-rules/sections/TeamPoints";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -68,6 +70,8 @@ const TournamentRules = () => {
               <CareerDevelopment />
               <GlobalStandards />
               <CommunityEngagement />
+              <AwardCeremony />
+              <TeamPoints />
               <Sustainability />
             </div>
           </div>

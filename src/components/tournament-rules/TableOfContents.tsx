@@ -14,6 +14,8 @@ export const TableOfContents = () => {
     { id: "career-development", title: "選手キャリア開発" },
     { id: "global-standards", title: "国際標準化" },
     { id: "community-engagement", title: "コミュニティ参加" },
+    { id: "award-ceremony", title: "表彰式" },
+    { id: "team-points", title: "チームポイント" },
     { id: "sustainability", title: "持続可能性への取り組み" }
   ];
 

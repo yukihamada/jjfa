@@ -1,5 +1,6 @@
 import { RuleSection } from "../RuleSection";
 import { Info, Target, Book, Users, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Introduction = () => {
   return (
@@ -34,9 +35,14 @@ export const Introduction = () => {
             大会参加資格
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
-            <li>有効なJJFA会員資格を保持していること</li>
+            <li>
+              <Link to="/community-registration" className="text-blue-600 hover:underline">
+                JJFA会員登録
+              </Link>
+              を完了し、有効な会員資格を保持していること
+            </li>
             <li>出場カテゴリーに適合する年齢・体重・帯色であること</li>
-            <li>医師による健康診断を受け、競技に支障がないと認められていること</li>
+            <li>健康状態が良好で、競技に参加可能な体調であること</li>
             <li>過去1年以内に重大な違反行為がないこと</li>
             <li>必要な保険に加入していること</li>
           </ul>

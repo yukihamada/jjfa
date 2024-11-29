@@ -51,7 +51,8 @@ const Roadmap = () => {
                               text.includes("会員登録") ||
                               text.includes("トークン規程") ||
                               text.includes("定款") ||
-                              text.includes("利用規程")
+                              text.includes("利用規程") ||
+                              text.includes("大会ルール")
                             );
 
                             // リンクの生成
@@ -78,6 +79,12 @@ const Roadmap = () => {
                               content = text.replace(
                                 "利用規程",
                                 `<a href="/operating-rules" class="text-blue-600 hover:underline">利用規程</a>`
+                              );
+                            }
+                            if (text.includes("大会ルール")) {
+                              content = text.replace(
+                                "大会ルール",
+                                `<a href="/tournament-rules" class="text-blue-600 hover:underline">大会ルール</a>`
                               );
                             }
 

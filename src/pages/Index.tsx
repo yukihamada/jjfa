@@ -7,12 +7,16 @@ import { TeamSection } from "@/components/TeamSection";
 import { TokenSection } from "@/components/sections/TokenSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
-import { PageTitle } from "@/components/PageTitle";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <PageTitle title="JJFA - 柔術 for ALL" />
+      <SEO 
+        title="JJFA - 柔術 for ALL"
+        description="JJFAは柔術の普及とコミュニティの発展を目指すプラットフォームです。トーナメント運営、教育コンテンツの提供、グローバルなコミュニティ作りを通じて、柔術の魅力を全ての人々に届けます。"
+        keywords="柔術,JJFA,Jiu-Jitsu,大会,トーナメント,コミュニティ,教育,MASTER NFT,VOTE Token,BJJ Token,DAO"
+      />
       <BackgroundGradient />
       <HeroSection />
       <JiujitsuBenefitsSection />

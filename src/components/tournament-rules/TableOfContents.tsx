@@ -4,6 +4,10 @@ export const TableOfContents = () => {
   const sections = [
     { id: "introduction", title: "はじめに" },
     { id: "match-format", title: "試合形式" },
+    { id: "uniform-rules", title: "服装規定" },
+    { id: "age-categories", title: "年齢カテゴリー" },
+    { id: "match-duration", title: "試合時間" },
+    { id: "weight-divisions", title: "体重区分" },
     { id: "point-system", title: "ポイントシステム" },
     { id: "referee-basics", title: "レフェリーの基本原則" },
     { id: "penalties", title: "ペナルティ" },

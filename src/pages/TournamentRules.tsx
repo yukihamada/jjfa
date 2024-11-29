@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Printer, History as HistoryIcon } from "lucide-react";
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
+import { UniformRules } from "@/components/tournament-rules/sections/UniformRules";
+import { AgeCategories } from "@/components/tournament-rules/sections/AgeCategories";
+import { MatchDuration } from "@/components/tournament-rules/sections/MatchDuration";
+import { WeightDivisions } from "@/components/tournament-rules/sections/WeightDivisions";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
 import { RefereeBasics } from "@/components/tournament-rules/sections/RefereeBasics";
 import { Penalties } from "@/components/tournament-rules/sections/Penalties";
@@ -65,6 +69,10 @@ const TournamentRules = () => {
             <div className="space-y-12">
               <Introduction />
               <MatchFormat />
+              <UniformRules />
+              <AgeCategories />
+              <MatchDuration />
+              <WeightDivisions />
               <PointSystem />
               <RefereeBasics />
               <Penalties />

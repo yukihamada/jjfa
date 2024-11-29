@@ -11,32 +11,32 @@ export const WeightDivisions = () => {
             <RuleItem
               title="ルースター級"
               description="57.5kg以下"
-              ruleNumber="6.1"
+              ruleNumber="5.0"
             />
             <RuleItem
               title="フェザー級"
               description="64kg以下"
-              ruleNumber="6.2"
+              ruleNumber="5.1"
             />
             <RuleItem
               title="ライト級"
               description="70kg以下"
-              ruleNumber="6.3"
+              ruleNumber="5.2"
             />
             <RuleItem
               title="ミドル級"
               description="77.5kg以下"
-              ruleNumber="6.4"
+              ruleNumber="5.3"
             />
             <RuleItem
               title="ミディアムヘビー級"
               description="85.5kg以下"
-              ruleNumber="6.5"
+              ruleNumber="5.4"
             />
             <RuleItem
               title="ヘビー級"
               description="85.5kg超"
-              ruleNumber="6.6"
+              ruleNumber="5.5"
             />
           </div>
         </div>
@@ -47,27 +47,27 @@ export const WeightDivisions = () => {
             <RuleItem
               title="ライトフェザー級"
               description="53.5kg以下"
-              ruleNumber="6.7"
+              ruleNumber="5.6"
             />
             <RuleItem
               title="フェザー級"
               description="58.5kg以下"
-              ruleNumber="6.8"
+              ruleNumber="5.7"
             />
             <RuleItem
               title="ライト級"
               description="64kg以下"
-              ruleNumber="6.9"
+              ruleNumber="5.8"
             />
             <RuleItem
               title="ミドル級"
               description="69kg以下"
-              ruleNumber="6.10"
+              ruleNumber="5.9"
             />
             <RuleItem
               title="ヘビー級"
               description="69kg超"
-              ruleNumber="6.11"
+              ruleNumber="5.10"
             />
           </div>
         </div>
@@ -75,7 +75,7 @@ export const WeightDivisions = () => {
         <RuleItem
           title="計量ルール"
           description="試合当日、試合開始20分前までに計量を完了する必要があります。計量の回数制限は大会ごとに異なります。"
-          ruleNumber="6.12"
+          ruleNumber="5.11"
         />
       </div>
     </RuleSection>

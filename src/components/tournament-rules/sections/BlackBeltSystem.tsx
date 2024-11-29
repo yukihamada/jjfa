@@ -13,12 +13,12 @@ export const BlackBeltSystem = () => {
           <RuleItem
             title="技術試験"
             description="技術試験を通過する必要があります。試験内容は、基本技術やコンビネーションが含まれます。"
-            ruleNumber="13.1"
+            ruleNumber="13.0"
           />
           <RuleItem
             title="試合参加"
             description="黒帯取得者は、指定された期間内に一定数の公式試合に参加しなければなりません。"
-            ruleNumber="13.2"
+            ruleNumber="13.1"
           />
         </div>
 
@@ -30,12 +30,12 @@ export const BlackBeltSystem = () => {
           <RuleItem
             title="後進指導"
             description="黒帯保持者は、初心者や子供たちへの指導を行い、技術や倫理の普及に努める必要があります。"
-            ruleNumber="13.3"
+            ruleNumber="13.2"
           />
           <RuleItem
             title="大会参加"
             description="指定された大会に参加し、レフェリーやコーチとしての役割を果たすことも求められる場合があります。"
-            ruleNumber="13.4"
+            ruleNumber="13.3"
           />
         </div>
       </div>

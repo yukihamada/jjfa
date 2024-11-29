@@ -1,12 +1,11 @@
 import { RuleSection } from "../RuleSection";
 import { RuleItem } from "../RuleItem";
-import { Gavel, Scale, Shield, Users, Award, Scroll, School, MessageSquare } from "lucide-react";
+import { Gavel, Shield, MessageSquare } from "lucide-react";
 
 export const RefereeBasics = () => {
   return (
     <RuleSection id="referee-basics" title="レフェリーの基本原則" sectionNumber="7">
       <div className="space-y-8">
-        {/* 基本原則 */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Gavel className="w-6 h-6 text-blue-500" />
@@ -14,24 +13,23 @@ export const RefereeBasics = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="1"
+              ruleNumber="7.0"
               title="公正性の重要性"
               description="研修を受け、一貫性のあるレフェリーは、個々の試合の結果に影響を与える決定をするので、公正な大会には不可欠です。正確かつ偏見のない振る舞いで、ルールを守り、試合を判断することが期待されています。"
             />
             <RuleItem
-              ruleNumber="2"
+              ruleNumber="7.1"
               title="判定の自信"
               description="レフェリーは、判定に自信を示すべきであり、その特性はルールの理解及び経験から得られるものです。マット上の状況に関わらず、落ち着いた態度を維持することが望まれます。"
             />
             <RuleItem
-              ruleNumber="3"
+              ruleNumber="7.2"
               title="中立性の維持"
               description="レフェリー及びスタッフは、競技エリア内でいかなる競技者も励ましたり、贔屓をしたり、応援したりすることは許可されていません。"
             />
           </div>
         </div>
 
-        {/* 主審の責務 */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
@@ -39,7 +37,7 @@ export const RefereeBasics = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="4"
+              ruleNumber="7.3"
               title="試合の管理"
               description="試合は、一人の主審によって裁かれます。主審は対戦エリアに居続け、競技者の近くに居ることで試合を管理します。"
             />
@@ -56,7 +54,6 @@ export const RefereeBasics = () => {
           </div>
         </div>
 
-        {/* レフェリーの指示 */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <MessageSquare className="w-6 h-6 text-blue-500" />
@@ -81,42 +78,6 @@ export const RefereeBasics = () => {
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">Acabou / Time</p>
                   <p className="text-slate-600 mt-1">試合終了</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold text-lg text-slate-800">主なジェスチャー</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">試合開始</p>
-                  <p className="text-slate-600 mt-1">両腕を前に伸ばし、「Combate / Fight」と共に下ろす</p>
-                </div>
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">ポイント付与</p>
-                  <p className="text-slate-600 mt-1">該当選手の色の手を上げ、指の本数でポイントを示す</p>
-                </div>
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">一時停止</p>
-                  <p className="text-slate-600 mt-1">「T」の形に手を組み、「Parou / Stop」と宣言</p>
-                </div>
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">試合終了</p>
-                  <p className="text-slate-600 mt-1">両腕を交差させ、「Acabou / Time」と宣言</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold text-lg text-slate-800">罰則と失格の合図</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">ファウル</p>
-                  <p className="text-slate-600 mt-1">該当選手の色の手を挙げ、反則の種類を示す</p>
-                </div>
-                <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">失格</p>
-                  <p className="text-slate-600 mt-1">両腕を頭上で交差させ、該当選手を指す</p>
                 </div>
               </div>
             </div>

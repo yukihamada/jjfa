@@ -6,7 +6,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@supabase/auth-helpers-react";
 
 interface Message {
   id: string;
@@ -15,14 +14,13 @@ interface Message {
   user_id: string;
   profiles: {
     username: string;
-    avatar_url: string;
+    avatar_url: string | null;
   };
 }
 
 export const ChatRoom = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const auth = useAuth();
 
   const { data: initialMessages } = useQuery({
     queryKey: ["chat-messages"],
@@ -40,7 +38,7 @@ export const ChatRoom = () => {
         .limit(50);
 
       if (error) throw error;
-      return data as unknown as Message[];
+      return data as Message[];
     },
   });
 
@@ -90,12 +88,18 @@ export const ChatRoom = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim() || !auth?.user?.id) return;
+    if (!message.trim()) return;
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session?.user?.id) {
+      toast.error("ログインが必要です");
+      return;
+    }
 
     try {
       const { error } = await supabase.from("chat_messages").insert({
         content: message.trim(),
-        user_id: auth.user.id,
+        user_id: session.user.id,
       });
 
       if (error) throw error;
@@ -115,7 +119,7 @@ export const ChatRoom = () => {
           {messages.map((msg) => (
             <div key={msg.id} className="flex items-start gap-3">
               <Avatar>
-                <AvatarImage src={msg.profiles?.avatar_url} />
+                <AvatarImage src={msg.profiles?.avatar_url || undefined} />
                 <AvatarFallback>
                   {msg.profiles?.username?.[0]?.toUpperCase() || "U"}
                 </AvatarFallback>

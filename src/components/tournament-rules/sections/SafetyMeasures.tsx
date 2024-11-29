@@ -3,7 +3,7 @@ import { RuleItem } from "../RuleItem";
 
 export const SafetyMeasures = () => {
   return (
-    <RuleSection id="safety-measures" title="安全対策" sectionNumber="6">
+    <RuleSection id="safety-measures" title="安全対策" sectionNumber="9">
       <RuleItem
         title="メディカルチェック"
         description="試合前に選手の健康状態をデジタル記録し、ブロックチェーンで管理します。"

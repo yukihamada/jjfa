@@ -3,7 +3,7 @@ import { RuleItem } from "../RuleItem";
 
 export const WeightDivisions = () => {
   return (
-    <RuleSection id="weight-divisions" title="体重区分" sectionNumber="6">
+    <RuleSection id="weight-divisions" title="体重区分" sectionNumber="5">
       <div className="space-y-4">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4">男性部門</h3>

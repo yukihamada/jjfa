@@ -5,7 +5,7 @@ import { GraduationCap, Globe2, Handshake, Trophy } from "lucide-react";
 
 export const CareerDevelopment = () => {
   return (
-    <RuleSection id="career-development" title="選手キャリア開発" sectionNumber="7">
+    <RuleSection id="career-development" title="キャリア開発" sectionNumber="20">
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>

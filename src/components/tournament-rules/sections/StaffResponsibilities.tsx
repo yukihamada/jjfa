@@ -3,7 +3,7 @@ import { Users, UserCog, Scale, Table, Shield, Camera, Megaphone, Stethoscope } 
 
 export const StaffResponsibilities = () => {
   return (
-    <RuleSection id="staff-responsibilities" title="大会運営スタッフの責任" sectionNumber="7">
+    <RuleSection id="staff-responsibilities" title="大会運営スタッフの責任" sectionNumber="16">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

@@ -1,69 +1,42 @@
 import { RuleSection } from "../RuleSection";
 import { RuleItem } from "../RuleItem";
-import { Medal } from "lucide-react";
 
 export const BlackBeltSystem = () => {
   return (
-    <RuleSection id="black-belt-system" title="黒帯制度" sectionNumber="3">
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Medal className="w-5 h-5 text-slate-600" />
-            黒帯の基本要件
-          </h3>
-          <div className="space-y-4">
-            <RuleItem
-              title="年齢要件"
-              description="黒帯を与えられるのは19歳以上の選手のみです。"
-              ruleNumber="3.1"
-            />
-            <RuleItem
-              title="所属要件"
-              description="黒帯証明書の申請には、JJFAに所属している必要があります。"
-              ruleNumber="3.2"
-            />
-            <RuleItem
-              title="指導者要件"
-              description="黒帯の段位を授与されるためには、そのJJFAの正会員であり、JJFA加盟スクールにメインインストラクターまたはアシスタントインストラクターとして登録されている必要があります。"
-              ruleNumber="3.3"
-            />
-          </div>
+    <RuleSection id="black-belt-system" title="黒帯制度" sectionNumber="13">
+      <div className="space-y-6">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4">黒帯取得の要件</h3>
+          <p className="text-slate-600 mb-4">
+            黒帯を取得するためには、競技歴、技術、試合でのパフォーマンスを総合的に評価されます。
+          </p>
+          <RuleItem
+            title="技術試験"
+            description="技術試験を通過する必要があります。試験内容は、基本技術やコンビネーションが含まれます。"
+            ruleNumber="13.1"
+          />
+          <RuleItem
+            title="試合参加"
+            description="黒帯取得者は、指定された期間内に一定数の公式試合に参加しなければなりません。"
+            ruleNumber="13.2"
+          />
         </div>
 
-        <div>
-          <h3 className="text-lg font-semibold mb-4">黒帯段位システム</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">段位</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">対象年齢</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">最短修了期間</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {[
-                  { rank: "黒帯", age: "19歳以上", period: "前の帯で1年" },
-                  { rank: "黒帯初段", age: "22歳以上", period: "前の帯で3年" },
-                  { rank: "黒帯二段", age: "25歳以上", period: "前の帯で3年" },
-                  { rank: "黒帯三段", age: "28歳以上", period: "前の帯で3年" },
-                  { rank: "黒帯四段", age: "33歳以上", period: "前の帯で5年" },
-                  { rank: "黒帯五段", age: "38歳以上", period: "前の帯で5年" },
-                  { rank: "黒帯六段", age: "43歳以上", period: "前の帯で5年" },
-                  { rank: "赤黒帯七段", age: "50歳以上", period: "前の帯で7年" },
-                  { rank: "赤黒帯八段", age: "57歳以上", period: "前の帯で7年" },
-                  { rank: "赤帯九段", age: "67歳以上", period: "前の帯で10年" },
-                  { rank: "赤帯十段", age: "82歳以上", period: "前の帯で10年" },
-                ].map((item, index) => (
-                  <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.rank}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.age}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.period}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4">黒帯の義務</h3>
+          <p className="text-slate-600 mb-4">
+            黒帯は、その地位にふさわしい行動、指導、競技者との交流を行うことが求められます。
+          </p>
+          <RuleItem
+            title="後進指導"
+            description="黒帯保持者は、初心者や子供たちへの指導を行い、技術や倫理の普及に努める必要があります。"
+            ruleNumber="13.3"
+          />
+          <RuleItem
+            title="大会参加"
+            description="指定された大会に参加し、レフェリーやコーチとしての役割を果たすことも求められる場合があります。"
+            ruleNumber="13.4"
+          />
         </div>
       </div>
     </RuleSection>

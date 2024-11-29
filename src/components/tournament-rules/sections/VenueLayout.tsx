@@ -4,7 +4,7 @@ import { MapPin, LayoutGrid, Building, Table, User, Trophy, Weight, Stethoscope 
 
 export const VenueLayout = () => {
   return (
-    <RuleSection id="venue-layout" title="大会会場のレイアウト" sectionNumber="14">
+    <RuleSection id="venue-layout" title="会場レイアウト" sectionNumber="15">
       <div className="space-y-8">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

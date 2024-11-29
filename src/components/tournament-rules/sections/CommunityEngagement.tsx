@@ -12,7 +12,7 @@ export const CommunityEngagement = () => {
             <Users className="w-12 h-12 text-blue-600 mb-4" />
             <CardTitle>オープンガバナンス</CardTitle>
             <RuleItem
-              title="意思決定プロセス"
+              title="18. 意思決定プロセス"
               description="ルール改定や大会運営に関する提案をコミュニティから募集し、オープンな議論と投票システムを通じて決定します。"
             />
             <RuleItem

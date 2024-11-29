@@ -11,6 +11,7 @@ export const MatchFormat = () => {
             トーナメント方式
           </h3>
           <p className="text-slate-600">
+            <span className="font-semibold">2. </span>
             シングルイリミネーション方式で実施され、敗者は次のラウンドに進めません。
           </p>
         </div>

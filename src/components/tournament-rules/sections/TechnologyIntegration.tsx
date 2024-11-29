@@ -12,6 +12,7 @@ export const TechnologyIntegration = () => {
             データ管理システム
           </h3>
           <p className="text-slate-600">
+            <span className="font-semibold">15. </span>
             試合結果、スコア、選手のパフォーマンスデータを永続的なデータベースに記録し、改ざん不可能な形で保存します。
           </p>
         </div>

@@ -14,6 +14,7 @@ export const Penalties = () => {
             消極的行動
           </h3>
           <p className="text-slate-600">
+            <span className="font-semibold">4. </span>
             過度に防御的な行動や、アクションを避ける行為には警告が与えられます。警告が3回続くと、相手に1ポイントが加算されます。
           </p>
         </div>

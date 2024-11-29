@@ -17,7 +17,7 @@ export const Rankings = () => {
             </p>
             <div className="grid gap-4">
               <RuleItem
-                title="ランキングの分類"
+                title="8. ランキングの分類"
                 description="個人の帯、年齢グループ、及び階級に基づき分類されます。ランキングポイントは帯や年齢カテゴリー間での移行はできません。"
               />
               <RuleItem

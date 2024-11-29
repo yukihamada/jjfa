@@ -12,7 +12,7 @@ export const Sustainability = () => {
             <Leaf className="w-12 h-12 text-green-600 mb-4" />
             <CardTitle>環境配慮型運営</CardTitle>
             <RuleItem
-              title="環境負荷削減"
+              title="19. 環境負荷削減"
               description="大会運営における環境負荷を最小限に抑え、持続可能な大会運営を実現します。"
             />
           </CardHeader>

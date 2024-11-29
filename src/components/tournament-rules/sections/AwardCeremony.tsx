@@ -13,7 +13,7 @@ export const AwardCeremony = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              title="ユニフォーム規定"
+              title="13. ユニフォーム規定"
               description="選手はJJFA公認のユニフォームで表彰式に出席しなければなりません。"
             />
             <RuleItem

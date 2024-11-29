@@ -11,7 +11,7 @@ export const StaffResponsibilities = () => {
             基本的な責務
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
-            <li>イベントの少なくとも30分前に会場に到着すること</li>
+            <li><span className="font-semibold">12. </span>イベントの少なくとも30分前に会場に到着すること</li>
             <li>適切なユニフォームを着用すること</li>
             <li>効率的かつ正確に業務を遂行すること</li>
             <li>プロフェッショナルな行動を維持すること</li>

@@ -7,7 +7,7 @@ export const MatchDuration = () => {
       <div className="space-y-4">
         <RuleItem
           title="白帯"
-          description="2分1ラウンド"
+          description="2分1ラウンド以上"
           ruleNumber="11.1"
         />
         <RuleItem
@@ -17,7 +17,7 @@ export const MatchDuration = () => {
         />
         <RuleItem
           title="休憩時間"
-          description="ラウンド間は30秒の休憩。選手のコンディション管理を重視します。"
+          description="ラウンド間は30秒以上の休憩。選手のコンディション管理を重視します。"
           ruleNumber="11.3"
         />
         <RuleItem

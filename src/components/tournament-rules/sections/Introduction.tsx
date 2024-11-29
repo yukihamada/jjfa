@@ -37,7 +37,6 @@ export const Introduction = () => {
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
             <li>JJFA主催の全ての公式大会</li>
             <li>JJFA公認の地域大会およびオープン大会</li>
-            <li>JJFA会員が参加する国際大会</li>
           </ul>
         </div>
 

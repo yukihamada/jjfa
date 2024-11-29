@@ -67,19 +67,19 @@ export const RefereeBasics = () => {
               <h4 className="font-semibold text-lg text-slate-800">基本的な声による指示</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">コンバッチ (Combate)</p>
+                  <p className="font-semibold text-blue-600">Combate / Fight</p>
                   <p className="text-slate-600 mt-1">試合開始</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">パレー (Parou)</p>
+                  <p className="font-semibold text-blue-600">Parou / Stop</p>
                   <p className="text-slate-600 mt-1">一時停止</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">ルッチ (Lute)</p>
+                  <p className="font-semibold text-blue-600">Lute / Fight</p>
                   <p className="text-slate-600 mt-1">積極的に戦うように促す</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
-                  <p className="font-semibold text-blue-600">アカボイ (Acabou)</p>
+                  <p className="font-semibold text-blue-600">Acabou / Time</p>
                   <p className="text-slate-600 mt-1">試合終了</p>
                 </div>
               </div>
@@ -90,7 +90,7 @@ export const RefereeBasics = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">試合開始</p>
-                  <p className="text-slate-600 mt-1">両腕を前に伸ばし、「コンバッチ」と共に下ろす</p>
+                  <p className="text-slate-600 mt-1">両腕を前に伸ばし、「Combate / Fight」と共に下ろす</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">ポイント付与</p>
@@ -98,11 +98,11 @@ export const RefereeBasics = () => {
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">一時停止</p>
-                  <p className="text-slate-600 mt-1">「T」の形に手を組み、「パレー」と宣言</p>
+                  <p className="text-slate-600 mt-1">「T」の形に手を組み、「Parou / Stop」と宣言</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">試合終了</p>
-                  <p className="text-slate-600 mt-1">両腕を交差させ、「アカボイ」と宣言</p>
+                  <p className="text-slate-600 mt-1">両腕を交差させ、「Acabou / Time」と宣言</p>
                 </div>
               </div>
             </div>

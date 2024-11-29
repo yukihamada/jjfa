@@ -1,10 +1,22 @@
 import { RuleSection } from "../RuleSection";
-import { Calendar, Layout, Award, Timer } from "lucide-react";
+import { Calendar, Layout, Award, Timer, Scale } from "lucide-react";
 
 export const MatchFormat = () => {
   return (
     <RuleSection id="match-format" title="試合形式">
       <div className="space-y-6">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Scale className="w-6 h-6 text-blue-500" />
+            計量ルール
+          </h3>
+          <ul className="list-disc pl-5 text-slate-600 space-y-2">
+            <li>試合開始20分前までに計量を完了する必要があります</li>
+            <li>計量時間は大会によって変更される場合があります</li>
+            <li>体重オーバーの場合は失格となります</li>
+          </ul>
+        </div>
+
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Award className="w-6 h-6 text-blue-500" />

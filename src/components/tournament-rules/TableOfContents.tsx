@@ -4,7 +4,6 @@ export const TableOfContents = () => {
   const sections = [
     { id: "introduction", title: "はじめに" },
     { id: "match-format", title: "試合形式" },
-    { id: "team-rules", title: "団体戦ルール" },
     { id: "point-system", title: "ポイントシステム" },
     { id: "penalties", title: "ペナルティ" },
     { id: "safety-measures", title: "安全対策" },
@@ -14,9 +13,11 @@ export const TableOfContents = () => {
     { id: "career-development", title: "選手キャリア開発" },
     { id: "global-standards", title: "国際標準化" },
     { id: "community-engagement", title: "コミュニティ参加" },
+    { id: "code-of-conduct", title: "行動規範" },
     { id: "award-ceremony", title: "表彰式" },
     { id: "team-points", title: "チームポイント" },
     { id: "rankings", title: "ランキングシステム" },
+    { id: "team-rules", title: "団体戦ルール" },
     { id: "sustainability", title: "持続可能性への取り組み" }
   ];
 

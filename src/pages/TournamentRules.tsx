@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Printer } from "lucide-react";
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
-import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
 import { Penalties } from "@/components/tournament-rules/sections/Penalties";
 import { SafetyMeasures } from "@/components/tournament-rules/sections/SafetyMeasures";
@@ -20,6 +19,8 @@ import { StaffResponsibilities } from "@/components/tournament-rules/sections/St
 import { AwardCeremony } from "@/components/tournament-rules/sections/AwardCeremony";
 import { TeamPoints } from "@/components/tournament-rules/sections/TeamPoints";
 import { Rankings } from "@/components/tournament-rules/sections/Rankings";
+import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfConduct";
+import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -61,7 +62,6 @@ const TournamentRules = () => {
             <div className="space-y-12">
               <Introduction />
               <MatchFormat />
-              <TeamRules />
               <PointSystem />
               <Penalties />
               <SafetyMeasures />
@@ -71,9 +71,11 @@ const TournamentRules = () => {
               <CareerDevelopment />
               <GlobalStandards />
               <CommunityEngagement />
+              <CodeOfConduct />
               <AwardCeremony />
               <TeamPoints />
               <Rankings />
+              <TeamRules />
               <Sustainability />
             </div>
           </div>

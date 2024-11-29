@@ -99,8 +99,8 @@ const GlobalNav = () => {
       <div className="bg-white/90 backdrop-blur-md shadow-md w-full transition-all duration-300 ease-in-out">
         <div className="container mx-auto">
           <div className="flex justify-between items-center h-16 px-3 sm:px-4">
-            {/* Logo - Right aligned */}
-            <div className="flex-1 flex justify-end order-2">
+            {/* Logo - Left aligned */}
+            <div className="flex-1 flex justify-start order-1">
               <Link 
                 to="/" 
                 className="text-slate-800 hover:text-slate-600 font-bold text-lg flex items-center gap-2 transition-transform duration-300 hover:scale-105 min-w-0"
@@ -111,8 +111,8 @@ const GlobalNav = () => {
               </Link>
             </div>
 
-            {/* Navigation - Left aligned */}
-            <nav className="hidden lg:flex items-center gap-1 flex-1 justify-start order-1">
+            {/* Navigation - Center aligned */}
+            <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center order-2">
               <div className="flex items-center gap-1 bg-slate-50 rounded-lg p-1">
                 {menuItems.slice(0, 5).map((item) => {
                   const Icon = item.icon;
@@ -145,7 +145,7 @@ const GlobalNav = () => {
               </Link>
             </nav>
 
-            {/* User controls - Left aligned */}
+            {/* User controls - Right aligned */}
             <div className="flex items-center gap-2 order-3">
               <div className="flex items-center gap-2">
                 <LanguageSelector />

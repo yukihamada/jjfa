@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 import { PageTitle } from "@/components/PageTitle";
 import { TableOfContents } from "@/components/tournament-rules/TableOfContents";
 import { Button } from "@/components/ui/button";
-import { Printer, History } from "lucide-react";
+import { Printer } from "lucide-react";
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
@@ -23,6 +23,7 @@ import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfCond
 import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
 import { BracketSystem } from "@/components/tournament-rules/sections/BracketSystem";
 import { BlackBeltSystem } from "@/components/tournament-rules/sections/BlackBeltSystem";
+import { RefereeBasics } from "@/components/tournament-rules/sections/RefereeBasics";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -69,6 +70,7 @@ const TournamentRules = () => {
               <SafetyMeasures />
               <VenueLayout />
               <StaffResponsibilities />
+              <RefereeBasics />
               <TechnologyIntegration />
               <CareerDevelopment />
               <GlobalStandards />

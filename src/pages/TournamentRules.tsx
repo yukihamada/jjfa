@@ -7,23 +7,23 @@ import { Printer, History as HistoryIcon } from "lucide-react";
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
+import { RefereeBasics } from "@/components/tournament-rules/sections/RefereeBasics";
 import { Penalties } from "@/components/tournament-rules/sections/Penalties";
 import { SafetyMeasures } from "@/components/tournament-rules/sections/SafetyMeasures";
+import { BracketSystem } from "@/components/tournament-rules/sections/BracketSystem";
+import { TeamPoints } from "@/components/tournament-rules/sections/TeamPoints";
+import { Rankings } from "@/components/tournament-rules/sections/Rankings";
+import { BlackBeltSystem } from "@/components/tournament-rules/sections/BlackBeltSystem";
+import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
+import { VenueLayout } from "@/components/tournament-rules/sections/VenueLayout";
+import { StaffResponsibilities } from "@/components/tournament-rules/sections/StaffResponsibilities";
+import { AwardCeremony } from "@/components/tournament-rules/sections/AwardCeremony";
+import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfConduct";
 import { TechnologyIntegration } from "@/components/tournament-rules/sections/TechnologyIntegration";
 import { CareerDevelopment } from "@/components/tournament-rules/sections/CareerDevelopment";
 import { GlobalStandards } from "@/components/tournament-rules/sections/GlobalStandards";
 import { CommunityEngagement } from "@/components/tournament-rules/sections/CommunityEngagement";
 import { Sustainability } from "@/components/tournament-rules/sections/Sustainability";
-import { VenueLayout } from "@/components/tournament-rules/sections/VenueLayout";
-import { StaffResponsibilities } from "@/components/tournament-rules/sections/StaffResponsibilities";
-import { AwardCeremony } from "@/components/tournament-rules/sections/AwardCeremony";
-import { TeamPoints } from "@/components/tournament-rules/sections/TeamPoints";
-import { Rankings } from "@/components/tournament-rules/sections/Rankings";
-import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfConduct";
-import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
-import { BracketSystem } from "@/components/tournament-rules/sections/BracketSystem";
-import { BlackBeltSystem } from "@/components/tournament-rules/sections/BlackBeltSystem";
-import { RefereeBasics } from "@/components/tournament-rules/sections/RefereeBasics";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -66,22 +66,22 @@ const TournamentRules = () => {
               <Introduction />
               <MatchFormat />
               <PointSystem />
+              <RefereeBasics />
               <Penalties />
               <SafetyMeasures />
+              <BracketSystem />
+              <TeamPoints />
+              <Rankings />
+              <BlackBeltSystem />
+              <TeamRules />
               <VenueLayout />
               <StaffResponsibilities />
-              <RefereeBasics />
+              <AwardCeremony />
+              <CodeOfConduct />
               <TechnologyIntegration />
               <CareerDevelopment />
               <GlobalStandards />
               <CommunityEngagement />
-              <CodeOfConduct />
-              <AwardCeremony />
-              <TeamPoints />
-              <Rankings />
-              <BracketSystem />
-              <BlackBeltSystem />
-              <TeamRules />
               <Sustainability />
             </div>
 
@@ -91,8 +91,7 @@ const TournamentRules = () => {
                 <h2 className="text-xl font-bold">改訂履歴</h2>
               </div>
               <div className="space-y-2 text-sm text-slate-600">
-                <p>2024年3月21日 - バージョン1.0.0: 初版公開</p>
-                <p>2024年3月15日 - バージョン0.9.0: ドラフト版作成</p>
+                <p>2024年11月28日 - バージョン1.0.0: 初版公開</p>
               </div>
             </div>
           </div>

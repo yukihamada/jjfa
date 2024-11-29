@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import GlobalNav from "./components/GlobalNav";
 import GlobalFooter from "./components/GlobalFooter";
 import Index from "./pages/Index";
@@ -20,7 +21,6 @@ import Roadmap from "./pages/Roadmap";
 import Profile from "./pages/Profile";
 import NFT from "./pages/NFT";
 import LiveStreaming from "./pages/LiveStreaming";
-import { useState, useEffect } from "react";
 import { PasswordProtection } from "./components/PasswordProtection";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -33,6 +33,16 @@ const protectedRoutes = [
   '/profile',
   '/roadmap',
 ];
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -91,9 +101,10 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <BrowserRouter>
+          <ScrollToTop />
           <div className="flex flex-col min-h-screen">
             <GlobalNav />
-            <main className="flex-grow">
+            <main className="flex-grow pt-16"> {/* Add padding-top to prevent header overlap */}
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/whitepaper" element={<Whitepaper />} />

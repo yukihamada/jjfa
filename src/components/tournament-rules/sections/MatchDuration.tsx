@@ -7,27 +7,23 @@ export const MatchDuration = () => {
       <div className="space-y-4">
         <RuleItem
           title="白帯"
-          description="5分間。延長戦2分。"
+          description="2分1ラウンド。延長戦は1分。"
         />
         <RuleItem
-          title="青帯"
-          description="6分間。延長戦2分。"
+          title="青帯以上"
+          description="2分×3ラウンド以上。大会によってラウンド数を調整可能。延長戦は1分。"
         />
         <RuleItem
-          title="紫帯"
-          description="7分間。延長戦3分。"
+          title="休憩時間"
+          description="ラウンド間は30秒の休憩。選手のコンディション管理を重視します。"
         />
         <RuleItem
-          title="茶帯"
-          description="8分間。延長戦3分。"
+          title="試合進行"
+          description="選手の体力と安全を考慮しながら、観客にとって見やすい試合展開を心がけます。"
         />
         <RuleItem
-          title="黒帯"
-          description="10分間。延長戦5分。"
-        />
-        <RuleItem
-          title="延長戦ルール"
-          description="延長戦でも決着がつかない場合、審判による判定となります。"
+          title="試合時間の調整"
+          description="大会の規模や参加者数に応じて、主催者の判断で試合時間を調整できます。ただし、選手の安全を最優先とします。"
         />
       </div>
     </RuleSection>

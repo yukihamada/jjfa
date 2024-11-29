@@ -7,19 +7,19 @@ export const UniformRules = () => {
       <div className="space-y-4">
         <RuleItem
           title="道着の色"
-          description="白または青の道着のみ使用可能。黒や他の色は認められません。"
+          description="選手の個性を尊重し、道着の色は自由です。自分に合った色を選択できます。"
         />
         <RuleItem
           title="道着のサイズ"
-          description="袖は手首から4cm以上、長さは足首から5cm以上の余裕が必要です。"
+          description="安全性を考慮し、袖は手首から4cm以上、長さは足首から5cm以上の余裕が必要です。"
         />
         <RuleItem
           title="パッチとロゴ"
-          description="所属チームのパッチは肩、胸、背中の指定された位置のみ。サイズは10cm×10cm以内。"
+          description="所属チームのパッチは肩、胸、背中の指定された位置に付けることができます。サイズは10cm×10cm以内。"
         />
         <RuleItem
-          title="不適切な道着"
-          description="破れ、汚れ、不適切なサイズの道着での出場は認められず、失格となる場合があります。"
+          title="安全性の確認"
+          description="破れや危険な装飾がないか、試合前に確認します。選手の安全を第一に考えます。"
         />
       </div>
     </RuleSection>

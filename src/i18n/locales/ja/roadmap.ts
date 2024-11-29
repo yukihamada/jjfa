@@ -11,7 +11,7 @@ export const roadmap = {
   phase2: {
     title: "2024年1月: DAO発足と出資募集",
     dao: "DAO発足: JJFA DAOの正式ローンチ、初期メンバーの募集とガバナンス権の確立。",
-    funding: "出資募集開始: トークンセール（JJFAトークン、MASTER NFT、VOTEトークン）やクラウドファンディングにより初期資金調達を行う。"
+    funding: "出資募集開始: トークンセール（JJFA Member Token、Governance Token、JJFAトークン）やクラウドファンディングにより初期資金調達を行う。"
   },
   phase3: {
     title: "2024年2月上旬: トークン発行と大会準備",

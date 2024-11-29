@@ -23,7 +23,7 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
   const queryClient = useQueryClient();
 
-  // Fetch comments separately to ensure they're always up to date
+  // Fetch comments with profiles data
   const { data: comments } = useQuery({
     queryKey: ['discussion', discussion.id],
     queryFn: async () => {
@@ -31,7 +31,11 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
         .from('comments')
         .select(`
           *,
-          profiles (username, avatar_url)
+          profiles (
+            id,
+            username,
+            avatar_url
+          )
         `)
         .eq('discussion_id', discussion.id)
         .order('created_at', { ascending: true });

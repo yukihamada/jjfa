@@ -48,10 +48,11 @@ export const CommentForm = ({ discussionId, onCancel }: CommentFormProps) => {
     } else {
       toast.success("コメントを投稿しました");
       setContent("");
-      // Invalidate both the discussions and the specific discussion's comments
+      // Invalidate both discussions and comments queries
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['discussions'] }),
-        queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] })
+        queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
+        queryClient.invalidateQueries({ queryKey: ['comments'] })
       ]);
       if (onCancel) onCancel();
     }

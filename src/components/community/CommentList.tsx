@@ -39,7 +39,11 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
       console.error('Delete comment error:', error);
       toast.error("コメントの削除に失敗しました");
     } else {
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['discussions'] }),
+        queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
+        queryClient.invalidateQueries({ queryKey: ['comments'] })
+      ]);
       toast.success("コメントを削除しました");
     }
   };
@@ -59,7 +63,11 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
       console.error('Edit comment error:', error);
       toast.error("コメントの編集に失敗しました");
     } else {
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['discussions'] }),
+        queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
+        queryClient.invalidateQueries({ queryKey: ['comments'] })
+      ]);
       toast.success("コメントを編集しました");
       setEditingCommentId(null);
       setEditContent("");

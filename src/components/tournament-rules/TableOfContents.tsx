@@ -16,6 +16,7 @@ export const TableOfContents = () => {
     { id: "community-engagement", title: "コミュニティ参加" },
     { id: "award-ceremony", title: "表彰式" },
     { id: "team-points", title: "チームポイント" },
+    { id: "rankings", title: "ランキングシステム" },
     { id: "sustainability", title: "持続可能性への取り組み" }
   ];
 

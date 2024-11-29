@@ -12,12 +12,10 @@ export const CareerDevelopment = () => {
             <GraduationCap className="w-12 h-12 text-purple-600 mb-4" />
             <CardTitle>プロフェッショナル育成プログラム</CardTitle>
             <RuleItem
-              ruleNumber="29.1"
               title="キャリアパス設計"
               description="個々の選手の目標に応じた段階的な成長プランを策定し、技術指導、メンタルトレーニング、栄養管理など総合的なサポートを提供します。"
             />
             <RuleItem
-              ruleNumber="29.2"
               title="実践的トレーニング"
               description="トップアスリートによるセミナー、合同練習会、模擬試合などを通じて、実践的な技術向上の機会を提供します。"
             />
@@ -29,12 +27,10 @@ export const CareerDevelopment = () => {
             <Trophy className="w-12 h-12 text-yellow-600 mb-4" />
             <CardTitle>メディア露出支援</CardTitle>
             <RuleItem
-              ruleNumber="29.3"
               title="デジタルプレゼンス構築"
               description="SNSマーケティング、動画コンテンツ制作、メディアトレーニングを通じて、選手の個人ブランド確立を支援します。"
             />
             <RuleItem
-              ruleNumber="29.4"
               title="メディア連携"
               description="スポーツメディア、地域メディアとの連携を強化し、選手の活動や成果を効果的に発信します。"
             />
@@ -46,12 +42,10 @@ export const CareerDevelopment = () => {
             <Globe2 className="w-12 h-12 text-blue-600 mb-4" />
             <CardTitle>国際交流プログラム</CardTitle>
             <RuleItem
-              ruleNumber="29.5"
               title="国際練習キャンプ"
               description="年間を通じて世界各国の選手との合同練習キャンプを開催し、技術交流と文化理解を深める機会を提供します。"
             />
             <RuleItem
-              ruleNumber="29.6"
               title="国際大会参加支援"
               description="海外大会への参加をサポートし、国際経験を積む機会を創出します。"
             />
@@ -63,12 +57,10 @@ export const CareerDevelopment = () => {
             <Handshake className="w-12 h-12 text-green-600 mb-4" />
             <CardTitle>引退後支援</CardTitle>
             <RuleItem
-              ruleNumber="29.7"
               title="指導者育成プログラム"
               description="指導者資格の取得支援、道場経営ノウハウの提供、マーケティング支援など、包括的な独立支援を行います。"
             />
             <RuleItem
-              ruleNumber="29.8"
               title="キャリア移行支援"
               description="企業との連携による就職支援、起業支援、学術機関との連携によるキャリア教育を提供します。"
             />

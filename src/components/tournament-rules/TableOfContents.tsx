@@ -2,30 +2,30 @@ import { Link } from "react-scroll";
 
 export const TableOfContents = () => {
   const sections = [
-    { id: "introduction", title: "はじめに" },
-    { id: "match-format", title: "試合形式" },
-    { id: "uniform-rules", title: "服装規定" },
-    { id: "age-categories", title: "年齢カテゴリー" },
-    { id: "match-duration", title: "試合時間" },
-    { id: "weight-divisions", title: "体重区分" },
-    { id: "point-system", title: "ポイントシステム" },
-    { id: "referee-basics", title: "レフェリーの基本原則" },
-    { id: "penalties", title: "ペナルティ" },
-    { id: "safety-measures", title: "安全対策" },
-    { id: "bracket-system", title: "ブラケットシステム" },
-    { id: "team-points", title: "チームポイント" },
-    { id: "rankings", title: "ランキングシステム" },
-    { id: "black-belt-system", title: "黒帯制度" },
-    { id: "team-rules", title: "団体戦ルール" },
-    { id: "venue-layout", title: "会場レイアウト" },
-    { id: "staff-responsibilities", title: "大会運営スタッフの責任" },
-    { id: "award-ceremony", title: "表彰式" },
-    { id: "code-of-conduct", title: "行動規範" },
-    { id: "technology-integration", title: "テクノロジー統合" },
-    { id: "career-development", title: "選手キャリア開発" },
-    { id: "global-standards", title: "国際標準化" },
-    { id: "community-engagement", title: "コミュニティ参加" },
-    { id: "sustainability", title: "持続可能性への取り組み" }
+    { id: "introduction", title: "1. はじめに" },
+    { id: "match-format", title: "2. 試合形式" },
+    { id: "uniform-rules", title: "3. 服装規定" },
+    { id: "age-categories", title: "4. 年齢カテゴリー" },
+    { id: "match-duration", title: "5. 試合時間" },
+    { id: "weight-divisions", title: "6. 体重区分" },
+    { id: "point-system", title: "7. ポイントシステム" },
+    { id: "referee-basics", title: "8. レフェリーの基本原則" },
+    { id: "penalties", title: "9. ペナルティ" },
+    { id: "safety-measures", title: "10. 安全対策" },
+    { id: "bracket-system", title: "11. ブラケットシステム" },
+    { id: "team-points", title: "12. チームポイント" },
+    { id: "rankings", title: "13. ランキングシステム" },
+    { id: "black-belt-system", title: "14. 黒帯制度" },
+    { id: "team-rules", title: "15. 団体戦ルール" },
+    { id: "venue-layout", title: "16. 会場レイアウト" },
+    { id: "staff-responsibilities", title: "17. 大会運営スタッフの責任" },
+    { id: "award-ceremony", title: "18. 表彰式" },
+    { id: "code-of-conduct", title: "19. 行動規範" },
+    { id: "technology-integration", title: "20. テクノロジー統合" },
+    { id: "career-development", title: "21. 選手キャリア開発" },
+    { id: "global-standards", title: "22. 国際標準化" },
+    { id: "community-engagement", title: "23. コミュニティ参加" },
+    { id: "sustainability", title: "24. 持続可能性への取り組み" }
   ];
 
   return (
@@ -40,7 +40,6 @@ export const TableOfContents = () => {
               duration={500}
               className="text-slate-700 hover:text-blue-600 cursor-pointer flex items-center print:cursor-text print:hover:text-slate-700"
             >
-              <span className="mr-2">•</span>
               {section.title}
             </Link>
           </li>

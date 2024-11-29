@@ -17,6 +17,7 @@ export const TableOfContents = () => {
     { id: "award-ceremony", title: "表彰式" },
     { id: "team-points", title: "チームポイント" },
     { id: "rankings", title: "ランキングシステム" },
+    { id: "bracket-system", title: "ブラケットシステム" },
     { id: "team-rules", title: "団体戦ルール" },
     { id: "sustainability", title: "持続可能性への取り組み" }
   ];

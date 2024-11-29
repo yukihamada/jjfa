@@ -21,6 +21,7 @@ import { TeamPoints } from "@/components/tournament-rules/sections/TeamPoints";
 import { Rankings } from "@/components/tournament-rules/sections/Rankings";
 import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfConduct";
 import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
+import { BracketSystem } from "@/components/tournament-rules/sections/BracketSystem";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -75,6 +76,7 @@ const TournamentRules = () => {
               <AwardCeremony />
               <TeamPoints />
               <Rankings />
+              <BracketSystem />
               <TeamRules />
               <Sustainability />
             </div>

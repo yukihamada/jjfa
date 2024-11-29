@@ -13,7 +13,7 @@ export const BracketSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              title="6. トーナメント方式"
+              title="トーナメント方式"
               description="全てのJJFA大会はシングル・エリミネーション方式トーナメントのブラケットシステムで運営されます。"
             />
             <RuleItem

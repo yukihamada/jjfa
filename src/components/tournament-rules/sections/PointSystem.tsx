@@ -40,7 +40,6 @@ export const PointSystem = () => {
             勝利条件
           </h3>
           <p className="text-slate-600">
-            <span className="font-semibold">3. </span>
             ポイント、サブミッション、または審判の判定によって勝敗が決まります。
             時間内に決着がつかない場合、獲得ポイントにより勝敗を決定します。
           </p>

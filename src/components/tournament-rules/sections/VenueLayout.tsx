@@ -12,7 +12,6 @@ export const VenueLayout = () => {
             基本レイアウト要件
           </h3>
           <p className="text-slate-600 mb-4">
-            <span className="font-semibold">11. </span>
             JJFA公認大会の会場は、以下の要素を適切に配置し、選手と観客の安全性と利便性を確保する必要があります。
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

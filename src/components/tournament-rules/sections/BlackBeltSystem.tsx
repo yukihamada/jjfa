@@ -13,7 +13,7 @@ export const BlackBeltSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              title="9. 年齢要件"
+              title="年齢要件"
               description="黒帯を与えられるのは19歳以上の選手のみです。"
             />
             <RuleItem

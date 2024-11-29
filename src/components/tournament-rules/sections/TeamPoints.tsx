@@ -13,7 +13,7 @@ export const TeamPoints = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              title="7. チーム登録"
+              title="チーム登録"
               description="選手は登録時にチームを明確に指定する必要があります。登録後のチーム変更は認められません。"
             />
             <RuleItem

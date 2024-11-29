@@ -11,7 +11,6 @@ export const TeamRules = () => {
             チーム編成
           </h3>
           <p className="text-slate-600">
-            <span className="font-semibold">10. </span>
             同じ帯色の選手で構成されたチームで対戦します。
           </p>
         </div>

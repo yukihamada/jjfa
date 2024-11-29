@@ -12,7 +12,7 @@ export const CareerDevelopment = () => {
             <GraduationCap className="w-12 h-12 text-purple-600 mb-4" />
             <CardTitle>プロフェッショナル育成プログラム</CardTitle>
             <RuleItem
-              title="16. キャリアパス設計"
+              title="キャリアパス設計"
               description="個々の選手の目標に応じた段階的な成長プランを策定し、技術指導、メンタルトレーニング、栄養管理など総合的なサポートを提供します。"
             />
             <RuleItem

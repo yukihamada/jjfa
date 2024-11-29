@@ -12,7 +12,7 @@ export const GlobalStandards = () => {
             <Globe className="w-12 h-12 text-blue-600 mb-4" />
             <CardTitle>国際ルールの統一</CardTitle>
             <RuleItem
-              title="17. 国際ルール委員会"
+              title="国際ルール委員会"
               description="世界各国の柔術団体代表者で構成される委員会を設置し、定期的なルールレビューと更新を行います。"
             />
             <RuleItem

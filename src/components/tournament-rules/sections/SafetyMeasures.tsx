@@ -5,7 +5,7 @@ export const SafetyMeasures = () => {
   return (
     <RuleSection id="safety-measures" title="安全対策">
       <RuleItem
-        title="5. メディカルチェック"
+        title="メディカルチェック"
         description="試合前に選手の健康状態をデジタル記録し、ブロックチェーンで管理します。"
       />
       <RuleItem

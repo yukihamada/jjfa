@@ -3,7 +3,7 @@ import { Shield, Users, UserCheck, Users2 } from "lucide-react";
 
 export const CodeOfConduct = () => {
   return (
-    <RuleSection id="code-of-conduct" title="行動規範">
+    <RuleSection id="code-of-conduct" title="行動規範" sectionNumber="8">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

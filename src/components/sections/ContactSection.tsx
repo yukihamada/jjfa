@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useTranslation } from 'react-i18next';
+import { Github, ExternalLink, LineChart } from "lucide-react";
 
 export const ContactSection = () => {
   const { t } = useTranslation();
@@ -16,7 +17,7 @@ export const ContactSection = () => {
         <p className="mb-6 text-slate-600 animate-in fade-in slide-in-from-bottom-4 delay-300">
           {t('contact.address')}
         </p>
-        <div className="flex justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 delay-400">
+        <div className="flex justify-center gap-6 animate-in fade-in slide-in-from-bottom-4 delay-400">
           <a 
             href="https://x.com/JJFA_official"
             target="_blank"
@@ -24,21 +25,36 @@ export const ContactSection = () => {
           >
             <Button 
               variant="outline" 
-              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
+              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
-              X
+              <ExternalLink className="w-4 h-4" />
+              <span>X</span>
             </Button>
           </a>
           <a 
-            href="https://discord.gg/jjfa"
+            href="https://github.com/yukihamada/jjfa"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Button 
               variant="outline" 
-              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105"
+              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
-              Discord
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+            </Button>
+          </a>
+          <a 
+            href="https://line.me/ti/p/@jjfa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button 
+              variant="outline" 
+              className="text-slate-800 border-slate-800 hover:bg-slate-100 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            >
+              <LineChart className="w-4 h-4" />
+              <span>LINE</span>
             </Button>
           </a>
         </div>

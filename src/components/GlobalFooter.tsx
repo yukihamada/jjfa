@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { Github, ExternalLink, LineChart } from "lucide-react";
 
 const GlobalFooter = () => {
   const { t } = useTranslation();
@@ -63,30 +64,33 @@ const GlobalFooter = () => {
             <div className="text-slate-400 text-sm mb-4 md:mb-0">
               © 2024 JJFA. All rights reserved.
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-6 items-center">
               <a 
                 href="https://x.com/JJFA_official" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
-                X
+                <ExternalLink className="w-4 h-4" />
+                <span>X</span>
               </a>
               <a 
                 href="https://github.com/yukihamada/jjfa" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
-                GitHub
+                <Github className="w-4 h-4" />
+                <span>GitHub</span>
               </a>
               <a 
                 href="https://line.me/ti/p/@jjfa" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200"
+                className="text-slate-400 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
-                LINE
+                <LineChart className="w-4 h-4" />
+                <span>LINE</span>
               </a>
             </div>
           </div>

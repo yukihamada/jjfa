@@ -8,6 +8,7 @@ import { Introduction } from "@/components/tournament-rules/sections/Introductio
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
 import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
+import { Penalties } from "@/components/tournament-rules/sections/Penalties";
 import { SafetyMeasures } from "@/components/tournament-rules/sections/SafetyMeasures";
 import { TechnologyIntegration } from "@/components/tournament-rules/sections/TechnologyIntegration";
 import { CareerDevelopment } from "@/components/tournament-rules/sections/CareerDevelopment";
@@ -57,6 +58,7 @@ const TournamentRules = () => {
               <MatchFormat />
               <TeamRules />
               <PointSystem />
+              <Penalties />
               <SafetyMeasures />
               <TechnologyIntegration />
               <CareerDevelopment />

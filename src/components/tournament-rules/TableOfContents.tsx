@@ -6,6 +6,7 @@ export const TableOfContents = () => {
     { id: "match-format", title: "試合形式" },
     { id: "team-rules", title: "団体戦ルール" },
     { id: "point-system", title: "ポイントシステム" },
+    { id: "penalties", title: "ペナルティ" },
     { id: "safety-measures", title: "安全対策" },
     { id: "technology-integration", title: "テクノロジー統合" },
     { id: "career-development", title: "選手キャリア開発" },

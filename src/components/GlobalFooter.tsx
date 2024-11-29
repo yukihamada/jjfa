@@ -73,12 +73,20 @@ const GlobalFooter = () => {
                 X
               </a>
               <a 
-                href="https://discord.gg/jjfa" 
+                href="https://github.com/yukihamada/jjfa" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors duration-200"
               >
-                Discord
+                GitHub
+              </a>
+              <a 
+                href="https://line.me/ti/p/@jjfa" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-white transition-colors duration-200"
+              >
+                LINE
               </a>
             </div>
           </div>

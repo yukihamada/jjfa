@@ -5,7 +5,7 @@ import { Globe, Languages, Award, Users } from "lucide-react";
 
 export const GlobalStandards = () => {
   return (
-    <RuleSection id="global-standards" title="国際標準化">
+    <RuleSection id="global-standards" title="国際標準化" sectionNumber="10">
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>
@@ -14,10 +14,12 @@ export const GlobalStandards = () => {
             <RuleItem
               title="国際ルール委員会"
               description="世界各国の柔術団体代表者で構成される委員会を設置し、定期的なルールレビューと更新を行います。"
+              ruleNumber="10.1"
             />
             <RuleItem
               title="標準化プロセス"
               description="競技ルール、審判基準、大会運営方針の国際標準を策定し、段階的な導入を推進します。"
+              ruleNumber="10.2"
             />
           </CardHeader>
         </Card>
@@ -29,10 +31,12 @@ export const GlobalStandards = () => {
             <RuleItem
               title="公式文書の多言語化"
               description="ルールブック、審判マニュアル、大会規定などを10言語以上に翻訳し、定期的に更新します。"
+              ruleNumber="10.3"
             />
             <RuleItem
               title="通訳システム"
               description="国際大会における多言語通訳システムの導入と、オンライン研修の多言語対応を実現します。"
+              ruleNumber="10.4"
             />
           </CardHeader>
         </Card>
@@ -44,10 +48,12 @@ export const GlobalStandards = () => {
             <RuleItem
               title="資格認定システム"
               description="選手、審判、指導者の技能レベルを客観的に評価し、国際的に通用する資格認定を行います。"
+              ruleNumber="10.5"
             />
             <RuleItem
               title="継続教育"
               description="オンラインプラットフォームを活用した定期的な研修と、技能更新プログラムを提供します。"
+              ruleNumber="10.6"
             />
           </CardHeader>
         </Card>
@@ -59,10 +65,12 @@ export const GlobalStandards = () => {
             <RuleItem
               title="文化理解プログラム"
               description="各国の柔術文化や伝統を学ぶワークショップを開催し、相互理解を深めます。"
+              ruleNumber="10.7"
             />
             <RuleItem
               title="ローカライゼーション"
               description="各地域の文化や習慣に配慮した柔術普及プログラムを展開します。"
+              ruleNumber="10.8"
             />
           </CardHeader>
         </Card>

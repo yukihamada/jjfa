@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Introduction = () => {
   return (
-    <RuleSection id="introduction" title="はじめに">
+    <RuleSection id="introduction" title="はじめに" sectionNumber="0">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">

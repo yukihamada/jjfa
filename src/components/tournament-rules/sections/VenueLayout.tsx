@@ -1,6 +1,6 @@
 import { RuleSection } from "../RuleSection";
 import { RuleItem } from "../RuleItem";
-import { MapPin, LayoutGrid, Building, Table, User, Trophy, Weight, MedicalCross } from "lucide-react";
+import { MapPin, LayoutGrid, Building, Table, User, Trophy, Weight, Stethoscope } from "lucide-react";
 
 export const VenueLayout = () => {
   return (
@@ -62,7 +62,7 @@ export const VenueLayout = () => {
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <MedicalCross className="w-6 h-6 text-blue-500" />
+            <Stethoscope className="w-6 h-6 text-blue-500" />
             安全管理体制
           </h3>
           <div className="space-y-4">

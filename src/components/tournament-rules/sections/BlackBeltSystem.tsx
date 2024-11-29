@@ -13,17 +13,14 @@ export const BlackBeltSystem = () => {
           </h3>
           <div className="space-y-4">
             <RuleItem
-              ruleNumber="31.1"
               title="年齢要件"
               description="黒帯を与えられるのは19歳以上の選手のみです。"
             />
             <RuleItem
-              ruleNumber="31.2"
               title="所属要件"
               description="黒帯証明書の申請には、JJFAに所属している必要があります。"
             />
             <RuleItem
-              ruleNumber="31.3"
               title="指導者要件"
               description="黒帯の段位を授与されるためには、そのJJFAの正会員であり、JJFA加盟スクールにメインインストラクターまたはアシスタントインストラクターとして登録されている必要があります。"
             />
@@ -64,11 +61,6 @@ export const BlackBeltSystem = () => {
               </tbody>
             </table>
           </div>
-        </div>
-
-        <div className="mt-12 text-sm text-slate-500 border-t pt-4">
-          <p>最終改訂日: 2024年3月21日</p>
-          <p>バージョン: 1.0.0</p>
         </div>
       </div>
     </RuleSection>

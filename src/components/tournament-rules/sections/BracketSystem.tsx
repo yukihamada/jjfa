@@ -77,11 +77,6 @@ export const BracketSystem = () => {
             />
           </div>
         </div>
-
-        <div className="mt-12 text-sm text-slate-500 border-t pt-4">
-          <p>最終改訂日: 2024年3月21日</p>
-          <p>バージョン: 1.0.0</p>
-        </div>
       </div>
     </RuleSection>
   );

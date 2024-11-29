@@ -29,7 +29,7 @@ export const TableOfContents = () => {
   ];
 
   return (
-    <nav className="bg-slate-100 p-6 rounded-lg mb-12 print:border print:border-slate-200">
+    <nav id="table-of-contents" className="bg-slate-100 p-6 rounded-lg mb-12 print:border print:border-slate-200">
       <h2 className="text-xl font-bold mb-6 text-center border-b pb-4">目次</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {sections.map((section) => (

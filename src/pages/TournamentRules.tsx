@@ -22,6 +22,7 @@ import { Rankings } from "@/components/tournament-rules/sections/Rankings";
 import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfConduct";
 import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
 import { BracketSystem } from "@/components/tournament-rules/sections/BracketSystem";
+import { BlackBeltSystem } from "@/components/tournament-rules/sections/BlackBeltSystem";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -53,7 +54,7 @@ const TournamentRules = () => {
                 className="mx-auto w-32 h-auto mb-6"
               />
               <p className="text-lg text-slate-600 mb-8">
-                JiuFightトーナメントは、伝統的な柔術の価値を守りながら、
+                JJFAトーナメントは、伝統的な柔術の価値を守りながら、
                 最新のテクノロジーを活用して公平性と透明性を確保する次世代の大会フォーマットです。
               </p>
             </div>
@@ -77,6 +78,7 @@ const TournamentRules = () => {
               <TeamPoints />
               <Rankings />
               <BracketSystem />
+              <BlackBeltSystem />
               <TeamRules />
               <Sustainability />
             </div>

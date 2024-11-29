@@ -18,6 +18,7 @@ export const TableOfContents = () => {
     { id: "team-points", title: "チームポイント" },
     { id: "rankings", title: "ランキングシステム" },
     { id: "bracket-system", title: "ブラケットシステム" },
+    { id: "black-belt-system", title: "黒帯制度" },
     { id: "team-rules", title: "団体戦ルール" },
     { id: "sustainability", title: "持続可能性への取り組み" }
   ];

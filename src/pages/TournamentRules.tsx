@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 import { PageTitle } from "@/components/PageTitle";
 import { TableOfContents } from "@/components/tournament-rules/TableOfContents";
 import { Button } from "@/components/ui/button";
-import { Printer } from "lucide-react";
+import { Printer, History } from "lucide-react";
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
 import { PointSystem } from "@/components/tournament-rules/sections/PointSystem";
@@ -79,6 +79,17 @@ const TournamentRules = () => {
               <BracketSystem />
               <TeamRules />
               <Sustainability />
+            </div>
+
+            <div className="mt-16 border-t pt-8">
+              <div className="flex items-center gap-2 mb-4">
+                <History className="w-5 h-5 text-slate-600" />
+                <h2 className="text-xl font-bold">改訂履歴</h2>
+              </div>
+              <div className="space-y-2 text-sm text-slate-600">
+                <p>2024年3月21日 - バージョン1.0.0: 初版公開</p>
+                <p>2024年3月15日 - バージョン0.9.0: ドラフト版作成</p>
+              </div>
             </div>
           </div>
         </div>

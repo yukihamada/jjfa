@@ -42,10 +42,10 @@ export const MatchFormat = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Award className="w-6 h-6 text-blue-500" />
-            禁止技
+            特別ルール
           </h3>
           <p className="text-slate-600">
-            ルールの簡素化のため、ニーオンベリーやパスガードは禁止技となります。
+            ニーオンベリーやパスガードについては得点が与えられません。詳細はポイントシステムをご確認ください。
           </p>
         </div>
       </div>

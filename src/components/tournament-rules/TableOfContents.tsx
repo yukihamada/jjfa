@@ -9,6 +9,7 @@ export const TableOfContents = () => {
     { id: "penalties", title: "ペナルティ" },
     { id: "safety-measures", title: "安全対策" },
     { id: "venue-layout", title: "会場レイアウト" },
+    { id: "staff-responsibilities", title: "大会運営スタッフの責任" },
     { id: "technology-integration", title: "テクノロジー統合" },
     { id: "career-development", title: "選手キャリア開発" },
     { id: "global-standards", title: "国際標準化" },

@@ -16,6 +16,7 @@ import { GlobalStandards } from "@/components/tournament-rules/sections/GlobalSt
 import { CommunityEngagement } from "@/components/tournament-rules/sections/CommunityEngagement";
 import { Sustainability } from "@/components/tournament-rules/sections/Sustainability";
 import { VenueLayout } from "@/components/tournament-rules/sections/VenueLayout";
+import { StaffResponsibilities } from "@/components/tournament-rules/sections/StaffResponsibilities";
 
 const TournamentRules = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -62,6 +63,7 @@ const TournamentRules = () => {
               <Penalties />
               <SafetyMeasures />
               <VenueLayout />
+              <StaffResponsibilities />
               <TechnologyIntegration />
               <CareerDevelopment />
               <GlobalStandards />

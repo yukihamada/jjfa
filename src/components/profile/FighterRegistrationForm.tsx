@@ -12,7 +12,6 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const [height, setHeight] = useState("");
   const [dojoId, setDojoId] = useState("");
   const [beltId, setBeltId] = useState("");
-  const [instructor, setInstructor] = useState("");
   const [dojos, setDojos] = useState<any[]>([]);
   const [belts, setBelts] = useState<any[]>([]);
 
@@ -53,7 +52,6 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
           height: parseFloat(height),
           dojo_id: dojoId,
           belt_id: beltId,
-          instructor: instructor,
           is_active: true,
         });
 
@@ -61,9 +59,9 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
 
       toast.success("選手登録が完了しました");
       onSuccess();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error:", error);
-      toast.error("選手登録に失敗しました");
+      toast.error(error.message || "選手登録に失敗しました");
     } finally {
       setLoading(false);
     }
@@ -101,16 +99,6 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
             ))}
           </SelectContent>
         </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">指導者</label>
-        <Input
-          value={instructor}
-          onChange={(e) => setInstructor(e.target.value)}
-          required
-          placeholder="指導者の名前"
-        />
       </div>
 
       <div>

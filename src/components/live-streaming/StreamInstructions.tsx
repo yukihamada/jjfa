@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Copy, Info, Smartphone, Desktop } from "lucide-react";
+import { Copy, Info, Smartphone, Monitor } from "lucide-react";
 import { toast } from "sonner";
 
 interface StreamInstructionsProps {
@@ -29,7 +29,7 @@ export const StreamInstructions = ({ open, onOpenChange, streamKey }: StreamInst
         <Tabs defaultValue="browser">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="browser" className="flex items-center gap-2">
-              <Desktop className="w-4 h-4" />
+              <Monitor className="w-4 h-4" />
               ブラウザ
             </TabsTrigger>
             <TabsTrigger value="obs">OBS</TabsTrigger>

@@ -29,19 +29,43 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
       console.error('No authorization header')
-      return new Response(JSON.stringify({ error: '認証が必要です' }), {
-        status: 401,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      })
+      return new Response(
+        JSON.stringify({ error: '認証が必要です' }), 
+        { 
+          status: 401, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
     }
 
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser(authHeader.replace('Bearer ', ''))
     if (userError || !user) {
       console.error('User error:', userError)
-      return new Response(JSON.stringify({ error: '認証に失敗しました' }), {
-        status: 401,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      })
+      return new Response(
+        JSON.stringify({ error: '認証に失敗しました' }), 
+        { 
+          status: 401, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
+
+    // Check if user already has an active DAO membership
+    const { data: existingMembership } = await supabaseClient
+      .from('dao_memberships')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+      .single()
+
+    if (existingMembership) {
+      return new Response(
+        JSON.stringify({ error: 'すでにDAO会員として登録されています' }), 
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400 
+        }
+      )
     }
 
     console.log('Creating Stripe checkout session...')
@@ -82,20 +106,29 @@ serve(async (req) => {
 
     if (purchaseError) {
       console.error('Purchase record creation failed:', purchaseError)
-      return new Response(JSON.stringify({ error: '購入記録の作成に失敗しました' }), {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      })
+      return new Response(
+        JSON.stringify({ error: '購入記録の作成に失敗しました' }), 
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
     }
 
-    return new Response(JSON.stringify({ url: session.url }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    })
+    return new Response(
+      JSON.stringify({ url: session.url }), 
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    )
   } catch (error) {
     console.error('Stripe error:', error)
-    return new Response(JSON.stringify({ error: '購入処理中にエラーが発生しました' }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    })
+    return new Response(
+      JSON.stringify({ error: '購入処理中にエラーが発生しました。もう一度お試しください。' }), 
+      { 
+        status: 500, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    )
   }
 })

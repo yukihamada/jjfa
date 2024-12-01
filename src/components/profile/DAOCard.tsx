@@ -22,6 +22,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
         return;
       }
 
+      console.log("Creating checkout session...");
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`,
         {
@@ -33,22 +34,23 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
         }
       );
 
-      const data = await response.json();
-      
-      if (!response.ok || data.error) {
-        console.error("Checkout error:", data.error || response.statusText);
-        toast.error(data.error || "購入処理の開始に失敗しました。もう一度お試しください。");
-        return;
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Checkout error response:", errorData);
+        throw new Error(errorData.error || "チェックアウトの作成に失敗しました");
       }
 
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        toast.error("チェックアウトURLの取得に失敗しました");
+      const data = await response.json();
+      console.log("Checkout session created:", data);
+      
+      if (!data.url) {
+        throw new Error("チェックアウトURLの取得に失敗しました");
       }
+
+      window.location.href = data.url;
     } catch (error) {
       console.error("Purchase error:", error);
-      toast.error("予期せぬエラーが発生しました。もう一度お試しください。");
+      toast.error(error instanceof Error ? error.message : "予期せぬエラーが発生しました。もう一度お試しください。");
     } finally {
       setLoading(false);
     }

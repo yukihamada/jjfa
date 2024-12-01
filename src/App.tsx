@@ -22,6 +22,7 @@ import Roadmap from "./pages/Roadmap";
 import Profile from "./pages/Profile";
 import NFT from "./pages/NFT";
 import LiveStreaming from "./pages/LiveStreaming";
+import { PasswordProtection } from "./components/PasswordProtection";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -45,8 +46,45 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // 一時的にtrueに設定
-  const [isLoading, setIsLoading] = useState(false); // 一時的にfalseに設定
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // 初期セッションチェック
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+      setIsLoading(false);
+
+      // セッションが存在する場合、30分後に自動的にログアウト
+      if (session) {
+        setTimeout(() => {
+          supabase.auth.signOut();
+          setIsAuthenticated(false);
+          toast.error("セッションが終了しました。再度ログインしてください。");
+        }, 1800000); // 30分 = 1800000ミリ秒
+      }
+    };
+    checkSession();
+
+    // セッション状態の監視
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
+        setIsAuthenticated(!!session);
+        if (!session) {
+          toast.error("セッションが終了しました。再度ログインしてください。");
+        }
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  if (!isAuthenticated) {
+    return <PasswordProtection onAuthenticated={() => setIsAuthenticated(true)} />;
+  }
 
   const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const currentPath = window.location.pathname;

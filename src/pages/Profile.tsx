@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -10,19 +10,7 @@ import { DAOCard } from "@/components/profile/DAOCard";
 import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { AccountSettings } from "@/components/profile/AccountSettings";
 import { ProfileForm } from "@/components/profile/ProfileForm";
-import { WalletConnection } from "@/components/profile/WalletConnection";
 import { Profile } from "@/integrations/supabase/types/profiles";
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from '@solana/wallet-adapter-react';
-import {
-  PhantomWalletAdapter,
-  SolflareWalletAdapter,
-  TorusWalletAdapter,
-} from '@solana/wallet-adapter-wallets';
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl } from '@solana/web3.js';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -108,16 +96,6 @@ const ProfilePage = () => {
     setFighter(fighter);
   };
 
-  const endpoint = useMemo(() => clusterApiUrl('devnet'), []);
-  const wallets = useMemo(
-    () => [
-      new PhantomWalletAdapter(),
-      new SolflareWalletAdapter(),
-      new TorusWalletAdapter(),
-    ],
-    []
-  );
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -127,56 +105,47 @@ const ProfilePage = () => {
   }
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>
-          <div className="container max-w-4xl mx-auto px-4 py-8 mt-16">
-            <h1 className="text-2xl font-bold mb-8">プロフィール設定</h1>
+    <div className="container max-w-4xl mx-auto px-4 py-8 mt-16">
+      <h1 className="text-2xl font-bold mb-8">プロフィール設定</h1>
 
-            <div className="mb-8">
-              <ProfilePhotoUpload
-                userId={user.id}
-                currentPhotoUrl={profile?.avatar_url}
-                onPhotoUpdate={handlePhotoUpdate}
+      <div className="mb-8">
+        <ProfilePhotoUpload
+          userId={user.id}
+          currentPhotoUrl={profile?.avatar_url}
+          onPhotoUpdate={handlePhotoUpdate}
+        />
+      </div>
+
+      <Tabs defaultValue="profile" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="profile">基本情報</TabsTrigger>
+          <TabsTrigger value="membership">会員情報</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="profile">
+          <div className="grid gap-6 md:grid-cols-2">
+            <AccountSettings userEmail={user?.email} />
+            <ProfileForm profile={profile} user={user} />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="membership">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-6">
+              <FighterCard 
+                fighter={fighter} 
+                onRegistrationSuccess={refreshFighterData}
+              />
+              <MembershipCard 
+                member={member} 
+                onPurchaseNFT={handlePurchaseNFT} 
               />
             </div>
-
-            <Tabs defaultValue="profile" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="profile">基本情報</TabsTrigger>
-                <TabsTrigger value="membership">会員情報</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="profile">
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="space-y-6">
-                    <AccountSettings userEmail={user?.email} />
-                    <WalletConnection />
-                  </div>
-                  <ProfileForm profile={profile} user={user} />
-                </div>
-              </TabsContent>
-
-              <TabsContent value="membership">
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="space-y-6">
-                    <FighterCard 
-                      fighter={fighter} 
-                      onRegistrationSuccess={refreshFighterData}
-                    />
-                    <MembershipCard 
-                      member={member} 
-                      onPurchaseNFT={handlePurchaseNFT} 
-                    />
-                  </div>
-                  <DAOCard onPurchaseNFT={handlePurchaseNFT} />
-                </div>
-              </TabsContent>
-            </Tabs>
+            <DAOCard onPurchaseNFT={handlePurchaseNFT} />
           </div>
-        </WalletModalProvider>
-      </WalletProvider>
-    </ConnectionProvider>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 };
 

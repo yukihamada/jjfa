@@ -1,31 +1,32 @@
+import { HeroSection } from "@/components/sections/HeroSection";
+import { JiujitsuBenefitsSection } from "@/components/sections/JiujitsuBenefitsSection";
+import { EventsSection } from "@/components/sections/EventsSection";
+import ExternalLinks from "@/components/ExternalLinks";
+import { ComingSoonSection } from "@/components/sections/ComingSoonSection";
+import { TeamSection } from "@/components/TeamSection";
+import { TokenSection } from "@/components/sections/TokenSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { SEO } from "@/components/SEO";
-import { PageTitle } from "@/components/PageTitle";
 
 const Index = () => {
   return (
-    <>
+    <div className="min-h-screen">
       <SEO 
         title="JJFA - 柔術 for ALL"
-        description="JJFAは柔術の普及とコミュニティの発展を目指すプラットフォームです。"
+        description="JJFAは柔術の普及とコミュニティの発展を目指すプラットフォームです。トーナメント運営、教育コンテンツの提供、グローバルなコミュニティ作りを通じて、柔術の魅力を全ての人々に届けます。"
+        keywords="柔術,JJFA,Jiu-Jitsu,大会,トーナメント,コミュニティ,教育,MASTER NFT,VOTE Token,BJJ Token,DAO"
       />
-      <div className="relative min-h-screen">
-        <BackgroundGradient />
-        <div className="container mx-auto px-4 py-20">
-          <h1 className="text-4xl md:text-6xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
-            JJFA - 柔術 for ALL
-          </h1>
-          <p className="text-xl text-center text-slate-600 mb-12">
-            柔術の普及とコミュニティの発展を目指すプラットフォーム
-          </p>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-lg text-slate-700 mb-6">
-              JJFAは、柔術を通じて人々をつなぎ、共に成長できる場を提供します。
-            </p>
-          </div>
-        </div>
-      </div>
-    </>
+      <BackgroundGradient />
+      <HeroSection />
+      <JiujitsuBenefitsSection />
+      <EventsSection />
+      <ExternalLinks />
+      <ComingSoonSection />
+      <TeamSection />
+      <TokenSection />
+      <ContactSection />
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { Menu, Home, Users, Star, FileText, Video, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useTranslation } from 'react-i18next';

@@ -11,7 +11,7 @@ const GlobalFooter = () => {
       links: [
         { to: "/", label: t('nav.home') },
         { to: "/whitepaper", label: t('nav.whitepaper') },
-        { to: "/roadmap", label: "Roadmap" },
+        { to: "/roadmap", label: t('nav.roadmap') },
         { to: "/operating-rules", label: t('nav.operatingRules') },
         { to: "/token-rules", label: t('nav.tokenRules') },
         { to: "/tournament-rules", label: "大会ルール" },

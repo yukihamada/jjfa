@@ -37,6 +37,20 @@ export const Chapter1 = () => {
               </li>
             </ul>
           </li>
+          <li>JJFAトークン（JJFA Utility Token）
+            <ul className="list-disc pl-6 mt-2">
+              <li>プラットフォーム内での取引や支払いに使用するユーティリティトークン。</li>
+              <li>主な機能と用途：
+                <ol className="list-decimal pl-6">
+                  <li>大会エントリー費の支払い。</li>
+                  <li>道場利用料の支払い。</li>
+                  <li>コミュニティ内での商品やサービスの購入。</li>
+                  <li>コンテンツクリエイターへのチップ送付。</li>
+                </ol>
+              </li>
+              <li>プラットフォーム内での活動に応じて獲得可能。</li>
+            </ul>
+          </li>
         </ol>
       </TokenRulesArticle>
 

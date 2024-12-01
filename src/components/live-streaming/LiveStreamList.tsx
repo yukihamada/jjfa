@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { useEffect, useState } from "react";
 
 interface Profile {
   username: string;
@@ -33,6 +34,15 @@ interface LiveStream {
 
 export const LiveStreamList = () => {
   const navigate = useNavigate();
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setCurrentUserId(user?.id || null);
+    };
+    getCurrentUser();
+  }, []);
   
   const { data: streams, isLoading } = useQuery({
     queryKey: ['live-streams'],
@@ -71,7 +81,7 @@ export const LiveStreamList = () => {
     );
   }
 
-  const myStream = streams?.find(stream => stream.user_id === supabase.auth.user()?.id && stream.status !== 'ended');
+  const myStream = streams?.find(stream => stream.user_id === currentUserId && stream.status !== 'ended');
 
   return (
     <div className="space-y-6">

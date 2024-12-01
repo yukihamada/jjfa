@@ -28,23 +28,34 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${session.access_token}`,
+            'Content-Type': 'application/json'
           },
         }
       );
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Checkout error:", errorData);
+        toast.error(errorData.error || "購入処理の開始に失敗しました");
+        return;
+      }
+
       const { error, url } = await response.json();
       
       if (error) {
+        console.error("Checkout error:", error);
         toast.error("購入処理の開始に失敗しました");
         return;
       }
 
       if (url) {
         window.location.href = url;
+      } else {
+        toast.error("チェックアウトURLの取得に失敗しました");
       }
     } catch (error) {
-      toast.error("エラーが発生しました");
       console.error("Purchase error:", error);
+      toast.error("予期せぬエラーが発生しました");
     } finally {
       setLoading(false);
     }

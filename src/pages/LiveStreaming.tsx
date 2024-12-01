@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Plus, Video, Users, Trophy } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const LiveStreaming = () => {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [currentStreamKey, setCurrentStreamKey] = useState("");
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     liveCount: 0,
     viewerCount: 0,
@@ -18,6 +21,7 @@ const LiveStreaming = () => {
   });
 
   useEffect(() => {
+    checkAuth();
     fetchStreamStats();
     
     // Subscribe to live stream changes
@@ -36,6 +40,19 @@ const LiveStreaming = () => {
       channel.unsubscribe();
     };
   }, []);
+
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      toast.error("配信するにはログインが必要です");
+      navigate("/community-registration");
+    }
+  };
+
+  const handleCreateStream = () => {
+    checkAuth();
+    setShowCreateDialog(true);
+  };
 
   const fetchStreamStats = async () => {
     // Get live stream count
@@ -104,7 +121,7 @@ const LiveStreaming = () => {
               </p>
             </div>
             <Button 
-              onClick={() => setShowCreateDialog(true)} 
+              onClick={handleCreateStream} 
               className="bg-white text-slate-900 hover:bg-slate-100 gap-2"
             >
               <Plus className="w-4 h-4" />

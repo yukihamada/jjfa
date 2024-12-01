@@ -65,19 +65,23 @@ export const RefereeBasics = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">Combate / Fight</p>
-                  <p className="text-slate-600 mt-1">試合開始</p>
+                  <p className="text-slate-700 font-medium">読み方：コンバッチ / ファイト</p>
+                  <p className="text-slate-600 mt-1">試合開始の合図。選手は攻防を開始できます。</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">Parou / Stop</p>
-                  <p className="text-slate-600 mt-1">一時停止</p>
+                  <p className="text-slate-700 font-medium">読み方：パロー / ストップ</p>
+                  <p className="text-slate-600 mt-1">試合の一時停止。選手は即座に動きを止める必要があります。</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">Lute / Fight</p>
-                  <p className="text-slate-600 mt-1">積極的に戦うように促す</p>
+                  <p className="text-slate-700 font-medium">読み方：ルッチ / ファイト</p>
+                  <p className="text-slate-600 mt-1">消極的な選手に対して、より積極的な戦いを促す指示です。</p>
                 </div>
                 <div className="bg-slate-50 p-4 rounded-lg">
                   <p className="font-semibold text-blue-600">Acabou / Time</p>
-                  <p className="text-slate-600 mt-1">試合終了</p>
+                  <p className="text-slate-700 font-medium">読み方：アカボー / タイム</p>
+                  <p className="text-slate-600 mt-1">試合終了の合図。全ての攻防を即座に終了しなければなりません。</p>
                 </div>
               </div>
             </div>

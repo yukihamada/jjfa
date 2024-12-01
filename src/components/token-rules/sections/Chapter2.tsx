@@ -20,7 +20,7 @@ export const Chapter2 = () => {
         <ol className="list-decimal pl-6 mb-4">
           <li>社員権トークン
             <ul className="list-disc pl-6 mt-2">
-              <li>設立時の出資額に応じて初期配分される。</li>
+              <li>設立時の出資額10万円につき1トークンを初期配分する。</li>
               <li>柔術コミュニティへの特別貢献が認められた者に追加付与される。</li>
             </ul>
           </li>

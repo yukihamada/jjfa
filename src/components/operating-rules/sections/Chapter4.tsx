@@ -3,7 +3,7 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter4 = () => {
   return (
-    <OperatingRulesSection title="第4章 トークン管理とセキュリティ">
+    <OperatingRulesSection id="tournament" title="第4章 トークン管理とセキュリティ">
       <OperatingRulesArticle title="第8条（トークンの発行および管理）">
         <ol className="list-decimal pl-6 mb-4">
           <li>トークンの発行・配分・再発行は、スマートコントラクトに基づき実施する。</li>

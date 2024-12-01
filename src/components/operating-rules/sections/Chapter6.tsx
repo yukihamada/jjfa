@@ -3,7 +3,7 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter6 = () => {
   return (
-    <OperatingRulesSection title="第6章 附則">
+    <OperatingRulesSection id="other" title="第6章 附則">
       <OperatingRulesArticle title="第11条（規程改定の手続き）">
         <ol className="list-decimal pl-6 mb-4">
           <li>規程改定案はDAO総会での特別決議によって承認される。</li>

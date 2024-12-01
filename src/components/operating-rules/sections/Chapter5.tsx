@@ -3,7 +3,7 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter5 = () => {
   return (
-    <OperatingRulesSection title="第5章 ガバナンスおよび透明性">
+    <OperatingRulesSection id="token" title="第5章 ガバナンスおよび透明性">
       <OperatingRulesArticle title="第10条（運営報告の具体化）">
         <ol className="list-decimal pl-6 mb-4">
           <li>四半期ごとの運営報告

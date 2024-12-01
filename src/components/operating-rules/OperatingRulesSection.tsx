@@ -1,11 +1,12 @@
 interface OperatingRulesSectionProps {
+  id?: string;
   title: string;
   children: React.ReactNode;
 }
 
-export const OperatingRulesSection = ({ title, children }: OperatingRulesSectionProps) => {
+export const OperatingRulesSection = ({ id, title, children }: OperatingRulesSectionProps) => {
   return (
-    <section>
+    <section id={id}>
       <h2 className="text-xl font-bold mt-8 mb-4">{title}</h2>
       {children}
     </section>

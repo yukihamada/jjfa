@@ -3,7 +3,7 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter2 = () => {
   return (
-    <OperatingRulesSection title="第2章 運営体制">
+    <OperatingRulesSection id="organization" title="第2章 運営体制">
       <OperatingRulesArticle title="第4条（運営組織の構成）">
         <ol className="list-decimal pl-6 mb-4">
           <li>DAO総会

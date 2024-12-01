@@ -3,7 +3,7 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter3 = () => {
   return (
-    <OperatingRulesSection title="第3章 提案および意思決定プロセス">
+    <OperatingRulesSection id="dao" title="第3章 提案および意思決定プロセス">
       <OperatingRulesArticle title="第6条（提案の要件と審査）">
         <ol className="list-decimal pl-6 mb-4">
           <li>提案の要件

@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { NotificationBell } from "@/components/community/NotificationBell";
 import { OnlineUsersDisplay } from "@/components/community/OnlineUsersDisplay";
+import { Button } from "@/components/ui/button";
+import { PenSquare } from "lucide-react";
 
 const Community = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("discussions");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +50,10 @@ const Community = () => {
     return null;
   }
 
+  const handleNewPostClick = () => {
+    setActiveTab("create");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
       <div className="container mx-auto px-4">
@@ -58,7 +65,7 @@ const Community = () => {
           <NotificationBell />
         </div>
         <div className="max-w-6xl mx-auto">
-          <Tabs defaultValue="discussions" className="space-y-8">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="discussions">投稿一覧</TabsTrigger>
               <TabsTrigger value="create">新規投稿</TabsTrigger>
@@ -76,6 +83,17 @@ const Community = () => {
           </Tabs>
         </div>
       </div>
+      
+      {/* 固定された新規投稿ボタン */}
+      {activeTab !== "create" && (
+        <Button
+          onClick={handleNewPostClick}
+          className="fixed bottom-6 right-6 rounded-full w-16 h-16 shadow-lg hover:shadow-xl transition-shadow"
+          size="icon"
+        >
+          <PenSquare className="w-6 h-6" />
+        </Button>
+      )}
     </div>
   );
 };

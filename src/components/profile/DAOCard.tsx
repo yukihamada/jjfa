@@ -22,7 +22,26 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
         return;
       }
 
-      console.log("Creating checkout session...");
+      // Check if user already has an active DAO membership
+      const { data: existingMembership, error: membershipError } = await supabase
+        .from('dao_memberships')
+        .select('*')
+        .eq('user_id', session.user.id)
+        .eq('status', 'active')
+        .single();
+
+      if (membershipError && membershipError.code !== 'PGRST116') {
+        console.error("Membership check error:", membershipError);
+        toast.error("会員情報の確認中にエラーが発生しました");
+        return;
+      }
+
+      if (existingMembership) {
+        toast.error("すでにDAO会員として登録されています");
+        return;
+      }
+
+      // Create checkout session
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`,
         {
@@ -35,13 +54,18 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
       );
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error("Checkout error response:", errorData);
-        throw new Error(errorData.error || "チェックアウトの作成に失敗しました");
+        const errorText = await response.text();
+        let errorMessage;
+        try {
+          const errorData = JSON.parse(errorText);
+          errorMessage = errorData.error;
+        } catch {
+          errorMessage = "チェックアウトの作成に失敗しました";
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
-      console.log("Checkout session created:", data);
       
       if (!data.url) {
         throw new Error("チェックアウトURLの取得に失敗しました");

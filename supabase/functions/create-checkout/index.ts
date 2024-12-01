@@ -13,22 +13,19 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
 
   try {
-    console.log('Starting checkout session creation...')
-    
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? ''
     )
 
+    // Verify authentication
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
-      console.error('No authorization header')
       return new Response(
         JSON.stringify({ error: '認証が必要です' }), 
         { 
@@ -51,12 +48,23 @@ serve(async (req) => {
     }
 
     // Check if user already has an active DAO membership
-    const { data: existingMembership } = await supabaseClient
+    const { data: existingMembership, error: membershipError } = await supabaseClient
       .from('dao_memberships')
       .select('*')
       .eq('user_id', user.id)
       .eq('status', 'active')
       .single()
+
+    if (membershipError && membershipError.code !== 'PGRST116') {
+      console.error('Membership check error:', membershipError)
+      return new Response(
+        JSON.stringify({ error: '会員情報の確認中にエラーが発生しました' }), 
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
 
     if (existingMembership) {
       return new Response(
@@ -68,8 +76,7 @@ serve(async (req) => {
       )
     }
 
-    console.log('Creating Stripe checkout session...')
-
+    // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -93,9 +100,7 @@ serve(async (req) => {
       },
     })
 
-    console.log('Checkout session created:', session.id)
-
-    // Create a pending purchase record
+    // Create purchase record
     const { error: purchaseError } = await supabaseClient
       .from('nft_purchases')
       .insert({
@@ -124,7 +129,9 @@ serve(async (req) => {
   } catch (error) {
     console.error('Stripe error:', error)
     return new Response(
-      JSON.stringify({ error: '購入処理中にエラーが発生しました。もう一度お試しください。' }), 
+      JSON.stringify({ 
+        error: error instanceof Error ? error.message : '購入処理中にエラーが発生しました。もう一度お試しください。'
+      }), 
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }

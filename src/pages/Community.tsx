@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { DiscussionForm } from "@/components/community/DiscussionForm";
 import { DiscussionList } from "@/components/community/DiscussionList";
-import { ChatRoom } from "@/components/community/ChatRoom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -66,10 +65,9 @@ const Community = () => {
         </div>
         <div className="max-w-6xl mx-auto">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="discussions">投稿一覧</TabsTrigger>
               <TabsTrigger value="create">新規投稿</TabsTrigger>
-              <TabsTrigger value="chat">チャット</TabsTrigger>
             </TabsList>
             <TabsContent value="discussions">
               <DiscussionList />
@@ -77,14 +75,10 @@ const Community = () => {
             <TabsContent value="create">
               <DiscussionForm />
             </TabsContent>
-            <TabsContent value="chat">
-              <ChatRoom />
-            </TabsContent>
           </Tabs>
         </div>
       </div>
       
-      {/* 固定された新規投稿ボタン */}
       {activeTab !== "create" && (
         <Button
           onClick={handleNewPostClick}

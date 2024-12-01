@@ -1,6 +1,6 @@
 import { RuleSection } from "../RuleSection";
 import { RuleItem } from "../RuleItem";
-import { Shield, FirstAid, FileCheck, Stethoscope } from "lucide-react";
+import { Shield, Heart, FileCheck, Stethoscope } from "lucide-react";
 
 export const SafetyMeasures = () => {
   return (
@@ -50,7 +50,7 @@ export const SafetyMeasures = () => {
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <FirstAid className="w-6 h-6 text-red-500" />
+            <Heart className="w-6 h-6 text-red-500" />
             メディカルチェック
           </h3>
           <p className="text-slate-600">

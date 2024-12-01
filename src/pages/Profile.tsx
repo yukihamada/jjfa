@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FighterCard } from "@/components/profile/FighterCard";
 import { MembershipCard } from "@/components/profile/MembershipCard";
 import { DAOCard } from "@/components/profile/DAOCard";
@@ -108,43 +107,37 @@ const ProfilePage = () => {
     <div className="container max-w-4xl mx-auto px-4 py-8 mt-16">
       <h1 className="text-2xl font-bold mb-8">プロフィール設定</h1>
 
-      <div className="mb-8">
-        <ProfilePhotoUpload
-          userId={user.id}
-          currentPhotoUrl={profile?.avatar_url}
-          onPhotoUpdate={handlePhotoUpdate}
-        />
+      <div className="space-y-8">
+        {/* プロフィール写真セクション */}
+        <div className="mb-8">
+          <ProfilePhotoUpload
+            userId={user.id}
+            currentPhotoUrl={profile?.avatar_url}
+            onPhotoUpdate={handlePhotoUpdate}
+          />
+        </div>
+
+        {/* 基本情報セクション */}
+        <div className="grid gap-6 md:grid-cols-2">
+          <AccountSettings userEmail={user?.email} />
+          <ProfileForm profile={profile} user={user} />
+        </div>
+
+        {/* 会員情報セクション */}
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="space-y-6">
+            <FighterCard 
+              fighter={fighter} 
+              onRegistrationSuccess={refreshFighterData}
+            />
+            <MembershipCard 
+              member={member} 
+              onPurchaseNFT={handlePurchaseNFT} 
+            />
+          </div>
+          <DAOCard onPurchaseNFT={handlePurchaseNFT} />
+        </div>
       </div>
-
-      <Tabs defaultValue="profile" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="profile">基本情報</TabsTrigger>
-          <TabsTrigger value="membership">会員情報</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="profile">
-          <div className="grid gap-6 md:grid-cols-2">
-            <AccountSettings userEmail={user?.email} />
-            <ProfileForm profile={profile} user={user} />
-          </div>
-        </TabsContent>
-
-        <TabsContent value="membership">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-6">
-              <FighterCard 
-                fighter={fighter} 
-                onRegistrationSuccess={refreshFighterData}
-              />
-              <MembershipCard 
-                member={member} 
-                onPurchaseNFT={handlePurchaseNFT} 
-              />
-            </div>
-            <DAOCard onPurchaseNFT={handlePurchaseNFT} />
-          </div>
-        </TabsContent>
-      </Tabs>
     </div>
   );
 };

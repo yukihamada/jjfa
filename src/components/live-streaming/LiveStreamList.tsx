@@ -8,6 +8,7 @@ import { Eye, Clock, Video } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 interface Profile {
   username: string;
@@ -70,86 +71,108 @@ export const LiveStreamList = () => {
     );
   }
 
+  const myStream = streams?.find(stream => stream.user_id === supabase.auth.user()?.id && stream.status !== 'ended');
+
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {streams?.map((stream) => (
-        <Card 
-          key={stream.id} 
-          className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group"
-          onClick={() => navigate(`/live/${stream.id}`)}
-        >
-          <CardContent className="p-0">
-            <div className="relative">
-              {stream.thumbnail_url ? (
-                <img 
-                  src={stream.thumbnail_url} 
-                  alt={stream.title} 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              ) : (
-                <div className="w-full h-48 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                  <span className="text-slate-400">No thumbnail</span>
-                </div>
-              )}
-              <Badge 
-                variant={stream.status === 'live' ? 'destructive' : 'secondary'}
-                className="absolute top-2 right-2"
-              >
-                {stream.status === 'live' ? 'LIVE' : '配信終了'}
-              </Badge>
-            </div>
+    <div className="space-y-6">
+      {myStream && (
+        <Alert className="mb-6">
+          <Video className="h-4 w-4" />
+          <AlertTitle>配信ステータス</AlertTitle>
+          <AlertDescription>
+            {myStream.status === 'live' ? (
+              <span className="text-green-600">現在配信中です！ 「{myStream.title}」</span>
+            ) : (
+              <span className="text-yellow-600">
+                配信の準備ができました。OBSなどの配信ソフトで配信を開始してください。
+                <br />
+                配信キー: {myStream.stream_key}
+              </span>
+            )}
+          </AlertDescription>
+        </Alert>
+      )}
 
-            <div className="p-4 space-y-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {streams?.map((stream) => (
+          <Card 
+            key={stream.id} 
+            className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group"
+            onClick={() => navigate(`/live/${stream.id}`)}
+          >
+            <CardContent className="p-0">
+              <div className="relative">
+                {stream.thumbnail_url ? (
+                  <img 
+                    src={stream.thumbnail_url} 
+                    alt={stream.title} 
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="w-full h-48 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                    <span className="text-slate-400">No thumbnail</span>
+                  </div>
+                )}
+                <Badge 
+                  variant={stream.status === 'live' ? 'destructive' : 'secondary'}
+                  className="absolute top-2 right-2"
+                >
+                  {stream.status === 'live' ? 'LIVE' : '配信終了'}
+                </Badge>
+              </div>
+
+              <div className="p-4 space-y-4">
+                <div>
+                  <h3 className="font-semibold line-clamp-1">{stream.title}</h3>
+                  <p className="text-sm text-slate-500 line-clamp-2">{stream.description}</p>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Avatar className="w-6 h-6">
+                      <AvatarImage src={stream.profiles.avatar_url} />
+                      <AvatarFallback>
+                        {stream.profiles.username?.[0]?.toUpperCase() || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm font-medium">{stream.profiles.username}</span>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-sm text-slate-500">
+                    <div className="flex items-center gap-1">
+                      <Eye className="w-4 h-4" />
+                      <span>{stream.viewer_count}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      <span>
+                        {formatDistanceToNow(new Date(stream.created_at), { 
+                          addSuffix: true,
+                          locale: ja 
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+        
+        {streams?.length === 0 && (
+          <div className="col-span-full text-center py-12">
+            <div className="max-w-sm mx-auto space-y-4">
+              <Video className="w-12 h-12 mx-auto text-slate-300" />
               <div>
-                <h3 className="font-semibold line-clamp-1">{stream.title}</h3>
-                <p className="text-sm text-slate-500 line-clamp-2">{stream.description}</p>
+                <p className="text-lg font-medium">現在配信中の番組はありません</p>
+                <p className="text-sm text-slate-500">
+                  新しい配信が始まるのをお待ちください
+                </p>
               </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Avatar className="w-6 h-6">
-                    <AvatarImage src={stream.profiles.avatar_url} />
-                    <AvatarFallback>
-                      {stream.profiles.username?.[0]?.toUpperCase() || 'U'}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="text-sm font-medium">{stream.profiles.username}</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-sm text-slate-500">
-                  <div className="flex items-center gap-1">
-                    <Eye className="w-4 h-4" />
-                    <span>{stream.viewer_count}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    <span>
-                      {formatDistanceToNow(new Date(stream.created_at), { 
-                        addSuffix: true,
-                        locale: ja 
-                      })}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-      
-      {streams?.length === 0 && (
-        <div className="col-span-full text-center py-12">
-          <div className="max-w-sm mx-auto space-y-4">
-            <Video className="w-12 h-12 mx-auto text-slate-300" />
-            <div>
-              <p className="text-lg font-medium">現在配信中の番組はありません</p>
-              <p className="text-sm text-slate-500">
-                新しい配信が始まるのをお待ちください
-              </p>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

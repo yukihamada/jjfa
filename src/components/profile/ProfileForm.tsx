@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Loader2, User, Phone, MapPin, Lock } from "lucide-react";
+import { Loader2, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -36,8 +36,6 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
         username: formData.username,
         full_name: formData.full_name,
         bio: formData.bio,
-        phone: formData.phone,
-        address: formData.address,
       })
       .eq("id", user.id);
 
@@ -86,38 +84,6 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               rows={4}
             />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              電話番号
-              <span className="inline-flex items-center text-xs text-gray-500">
-                <Lock className="w-3 h-3 mr-1" />
-                非公開
-              </span>
-            </label>
-            <div className="flex gap-2">
-              <Phone className="w-4 h-4 mt-3 text-gray-500" />
-              <Input
-                value={formData?.phone || ""}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              住所
-              <span className="inline-flex items-center text-xs text-gray-500">
-                <Lock className="w-3 h-3 mr-1" />
-                非公開
-              </span>
-            </label>
-            <div className="flex gap-2">
-              <MapPin className="w-4 h-4 mt-3 text-gray-500" />
-              <Input
-                value={formData?.address || ""}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              />
-            </div>
           </div>
           <Button type="submit" className="w-full" disabled={updating}>
             {updating ? (

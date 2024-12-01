@@ -8,6 +8,8 @@ interface FighterRegistrationData {
   instructor: string;
   weight: string;
   height: string;
+  phone: string;
+  address: string;
 }
 
 export const useFighterRegistration = (onSuccess: () => void) => {
@@ -26,6 +28,16 @@ export const useFighterRegistration = (onSuccess: () => void) => {
 
     if (!data.instructor.trim()) {
       toast.error("指導者名を入力してください");
+      return false;
+    }
+
+    if (!data.phone.trim()) {
+      toast.error("電話番号を入力してください");
+      return false;
+    }
+
+    if (!data.address.trim()) {
+      toast.error("住所を入力してください");
       return false;
     }
 
@@ -81,6 +93,22 @@ export const useFighterRegistration = (onSuccess: () => void) => {
         return;
       }
 
+      // Update profile with phone and address
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .update({
+          phone: data.phone,
+          address: data.address,
+        })
+        .eq("id", user.id);
+
+      if (profileError) {
+        console.error("Profile update error:", profileError);
+        toast.error("プロフィール情報の更新に失敗しました");
+        return;
+      }
+
+      // Create fighter profile
       const { error: insertError } = await supabase
         .from("fighters")
         .insert({

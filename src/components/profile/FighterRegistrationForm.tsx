@@ -12,6 +12,8 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const [dojoId, setDojoId] = useState("");
   const [beltId, setBeltId] = useState("");
   const [instructor, setInstructor] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   
   const { dojos, belts } = useFighterFormData();
   const { registerFighter, loading } = useFighterRegistration(onSuccess);
@@ -24,6 +26,8 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
       instructor,
       weight,
       height,
+      phone,
+      address,
     });
   };
 
@@ -73,6 +77,27 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
           onChange={(e) => setInstructor(e.target.value)}
           required
           placeholder="指導者の名前"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">電話番号</label>
+        <Input
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+          placeholder="例: 090-1234-5678"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">住所</label>
+        <Input
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+          placeholder="例: 東京都渋谷区..."
         />
       </div>
 

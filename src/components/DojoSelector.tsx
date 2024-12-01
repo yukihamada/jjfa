@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Navigation } from "lucide-react";
@@ -89,7 +89,7 @@ export const DojoSelector = ({ onSelect }: { onSelect: (dojo: Dojo) => void }) =
   };
 
   // 初回マウント時に道場リストを取得
-  useState(() => {
+  useEffect(() => {
     fetchDojos();
   }, []);
 

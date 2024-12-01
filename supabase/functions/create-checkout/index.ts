@@ -44,8 +44,6 @@ serve(async (req) => {
     }
 
     console.log('Creating Stripe checkout session...')
-    console.log('Stripe Key type:', typeof Deno.env.get('STRIPE_SECRET_KEY'))
-    console.log('Stripe Key starts with:', Deno.env.get('STRIPE_SECRET_KEY')?.substring(0, 7))
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],

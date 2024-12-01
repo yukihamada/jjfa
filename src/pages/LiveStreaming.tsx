@@ -21,7 +21,6 @@ const LiveStreaming = () => {
   });
 
   useEffect(() => {
-    checkAuth();
     fetchStreamStats();
     
     // Subscribe to live stream changes
@@ -41,16 +40,13 @@ const LiveStreaming = () => {
     };
   }, []);
 
-  const checkAuth = async () => {
+  const handleCreateStream = async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       toast.error("配信するにはログインが必要です");
       navigate("/community-registration");
+      return;
     }
-  };
-
-  const handleCreateStream = () => {
-    checkAuth();
     setShowCreateDialog(true);
   };
 
@@ -121,7 +117,7 @@ const LiveStreaming = () => {
               </p>
             </div>
             <Button 
-              onClick={handleCreateStream} 
+              onClick={handleCreateStream}
               className="bg-white text-slate-900 hover:bg-slate-100 gap-2"
             >
               <Plus className="w-4 h-4" />

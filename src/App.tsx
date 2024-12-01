@@ -11,7 +11,6 @@ import Whitepaper from "./pages/Whitepaper";
 import Community from "./pages/Community";
 import CommunityRegistration from "./pages/CommunityRegistration";
 import JiujitsuBenefits from "./pages/JiujitsuBenefits";
-import TrialClass from "./pages/TrialClass";
 import Articles from "./pages/Articles";
 import OperatingRules from "./pages/OperatingRules";
 import TokenRules from "./pages/TokenRules";
@@ -113,7 +112,6 @@ const App = () => {
                   <Route path="/community-registration" element={<CommunityRegistration />} />
                   <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
                   <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
-                  <Route path="/trial-class" element={<TrialClass />} />
                   <Route path="/articles" element={<Articles />} />
                   <Route path="/operating-rules" element={<OperatingRules />} />
                   <Route path="/token-rules" element={<TokenRules />} />

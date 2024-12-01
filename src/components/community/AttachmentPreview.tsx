@@ -1,5 +1,6 @@
 import { Image, Video, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
 
 interface Attachment {
   url: string;
@@ -33,6 +34,7 @@ export const AttachmentPreview = ({ attachments, onRemove, readonly }: Attachmen
                 src={attachment.url}
                 controls
                 className="rounded-lg w-full h-full object-cover"
+                poster={`${attachment.url}#t=0.1`} // Generate thumbnail from the first frame
               />
             </div>
           ) : null}

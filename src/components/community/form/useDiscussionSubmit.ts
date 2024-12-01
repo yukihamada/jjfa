@@ -18,7 +18,16 @@ export const useDiscussionSubmit = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("ログインが必要です");
 
-      // First create the discussion
+      // Get the user's profile
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) throw profileError;
+
+      // First create the discussion with profile information
       const { data: discussion, error: discussionError } = await supabase
         .from("discussions")
         .insert([
@@ -26,6 +35,7 @@ export const useDiscussionSubmit = () => {
             title,
             content,
             user_id: user.id,
+            profile_id: profile.id, // Link to the profile
             visibility,
             attachments
           },

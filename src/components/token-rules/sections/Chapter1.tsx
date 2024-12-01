@@ -56,7 +56,7 @@ export const Chapter1 = () => {
 
       <TokenRulesArticle title="第3条（トークンの基本設計）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>トークンはEthereumまたはPolygonなど、セキュリティと拡張性に優れたブロックチェーンネットワーク上で発行される。</li>
+          <li>トークンはEthereum、Polygon、Solanaなど、セキュリティと拡張性に優れたブロックチェーンネットワーク上で発行される。</li>
           <li>トークンの技術仕様（例：スマートコントラクトコード、発行履歴）はオープンソースで公開し、保有者が透明性を確認できる環境を提供する。</li>
           <li>本トークンは、金融商品取引法その他の関連法令に準拠し、適法に設計・運用される。</li>
         </ol>

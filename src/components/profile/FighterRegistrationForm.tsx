@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2 } from "lucide-react";
 import { useFighterFormData } from "./hooks/useFighterFormData";
 import { useFighterRegistration } from "./hooks/useFighterRegistration";
+import { DojoRegistrationDialog } from "@/components/DojoRegistrationDialog";
 
 export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const [weight, setWeight] = useState("");
@@ -18,7 +19,7 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const [emergencyPhone, setEmergencyPhone] = useState("");
   const [emergencyRelation, setEmergencyRelation] = useState("");
   
-  const { dojos, belts } = useFighterFormData();
+  const { dojos, belts, refetchDojos } = useFighterFormData();
   const { registerFighter, loading } = useFighterRegistration(onSuccess);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,20 +40,25 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+      <div className="space-y-2">
         <label className="block text-sm font-medium mb-1">道場</label>
-        <Select value={dojoId} onValueChange={setDojoId} required>
-          <SelectTrigger>
-            <SelectValue placeholder="道場を選択" />
-          </SelectTrigger>
-          <SelectContent>
-            {dojos.map((dojo) => (
-              <SelectItem key={dojo.id} value={dojo.id}>
-                {dojo.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex gap-2">
+          <div className="flex-1">
+            <Select value={dojoId} onValueChange={setDojoId} required>
+              <SelectTrigger>
+                <SelectValue placeholder="道場を選択" />
+              </SelectTrigger>
+              <SelectContent>
+                {dojos.map((dojo) => (
+                  <SelectItem key={dojo.id} value={dojo.id}>
+                    {dojo.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <DojoRegistrationDialog onSuccess={refetchDojos} />
+        </div>
       </div>
 
       <div>

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Navigation } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { InfoIcon } from "lucide-react";
+import { DojoRegistrationDialog } from "./DojoRegistrationDialog";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Dojo {
   id: string;
@@ -16,31 +18,30 @@ interface Dojo {
   };
 }
 
-// サンプルデータ
-const SAMPLE_DOJOS: Dojo[] = [
-  {
-    id: "1",
-    name: "JJFA札幌道場（サンプル）",
-    address: "北海道札幌市中央区南3条西2丁目",
-    coordinates: { lat: 43.058434, lng: 141.354271 }
-  },
-  {
-    id: "2",
-    name: "JJFA東京道場（サンプル）",
-    address: "東京都渋谷区神南1丁目",
-    coordinates: { lat: 35.662158, lng: 139.701447 }
-  },
-  {
-    id: "3",
-    name: "JJFA大阪道場（サンプル）",
-    address: "大阪府大阪市中央区心斎橋筋",
-    coordinates: { lat: 34.671654, lng: 135.502165 }
-  }
-];
-
 export const DojoSelector = ({ onSelect }: { onSelect: (dojo: Dojo) => void }) => {
-  const [dojos, setDojos] = useState<Dojo[]>(SAMPLE_DOJOS);
+  const [dojos, setDojos] = useState<Dojo[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const fetchDojos = async () => {
+    const { data, error } = await supabase
+      .from('dojos')
+      .select('*')
+      .eq('status', 'approved');
+    
+    if (error) {
+      console.error('Error fetching dojos:', error);
+      return;
+    }
+
+    const formattedDojos = data.map(dojo => ({
+      id: dojo.id,
+      name: dojo.name,
+      address: dojo.address || '',
+      coordinates: { lat: 0, lng: 0 } // You might want to add actual coordinates to your dojos table
+    }));
+
+    setDojos(formattedDojos);
+  };
 
   const getCurrentLocation = () => {
     setLoading(true);
@@ -50,7 +51,7 @@ export const DojoSelector = ({ onSelect }: { onSelect: (dojo: Dojo) => void }) =
           const { latitude, longitude } = position.coords;
           
           // 現在地からの距離を計算して道場リストを更新
-          const dojosWithDistance = SAMPLE_DOJOS.map(dojo => ({
+          const dojosWithDistance = dojos.map(dojo => ({
             ...dojo,
             distance: calculateDistance(
               latitude,
@@ -87,25 +88,32 @@ export const DojoSelector = ({ onSelect }: { onSelect: (dojo: Dojo) => void }) =
     return deg * (Math.PI/180);
   };
 
+  // 初回マウント時に道場リストを取得
+  useState(() => {
+    fetchDojos();
+  }, []);
+
   return (
     <div className="space-y-4">
       <Alert className="bg-blue-50 border-blue-200">
         <InfoIcon className="h-4 w-4 text-blue-600" />
         <AlertDescription className="text-blue-800">
-          現在、JJFAでは提携道場を募集しています。道場運営者の方は、お問い合わせフォームよりご連絡ください。
-          <br />
-          ※下記は提携道場のサンプル表示です。
+          現在、JJFAでは提携道場を募集しています。道場運営者の方は、以下のフォームから新規登録をお願いします。
         </AlertDescription>
       </Alert>
 
-      <Button
-        onClick={getCurrentLocation}
-        className="w-full flex items-center justify-center gap-2"
-        disabled={loading}
-      >
-        <Navigation className="h-4 w-4" />
-        {loading ? "位置情報を取得中..." : "現在地から近い道場を探す"}
-      </Button>
+      <div className="space-y-2">
+        <Button
+          onClick={getCurrentLocation}
+          className="w-full flex items-center justify-center gap-2"
+          disabled={loading}
+        >
+          <Navigation className="h-4 w-4" />
+          {loading ? "位置情報を取得中..." : "現在地から近い道場を探す"}
+        </Button>
+
+        <DojoRegistrationDialog onSuccess={fetchDojos} />
+      </div>
 
       <div className="grid gap-4">
         {dojos.map((dojo) => (

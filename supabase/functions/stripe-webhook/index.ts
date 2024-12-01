@@ -34,6 +34,8 @@ serve(async (req) => {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
 
+    console.log('Processing successful payment:', session.id)
+
     // Update purchase status
     const { error: purchaseError } = await supabaseClient
       .from('nft_purchases')
@@ -58,6 +60,8 @@ serve(async (req) => {
       console.error('Failed to create membership:', membershipError)
       return new Response(JSON.stringify({ error: 'Failed to create membership' }), { status: 500 })
     }
+
+    console.log('Successfully processed payment and created membership')
   }
 
   return new Response(JSON.stringify({ received: true }), { status: 200 })

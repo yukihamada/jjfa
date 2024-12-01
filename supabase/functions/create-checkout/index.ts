@@ -13,6 +13,7 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
@@ -83,7 +84,7 @@ serve(async (req) => {
       console.error('Purchase record creation failed:', purchaseError)
     }
 
-    return new Response(JSON.stringify({ sessionId: session.id, url: session.url }), {
+    return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   } catch (error) {

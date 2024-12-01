@@ -34,13 +34,10 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
       );
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Checkout error:", errorData);
-        toast.error(errorData.error || "購入処理の開始に失敗しました");
-        return;
+        throw new Error('Checkout session creation failed');
       }
 
-      const { error, url } = await response.json();
+      const { url, error } = await response.json();
       
       if (error) {
         console.error("Checkout error:", error);

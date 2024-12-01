@@ -1,150 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { useFighterFormData } from "./hooks/useFighterFormData";
+import { useFighterRegistration } from "./hooks/useFighterRegistration";
 
 export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }) => {
-  const [loading, setLoading] = useState(false);
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [dojoId, setDojoId] = useState("");
   const [beltId, setBeltId] = useState("");
   const [instructor, setInstructor] = useState("");
-  const [dojos, setDojos] = useState<any[]>([]);
-  const [belts, setBelts] = useState<any[]>([]);
-
-  // Fetch dojos and belts on component mount
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: dojosData, error: dojosError } = await supabase
-          .from('dojos')
-          .select('id, name')
-          .order('name');
-        
-        if (dojosError) {
-          console.error("Error fetching dojos:", dojosError);
-          toast.error("道場データの取得に失敗しました");
-          return;
-        }
-        if (dojosData) setDojos(dojosData);
-
-        const { data: beltsData, error: beltsError } = await supabase
-          .from('belts')
-          .select('id, name, color')
-          .order('belt_order');
-        
-        if (beltsError) {
-          console.error("Error fetching belts:", beltsError);
-          toast.error("帯データの取得に失敗しました");
-          return;
-        }
-        if (beltsData) setBelts(beltsData);
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-        toast.error("データの取得中にエラーが発生しました");
-      }
-    };
-    fetchData();
-  }, []);
+  
+  const { dojos, belts } = useFighterFormData();
+  const { registerFighter, loading } = useFighterRegistration(onSuccess);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-
-    try {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
-      if (userError) {
-        console.error("Auth error:", userError);
-        toast.error("認証エラー: ログインが必要です");
-        return;
-      }
-
-      if (!user) {
-        toast.error("ログインが必要です");
-        return;
-      }
-
-      // Validate required fields
-      if (!dojoId) {
-        toast.error("道場を選択してください");
-        return;
-      }
-
-      if (!beltId) {
-        toast.error("帯を選択してください");
-        return;
-      }
-
-      if (!instructor.trim()) {
-        toast.error("指導者名を入力してください");
-        return;
-      }
-
-      if (!weight || isNaN(parseFloat(weight))) {
-        toast.error("有効な体重を入力してください");
-        return;
-      }
-
-      if (!height || isNaN(parseFloat(height))) {
-        toast.error("有効な身長を入力してください");
-        return;
-      }
-
-      // Check if user already has a fighter profile
-      const { data: existingFighter, error: checkError } = await supabase
-        .from("fighters")
-        .select("id")
-        .eq("user_id", user.id)
-        .single();
-
-      if (checkError && checkError.code !== "PGRST116") { // PGRST116 is "no rows returned" error
-        console.error("Error checking existing fighter:", checkError);
-        toast.error("既存の選手データの確認中にエラーが発生しました");
-        return;
-      }
-
-      if (existingFighter) {
-        toast.error("すでに選手登録が完了しています");
-        return;
-      }
-
-      const { error: insertError } = await supabase
-        .from("fighters")
-        .insert({
-          user_id: user.id,
-          weight: parseFloat(weight),
-          height: parseFloat(height),
-          dojo_id: dojoId,
-          belt_id: beltId,
-          instructor: instructor,
-          is_active: true,
-        });
-
-      if (insertError) {
-        console.error("Insert error:", insertError);
-        if (insertError.code === "23503") {
-          toast.error("選択された道場または帯が無効です");
-        } else if (insertError.code === "23505") {
-          toast.error("すでに選手登録が完了しています");
-        } else {
-          toast.error(`選手登録に失敗しました: ${insertError.message}`);
-        }
-        return;
-      }
-
-      toast.success("選手登録が完了しました");
-      onSuccess();
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
-      toast.error("予期せぬエラーが発生しました。もう一度お試しください。");
-    } finally {
-      setLoading(false);
-    }
+    await registerFighter({
+      dojoId,
+      beltId,
+      instructor,
+      weight,
+      height,
+    });
   };
 
   return (

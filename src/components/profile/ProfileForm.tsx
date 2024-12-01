@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Loader2, User, Phone, MapPin } from "lucide-react";
+import { Loader2, User, Phone, MapPin, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -88,7 +88,13 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium">電話番号</label>
+            <label className="text-sm font-medium flex items-center gap-2">
+              電話番号
+              <span className="inline-flex items-center text-xs text-gray-500">
+                <Lock className="w-3 h-3 mr-1" />
+                非公開
+              </span>
+            </label>
             <div className="flex gap-2">
               <Phone className="w-4 h-4 mt-3 text-gray-500" />
               <Input
@@ -98,7 +104,13 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
             </div>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium">住所</label>
+            <label className="text-sm font-medium flex items-center gap-2">
+              住所
+              <span className="inline-flex items-center text-xs text-gray-500">
+                <Lock className="w-3 h-3 mr-1" />
+                非公開
+              </span>
+            </label>
             <div className="flex gap-2">
               <MapPin className="w-4 h-4 mt-3 text-gray-500" />
               <Input

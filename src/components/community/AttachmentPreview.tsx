@@ -21,20 +21,20 @@ export const AttachmentPreview = ({ attachments, onRemove, readonly }: Attachmen
       {attachments.map((attachment, index) => (
         <div key={index} className="relative group">
           {attachment.type === 'image' ? (
-            <div className="relative aspect-video">
+            <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
               <img
                 src={attachment.url}
                 alt={`添付画像 ${index + 1}`}
-                className="rounded-lg object-cover w-full h-full"
+                className="absolute inset-0 w-full h-full object-contain"
               />
             </div>
           ) : attachment.type === 'video' ? (
-            <div className="relative aspect-video">
+            <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
               <video
                 src={attachment.url}
                 controls
-                className="rounded-lg w-full h-full object-cover"
-                poster={`${attachment.url}#t=0.1`} // Generate thumbnail from the first frame
+                className="absolute inset-0 w-full h-full object-contain"
+                poster={`${attachment.url}#t=0.1`}
               />
             </div>
           ) : null}

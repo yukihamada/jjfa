@@ -1,6 +1,6 @@
 import { OperatingRulesSection } from "../OperatingRulesSection";
 import { OperatingRulesArticle } from "../OperatingRulesArticle";
-import { CommunityGuidelines } from "../CommunityGuidelines";
+import { CommunityGuidelines } from "../../community/CommunityGuidelines";
 
 export const Chapter1 = () => {
   return (

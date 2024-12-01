@@ -94,6 +94,7 @@ npm run preview
 
 - [プロジェクトの概要](https://jjforall.com/whitepaper)
 - [トークン規程](https://jjforall.com/token-rules)
+- [トークン技術仕様書](https://jjforall.com/token-specification)
 - [運営規程](https://jjforall.com/operating-rules)
 - [定款](https://jjforall.com/articles)
 

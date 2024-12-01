@@ -463,6 +463,7 @@ export type Database = {
           dojo_id: string | null
           draws: number | null
           entrance_music: string | null
+          guardian_consent: boolean | null
           height: number | null
           id: string
           is_active: boolean | null
@@ -487,6 +488,7 @@ export type Database = {
           dojo_id?: string | null
           draws?: number | null
           entrance_music?: string | null
+          guardian_consent?: boolean | null
           height?: number | null
           id?: string
           is_active?: boolean | null
@@ -511,6 +513,7 @@ export type Database = {
           dojo_id?: string | null
           draws?: number | null
           entrance_music?: string | null
+          guardian_consent?: boolean | null
           height?: number | null
           id?: string
           is_active?: boolean | null
@@ -853,7 +856,13 @@ export type Database = {
           emergency_phone: string | null
           emergency_relation: string | null
           full_name: string | null
+          guardian_address: string | null
+          guardian_email: string | null
+          guardian_name: string | null
+          guardian_phone: string | null
+          guardian_relation: string | null
           id: string
+          is_minor: boolean | null
           membership_number: string | null
           membership_status: string | null
           phone: string | null
@@ -869,7 +878,13 @@ export type Database = {
           emergency_phone?: string | null
           emergency_relation?: string | null
           full_name?: string | null
+          guardian_address?: string | null
+          guardian_email?: string | null
+          guardian_name?: string | null
+          guardian_phone?: string | null
+          guardian_relation?: string | null
           id: string
+          is_minor?: boolean | null
           membership_number?: string | null
           membership_status?: string | null
           phone?: string | null
@@ -885,7 +900,13 @@ export type Database = {
           emergency_phone?: string | null
           emergency_relation?: string | null
           full_name?: string | null
+          guardian_address?: string | null
+          guardian_email?: string | null
+          guardian_name?: string | null
+          guardian_phone?: string | null
+          guardian_relation?: string | null
           id?: string
+          is_minor?: boolean | null
           membership_number?: string | null
           membership_status?: string | null
           phone?: string | null

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const ExternalLinks = () => {
+export const ExternalLinks = () => {
   const { t } = useTranslation();
 
   return (
@@ -63,5 +63,3 @@ const ExternalLinks = () => {
     </section>
   );
 };
-
-export default ExternalLinks;

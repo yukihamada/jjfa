@@ -1,7 +1,7 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { JiujitsuBenefitsSection } from "@/components/sections/JiujitsuBenefitsSection";
 import { EventsSection } from "@/components/sections/EventsSection";
-import ExternalLinks from "@/components/ExternalLinks";
+import { ExternalLinks } from "@/components/ExternalLinks";
 import { ComingSoonSection } from "@/components/sections/ComingSoonSection";
 import { TeamSection } from "@/components/TeamSection";
 import { TokenSection } from "@/components/sections/TokenSection";

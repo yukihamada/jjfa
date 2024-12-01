@@ -22,7 +22,6 @@ const GlobalFooter = () => {
       links: [
         { to: "/community", label: t('nav.community') },
         { to: "/jiujitsu-benefits", label: t('nav.benefits') },
-        { to: "/trial-class", label: t('nav.trial') },
         { to: "/articles", label: t('nav.articles') },
       ]
     },

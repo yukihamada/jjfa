@@ -16,9 +16,18 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
   const [updating, setUpdating] = useState(false);
   const [formData, setFormData] = useState(profile);
 
+  const validateUsername = (username: string) => {
+    return /^[a-zA-Z0-9_]*$/.test(username);
+  };
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
+    
+    if (!validateUsername(formData.username)) {
+      toast.error("ユーザーネームは半角英数字とアンダースコアのみ使用できます");
+      return;
+    }
     
     setUpdating(true);
     const { error } = await supabase
@@ -49,12 +58,14 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">ユーザーネーム</label>
+            <label className="text-sm font-medium">ユーザーネーム (半角英数字とアンダースコアのみ)</label>
             <div className="flex gap-2">
               <User className="w-4 h-4 mt-3 text-gray-500" />
               <Input
                 value={formData?.username || ""}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                pattern="^[a-zA-Z0-9_]*$"
+                title="半角英数字とアンダースコアのみ使用できます"
               />
             </div>
           </div>

@@ -28,7 +28,7 @@ export const TagFilter = ({ selectedTags, onTagSelect }: TagFilterProps) => {
           <Badge
             key={tag.id}
             variant={selectedTags.includes(tag.id) ? "default" : "outline"}
-            className="cursor-pointer hover:bg-primary/90"
+            className="cursor-pointer transition-colors hover:bg-primary/90 hover:text-primary-foreground"
             onClick={() => onTagSelect(tag.id)}
           >
             {tag.name}

@@ -14,6 +14,9 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const [instructor, setInstructor] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [emergencyContact, setEmergencyContact] = useState("");
+  const [emergencyPhone, setEmergencyPhone] = useState("");
+  const [emergencyRelation, setEmergencyRelation] = useState("");
   
   const { dojos, belts } = useFighterFormData();
   const { registerFighter, loading } = useFighterRegistration(onSuccess);
@@ -28,6 +31,9 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
       height,
       phone,
       address,
+      emergencyContact,
+      emergencyPhone,
+      emergencyRelation,
     });
   };
 
@@ -99,6 +105,41 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
           required
           placeholder="例: 東京都渋谷区..."
         />
+      </div>
+
+      <div className="space-y-4 pt-4 border-t">
+        <h3 className="font-medium">緊急連絡先</h3>
+        
+        <div>
+          <label className="block text-sm font-medium mb-1">氏名</label>
+          <Input
+            value={emergencyContact}
+            onChange={(e) => setEmergencyContact(e.target.value)}
+            required
+            placeholder="緊急連絡先の氏名"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">続柄</label>
+          <Input
+            value={emergencyRelation}
+            onChange={(e) => setEmergencyRelation(e.target.value)}
+            required
+            placeholder="例: 父親、母親、配偶者など"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">電話番号</label>
+          <Input
+            type="tel"
+            value={emergencyPhone}
+            onChange={(e) => setEmergencyPhone(e.target.value)}
+            required
+            placeholder="例: 090-1234-5678"
+          />
+        </div>
       </div>
 
       <div>

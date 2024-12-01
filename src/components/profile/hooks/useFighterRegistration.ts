@@ -10,6 +10,9 @@ interface FighterRegistrationData {
   height: string;
   phone: string;
   address: string;
+  emergencyContact: string;
+  emergencyPhone: string;
+  emergencyRelation: string;
 }
 
 export const useFighterRegistration = (onSuccess: () => void) => {
@@ -38,6 +41,21 @@ export const useFighterRegistration = (onSuccess: () => void) => {
 
     if (!data.address.trim()) {
       toast.error("住所を入力してください");
+      return false;
+    }
+
+    if (!data.emergencyContact.trim()) {
+      toast.error("緊急連絡先の氏名を入力してください");
+      return false;
+    }
+
+    if (!data.emergencyPhone.trim()) {
+      toast.error("緊急連絡先の電話番号を入力してください");
+      return false;
+    }
+
+    if (!data.emergencyRelation.trim()) {
+      toast.error("緊急連絡先の続柄を入力してください");
       return false;
     }
 
@@ -93,12 +111,15 @@ export const useFighterRegistration = (onSuccess: () => void) => {
         return;
       }
 
-      // Update profile with phone and address
+      // Update profile with contact information
       const { error: profileError } = await supabase
         .from("profiles")
         .update({
           phone: data.phone,
           address: data.address,
+          emergency_contact: data.emergencyContact,
+          emergency_phone: data.emergencyPhone,
+          emergency_relation: data.emergencyRelation,
         })
         .eq("id", user.id);
 

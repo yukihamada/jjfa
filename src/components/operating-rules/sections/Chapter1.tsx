@@ -13,8 +13,9 @@ export const Chapter1 = () => {
       <OperatingRulesArticle title="第2条（適用範囲）">
         <p>本規程は、当会社が発行する以下のトークンおよび関連活動に適用される。</p>
         <ol className="list-decimal pl-6 mb-4">
-          <li>社員権トークン（Equity Token）</li>
-          <li>ガバナンストークン（Governance Token）</li>
+          <li>JJFAメンバートークン（JJFA Member Token）：社員権を表すトークン</li>
+          <li>JJFAガバナンストークン（JJFA Governance Token）：DAO内での投票権を表すトークン</li>
+          <li>JJFAトークン（JJFA Token）：プラットフォーム内での支払いに使用するユーティリティトークン</li>
         </ol>
       </OperatingRulesArticle>
 
@@ -23,6 +24,7 @@ export const Chapter1 = () => {
           <li>提案：トークン保有者または運営チームがDAO総会に提出する改善案、予算案、または新規プロジェクト案を指す。</li>
           <li>スマートコントラクト：トークン発行・管理および投票プロセスを技術的に実現するためのブロックチェーンプログラム。</li>
           <li>公式プラットフォーム：DAO総会の管理、提案の公開、進捗報告を行うオンラインシステム。</li>
+          <li>JJFAエコシステム：当会社が運営する柔術コミュニティプラットフォームおよび関連サービスの総称。</li>
         </ol>
       </OperatingRulesArticle>
     </OperatingRulesSection>

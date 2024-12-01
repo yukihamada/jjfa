@@ -14,6 +14,16 @@ import { PostPreview } from "./form/PostPreview";
 import { useDiscussionSubmit } from "./form/useDiscussionSubmit";
 import { useTagsQuery } from "./form/useTagsQuery";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const MAX_TITLE_LENGTH = 100;
 const MAX_CONTENT_LENGTH = 2000;
@@ -25,6 +35,7 @@ export const DiscussionForm = () => {
   const [visibility, setVisibility] = useState("public");
   const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
   const [showPreview, setShowPreview] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   const { data: tags } = useTagsQuery();
   const createDiscussion = useDiscussionSubmit();
@@ -43,6 +54,10 @@ export const DiscussionForm = () => {
       toast.error(`本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`);
       return;
     }
+    setShowConfirmDialog(true);
+  };
+
+  const handleConfirmedSubmit = () => {
     createDiscussion.mutate(
       { title, content, tagId: selectedTag, visibility, attachments },
       {
@@ -53,6 +68,7 @@ export const DiscussionForm = () => {
           setVisibility("public");
           setAttachments([]);
           setShowPreview(false);
+          setShowConfirmDialog(false);
         }
       }
     );
@@ -67,72 +83,117 @@ export const DiscussionForm = () => {
   };
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm">
-      <CardHeader>
-        <CardTitle>新しい投稿を作成</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <FormTips />
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <div className="relative">
-              <Input
-                placeholder="タイトル"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full pr-16"
-                maxLength={MAX_TITLE_LENGTH}
-              />
-              <span className="absolute right-2 top-2 text-sm text-gray-400">
-                {title.length}/{MAX_TITLE_LENGTH}
-              </span>
+    <>
+      <Card className="bg-white/80 backdrop-blur-sm">
+        <CardHeader>
+          <CardTitle>新しい投稿を作成</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <FormTips />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <div className="relative">
+                <Input
+                  placeholder="タイトル"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full pr-16"
+                  maxLength={MAX_TITLE_LENGTH}
+                />
+                <span className="absolute right-2 top-2 text-sm text-gray-400">
+                  {title.length}/{MAX_TITLE_LENGTH}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Select value={selectedTag} onValueChange={setSelectedTag}>
-              <SelectTrigger>
-                <SelectValue placeholder="カテゴリを選択" />
-              </SelectTrigger>
-              <SelectContent>
-                {tags?.map((tag) => (
-                  <SelectItem key={tag.id} value={tag.id}>
-                    {tag.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <VisibilitySelect value={visibility} onChange={setVisibility} />
-          </div>
-          <div className="space-y-2">
-            <div className="relative">
-              <Textarea
-                placeholder="内容を入力してください"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                className="w-full min-h-[100px] pr-16"
-                maxLength={MAX_CONTENT_LENGTH}
-              />
-              <span className="absolute right-2 top-2 text-sm text-gray-400">
-                {content.length}/{MAX_CONTENT_LENGTH}
-              </span>
+            <div className="grid gap-4 md:grid-cols-2">
+              <Select value={selectedTag} onValueChange={setSelectedTag}>
+                <SelectTrigger>
+                  <SelectValue placeholder="カテゴリを選択" />
+                </SelectTrigger>
+                <SelectContent>
+                  {tags?.map((tag) => (
+                    <SelectItem key={tag.id} value={tag.id}>
+                      {tag.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <VisibilitySelect value={visibility} onChange={setVisibility} />
             </div>
-          </div>
-          <AttachmentUpload onUploadComplete={handleAttachmentUpload} />
-          <AttachmentPreview attachments={attachments} onRemove={removeAttachment} />
-          
-          <div className="flex items-center gap-2 justify-end">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setShowPreview(!showPreview)}
-              className="gap-2"
-            >
-              <Eye className="w-4 h-4" />
-              プレビュー
-            </Button>
-            <Button 
-              type="submit" 
-              className="min-w-[120px]"
+            <div className="space-y-2">
+              <div className="relative">
+                <Textarea
+                  placeholder="内容を入力してください"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  className="w-full min-h-[100px] pr-16"
+                  maxLength={MAX_CONTENT_LENGTH}
+                />
+                <span className="absolute right-2 top-2 text-sm text-gray-400">
+                  {content.length}/{MAX_CONTENT_LENGTH}
+                </span>
+              </div>
+            </div>
+            <AttachmentUpload onUploadComplete={handleAttachmentUpload} />
+            <AttachmentPreview attachments={attachments} onRemove={removeAttachment} />
+            
+            <div className="flex items-center gap-2 justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowPreview(!showPreview)}
+                className="gap-2"
+              >
+                <Eye className="w-4 h-4" />
+                プレビュー
+              </Button>
+              <Button 
+                type="submit" 
+                className="min-w-[120px]"
+                disabled={createDiscussion.isPending}
+              >
+                投稿する
+              </Button>
+            </div>
+
+            <AnimatePresence>
+              {showPreview && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <PostPreview
+                    title={title}
+                    content={content}
+                    tag={tags?.find(t => t.id === selectedTag)?.name}
+                    visibility={visibility}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </form>
+        </CardContent>
+      </Card>
+
+      <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>投稿の確認</AlertDialogTitle>
+            <AlertDialogDescription>
+              この内容で投稿してよろしいですか？
+              {attachments.length > 0 && (
+                <p className="mt-2">
+                  添付ファイル: {attachments.length}件
+                </p>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>キャンセル</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleConfirmedSubmit}
               disabled={createDiscussion.isPending}
             >
               {createDiscussion.isPending ? (
@@ -143,28 +204,10 @@ export const DiscussionForm = () => {
               ) : (
                 "投稿する"
               )}
-            </Button>
-          </div>
-
-          <AnimatePresence>
-            {showPreview && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <PostPreview
-                  title={title}
-                  content={content}
-                  tag={tags?.find(t => t.id === selectedTag)?.name}
-                  visibility={visibility}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </form>
-      </CardContent>
-    </Card>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };

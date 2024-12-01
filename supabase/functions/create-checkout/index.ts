@@ -18,6 +18,8 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting checkout session creation...')
+    
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? ''
@@ -25,6 +27,7 @@ serve(async (req) => {
 
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
+      console.error('No authorization header')
       return new Response(JSON.stringify({ error: 'No authorization header' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -33,11 +36,16 @@ serve(async (req) => {
 
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser(authHeader.replace('Bearer ', ''))
     if (userError || !user) {
+      console.error('User error:', userError)
       return new Response(JSON.stringify({ error: 'Invalid token' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
+
+    console.log('Creating Stripe checkout session...')
+    console.log('Stripe Key type:', typeof Deno.env.get('STRIPE_SECRET_KEY'))
+    console.log('Stripe Key starts with:', Deno.env.get('STRIPE_SECRET_KEY')?.substring(0, 7))
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -62,6 +70,8 @@ serve(async (req) => {
       },
     })
 
+    console.log('Checkout session created:', session.id)
+
     // Create a pending purchase record
     const { error: purchaseError } = await supabaseClient
       .from('nft_purchases')
@@ -79,6 +89,7 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   } catch (error) {
+    console.error('Stripe error:', error)
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

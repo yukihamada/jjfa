@@ -23,6 +23,7 @@ serve(async (req) => {
       cryptoProvider
     )
   } catch (err) {
+    console.error('Webhook signature verification failed:', err.message)
     return new Response(err.message, { status: 400 })
   }
 
@@ -36,32 +37,38 @@ serve(async (req) => {
 
     console.log('Processing successful payment:', session.id)
 
-    // Update purchase status
-    const { error: purchaseError } = await supabaseClient
-      .from('nft_purchases')
-      .update({ status: 'completed' })
-      .eq('stripe_session_id', session.id)
+    try {
+      // Update purchase status
+      const { error: purchaseError } = await supabaseClient
+        .from('nft_purchases')
+        .update({ status: 'completed' })
+        .eq('stripe_session_id', session.id)
 
-    if (purchaseError) {
-      console.error('Failed to update purchase:', purchaseError)
-      return new Response(JSON.stringify({ error: 'Failed to update purchase' }), { status: 500 })
+      if (purchaseError) {
+        console.error('Failed to update purchase:', purchaseError)
+        return new Response(JSON.stringify({ error: 'Failed to update purchase' }), { status: 500 })
+      }
+
+      // Create DAO membership
+      const { error: membershipError } = await supabaseClient
+        .from('dao_memberships')
+        .insert({
+          user_id: session.metadata.user_id,
+          status: 'active',
+          purchase_date: new Date().toISOString(),
+        })
+
+      if (membershipError) {
+        console.error('Failed to create membership:', membershipError)
+        return new Response(JSON.stringify({ error: 'Failed to create membership' }), { status: 500 })
+      }
+
+      console.log('Successfully processed payment and created membership')
+      return new Response(JSON.stringify({ received: true }), { status: 200 })
+    } catch (error) {
+      console.error('Error processing webhook:', error)
+      return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 })
     }
-
-    // Create DAO membership
-    const { error: membershipError } = await supabaseClient
-      .from('dao_memberships')
-      .insert({
-        user_id: session.metadata.user_id,
-        status: 'active',
-        purchase_date: new Date().toISOString(),
-      })
-
-    if (membershipError) {
-      console.error('Failed to create membership:', membershipError)
-      return new Response(JSON.stringify({ error: 'Failed to create membership' }), { status: 500 })
-    }
-
-    console.log('Successfully processed payment and created membership')
   }
 
   return new Response(JSON.stringify({ received: true }), { status: 200 })

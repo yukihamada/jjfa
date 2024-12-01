@@ -29,7 +29,7 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
       console.error('No authorization header')
-      return new Response(JSON.stringify({ error: 'No authorization header' }), {
+      return new Response(JSON.stringify({ error: '認証が必要です' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
@@ -38,7 +38,7 @@ serve(async (req) => {
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser(authHeader.replace('Bearer ', ''))
     if (userError || !user) {
       console.error('User error:', userError)
-      return new Response(JSON.stringify({ error: 'Invalid token' }), {
+      return new Response(JSON.stringify({ error: '認証に失敗しました' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
@@ -82,6 +82,10 @@ serve(async (req) => {
 
     if (purchaseError) {
       console.error('Purchase record creation failed:', purchaseError)
+      return new Response(JSON.stringify({ error: '購入記録の作成に失敗しました' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
     }
 
     return new Response(JSON.stringify({ url: session.url }), {
@@ -89,7 +93,7 @@ serve(async (req) => {
     })
   } catch (error) {
     console.error('Stripe error:', error)
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: '購入処理中にエラーが発生しました' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })

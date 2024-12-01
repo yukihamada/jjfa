@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
 import { PageTitle } from "@/components/PageTitle";
 import { OperatingRulesHeader } from "@/components/operating-rules/OperatingRulesHeader";
+import { TableOfContents } from "@/components/operating-rules/TableOfContents";
 import { Chapter1 } from "@/components/operating-rules/sections/Chapter1";
 import { Chapter2 } from "@/components/operating-rules/sections/Chapter2";
 import { Chapter3 } from "@/components/operating-rules/sections/Chapter3";
@@ -20,6 +21,7 @@ const OperatingRules = () => {
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
             <OperatingRulesHeader />
+            <TableOfContents />
             <div className="prose prose-slate max-w-none">
               <Chapter1 />
               <Chapter2 />

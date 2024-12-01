@@ -26,7 +26,10 @@ export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps
             <div className="flex items-center gap-2 text-sm">
               <Shield className="w-4 h-4 text-purple-500" />
               <span className="font-medium">帯:</span>
-              <span style={{ color: fighter.belt?.color }}>
+              <span 
+                className={`px-2 py-0.5 rounded ${fighter.belt?.color === '#FFFFFF' ? 'bg-gray-100 text-gray-900' : ''}`}
+                style={{ color: fighter.belt?.color !== '#FFFFFF' ? fighter.belt?.color : undefined }}
+              >
                 {fighter.belt?.name || "未設定"}
               </span>
             </div>

@@ -96,7 +96,12 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
           <SelectContent>
             {belts.map((belt) => (
               <SelectItem key={belt.id} value={belt.id}>
-                <span style={{ color: belt.color }}>{belt.name}</span>
+                <span 
+                  className={`px-2 py-0.5 rounded ${belt.color === '#FFFFFF' ? 'bg-gray-100 text-gray-900' : ''}`} 
+                  style={{ color: belt.color !== '#FFFFFF' ? belt.color : undefined }}
+                >
+                  {belt.name}
+                </span>
               </SelectItem>
             ))}
           </SelectContent>

@@ -466,6 +466,7 @@ export type Database = {
           guardian_consent: boolean | null
           height: number | null
           id: string
+          instructor: string | null
           is_active: boolean | null
           losses: number | null
           nickname: string | null
@@ -491,6 +492,7 @@ export type Database = {
           guardian_consent?: boolean | null
           height?: number | null
           id?: string
+          instructor?: string | null
           is_active?: boolean | null
           losses?: number | null
           nickname?: string | null
@@ -516,6 +518,7 @@ export type Database = {
           guardian_consent?: boolean | null
           height?: number | null
           id?: string
+          instructor?: string | null
           is_active?: boolean | null
           losses?: number | null
           nickname?: string | null

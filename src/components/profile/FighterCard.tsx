@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Shield } from "lucide-react";
+import { Award, Shield, Edit2 } from "lucide-react";
 import { FighterRegistrationForm } from "./FighterRegistrationForm";
+import { Button } from "@/components/ui/button";
 
 interface FighterCardProps {
   fighter: any;
@@ -9,14 +10,36 @@ interface FighterCardProps {
 }
 
 export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditComplete = () => {
+    setIsEditing(false);
+    onRegistrationSuccess();
+  };
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>選手登録情報</CardTitle>
-        <CardDescription>選手としての状態</CardDescription>
+        <div className="flex justify-between items-center">
+          <div>
+            <CardTitle>選手登録情報</CardTitle>
+            <CardDescription>選手としての状態</CardDescription>
+          </div>
+          {fighter && !isEditing && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsEditing(true)}
+              className="flex items-center gap-2"
+            >
+              <Edit2 className="w-4 h-4" />
+              編集
+            </Button>
+          )}
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        {fighter ? (
+        {fighter && !isEditing ? (
           <>
             <div className="flex items-center gap-2 text-sm">
               <Award className="w-4 h-4 text-blue-500" />
@@ -53,13 +76,23 @@ export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps
                 <span className="font-medium">スタンス:</span> {fighter.preferred_stance}
               </div>
             )}
+            {fighter.instructor && (
+              <div className="text-sm">
+                <span className="font-medium">指導者:</span> {fighter.instructor}
+              </div>
+            )}
           </>
         ) : (
           <div className="space-y-4">
-            <div className="text-sm text-gray-500 mb-4">
-              選手登録がありません。以下のフォームから登録できます。
-            </div>
-            <FighterRegistrationForm onSuccess={onRegistrationSuccess} />
+            {!fighter && (
+              <div className="text-sm text-gray-500 mb-4">
+                選手登録がありません。以下のフォームから登録できます。
+              </div>
+            )}
+            <FighterRegistrationForm 
+              onSuccess={handleEditComplete} 
+              existingFighter={isEditing ? fighter : undefined}
+            />
           </div>
         )}
       </CardContent>

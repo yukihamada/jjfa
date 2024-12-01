@@ -8,11 +8,11 @@ interface FighterRegistrationData {
   instructor: string;
   weight: string;
   height: string;
-  phone: string;
-  address: string;
-  emergencyContact: string;
-  emergencyPhone: string;
-  emergencyRelation: string;
+  phone?: string;
+  address?: string;
+  emergencyContact?: string;
+  emergencyPhone?: string;
+  emergencyRelation?: string;
 }
 
 export const useFighterRegistration = (onSuccess: () => void) => {
@@ -29,31 +29,6 @@ export const useFighterRegistration = (onSuccess: () => void) => {
       return false;
     }
 
-    if (!data.phone.trim()) {
-      toast.error("電話番号を入力してください");
-      return false;
-    }
-
-    if (!data.address.trim()) {
-      toast.error("住所を入力してください");
-      return false;
-    }
-
-    if (!data.emergencyContact.trim()) {
-      toast.error("緊急連絡先の氏名を入力してください");
-      return false;
-    }
-
-    if (!data.emergencyPhone.trim()) {
-      toast.error("緊急連絡先の電話番号を入力してください");
-      return false;
-    }
-
-    if (!data.emergencyRelation.trim()) {
-      toast.error("緊急連絡先の続柄を入力してください");
-      return false;
-    }
-
     if (!data.weight || isNaN(parseFloat(data.weight))) {
       toast.error("有効な体重を入力してください");
       return false;
@@ -62,6 +37,34 @@ export const useFighterRegistration = (onSuccess: () => void) => {
     if (!data.height || isNaN(parseFloat(data.height))) {
       toast.error("有効な身長を入力してください");
       return false;
+    }
+
+    // Only validate these fields for new registrations
+    if (data.phone !== undefined) {
+      if (!data.phone.trim()) {
+        toast.error("電話番号を入力してください");
+        return false;
+      }
+
+      if (!data.address?.trim()) {
+        toast.error("住所を入力してください");
+        return false;
+      }
+
+      if (!data.emergencyContact?.trim()) {
+        toast.error("緊急連絡先の氏名を入力してください");
+        return false;
+      }
+
+      if (!data.emergencyPhone?.trim()) {
+        toast.error("緊急連絡先の電話番号を入力してください");
+        return false;
+      }
+
+      if (!data.emergencyRelation?.trim()) {
+        toast.error("緊急連絡先の続柄を入力してください");
+        return false;
+      }
     }
 
     return true;
@@ -159,5 +162,40 @@ export const useFighterRegistration = (onSuccess: () => void) => {
     }
   };
 
-  return { registerFighter, loading };
+  const updateFighter = async (fighterId: string, data: FighterRegistrationData) => {
+    setLoading(true);
+
+    try {
+      if (!validateForm(data)) {
+        return;
+      }
+
+      const { error: updateError } = await supabase
+        .from("fighters")
+        .update({
+          weight: parseFloat(data.weight),
+          height: parseFloat(data.height),
+          dojo_id: data.dojoId,
+          belt_id: data.beltId,
+          instructor: data.instructor,
+        })
+        .eq("id", fighterId);
+
+      if (updateError) {
+        console.error("Update error:", updateError);
+        toast.error("選手情報の更新に失敗しました");
+        return;
+      }
+
+      toast.success("選手情報を更新しました");
+      onSuccess();
+    } catch (error) {
+      console.error("Error in updateFighter:", error);
+      toast.error("予期せぬエラーが発生しました。もう一度お試しください。");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { registerFighter, updateFighter, loading };
 };

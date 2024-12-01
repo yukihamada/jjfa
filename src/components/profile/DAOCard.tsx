@@ -31,7 +31,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
         .single();
 
       if (membershipError && membershipError.code !== 'PGRST116') {
-        console.error("Membership check error:", membershipError);
+        console.error("会員情報チェックエラー:", membershipError);
         toast.error("会員情報の確認中にエラーが発生しました");
         return;
       }
@@ -73,7 +73,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
 
       window.location.href = data.url;
     } catch (error) {
-      console.error("Purchase error:", error);
+      console.error("購入エラー:", error);
       toast.error(error instanceof Error ? error.message : "予期せぬエラーが発生しました。もう一度お試しください。");
     } finally {
       setLoading(false);

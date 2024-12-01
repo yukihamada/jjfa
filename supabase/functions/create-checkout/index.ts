@@ -18,6 +18,7 @@ serve(async (req) => {
   }
 
   try {
+    // Initialize Supabase client
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? ''
@@ -26,6 +27,7 @@ serve(async (req) => {
     // Verify authentication
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
+      console.error('認証ヘッダーがありません')
       return new Response(
         JSON.stringify({ error: '認証が必要です' }), 
         { 
@@ -37,7 +39,7 @@ serve(async (req) => {
 
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser(authHeader.replace('Bearer ', ''))
     if (userError || !user) {
-      console.error('User error:', userError)
+      console.error('認証エラー:', userError)
       return new Response(
         JSON.stringify({ error: '認証に失敗しました' }), 
         { 
@@ -56,7 +58,7 @@ serve(async (req) => {
       .single()
 
     if (membershipError && membershipError.code !== 'PGRST116') {
-      console.error('Membership check error:', membershipError)
+      console.error('会員情報チェックエラー:', membershipError)
       return new Response(
         JSON.stringify({ error: '会員情報の確認中にエラーが発生しました' }), 
         { 
@@ -76,61 +78,72 @@ serve(async (req) => {
       )
     }
 
-    // Create Stripe checkout session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'jpy',
-            product_data: {
-              name: 'JJFA DAO NFT',
-              description: 'JJFA DAOの社員権NFT',
+    try {
+      // Create Stripe checkout session
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'jpy',
+              product_data: {
+                name: 'JJFA DAO NFT',
+                description: 'JJFA DAOの社員権NFT',
+              },
+              unit_amount: 100000,
             },
-            unit_amount: 100000,
+            quantity: 1,
           },
-          quantity: 1,
+        ],
+        mode: 'payment',
+        success_url: `${req.headers.get('origin')}/profile?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.get('origin')}/profile`,
+        metadata: {
+          user_id: user.id,
         },
-      ],
-      mode: 'payment',
-      success_url: `${req.headers.get('origin')}/profile?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get('origin')}/profile`,
-      metadata: {
-        user_id: user.id,
-      },
-    })
-
-    // Create purchase record
-    const { error: purchaseError } = await supabaseClient
-      .from('nft_purchases')
-      .insert({
-        user_id: user.id,
-        amount: 100000,
-        stripe_session_id: session.id,
       })
 
-    if (purchaseError) {
-      console.error('Purchase record creation failed:', purchaseError)
+      // Create purchase record
+      const { error: purchaseError } = await supabaseClient
+        .from('nft_purchases')
+        .insert({
+          user_id: user.id,
+          amount: 100000,
+          stripe_session_id: session.id,
+        })
+
+      if (purchaseError) {
+        console.error('購入記録作成エラー:', purchaseError)
+        return new Response(
+          JSON.stringify({ error: '購入記録の作成に失敗しました' }), 
+          { 
+            status: 500, 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        )
+      }
+
       return new Response(
-        JSON.stringify({ error: '購入記録の作成に失敗しました' }), 
+        JSON.stringify({ url: session.url }), 
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    } catch (stripeError) {
+      console.error('Stripeエラー:', stripeError)
+      return new Response(
+        JSON.stringify({ error: 'Stripeでの決済処理に失敗しました。もう一度お試しください。' }), 
         { 
           status: 500, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       )
     }
-
-    return new Response(
-      JSON.stringify({ url: session.url }), 
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      }
-    )
   } catch (error) {
-    console.error('Stripe error:', error)
+    console.error('予期せぬエラー:', error)
     return new Response(
       JSON.stringify({ 
-        error: error instanceof Error ? error.message : '購入処理中にエラーが発生しました。もう一度お試しください。'
+        error: error instanceof Error ? error.message : '予期せぬエラーが発生しました。もう一度お試しください。'
       }), 
       { 
         status: 500, 

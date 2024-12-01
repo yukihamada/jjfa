@@ -35,18 +35,22 @@ export const AwardCeremony = () => {
             <RuleItem
               title="ユニフォーム規定"
               description="選手は試合時と同様のJJFA公認ユニフォームで表彰式に出席する必要があります。詳細は服装規定をご確認ください。"
+              ruleNumber="17.1"
             />
             <RuleItem
               title="メダル受け取りの義務"
               description="メダルを獲得した各選手は、表彰式に出席してメダルを自身で受け取る必要があります。正当な理由なく表彰式を欠席した場合、メダルを失う可能性があります。"
+              ruleNumber="17.2"
             />
             <RuleItem
               title="表彰台でのマナー"
               description="表彰台では、宗教的、政治的、個人的、商業的な意味を含む無礼または挑発的な表明は禁止されています。特別な理由がない限り、帽子などの頭を覆うものの着用も禁止されています。"
+              ruleNumber="17.3"
             />
             <RuleItem
               title="国歌演奏時の礼儀"
               description="優勝者の国歌が演奏される間、全ての選手は起立して敬意を表する必要があります。"
+              ruleNumber="17.4"
             />
           </div>
         </div>

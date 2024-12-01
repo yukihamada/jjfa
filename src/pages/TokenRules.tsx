@@ -8,6 +8,7 @@ import { Chapter4 } from "@/components/token-rules/sections/Chapter4";
 import { Chapter5 } from "@/components/token-rules/sections/Chapter5";
 import { Appendix } from "@/components/token-rules/sections/Appendix";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
+import { Link } from "react-router-dom";
 
 const TokenRules = () => {
   return (
@@ -29,6 +30,7 @@ const TokenRules = () => {
 
               <div className="mt-8 text-sm text-slate-600">
                 <p>本規程は、<a href="https://jpdao.org/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://jpdao.org/</a> にて公開されている日本DAO協会のガイドラインを参考に作成されました。</p>
+                <p className="mt-2">※トークンの詳細な背景や目的については<Link to="/whitepaper" className="text-blue-600 hover:underline">ホワイトペーパー</Link>をご参照ください。</p>
               </div>
             </div>
           </CardContent>

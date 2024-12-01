@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageCircle, Send, Share2 } from "lucide-react";
+import { MessageCircle, Send, Share2, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const SocialLinks = () => {
   return (
@@ -12,6 +13,17 @@ export const SocialLinks = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        <Button
+          variant="outline"
+          className="w-full justify-start gap-2"
+          asChild
+        >
+          <Link to="/community">
+            <Users className="w-5 h-5" />
+            JJFAコミュニティに参加
+          </Link>
+        </Button>
+        
         <Button
           variant="outline"
           className="w-full justify-start gap-2"

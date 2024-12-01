@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 interface FighterRegistrationData {
-  dojoId: string;
+  dojoId: string | null;
   beltId: string;
   instructor: string;
   weight: string;
@@ -19,11 +19,6 @@ export const useFighterRegistration = (onSuccess: () => void) => {
   const [loading, setLoading] = useState(false);
 
   const validateForm = (data: FighterRegistrationData) => {
-    if (!data.dojoId) {
-      toast.error("道場を選択してください");
-      return false;
-    }
-
     if (!data.beltId) {
       toast.error("帯を選択してください");
       return false;

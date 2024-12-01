@@ -25,7 +25,7 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await registerFighter({
-      dojoId,
+      dojoId: dojoId || null, // Allow null dojoId
       beltId,
       instructor,
       weight,
@@ -41,10 +41,10 @@ export const FighterRegistrationForm = ({ onSuccess }: { onSuccess: () => void }
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <label className="block text-sm font-medium mb-1">道場</label>
+        <label className="block text-sm font-medium mb-1">道場（任意）</label>
         <div className="flex gap-2">
           <div className="flex-1">
-            <Select value={dojoId} onValueChange={setDojoId} required>
+            <Select value={dojoId} onValueChange={setDojoId}>
               <SelectTrigger>
                 <SelectValue placeholder="道場を選択" />
               </SelectTrigger>

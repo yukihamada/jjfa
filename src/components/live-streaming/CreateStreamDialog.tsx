@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
@@ -16,10 +17,43 @@ interface CreateStreamDialogProps {
   onStreamCreated?: (streamKey: string) => void;
 }
 
+interface Match {
+  id: string;
+  match_number: number;
+  blue_fighter: { nickname: string | null } | null;
+  red_fighter: { nickname: string | null } | null;
+}
+
 export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: CreateStreamDialogProps) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedMatch, setSelectedMatch] = useState<string>("");
+
+  // Fetch upcoming matches within 5 minutes
+  const { data: upcomingMatches } = useQuery({
+    queryKey: ['upcoming-matches'],
+    queryFn: async () => {
+      const fiveMinutesFromNow = new Date(Date.now() + 5 * 60 * 1000).toISOString();
+      const now = new Date().toISOString();
+
+      const { data, error } = await supabase
+        .from('matches')
+        .select(`
+          id,
+          match_number,
+          blue_fighter:blue_fighter_id(nickname),
+          red_fighter:red_fighter_id(nickname)
+        `)
+        .gte('match_time', now)
+        .lte('match_time', fiveMinutesFromNow)
+        .order('match_time', { ascending: true });
+
+      if (error) throw error;
+      return data as Match[];
+    },
+    enabled: open, // Only fetch when dialog is open
+  });
 
   const createStream = useMutation({
     mutationFn: async () => {
@@ -34,7 +68,8 @@ export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: Crea
           title,
           description,
           stream_key: streamKey,
-          status: 'offline'
+          status: 'offline',
+          is_official_match: !!selectedMatch, // Set to true if a match is selected
         })
         .select()
         .single();
@@ -62,6 +97,12 @@ export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: Crea
     createStream.mutate();
   };
 
+  const getMatchLabel = (match: Match) => {
+    const blueName = match.blue_fighter?.nickname || "青コーナー";
+    const redName = match.red_fighter?.nickname || "赤コーナー";
+    return `試合${match.match_number}: ${blueName} vs ${redName}`;
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -70,6 +111,30 @@ export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: Crea
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4">
+          {upcomingMatches && upcomingMatches.length > 0 && (
+            <div className="space-y-2">
+              <Label htmlFor="match">公式試合を選択</Label>
+              <Select
+                value={selectedMatch}
+                onValueChange={setSelectedMatch}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="公式試合を選択（任意）" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">
+                    通常配信
+                  </SelectItem>
+                  {upcomingMatches.map((match) => (
+                    <SelectItem key={match.id} value={match.id}>
+                      {getMatchLabel(match)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
           <div className="space-y-2">
             <Label htmlFor="title">タイトル</Label>
             <Input

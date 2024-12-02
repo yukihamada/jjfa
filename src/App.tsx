@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import { BrowserRouter, useLocation, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { HelmetProvider } from 'react-helmet-async';
 import { GlobalNav } from "./components/GlobalNav";
@@ -10,6 +10,7 @@ import { PasswordProtection } from "./components/PasswordProtection";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { AppRoutes } from "./routes";
+import { Loader2 } from "lucide-react";
 
 const queryClient = new QueryClient();
 
@@ -29,18 +30,25 @@ const App = () => {
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setIsAuthenticated(!!session);
-      setIsLoading(false);
-
-      if (session) {
-        setTimeout(() => {
-          supabase.auth.signOut();
-          setIsAuthenticated(false);
-          toast.error("セッションが終了しました。再度ログインしてください。");
-        }, 1800000);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setIsAuthenticated(!!session);
+        
+        if (session) {
+          setTimeout(() => {
+            supabase.auth.signOut();
+            setIsAuthenticated(false);
+            toast.error("セッションが終了しました。再度ログインしてください。");
+          }, 1800000);
+        }
+      } catch (error) {
+        console.error("Session check error:", error);
+        toast.error("認証状態の確認中にエラーが発生しました");
+      } finally {
+        setIsLoading(false);
       }
     };
+    
     checkSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -56,6 +64,14 @@ const App = () => {
       subscription.unsubscribe();
     };
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return <PasswordProtection onAuthenticated={() => setIsAuthenticated(true)} />;

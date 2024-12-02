@@ -31,6 +31,7 @@ export const StreamSetupInstructions = ({
   onCopy
 }: StreamSetupInstructionsProps) => {
   const [showBrowserControls, setShowBrowserControls] = useState(false);
+  const wsUrl = import.meta.env.VITE_LIVEKIT_WS_URL;
 
   const handleCopy = async (text: string) => {
     try {
@@ -118,13 +119,13 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => handleCopy(`wss://stream.jjfa.jp/ws`)}
+                  onClick={() => handleCopy(wsUrl)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー
                 </Button>
               </div>
-              <code className="text-sm">wss://stream.jjfa.jp/ws</code>
+              <code className="text-sm">{wsUrl}</code>
             </div>
 
             <div>

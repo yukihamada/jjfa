@@ -656,6 +656,41 @@ export type Database = {
         }
         Relationships: []
       }
+      livekit_rooms: {
+        Row: {
+          created_at: string
+          id: string
+          participant_identity: string
+          room_name: string
+          stream_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          participant_identity: string
+          room_name: string
+          stream_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          participant_identity?: string
+          room_name?: string
+          stream_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "livekit_rooms_stream_id_fkey"
+            columns: ["stream_id"]
+            isOneToOne: false
+            referencedRelation: "live_streams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       match_scores: {
         Row: {
           fighter_id: string | null

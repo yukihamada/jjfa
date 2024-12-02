@@ -1,66 +1,98 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Info, Loader2 } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import { Room, RoomEvent, createLocalVideoTrack, createLocalAudioTrack } from "livekit-client";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
 
 interface BrowserStreamControlsProps {
   streamKey: string;
-  onStreamStart: () => void;
-  onStreamEnd: () => void;
+  onStreamStart?: () => void;
+  onStreamEnd?: () => void;
 }
 
-export const BrowserStreamControls = ({ 
-  streamKey, 
+export const BrowserStreamControls = ({
+  streamKey,
   onStreamStart,
-  onStreamEnd 
+  onStreamEnd
 }: BrowserStreamControlsProps) => {
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const navigate = useNavigate();
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [room, setRoom] = useState<Room | null>(null);
+  const [previewElement, setPreviewElement] = useState<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (room) {
+        room.disconnect();
+      }
+    };
+  }, [room]);
 
   const startStream = async () => {
-    setIsLoading(true);
     try {
-      // Request camera and microphone permissions
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-          facingMode: "user"
-        },
-        audio: true
-      });
-      
-      // Set up video preview
-      setMediaStream(stream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-      }
+      setIsLoading(true);
 
-      // Update stream status in database
-      const { error } = await supabase
-        .from('live_streams')
-        .update({ 
-          status: 'live', 
-          started_at: new Date().toISOString() 
-        })
-        .eq('stream_key', streamKey);
-      
-      if (error) throw error;
-      
+      // LiveKitトークンを取得
+      const { data: tokenData, error: tokenError } = await supabase.functions.invoke('livekit', {
+        body: {
+          roomName: streamKey,
+          participantName: `broadcaster-${streamKey}`,
+          isPublisher: true
+        }
+      });
+
+      if (tokenError) throw new Error('Failed to get LiveKit token');
+
+      // Roomを作成
+      const newRoom = new Room({
+        adaptiveStream: true,
+        dynacast: true,
+      });
+
+      // Roomに接続
+      await newRoom.connect(`${import.meta.env.VITE_LIVEKIT_WS_URL}`, tokenData.token);
+
+      // カメラとマイクのトラックを取得
+      const videoTrack = await createLocalVideoTrack({
+        resolution: { width: 1280, height: 720 },
+      });
+      const audioTrack = await createLocalAudioTrack();
+
+      // トラックをルームに公開
+      await Promise.all([
+        newRoom.localParticipant.publishTrack(videoTrack),
+        newRoom.localParticipant.publishTrack(audioTrack),
+      ]);
+
+      // プレビュー表示用のビデオ要素を作成
+      const video = document.createElement('video');
+      video.autoplay = true;
+      video.muted = true;
+      video.playsInline = true;
+      videoTrack.attach(video);
+
+      // Roomの状態を監視
+      newRoom.on(RoomEvent.Disconnected, () => {
+        setIsStreaming(false);
+        onStreamEnd?.();
+      });
+
+      setRoom(newRoom);
+      setPreviewElement(video);
       setIsStreaming(true);
-      onStreamStart();
+      onStreamStart?.();
+
+      // Supabaseのlive_streamsテーブルを更新
+      await supabase
+        .from('live_streams')
+        .update({ status: 'live', started_at: new Date().toISOString() })
+        .eq('stream_key', streamKey);
+
       toast.success("配信を開始しました");
-      navigate(`/live/${streamKey}`);
     } catch (error) {
-      console.error('Error accessing media devices:', error);
-      toast.error("カメラとマイクの使用を許可してください");
+      console.error('Failed to start stream:', error);
+      toast.error("配信の開始に失敗しました");
     } finally {
       setIsLoading(false);
     }
@@ -68,85 +100,62 @@ export const BrowserStreamControls = ({
 
   const stopStream = async () => {
     try {
-      if (mediaStream) {
-        mediaStream.getTracks().forEach(track => track.stop());
-        setMediaStream(null);
+      setIsLoading(true);
+
+      if (room) {
+        room.disconnect();
+        setRoom(null);
       }
 
-      const { error } = await supabase
+      // Supabaseのlive_streamsテーブルを更新
+      await supabase
         .from('live_streams')
-        .update({ 
-          status: 'ended', 
-          ended_at: new Date().toISOString() 
+        .update({
+          status: 'ended',
+          ended_at: new Date().toISOString()
         })
         .eq('stream_key', streamKey);
 
-      if (error) throw error;
-      
       setIsStreaming(false);
-      onStreamEnd();
+      onStreamEnd?.();
       toast.success("配信を終了しました");
-      navigate('/live');
     } catch (error) {
-      console.error('Error stopping stream:', error);
-      toast.error("配信の終了中にエラーが発生しました");
+      console.error('Failed to stop stream:', error);
+      toast.error("配信の終了に失敗しました");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (mediaStream) {
-        mediaStream.getTracks().forEach(track => track.stop());
-      }
-    };
-  }, [mediaStream]);
-
   return (
     <div className="space-y-4">
-      <h3 className="font-semibold">ブラウザから配信</h3>
-      <ol className="list-decimal list-inside space-y-2">
-        <li>カメラとマイクの使用を許可してください</li>
-        <li>「配信開始」ボタンをクリックして配信を開始します</li>
-        <li>配信を終了する場合は「配信終了」ボタンをクリックします</li>
-      </ol>
-
-      <Alert>
-        <Info className="h-4 w-4" />
-        <AlertDescription>
-          ブラウザ配信は実験的な機能です。安定した配信にはOBSの使用をお勧めします。
-        </AlertDescription>
-      </Alert>
-
-      {mediaStream && (
-        <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted
-            className="w-full h-full object-contain"
-          />
+      <Card className="p-4">
+        <div className="space-y-4">
+          <div className="aspect-video bg-slate-900 rounded-lg overflow-hidden">
+            {previewElement && (
+              <div ref={(container) => container?.appendChild(previewElement)} className="w-full h-full" />
+            )}
+          </div>
+          <div className="flex justify-end">
+            {!isStreaming ? (
+              <Button
+                onClick={startStream}
+                disabled={isLoading}
+              >
+                配信を開始
+              </Button>
+            ) : (
+              <Button
+                onClick={stopStream}
+                disabled={isLoading}
+                variant="destructive"
+              >
+                配信を終了
+              </Button>
+            )}
+          </div>
         </div>
-      )}
-
-      <div className="flex justify-center">
-        <Button 
-          className="w-full max-w-sm"
-          onClick={isStreaming ? stopStream : startStream}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              接続中...
-            </>
-          ) : isStreaming ? (
-            "配信を終了"
-          ) : (
-            "配信を開始"
-          )}
-        </Button>
-      </div>
+      </Card>
     </div>
   );
 };

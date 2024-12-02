@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Video, Users, Trophy } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 const LiveStreaming = () => {
@@ -14,11 +14,19 @@ const LiveStreaming = () => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [currentStreamKey, setCurrentStreamKey] = useState("");
   const navigate = useNavigate();
+  const { streamId } = useParams();
   const [stats, setStats] = useState({
     liveCount: 0,
     viewerCount: 0,
     totalStreamTime: 0
   });
+
+  useEffect(() => {
+    if (streamId) {
+      setShowInstructions(true);
+      setCurrentStreamKey(streamId);
+    }
+  }, [streamId]);
 
   useEffect(() => {
     fetchStreamStats();
@@ -82,6 +90,14 @@ const LiveStreaming = () => {
   const handleStreamCreated = (streamKey: string) => {
     setCurrentStreamKey(streamKey);
     setShowInstructions(true);
+  };
+
+  const handleStreamStart = () => {
+    setShowInstructions(false);
+  };
+
+  const handleStreamEnd = () => {
+    navigate('/live');
   };
 
   const statsConfig = [
@@ -162,6 +178,8 @@ const LiveStreaming = () => {
         open={showInstructions}
         onOpenChange={setShowInstructions}
         streamKey={currentStreamKey}
+        onStreamStart={handleStreamStart}
+        onStreamEnd={handleStreamEnd}
       />
     </div>
   );

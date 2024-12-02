@@ -122,6 +122,7 @@ const App = () => {
                   <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
                   <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                   <Route path="/live" element={<LiveStreaming />} />
+                  <Route path="/live/:streamId" element={<LiveStreaming />} />
                 </Routes>
               </main>
               <GlobalFooter />

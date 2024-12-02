@@ -71,6 +71,21 @@ export const StreamSetupInstructions = ({
           </div>
           <code className="text-sm">{streamKey}</code>
         </div>
+
+        <div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium">視聴用URL</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onCopy(`https://stream.jjfa.jp/live/${streamKey}/index.m3u8`)}
+            >
+              <Copy className="w-4 h-4 mr-2" />
+              コピー
+            </Button>
+          </div>
+          <code className="text-sm">https://stream.jjfa.jp/live/{streamKey}/index.m3u8</code>
+        </div>
       </div>
     </div>
   );

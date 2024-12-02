@@ -58,6 +58,8 @@ export const StreamInstructions = ({
 
           <TabsContent value="obs">
             <StreamSetupInstructions 
+              open={open}
+              onOpenChange={onOpenChange}
               title="OBSの設定手順"
               steps={[
                 "OBSを開き、「設定」をクリックします",
@@ -73,6 +75,8 @@ export const StreamInstructions = ({
 
           <TabsContent value="mobile">
             <StreamSetupInstructions 
+              open={open}
+              onOpenChange={onOpenChange}
               title="スマートフォンでの配信方法"
               description={
                 <>

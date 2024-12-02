@@ -21,15 +21,23 @@ const Community = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast.error("このページにアクセスするにはログインが必要です");
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          toast.error("このページにアクセスするにはログインが必要です");
+          navigate('/community-registration');
+          return;
+        }
+        setUser(session.user);
+      } catch (error) {
+        console.error("Auth check error:", error);
+        toast.error("認証状態の確認中にエラーが発生しました");
         navigate('/community-registration');
-        return;
+      } finally {
+        setIsLoading(false);
       }
-      setUser(session.user);
-      setIsLoading(false);
     };
+    
     checkAuth();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -39,19 +47,18 @@ const Community = () => {
         return;
       }
       setUser(session.user);
-      setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  if (isLoading) {
-    return null;
-  }
-
   const handleNewPostClick = () => {
     setActiveTab("create");
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50 pt-20">
@@ -73,7 +80,7 @@ const Community = () => {
               <DiscussionList />
             </TabsContent>
             <TabsContent value="create">
-              <DiscussionForm />
+              <DiscussionForm onSuccess={() => setActiveTab("discussions")} />
             </TabsContent>
           </Tabs>
         </div>

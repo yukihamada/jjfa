@@ -1,92 +1,126 @@
-import { ReactNode } from "react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Info, Copy } from "lucide-react";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Copy, Video } from "lucide-react";
+import { BrowserStreamControls } from "./BrowserStreamControls";
+import { toast } from "sonner";
 
 interface StreamSetupInstructionsProps {
-  title: string;
-  description?: ReactNode;
-  steps?: string[];
-  rtmpUrl: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   streamKey: string;
-  onCopy: (text: string) => void;
+  onStreamStart?: () => void;
+  onStreamEnd?: () => void;
 }
 
 export const StreamSetupInstructions = ({
-  title,
-  description,
-  steps,
-  rtmpUrl,
+  open,
+  onOpenChange,
   streamKey,
-  onCopy
+  onStreamStart,
+  onStreamEnd
 }: StreamSetupInstructionsProps) => {
+  const [showBrowserControls, setShowBrowserControls] = useState(false);
+
+  const onCopy = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success("コピーしました");
+    } catch (error) {
+      toast.error("コピーに失敗しました");
+    }
+  };
+
   return (
-    <div className="space-y-4">
-      <h3 className="font-semibold">{title}</h3>
-      
-      {description && description}
-      
-      {steps && (
-        <ol className="list-decimal list-inside space-y-2">
-          {steps.map((step, index) => (
-            <li key={index}>{step}</li>
-          ))}
-        </ol>
-      )}
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>配信設定</DialogTitle>
+        </DialogHeader>
 
-      <Alert>
-        <Info className="h-4 w-4" />
-        <AlertDescription>
-          アプリの設定で、以下のRTMP URLとストリームキーを入力してください。
-        </AlertDescription>
-      </Alert>
-
-      <div className="space-y-4 p-4 bg-slate-50 rounded-lg">
-        <div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">配信URL</span>
+        <div className="space-y-4">
+          <div className="flex justify-center">
             <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onCopy(rtmpUrl)}
+              variant="outline"
+              className="w-full"
+              onClick={() => setShowBrowserControls(true)}
             >
-              <Copy className="w-4 h-4 mr-2" />
-              コピー
+              <Video className="w-4 h-4 mr-2" />
+              ブラウザから配信を開始
             </Button>
           </div>
-          <code className="text-sm">{rtmpUrl}</code>
-        </div>
 
-        <div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">ストリームキー</span>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onCopy(streamKey)}
-            >
-              <Copy className="w-4 h-4 mr-2" />
-              コピー
-            </Button>
-          </div>
-          <code className="text-sm">{streamKey}</code>
-        </div>
+          {showBrowserControls && (
+            <BrowserStreamControls
+              streamKey={streamKey}
+              onStreamStart={onStreamStart}
+              onStreamEnd={onStreamEnd}
+            />
+          )}
 
-        <div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">視聴用URL</span>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onCopy(`https://stream.jjfa.jp/live/${streamKey}/index.m3u8`)}
-            >
-              <Copy className="w-4 h-4 mr-2" />
-              コピー
-            </Button>
+          <div className="space-y-4 bg-slate-50 p-4 rounded-lg">
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">RTMP URL</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onCopy("rtmp://stream.jjfa.jp/live")}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  コピー
+                </Button>
+              </div>
+              <code className="text-sm">rtmp://stream.jjfa.jp/live</code>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">ストリームキー</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onCopy(streamKey)}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  コピー
+                </Button>
+              </div>
+              <code className="text-sm">{streamKey}</code>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">WebSocket URL</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onCopy(`wss://stream.jjfa.jp/ws`)}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  コピー
+                </Button>
+              </div>
+              <code className="text-sm">wss://stream.jjfa.jp/ws</code>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">視聴用URL</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onCopy(`https://stream.jjfa.jp/live/${streamKey}/index.m3u8`)}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  コピー
+                </Button>
+              </div>
+              <code className="text-sm">https://stream.jjfa.jp/live/{streamKey}/index.m3u8</code>
+            </div>
           </div>
-          <code className="text-sm">https://stream.jjfa.jp/live/{streamKey}/index.m3u8</code>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };

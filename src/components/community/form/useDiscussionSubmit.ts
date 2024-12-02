@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface DiscussionSubmitParams {
   title: string;
@@ -12,6 +13,7 @@ interface DiscussionSubmitParams {
 
 export const useDiscussionSubmit = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async ({ title, content, tagId, visibility, attachments }: DiscussionSubmitParams) => {
@@ -35,7 +37,7 @@ export const useDiscussionSubmit = () => {
             title,
             content,
             user_id: user.id,
-            profile_id: profile.id, // Link to the profile
+            profile_id: profile.id,
             visibility,
             attachments
           },
@@ -68,9 +70,11 @@ export const useDiscussionSubmit = () => {
 
       return discussion;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["discussions"] });
       toast.success("投稿が完了しました！");
+      // 投稿後に投稿詳細ページに遷移
+      navigate(`/community/discussion/${data.id}`);
     },
     onError: (error) => {
       toast.error(`投稿に失敗しました: ${error.message}`);

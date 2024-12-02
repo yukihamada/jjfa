@@ -24,6 +24,7 @@ import LiveStreaming from "./pages/LiveStreaming";
 import { PasswordProtection } from "./components/PasswordProtection";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import DiscussionDetail from "./pages/DiscussionDetail"; // 新しく追加
 
 const queryClient = new QueryClient();
 
@@ -111,6 +112,7 @@ const App = () => {
                   <Route path="/whitepaper" element={<Whitepaper />} />
                   <Route path="/community-registration" element={<CommunityRegistration />} />
                   <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
+                  <Route path="/community/discussion/:id" element={<ProtectedRoute><DiscussionDetail /></ProtectedRoute>} />
                   <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
                   <Route path="/articles" element={<Articles />} />
                   <Route path="/operating-rules" element={<OperatingRules />} />

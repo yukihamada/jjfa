@@ -1,9 +1,11 @@
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Copy, Info, Smartphone, Monitor } from "lucide-react";
+import { Copy, Info, Smartphone, Monitor, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface StreamInstructionsProps {
   open: boolean;
@@ -12,12 +14,70 @@ interface StreamInstructionsProps {
 }
 
 export const StreamInstructions = ({ open, onOpenChange, streamKey }: StreamInstructionsProps) => {
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const rtmpUrl = "rtmp://rtmp.livepeer.com/live";
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast.success("コピーしました");
   };
 
-  const rtmpUrl = "rtmp://rtmp.livepeer.com/live";
+  const startStream = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+      });
+      
+      setMediaStream(stream);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setIsStreaming(true);
+      
+      // Update stream status in database
+      const { error } = await supabase
+        .from('live_streams')
+        .update({ status: 'live', started_at: new Date().toISOString() })
+        .eq('stream_key', streamKey);
+      
+      if (error) throw error;
+      toast.success("配信を開始しました");
+    } catch (error) {
+      console.error('Error accessing media devices:', error);
+      toast.error("カメラとマイクの使用を許可してください");
+    }
+  };
+
+  const stopStream = async () => {
+    if (mediaStream) {
+      mediaStream.getTracks().forEach(track => track.stop());
+      setMediaStream(null);
+    }
+    setIsStreaming(false);
+
+    // Update stream status in database
+    const { error } = await supabase
+      .from('live_streams')
+      .update({ 
+        status: 'ended', 
+        ended_at: new Date().toISOString() 
+      })
+      .eq('stream_key', streamKey);
+
+    if (error) throw error;
+    toast.success("配信を終了しました");
+  };
+
+  useEffect(() => {
+    return () => {
+      if (mediaStream) {
+        mediaStream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, [mediaStream]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -55,9 +115,36 @@ export const StreamInstructions = ({ open, onOpenChange, streamKey }: StreamInst
                 </AlertDescription>
               </Alert>
 
+              {mediaStream && (
+                <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    muted
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+
               <div className="flex justify-center">
-                <Button className="w-full max-w-sm">
-                  配信を開始
+                <Button 
+                  className="w-full max-w-sm"
+                  onClick={isStreaming ? stopStream : startStream}
+                  disabled={isStreaming && !mediaStream}
+                >
+                  {isStreaming ? (
+                    mediaStream ? (
+                      "配信を終了"
+                    ) : (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        接続中...
+                      </>
+                    )
+                  ) : (
+                    "配信を開始"
+                  )}
                 </Button>
               </div>
             </div>

@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AttachmentUpload } from "./AttachmentUpload";
@@ -12,7 +11,7 @@ import { FormTips } from "./form/FormTips";
 import { VisibilitySelect } from "./form/VisibilitySelect";
 import { PostPreview } from "./form/PostPreview";
 import { useDiscussionSubmit } from "./form/useDiscussionSubmit";
-import { useTagsQuery } from "./form/useTagsQuery";
+import { CategorySelect } from "./form/CategorySelect";
 import { toast } from "sonner";
 import {
   AlertDialog,
@@ -37,7 +36,6 @@ export const DiscussionForm = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  const { data: tags } = useTagsQuery();
   const createDiscussion = useDiscussionSubmit();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -106,18 +104,7 @@ export const DiscussionForm = () => {
               </div>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
-              <Select value={selectedTag} onValueChange={setSelectedTag}>
-                <SelectTrigger>
-                  <SelectValue placeholder="カテゴリを選択" />
-                </SelectTrigger>
-                <SelectContent>
-                  {tags?.map((tag) => (
-                    <SelectItem key={tag.id} value={tag.id}>
-                      {tag.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <CategorySelect value={selectedTag} onChange={setSelectedTag} />
               <VisibilitySelect value={visibility} onChange={setVisibility} />
             </div>
             <div className="space-y-2">
@@ -167,7 +154,7 @@ export const DiscussionForm = () => {
                   <PostPreview
                     title={title}
                     content={content}
-                    tag={tags?.find(t => t.id === selectedTag)?.name}
+                    tag={selectedTag}
                     visibility={visibility}
                   />
                 </motion.div>

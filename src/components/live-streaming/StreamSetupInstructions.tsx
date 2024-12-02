@@ -11,6 +11,11 @@ interface StreamSetupInstructionsProps {
   streamKey: string;
   onStreamStart?: () => void;
   onStreamEnd?: () => void;
+  title?: string;
+  description?: React.ReactNode;
+  steps?: string[];
+  rtmpUrl?: string;
+  onCopy?: (text: string) => void;
 }
 
 export const StreamSetupInstructions = ({
@@ -18,14 +23,20 @@ export const StreamSetupInstructions = ({
   onOpenChange,
   streamKey,
   onStreamStart,
-  onStreamEnd
+  onStreamEnd,
+  title,
+  description,
+  steps,
+  rtmpUrl,
+  onCopy
 }: StreamSetupInstructionsProps) => {
   const [showBrowserControls, setShowBrowserControls] = useState(false);
 
-  const onCopy = async (text: string) => {
+  const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       toast.success("コピーしました");
+      onCopy?.(text);
     } catch (error) {
       toast.error("コピーに失敗しました");
     }
@@ -35,10 +46,22 @@ export const StreamSetupInstructions = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>配信設定</DialogTitle>
+          <DialogTitle>{title || "配信設定"}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
+          {description && <div className="text-sm text-gray-600">{description}</div>}
+          
+          {steps && (
+            <div className="space-y-2">
+              {steps.map((step, index) => (
+                <p key={index} className="text-sm">
+                  {index + 1}. {step}
+                </p>
+              ))}
+            </div>
+          )}
+
           <div className="flex justify-center">
             <Button
               variant="outline"
@@ -65,13 +88,13 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onCopy("rtmp://stream.jjfa.jp/live")}
+                  onClick={() => handleCopy(rtmpUrl || "rtmp://stream.jjfa.jp/live")}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー
                 </Button>
               </div>
-              <code className="text-sm">rtmp://stream.jjfa.jp/live</code>
+              <code className="text-sm">{rtmpUrl || "rtmp://stream.jjfa.jp/live"}</code>
             </div>
 
             <div>
@@ -80,7 +103,7 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onCopy(streamKey)}
+                  onClick={() => handleCopy(streamKey)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー
@@ -95,7 +118,7 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onCopy(`wss://stream.jjfa.jp/ws`)}
+                  onClick={() => handleCopy(`wss://stream.jjfa.jp/ws`)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー
@@ -110,7 +133,7 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onCopy(`https://stream.jjfa.jp/live/${streamKey}/index.m3u8`)}
+                  onClick={() => handleCopy(`https://stream.jjfa.jp/live/${streamKey}/index.m3u8`)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー

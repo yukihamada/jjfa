@@ -22,7 +22,7 @@ serve(async (req) => {
       )
     }
 
-    // LiveKitのAPI KeyとSecretを環境変数から取得
+    // Get LiveKit API Key and Secret from environment variables
     const apiKey = Deno.env.get('LIVEKIT_API_KEY')
     const apiSecret = Deno.env.get('LIVEKIT_API_SECRET')
     
@@ -33,10 +33,10 @@ serve(async (req) => {
       )
     }
 
-    // トークンを生成
+    // Create access token
     const at = new AccessToken(apiKey, apiSecret, {
       identity: participantName,
-      ttl: 3600 * 4, // 4時間
+      ttl: 3600 * 4, // 4 hours
     })
 
     at.addGrant({

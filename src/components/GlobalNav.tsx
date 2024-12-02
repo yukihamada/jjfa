@@ -12,7 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const GlobalNav = () => {
   const { t } = useTranslation();
-  const scrollDirection = useScrollDirection();
+  const isVisible = useScrollDirection();
   const [user, setUser] = useState<any>(null);
   const [liveStreams, setLiveStreams] = useState(0);
 
@@ -67,7 +67,7 @@ export const GlobalNav = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-transform duration-300",
-        scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
+        isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">

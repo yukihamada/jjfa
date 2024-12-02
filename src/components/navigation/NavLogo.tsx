@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Building2 } from "lucide-react";
 
 export const NavLogo = () => {
   const { t } = useTranslation();
@@ -8,9 +9,15 @@ export const NavLogo = () => {
     <Link 
       to="/" 
       className="text-slate-800 hover:text-slate-600 font-bold text-lg flex items-center gap-2 transition-transform duration-300 hover:scale-105 min-w-0"
+      aria-label="JJFA ホームページ"
     >
-      <span className="bg-slate-800 text-white px-2 py-1 rounded text-sm">JJFA</span>
-      <span className="hidden sm:inline text-xs text-slate-600 truncate">{t('hero.title')}</span>
+      <Building2 className="h-5 w-5 text-slate-800" aria-hidden="true" />
+      <div className="flex items-center gap-2">
+        <span className="bg-slate-800 text-white px-2 py-1 rounded text-sm font-bold tracking-wider">JJFA</span>
+        <span className="hidden sm:inline text-xs text-slate-600 truncate whitespace-nowrap">
+          {t('hero.title')}
+        </span>
+      </div>
     </Link>
   );
 };

@@ -27,7 +27,14 @@ export const useDiscussionSubmit = () => {
         .eq('id', user.id)
         .single();
 
-      if (profileError) throw profileError;
+      if (profileError) {
+        console.error('Profile fetch error:', profileError);
+        throw new Error("プロフィールの取得に失敗しました");
+      }
+
+      if (!profile) {
+        throw new Error("プロフィールが見つかりません");
+      }
 
       // First create the discussion with profile information
       const { data: discussion, error: discussionError } = await supabase
@@ -45,7 +52,14 @@ export const useDiscussionSubmit = () => {
         .select()
         .single();
 
-      if (discussionError) throw discussionError;
+      if (discussionError) {
+        console.error('Discussion creation error:', discussionError);
+        throw new Error("投稿の作成に失敗しました");
+      }
+
+      if (!discussion) {
+        throw new Error("投稿の作成に失敗しました");
+      }
 
       // Then create the tag association if a tag was selected
       if (tagId) {
@@ -59,6 +73,7 @@ export const useDiscussionSubmit = () => {
           ]);
 
         if (tagError) {
+          console.error('Tag association error:', tagError);
           // If tag insertion fails, delete the discussion to maintain consistency
           await supabase
             .from("discussions")
@@ -76,7 +91,8 @@ export const useDiscussionSubmit = () => {
       // 投稿後に投稿詳細ページに遷移
       navigate(`/community/discussion/${data.id}`);
     },
-    onError: (error) => {
+    onError: (error: Error) => {
+      console.error('Submission error:', error);
       toast.error(`投稿に失敗しました: ${error.message}`);
     },
   });

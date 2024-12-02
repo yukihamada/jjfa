@@ -13,6 +13,7 @@ import { PostPreview } from "./form/PostPreview";
 import { useDiscussionSubmit } from "./form/useDiscussionSubmit";
 import { CategorySelect } from "./form/CategorySelect";
 import { toast } from "sonner";
+import { useFormValidation } from "./form/useFormValidation";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,9 +25,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const MAX_TITLE_LENGTH = 100;
-const MAX_CONTENT_LENGTH = 2000;
-
 export const DiscussionForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -36,40 +34,48 @@ export const DiscussionForm = () => {
   const [showPreview, setShowPreview] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
+  const { errors, isValid, MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } = useFormValidation(title, content);
   const createDiscussion = useDiscussionSubmit();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !content.trim()) {
-      toast.error("タイトルと内容を入力してください");
+    
+    if (!isValid) {
+      if (errors.title) toast.error(errors.title);
+      if (errors.content) toast.error(errors.content);
+      if (!title.trim() || !content.trim()) {
+        toast.error("タイトルと内容を入力してください");
+      }
       return;
     }
-    if (title.length > MAX_TITLE_LENGTH) {
-      toast.error(`タイトルは${MAX_TITLE_LENGTH}文字以内で入力してください`);
-      return;
-    }
-    if (content.length > MAX_CONTENT_LENGTH) {
-      toast.error(`本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`);
-      return;
-    }
+
     setShowConfirmDialog(true);
   };
 
   const handleConfirmedSubmit = () => {
-    createDiscussion.mutate(
-      { title, content, tagId: selectedTag, visibility, attachments },
-      {
-        onSuccess: () => {
-          setTitle("");
-          setContent("");
-          setSelectedTag("");
-          setVisibility("public");
-          setAttachments([]);
-          setShowPreview(false);
-          setShowConfirmDialog(false);
+    try {
+      createDiscussion.mutate(
+        { title, content, tagId: selectedTag, visibility, attachments },
+        {
+          onSuccess: () => {
+            setTitle("");
+            setContent("");
+            setSelectedTag("");
+            setVisibility("public");
+            setAttachments([]);
+            setShowPreview(false);
+            setShowConfirmDialog(false);
+          },
+          onError: (error) => {
+            toast.error(`投稿に失敗しました: ${error.message}`);
+            setShowConfirmDialog(false);
+          }
         }
-      }
-    );
+      );
+    } catch (error) {
+      toast.error("予期せぬエラーが発生しました。もう一度お試しください。");
+      setShowConfirmDialog(false);
+    }
   };
 
   const handleAttachmentUpload = (newAttachments: { url: string; type: string }[]) => {
@@ -103,7 +109,7 @@ export const DiscussionForm = () => {
                   placeholder="印象的なタイトルを付けてください"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="pr-16 text-lg font-medium"
+                  className={`pr-16 text-lg font-medium ${errors.title ? 'border-red-500' : ''}`}
                   maxLength={MAX_TITLE_LENGTH}
                 />
                 <span className={`absolute right-3 top-1/2 -translate-y-1/2 text-sm ${titleCharCountColor}`}>
@@ -121,7 +127,7 @@ export const DiscussionForm = () => {
                   placeholder="技術的な詳細、質問、アドバイスなど、できるだけ具体的に書いてみましょう"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="min-h-[200px] resize-y text-base leading-relaxed"
+                  className={`min-h-[200px] resize-y text-base leading-relaxed ${errors.content ? 'border-red-500' : ''}`}
                   maxLength={MAX_CONTENT_LENGTH}
                 />
                 <span className={`absolute right-3 top-3 text-sm ${contentCharCountColor}`}>
@@ -146,10 +152,19 @@ export const DiscussionForm = () => {
               <Button 
                 type="submit" 
                 className="min-w-[120px] gap-2"
-                disabled={createDiscussion.isPending}
+                disabled={createDiscussion.isPending || !isValid}
               >
-                <PenSquare className="w-4 h-4" />
-                投稿する
+                {createDiscussion.isPending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    投稿中...
+                  </>
+                ) : (
+                  <>
+                    <PenSquare className="w-4 h-4" />
+                    投稿する
+                  </>
+                )}
               </Button>
             </div>
 

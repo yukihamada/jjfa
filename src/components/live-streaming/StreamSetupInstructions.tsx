@@ -27,7 +27,7 @@ export const StreamSetupInstructions = ({
   title,
   description,
   steps,
-  rtmpUrl,
+  rtmpUrl = "rtmp://global.rtmp.livekit.cloud/live",
   onCopy
 }: StreamSetupInstructionsProps) => {
   const [showBrowserControls, setShowBrowserControls] = useState(false);
@@ -89,13 +89,13 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => handleCopy(rtmpUrl || "rtmp://stream.jjfa.jp/live")}
+                  onClick={() => handleCopy(rtmpUrl)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー
                 </Button>
               </div>
-              <code className="text-sm">{rtmpUrl || "rtmp://stream.jjfa.jp/live"}</code>
+              <code className="text-sm">{rtmpUrl}</code>
             </div>
 
             <div>
@@ -134,13 +134,13 @@ export const StreamSetupInstructions = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => handleCopy(`https://stream.jjfa.jp/live/${streamKey}/index.m3u8`)}
+                  onClick={() => handleCopy(`${rtmpUrl}/${streamKey}`)}
                 >
                   <Copy className="w-4 h-4 mr-2" />
                   コピー
                 </Button>
               </div>
-              <code className="text-sm">https://stream.jjfa.jp/live/{streamKey}/index.m3u8</code>
+              <code className="text-sm">{rtmpUrl}/{streamKey}</code>
             </div>
           </div>
         </div>

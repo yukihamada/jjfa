@@ -41,7 +41,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
       case "720p":
         return VideoPresets.h720;
       case "480p":
-        return VideoPresets.h480;
+        return VideoPresets.h540; // LiveKitは480pを直接サポートしていないため、540pを使用
       default:
         return VideoPresets.h720;
     }

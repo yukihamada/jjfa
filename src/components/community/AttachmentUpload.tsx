@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, File, Image, Video } from "lucide-react";
+import { Loader2, Upload, Image as ImageIcon, Video } from "lucide-react";
 import { toast } from "sonner";
 
 interface AttachmentUploadProps {
@@ -52,22 +52,25 @@ export const AttachmentUpload = ({ onUploadComplete }: AttachmentUploadProps) =>
   };
 
   return (
-    <div className="mt-4">
+    <div className="relative">
       <Button
         variant="outline"
-        className="w-full"
+        className="w-full h-24 border-dashed flex flex-col gap-2 hover:border-primary hover:bg-primary/5"
         disabled={isUploading}
       >
-        <label className="flex items-center justify-center w-full cursor-pointer">
+        <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
           {isUploading ? (
             <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              アップロード中...
+              <Loader2 className="w-6 h-6 mb-2 animate-spin" />
+              <span className="text-sm">アップロード中...</span>
             </>
           ) : (
             <>
-              <File className="w-4 h-4 mr-2" />
-              画像・動画を添付
+              <Upload className="w-6 h-6 mb-2" />
+              <span className="text-sm">クリックまたはドラッグ＆ドロップでファイルを添付</span>
+              <span className="text-xs text-muted-foreground mt-1">
+                対応形式: 画像（PNG, JPG）、動画（MP4）
+              </span>
             </>
           )}
           <input

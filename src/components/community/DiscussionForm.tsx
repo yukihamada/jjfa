@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Eye } from "lucide-react";
+import { Loader2, Eye, PenSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AttachmentUpload } from "./AttachmentUpload";
 import { AttachmentPreview } from "./AttachmentPreview";
@@ -80,51 +80,60 @@ export const DiscussionForm = () => {
     setAttachments(prev => prev.filter((_, i) => i !== index));
   };
 
+  const titleCharCount = title.length;
+  const contentCharCount = content.length;
+  const titleCharCountColor = titleCharCount > MAX_TITLE_LENGTH * 0.8 ? "text-red-500" : "text-gray-400";
+  const contentCharCountColor = contentCharCount > MAX_CONTENT_LENGTH * 0.8 ? "text-red-500" : "text-gray-400";
+
   return (
     <>
-      <Card className="bg-white/80 backdrop-blur-sm">
-        <CardHeader>
-          <CardTitle>新しい投稿を作成</CardTitle>
+      <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">新しい投稿を作成</CardTitle>
+          <p className="text-sm text-muted-foreground">
+            コミュニティと知識を共有しましょう
+          </p>
         </CardHeader>
         <CardContent>
           <FormTips />
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
               <div className="relative">
                 <Input
-                  placeholder="タイトル"
+                  placeholder="印象的なタイトルを付けてください"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full pr-16"
+                  className="pr-16 text-lg font-medium"
                   maxLength={MAX_TITLE_LENGTH}
                 />
-                <span className="absolute right-2 top-2 text-sm text-gray-400">
-                  {title.length}/{MAX_TITLE_LENGTH}
+                <span className={`absolute right-3 top-1/2 -translate-y-1/2 text-sm ${titleCharCountColor}`}>
+                  {titleCharCount}/{MAX_TITLE_LENGTH}
                 </span>
               </div>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <CategorySelect value={selectedTag} onChange={setSelectedTag} />
-              <VisibilitySelect value={visibility} onChange={setVisibility} />
-            </div>
-            <div className="space-y-2">
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <CategorySelect value={selectedTag} onChange={setSelectedTag} />
+                <VisibilitySelect value={visibility} onChange={setVisibility} />
+              </div>
+
               <div className="relative">
                 <Textarea
-                  placeholder="内容を入力してください"
+                  placeholder="技術的な詳細、質問、アドバイスなど、できるだけ具体的に書いてみましょう"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="w-full min-h-[100px] pr-16"
+                  className="min-h-[200px] resize-y text-base leading-relaxed"
                   maxLength={MAX_CONTENT_LENGTH}
                 />
-                <span className="absolute right-2 top-2 text-sm text-gray-400">
-                  {content.length}/{MAX_CONTENT_LENGTH}
+                <span className={`absolute right-3 top-3 text-sm ${contentCharCountColor}`}>
+                  {contentCharCount}/{MAX_CONTENT_LENGTH}
                 </span>
               </div>
             </div>
+
             <AttachmentUpload onUploadComplete={handleAttachmentUpload} />
             <AttachmentPreview attachments={attachments} onRemove={removeAttachment} />
             
-            <div className="flex items-center gap-2 justify-end">
+            <div className="flex items-center gap-4 justify-end pt-4 border-t">
               <Button
                 type="button"
                 variant="outline"
@@ -136,9 +145,10 @@ export const DiscussionForm = () => {
               </Button>
               <Button 
                 type="submit" 
-                className="min-w-[120px]"
+                className="min-w-[120px] gap-2"
                 disabled={createDiscussion.isPending}
               >
+                <PenSquare className="w-4 h-4" />
                 投稿する
               </Button>
             </div>
@@ -150,6 +160,7 @@ export const DiscussionForm = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.2 }}
+                  className="mt-6 border-t pt-6"
                 >
                   <PostPreview
                     title={title}

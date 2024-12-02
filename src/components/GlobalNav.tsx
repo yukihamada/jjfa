@@ -7,41 +7,59 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { Home, Users, Star, FileText, Video, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const GlobalNav = () => {
   const { t } = useTranslation();
   const scrollDirection = useScrollDirection();
+  const [user, setUser] = useState<any>(null);
+  const [liveStreams, setLiveStreams] = useState(0);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+    };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const navItems = [
     {
       label: t("nav.home"),
-      href: "/",
-      icon: <Home className="w-4 h-4" />,
+      to: "/",
+      icon: Home,
     },
     {
       label: t("nav.community"),
-      href: "/community",
-      icon: <Users className="w-4 h-4" />,
+      to: "/community",
+      icon: Users,
     },
     {
       label: t("nav.benefits"),
-      href: "/jiujitsu-benefits",
-      icon: <Star className="w-4 h-4" />,
+      to: "/jiujitsu-benefits",
+      icon: Star,
     },
     {
       label: t("nav.whitepaper"),
-      href: "/whitepaper",
-      icon: <FileText className="w-4 h-4" />,
+      to: "/whitepaper",
+      icon: FileText,
     },
     {
       label: t("nav.live"),
-      href: "/live",
-      icon: <Video className="w-4 h-4" />,
+      to: "/live",
+      icon: Video,
     },
     {
       label: t("nav.contact"),
-      href: "/contact",
-      icon: <MessageCircle className="w-4 h-4" />,
+      to: "/contact",
+      icon: MessageCircle,
     },
   ];
 
@@ -57,11 +75,11 @@ export const GlobalNav = () => {
           <Link to="/" className="flex items-center gap-2">
             <NavLogo />
           </Link>
-          <NavItems items={navItems} />
+          <NavItems menuItems={navItems} liveStreams={liveStreams} onItemClick={() => {}} />
         </div>
         <div className="flex items-center gap-4">
-          <UserMenu />
-          <MobileMenu items={navItems} />
+          <UserMenu user={user} />
+          <MobileMenu menuItems={navItems} isOpen={false} liveStreams={liveStreams} onItemClick={() => {}} />
         </div>
       </nav>
     </header>

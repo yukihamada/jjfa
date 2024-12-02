@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { HelmetProvider } from 'react-helmet-async';
-import GlobalNav from "./components/GlobalNav";
+import { GlobalNav } from "./components/GlobalNav";
 import GlobalFooter from "./components/GlobalFooter";
 import Index from "./pages/Index";
 import Whitepaper from "./pages/Whitepaper";

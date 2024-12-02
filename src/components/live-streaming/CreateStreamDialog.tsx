@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,8 +24,8 @@ interface Fighter {
 interface Match {
   id: string;
   match_number: number;
-  blue_fighter: Fighter | null;
-  red_fighter: Fighter | null;
+  blue_fighter: Fighter;
+  red_fighter: Fighter;
 }
 
 export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: CreateStreamDialogProps) => {
@@ -54,9 +54,9 @@ export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: Crea
         .order('match_time', { ascending: true });
 
       if (error) throw error;
-      return data as Match[];
+      return data as unknown as Match[];
     },
-    enabled: open, // Only fetch when dialog is open
+    enabled: open,
   });
 
   const createStream = useMutation({

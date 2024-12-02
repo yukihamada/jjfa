@@ -31,7 +31,6 @@ const LiveStreaming = () => {
   useEffect(() => {
     fetchStreamStats();
     
-    // Subscribe to live stream changes
     const channel = supabase
       .channel('public:live_streams')
       .on('postgres_changes', {
@@ -55,7 +54,30 @@ const LiveStreaming = () => {
       navigate("/community-registration");
       return;
     }
-    setShowCreateDialog(true);
+
+    // 即座に新しい配信を作成
+    const streamKey = crypto.randomUUID();
+    const { data, error } = await supabase
+      .from('live_streams')
+      .insert({
+        user_id: session.user.id,
+        title: "新規配信",
+        description: "",
+        stream_key: streamKey,
+        status: 'offline',
+      })
+      .select()
+      .single();
+
+    if (error) {
+      toast.error("配信の作成に失敗しました");
+      return;
+    }
+
+    // 配信設定画面に直接遷移
+    navigate(`/live/${data.id}`);
+    setCurrentStreamKey(streamKey);
+    setShowInstructions(true);
   };
 
   const fetchStreamStats = async () => {
@@ -167,12 +189,6 @@ const LiveStreaming = () => {
           <LiveStreamList />
         </div>
       </div>
-
-      <CreateStreamDialog 
-        open={showCreateDialog} 
-        onOpenChange={setShowCreateDialog}
-        onStreamCreated={handleStreamCreated}
-      />
 
       <StreamInstructions
         open={showInstructions}

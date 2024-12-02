@@ -9,8 +9,19 @@ export const useTagsQuery = () => {
         .from('tags')
         .select('*')
         .order('name');
-      if (error) throw error;
+      
+      if (error) {
+        console.error('Failed to fetch tags:', error);
+        throw new Error('タグの取得に失敗しました');
+      }
+      
+      if (!data) {
+        throw new Error('タグが見つかりませんでした');
+      }
+      
       return data;
     },
+    retry: 2, // Retry failed requests up to 2 times
+    staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
   });
 };

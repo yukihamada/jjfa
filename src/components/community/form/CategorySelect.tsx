@@ -1,5 +1,7 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTagsQuery } from "./useTagsQuery";
+import { toast } from "sonner";
+import { AlertCircle } from "lucide-react";
 
 interface CategorySelectProps {
   value: string;
@@ -7,7 +9,23 @@ interface CategorySelectProps {
 }
 
 export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
-  const { data: tags, isLoading } = useTagsQuery();
+  const { data: tags, isLoading, error } = useTagsQuery();
+
+  if (error) {
+    // Show error toast only once when error occurs
+    toast.error("カテゴリの読み込みに失敗しました。再度お試しください。", {
+      icon: <AlertCircle className="h-5 w-5" />,
+    });
+
+    // Return disabled select with error state
+    return (
+      <Select disabled>
+        <SelectTrigger className="border-red-500">
+          <SelectValue placeholder="カテゴリを読み込めませんでした" />
+        </SelectTrigger>
+      </Select>
+    );
+  }
 
   // Group tags by category
   const videoTags = tags?.filter(tag => 

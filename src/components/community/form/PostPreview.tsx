@@ -10,8 +10,8 @@ interface PostPreviewProps {
 }
 
 export const PostPreview = ({ title, content, tag, visibility }: PostPreviewProps) => {
-  const { data: tags } = useTagsQuery();
-  const tagName = tags?.find(t => t.id === tag)?.name;
+  const { data: tags, isLoading } = useTagsQuery();
+  const selectedTag = tags?.find(t => t.id === tag);
 
   return (
     <Card className="mt-4">
@@ -21,9 +21,9 @@ export const PostPreview = ({ title, content, tag, visibility }: PostPreviewProp
       <CardContent className="space-y-4">
         <h3 className="text-xl font-bold">{title}</h3>
         <div className="flex gap-2">
-          {tagName && (
+          {!isLoading && selectedTag && (
             <Badge variant="secondary">
-              {tagName}
+              {selectedTag.name}
             </Badge>
           )}
           <Badge variant="outline">

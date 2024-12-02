@@ -9,11 +9,11 @@ interface StreamStatusProps {
 
 export const StreamStatus = ({ stream }: StreamStatusProps) => {
   return (
-    <div className="space-y-4">
-      <Alert className="mb-6">
+    <div className="space-y-3">
+      <Alert>
         <Video className="h-4 w-4" />
-        <AlertTitle>配信ステータス</AlertTitle>
-        <AlertDescription>
+        <AlertTitle className="text-sm">配信ステータス</AlertTitle>
+        <AlertDescription className="text-xs">
           {stream.status === 'live' ? (
             <span className="text-green-600">現在配信中です！ 「{stream.title}」</span>
           ) : (

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Room, RoomEvent, createLocalVideoTrack, createLocalAudioTrack } from "livekit-client";
+import { Room, RoomEvent } from "livekit-client";
 import { supabase } from "@/integrations/supabase/client";
+import { StreamPreviewSetup } from "./StreamPreviewSetup";
+import { StreamInfoForm } from "./StreamInfoForm";
 
 interface BrowserStreamControlsProps {
   streamKey: string;
@@ -24,9 +24,10 @@ export const BrowserStreamControls = ({
   const [previewElement, setPreviewElement] = useState<HTMLVideoElement | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [videoTrack, setVideoTrack] = useState<any>(null);
+  const [audioTrack, setAudioTrack] = useState<any>(null);
 
   useEffect(() => {
-    // 配信情報を取得
     const fetchStreamDetails = async () => {
       const { data } = await supabase
         .from('live_streams')
@@ -49,6 +50,12 @@ export const BrowserStreamControls = ({
     };
   }, [room, streamKey]);
 
+  const handlePreviewReady = (video: HTMLVideoElement, vTrack: any, aTrack: any) => {
+    setPreviewElement(video);
+    setVideoTrack(vTrack);
+    setAudioTrack(aTrack);
+  };
+
   const updateStreamDetails = async () => {
     const { error } = await supabase
       .from('live_streams')
@@ -63,6 +70,11 @@ export const BrowserStreamControls = ({
   };
 
   const startStream = async () => {
+    if (!videoTrack || !audioTrack) {
+      toast.error("カメラとマイクの準備ができていません");
+      return;
+    }
+
     try {
       setIsLoading(true);
 
@@ -83,21 +95,10 @@ export const BrowserStreamControls = ({
 
       await newRoom.connect(`${import.meta.env.VITE_LIVEKIT_WS_URL}`, tokenData.token);
 
-      const videoTrack = await createLocalVideoTrack({
-        resolution: { width: 1280, height: 720 },
-      });
-      const audioTrack = await createLocalAudioTrack();
-
       await Promise.all([
         newRoom.localParticipant.publishTrack(videoTrack),
         newRoom.localParticipant.publishTrack(audioTrack),
       ]);
-
-      const video = document.createElement('video');
-      video.autoplay = true;
-      video.muted = true;
-      video.playsInline = true;
-      videoTrack.attach(video);
 
       newRoom.on(RoomEvent.Disconnected, () => {
         setIsStreaming(false);
@@ -105,7 +106,6 @@ export const BrowserStreamControls = ({
       });
 
       setRoom(newRoom);
-      setPreviewElement(video);
       setIsStreaming(true);
       onStreamStart?.();
 
@@ -160,29 +160,14 @@ export const BrowserStreamControls = ({
     <div className="space-y-4">
       <Card className="p-4">
         <div className="space-y-4">
-          <div className="space-y-2">
-            <Input
-              placeholder="配信タイトル"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full"
-            />
-            <Textarea
-              placeholder="配信の説明"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full"
-            />
-            {isStreaming && (
-              <Button 
-                onClick={updateStreamDetails}
-                variant="outline"
-                className="w-full"
-              >
-                配信情報を更新
-              </Button>
-            )}
-          </div>
+          <StreamInfoForm
+            title={title}
+            description={description}
+            onTitleChange={setTitle}
+            onDescriptionChange={setDescription}
+            onUpdate={updateStreamDetails}
+            isStreaming={isStreaming}
+          />
 
           <div className="aspect-video bg-slate-900 rounded-lg overflow-hidden">
             {previewElement && (
@@ -191,7 +176,9 @@ export const BrowserStreamControls = ({
           </div>
           
           <div className="flex justify-end">
-            {!isStreaming ? (
+            {!previewElement ? (
+              <StreamPreviewSetup onPreviewReady={handlePreviewReady} />
+            ) : !isStreaming ? (
               <Button
                 onClick={startStream}
                 disabled={isLoading}

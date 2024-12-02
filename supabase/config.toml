@@ -1,4 +1,4 @@
 project_id = "hipoantgjdtzsgtkohxa"
 
-[functions.streaming]
+[functions.livekit]
 verify_jwt = true

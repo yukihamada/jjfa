@@ -35,7 +35,7 @@ export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: Crea
   const [selectedMatch, setSelectedMatch] = useState<string>("");
 
   // Fetch upcoming matches within 5 minutes
-  const { data: upcomingMatches } = useQuery({
+  const { data: upcomingMatches } = useQuery<Match[]>({
     queryKey: ['upcoming-matches'],
     queryFn: async () => {
       const fiveMinutesFromNow = new Date(Date.now() + 5 * 60 * 1000).toISOString();
@@ -73,7 +73,7 @@ export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: Crea
           description,
           stream_key: streamKey,
           status: 'offline',
-          is_official_match: !!selectedMatch, // Set to true if a match is selected
+          is_official_match: !!selectedMatch,
         })
         .select()
         .single();

@@ -15,6 +15,7 @@ export const GlobalNav = () => {
   const isVisible = useScrollDirection();
   const [user, setUser] = useState<any>(null);
   const [liveStreams, setLiveStreams] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -63,6 +64,10 @@ export const GlobalNav = () => {
     },
   ];
 
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header
       className={cn(
@@ -75,11 +80,16 @@ export const GlobalNav = () => {
           <Link to="/" className="flex items-center gap-2">
             <NavLogo />
           </Link>
-          <NavItems menuItems={navItems} liveStreams={liveStreams} onItemClick={() => {}} />
+          <NavItems menuItems={navItems} liveStreams={liveStreams} onItemClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="flex items-center gap-4">
           <UserMenu user={user} />
-          <MobileMenu menuItems={navItems} isOpen={false} liveStreams={liveStreams} onItemClick={() => {}} />
+          <MobileMenu 
+            menuItems={navItems} 
+            isOpen={isMenuOpen} 
+            liveStreams={liveStreams} 
+            onItemClick={handleMenuClick} 
+          />
         </div>
       </nav>
     </header>

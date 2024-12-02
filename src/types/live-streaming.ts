@@ -17,4 +17,7 @@ export interface LiveStream {
   started_at: string | null;
   ended_at: string | null;
   user_id: string;
+  archive_url: string | null;
+  is_official_match: boolean;
+  token_rewarded: boolean;
 }

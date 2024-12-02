@@ -604,43 +604,52 @@ export type Database = {
       }
       live_streams: {
         Row: {
+          archive_url: string | null
           created_at: string
           description: string | null
           ended_at: string | null
           id: string
+          is_official_match: boolean | null
           started_at: string | null
           status: string | null
           stream_key: string
           thumbnail_url: string | null
           title: string
+          token_rewarded: boolean | null
           updated_at: string
           user_id: string
           viewer_count: number | null
         }
         Insert: {
+          archive_url?: string | null
           created_at?: string
           description?: string | null
           ended_at?: string | null
           id?: string
+          is_official_match?: boolean | null
           started_at?: string | null
           status?: string | null
           stream_key: string
           thumbnail_url?: string | null
           title: string
+          token_rewarded?: boolean | null
           updated_at?: string
           user_id: string
           viewer_count?: number | null
         }
         Update: {
+          archive_url?: string | null
           created_at?: string
           description?: string | null
           ended_at?: string | null
           id?: string
+          is_official_match?: boolean | null
           started_at?: string | null
           status?: string | null
           stream_key?: string
           thumbnail_url?: string | null
           title?: string
+          token_rewarded?: boolean | null
           updated_at?: string
           user_id?: string
           viewer_count?: number | null
@@ -917,6 +926,38 @@ export type Database = {
           username?: string | null
         }
         Relationships: []
+      }
+      stream_rewards: {
+        Row: {
+          created_at: string
+          id: string
+          stream_id: string | null
+          token_amount: number
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          stream_id?: string | null
+          token_amount?: number
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          stream_id?: string | null
+          token_amount?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stream_rewards_stream_id_fkey"
+            columns: ["stream_id"]
+            isOneToOne: false
+            referencedRelation: "live_streams"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tags: {
         Row: {

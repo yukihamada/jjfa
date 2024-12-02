@@ -27,40 +27,40 @@ export const StreamCard = ({ stream, onClick, badges }: StreamCardProps) => {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-slate-200">
-              <span className="text-slate-400">No thumbnail</span>
+              <span className="text-slate-400 text-sm">No thumbnail</span>
             </div>
           )}
           {badges}
           {stream.status === 'live' && (
-            <div className="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-sm rounded-full flex items-center gap-2">
-              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            <div className="absolute top-2 left-2 px-2 py-1 bg-red-500 text-white text-xs rounded-full flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
               LIVE
             </div>
           )}
         </div>
 
-        <div className="p-4 space-y-4">
+        <div className="p-3 md:p-4 space-y-3">
           <div className="space-y-2">
-            <h3 className="font-semibold group-hover:text-blue-600 transition-colors">
+            <h3 className="font-medium text-sm md:text-base line-clamp-2 group-hover:text-blue-600 transition-colors">
               {stream.title}
             </h3>
-            <div className="flex items-center gap-2 text-sm text-slate-600">
-              <Avatar className="w-6 h-6">
+            <div className="flex items-center gap-2 text-xs md:text-sm text-slate-600">
+              <Avatar className="w-5 h-5 md:w-6 md:h-6">
                 <AvatarImage src={stream.profiles.avatar_url} />
                 <AvatarFallback>
                   {stream.profiles.username?.[0]?.toUpperCase() || 'U'}
                 </AvatarFallback>
               </Avatar>
-              <span>{stream.profiles.username}</span>
+              <span className="line-clamp-1">{stream.profiles.username}</span>
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-sm text-slate-500">
+          <div className="flex items-center justify-between text-xs md:text-sm text-slate-500">
             <div className="flex items-center gap-1">
-              <Users className="w-4 h-4" />
+              <Users className="w-3 h-3 md:w-4 md:h-4" />
               <span>{stream.viewer_count || 0}</span>
             </div>
-            <time>
+            <time className="text-xs">
               {formatDistanceToNow(new Date(stream.created_at), {
                 addSuffix: true,
                 locale: ja,

@@ -55,7 +55,6 @@ const LiveStreaming = () => {
       return;
     }
 
-    // 即座に新しい配信を作成
     const streamKey = crypto.randomUUID();
     const { data, error } = await supabase
       .from('live_streams')
@@ -74,24 +73,20 @@ const LiveStreaming = () => {
       return;
     }
 
-    // 配信設定画面に直接遷移
     navigate(`/live/${data.id}`);
     setCurrentStreamKey(streamKey);
     setShowInstructions(true);
   };
 
   const fetchStreamStats = async () => {
-    // Get live stream count
     const { data: liveStreams } = await supabase
       .from('live_streams')
       .select('viewer_count')
       .eq('status', 'live');
 
-    // Calculate total viewers and stream count
     const liveCount = liveStreams?.length || 0;
     const viewerCount = liveStreams?.reduce((sum, stream) => sum + (stream.viewer_count || 0), 0) || 0;
 
-    // Get total stream time (in hours)
     const { data: completedStreams } = await supabase
       .from('live_streams')
       .select('started_at, ended_at')
@@ -99,7 +94,7 @@ const LiveStreaming = () => {
 
     const totalStreamTime = completedStreams?.reduce((sum, stream) => {
       const duration = new Date(stream.ended_at).getTime() - new Date(stream.started_at).getTime();
-      return sum + (duration / (1000 * 60 * 60)); // Convert to hours
+      return sum + (duration / (1000 * 60 * 60));
     }, 0) || 0;
 
     setStats({
@@ -107,19 +102,6 @@ const LiveStreaming = () => {
       viewerCount,
       totalStreamTime: Math.round(totalStreamTime)
     });
-  };
-
-  const handleStreamCreated = (streamKey: string) => {
-    setCurrentStreamKey(streamKey);
-    setShowInstructions(true);
-  };
-
-  const handleStreamStart = () => {
-    setShowInstructions(false);
-  };
-
-  const handleStreamEnd = () => {
-    navigate('/live');
   };
 
   const statsConfig = [
@@ -145,34 +127,34 @@ const LiveStreaming = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <div className="pt-24 pb-8 px-4 bg-slate-900 text-white">
-        <div className="container mx-auto space-y-8">
+      <div className="pt-20 md:pt-24 pb-6 md:pb-8 px-4 bg-slate-900 text-white">
+        <div className="container mx-auto space-y-6 md:space-y-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold">ライブ配信</h1>
-              <p className="text-slate-300">
+              <h1 className="text-2xl md:text-3xl font-bold">ライブ配信</h1>
+              <p className="text-sm md:text-base text-slate-300">
                 世界中の柔術家たちとリアルタイムで繋がろう
               </p>
             </div>
             <Button 
               onClick={handleCreateStream}
-              className="bg-white text-slate-900 hover:bg-slate-100 gap-2"
+              className="w-full md:w-auto bg-white text-slate-900 hover:bg-slate-100 gap-2"
             >
               <Plus className="w-4 h-4" />
               配信を始める
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             {statsConfig.map(({ label, value, icon: Icon, color }) => (
-              <Card key={label} className="bg-slate-800 border-slate-700 p-4">
+              <Card key={label} className="bg-slate-800 border-slate-700 p-3 md:p-4">
                 <div className="flex items-center gap-3">
                   <div className={`p-2 bg-slate-700 rounded-lg ${color}`}>
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-4 h-4 md:w-5 md:h-5" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-300">{label}</p>
-                    <p className={`text-2xl font-bold ${color}`}>{value}</p>
+                    <p className="text-xs md:text-sm text-slate-300">{label}</p>
+                    <p className={`text-lg md:text-2xl font-bold ${color}`}>{value}</p>
                   </div>
                 </div>
               </Card>
@@ -181,10 +163,10 @@ const LiveStreaming = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">配信一覧</h2>
+            <h2 className="text-lg md:text-xl font-semibold">配信一覧</h2>
           </div>
           <LiveStreamList />
         </div>
@@ -194,8 +176,8 @@ const LiveStreaming = () => {
         open={showInstructions}
         onOpenChange={setShowInstructions}
         streamKey={currentStreamKey}
-        onStreamStart={handleStreamStart}
-        onStreamEnd={handleStreamEnd}
+        onStreamStart={() => setShowInstructions(false)}
+        onStreamEnd={() => navigate('/live')}
       />
     </div>
   );

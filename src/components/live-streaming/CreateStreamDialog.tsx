@@ -17,11 +17,15 @@ interface CreateStreamDialogProps {
   onStreamCreated?: (streamKey: string) => void;
 }
 
+interface Fighter {
+  nickname: string | null;
+}
+
 interface Match {
   id: string;
   match_number: number;
-  blue_fighter: { nickname: string | null } | null;
-  red_fighter: { nickname: string | null } | null;
+  blue_fighter: Fighter | null;
+  red_fighter: Fighter | null;
 }
 
 export const CreateStreamDialog = ({ open, onOpenChange, onStreamCreated }: CreateStreamDialogProps) => {

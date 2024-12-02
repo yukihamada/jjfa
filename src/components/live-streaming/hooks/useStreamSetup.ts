@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Room, RoomEvent } from "livekit-client";
+import { Room, RoomEvent, VideoPresets } from "livekit-client";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -9,6 +9,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
   const [room, setRoom] = useState<Room | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [quality, setQuality] = useState("720p");
 
   useEffect(() => {
     const fetchStreamDetails = async () => {
@@ -33,16 +34,31 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
     };
   }, [room, streamKey]);
 
-  const updateStreamDetails = async () => {
-    const { error } = await supabase
-      .from('live_streams')
-      .update({ title, description })
-      .eq('stream_key', streamKey);
+  const getVideoPreset = (quality: string) => {
+    switch (quality) {
+      case "1080p":
+        return VideoPresets.h1080;
+      case "720p":
+        return VideoPresets.h720;
+      case "480p":
+        return VideoPresets.h480;
+      default:
+        return VideoPresets.h720;
+    }
+  };
 
-    if (error) {
-      toast.error("配信情報の更新に失敗しました");
-    } else {
+  const updateStreamDetails = async () => {
+    try {
+      const { error } = await supabase
+        .from('live_streams')
+        .update({ title, description })
+        .eq('stream_key', streamKey);
+
+      if (error) throw error;
       toast.success("配信情報を更新しました");
+    } catch (error) {
+      console.error("Failed to update stream details:", error);
+      toast.error("配信情報の更新に失敗しました");
     }
   };
 
@@ -60,22 +76,23 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         body: {
           roomName: streamKey,
           participantName: `broadcaster-${streamKey}`,
-          isPublisher: true
+          isPublisher: true,
+          videoQuality: quality
         }
       });
 
-      if (tokenError) {
-        console.error('Token error:', tokenError);
-        throw new Error('Failed to get LiveKit token');
-      }
+      if (tokenError) throw tokenError;
 
       console.log("Got token, connecting to room");
       const newRoom = new Room({
         adaptiveStream: true,
         dynacast: true,
+        videoCaptureDefaults: {
+          resolution: getVideoPreset(quality)
+        }
       });
 
-      await newRoom.connect(`${import.meta.env.VITE_LIVEKIT_WS_URL}`, tokenData.token);
+      await newRoom.connect(import.meta.env.VITE_LIVEKIT_WS_URL, tokenData.token);
       console.log("Connected to room");
 
       await Promise.all([
@@ -87,6 +104,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
       newRoom.on(RoomEvent.Disconnected, () => {
         setIsStreaming(false);
         onStreamEnd?.();
+        toast.info("配信が終了しました");
       });
 
       setRoom(newRoom);
@@ -147,6 +165,8 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
     setTitle,
     description,
     setDescription,
+    quality,
+    setQuality,
     updateStreamDetails,
     startStream,
     stopStream

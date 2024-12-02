@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, MessageCircle } from "lucide-react";
 
 interface NavItemsProps {
   menuItems: Array<{

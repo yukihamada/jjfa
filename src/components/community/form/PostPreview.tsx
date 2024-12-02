@@ -1,32 +1,39 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { format } from "date-fns";
-import { ja } from "date-fns/locale";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useTagsQuery } from "./useTagsQuery";
 
 interface PostPreviewProps {
   title: string;
   content: string;
-  tag?: string;
+  tag: string;
   visibility: string;
 }
 
 export const PostPreview = ({ title, content, tag, visibility }: PostPreviewProps) => {
-  if (!title && !content) return null;
+  const { data: tags } = useTagsQuery();
+  const tagName = tags?.find(t => t.id === tag)?.name;
 
   return (
-    <Card className="bg-white/50 backdrop-blur-sm transition-all duration-300">
-      <CardContent className="p-4">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500">プレビュー</span>
-            <time className="text-sm text-gray-500">
-              {format(new Date(), 'PPP', { locale: ja })}
-            </time>
-          </div>
-          <h3 className="text-lg font-semibold">{title || "タイトル未入力"}</h3>
-          <div className="prose prose-sm max-w-none">
-            {content || "本文未入力"}
-          </div>
+    <Card className="mt-4">
+      <CardHeader>
+        <CardTitle>プレビュー</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <h3 className="text-xl font-bold">{title}</h3>
+        <div className="flex gap-2">
+          {tagName && (
+            <Badge variant="secondary">
+              {tagName}
+            </Badge>
+          )}
+          <Badge variant="outline">
+            {visibility === 'public' ? '公開' : 
+             visibility === 'private' ? '非公開' :
+             visibility === 'dojo' ? '道場のみ' : 
+             '指導者のみ'}
+          </Badge>
         </div>
+        <p className="whitespace-pre-wrap">{content}</p>
       </CardContent>
     </Card>
   );

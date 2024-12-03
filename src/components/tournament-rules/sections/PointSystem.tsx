@@ -39,9 +39,6 @@ export const PointSystem = () => {
             <Award className="w-6 h-6 text-green-500" />
             体重区分
           </h3>
-          <p className="text-slate-600">
-            SJ（スポーツ柔術）の体重区分に準拠します。
-          </p>
         </div>
       </div>
     </RuleSection>

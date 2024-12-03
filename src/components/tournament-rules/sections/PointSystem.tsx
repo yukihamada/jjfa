@@ -1,5 +1,5 @@
 import { RuleSection } from "../RuleSection";
-import { Shield, Info, Award } from "lucide-react";
+import { Shield, Info } from "lucide-react";
 
 export const PointSystem = () => {
   return (
@@ -32,13 +32,6 @@ export const PointSystem = () => {
               <p>ダブルガードから立ち上がり：2点</p>
             </div>
           </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Award className="w-6 h-6 text-green-500" />
-            体重区分
-          </h3>
         </div>
       </div>
     </RuleSection>

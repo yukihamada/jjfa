@@ -8,32 +8,28 @@ export const PointSystem = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
-            基本ポイント
+            基本ポイント（全て3秒キープ）
           </h3>
           <div className="grid gap-4">
             <div className="flex items-center gap-2">
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
-              <p>テイクダウン（立った状態から相手をコントロールしながら倒し、上位のポジションを確保）：2点</p>
+              <p>テイクダウン（立った状態から相手をコントロールしながら倒す）：即時2点</p>
             </div>
             <div className="flex items-center gap-2">
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
-              <p>スイープ（ガードポジションから相手のバランスを崩し、上位のポジションを確保）：2点</p>
+              <p>スイープ（全ての上下の入れ替え）：2点</p>
             </div>
             <div className="flex items-center gap-2">
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
-              <p>押さえ込み（相手を仰向けにして3秒間押さえ込みを維持）：2点</p>
+              <p>抑え込み（全ての抑え込み）：3点</p>
             </div>
             <div className="flex items-center gap-2">
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
-              <p>マウントポジション（相手の胸の上に完全なコントロールで跨る）：4点</p>
+              <p>ハーフガード抑え込み：1点</p>
             </div>
             <div className="flex items-center gap-2">
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
-              <p>バックコントロール（両フックを入れて相手の背後をコントロール）：4点</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
-              <p>ダブルガード（両足で相手の腰を挟んで制御）：1点</p>
+              <p>ダブルガードから立ち上がり：2点</p>
             </div>
           </div>
         </div>
@@ -41,11 +37,10 @@ export const PointSystem = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Award className="w-6 h-6 text-green-500" />
-            勝利条件
+            体重区分
           </h3>
           <p className="text-slate-600">
-            ポイント、サブミッション、または審判の判定によって勝敗が決まります。
-            時間内に決着がつかない場合、獲得ポイントにより勝敗を決定します。
+            SJ（スポーツ柔術）の体重区分に準拠します。
           </p>
         </div>
       </div>

@@ -6,23 +6,23 @@ export const UniformRules = () => {
     <RuleSection id="uniform-rules" title="服装規定" sectionNumber="2">
       <div className="space-y-4">
         <RuleItem
-          title="道着の色"
-          description="選手の個性を尊重し、道着の色は自由です。自分に合った色を選択できます。"
+          title="道着の素材"
+          description="綿または綿ポリエステル混紡の丈夫な生地を使用すること。薄すぎる生地や伸縮性の高い生地は禁止"
           ruleNumber="2.1"
         />
         <RuleItem
           title="道着のサイズ"
-          description="安全性を考慮し、袖は手首から4cm以上、長さは足首から5cm以上の余裕が必要です。"
+          description="袖は手首から4cm以上、裾は足首から5cm以上の余裕が必要"
           ruleNumber="2.2"
         />
         <RuleItem
-          title="パッチとロゴ"
-          description="試合に影響を与えない限り、パッチやロゴは自由に配置することができます。"
+          title="パッチの配置"
+          description="パッチは以下の位置のみ許可：肩（左右）、胸（左右）、背中（上部中央）、袖（上腕部）、ズボン（太もも部）。サイズは各部位の面積の25%以下"
           ruleNumber="2.3"
         />
         <RuleItem
           title="安全性の確認"
-          description="破れや危険な装飾がないか、試合前に確認します。選手の安全を第一に考えます。"
+          description="破れや危険な装飾がないか、試合前に確認。選手の安全を最優先"
           ruleNumber="2.4"
         />
       </div>

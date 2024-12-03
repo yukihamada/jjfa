@@ -25,7 +25,11 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-export const DiscussionForm = () => {
+interface DiscussionFormProps {
+  onSuccess?: () => void;
+}
+
+export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
@@ -65,6 +69,7 @@ export const DiscussionForm = () => {
             setAttachments([]);
             setShowPreview(false);
             setShowConfirmDialog(false);
+            onSuccess?.(); // Call onSuccess if provided
           },
           onError: (error) => {
             toast.error(`投稿に失敗しました: ${error.message}`);

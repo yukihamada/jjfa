@@ -44,7 +44,7 @@ export const LiveStreamList = () => {
 
       {liveStreams && liveStreams.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-base font-semibold md:text-lg">ライブ配信中</h2>
+          <h2 className="text-lg md:text-xl font-semibold">ライブ配信中</h2>
           <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
             {liveStreams.map((stream) => (
               <StreamCard
@@ -59,7 +59,7 @@ export const LiveStreamList = () => {
 
       {archivedStreams && archivedStreams.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-base font-semibold md:text-lg">アーカイブ</h2>
+          <h2 className="text-lg md:text-xl font-semibold">アーカイブ</h2>
           <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
             {archivedStreams.map((stream) => (
               <StreamCard

@@ -14,6 +14,7 @@ import Careers from "@/pages/Careers";
 import Roadmap from "@/pages/Roadmap";
 import Profile from "@/pages/Profile";
 import LiveStreaming from "@/pages/LiveStreaming";
+import StreamingStudio from "@/pages/StreamingStudio";
 import DiscussionDetail from "@/pages/DiscussionDetail";
 
 interface ProtectedRouteProps {
@@ -52,6 +53,8 @@ export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => 
       <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile /></ProtectedRoute>} />
       <Route path="/live" element={<LiveStreaming />} />
       <Route path="/live/:streamId" element={<LiveStreaming />} />
+      <Route path="/studio/:streamKey" element={<StreamingStudio />} />
+      <Route path="/studio" element={<StreamingStudio />} />
     </Routes>
   );
 };

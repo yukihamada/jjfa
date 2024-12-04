@@ -1,13 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
+interface Tag {
+  id: string;
+  name: string;
+}
+
 export const useTagsQuery = () => {
   return useQuery({
     queryKey: ['tags'],
-    queryFn: async () => {
+    queryFn: async (): Promise<Tag[]> => {
       const { data, error } = await supabase
         .from('tags')
-        .select('*')
+        .select('id, name')
         .order('name');
       
       if (error) {
@@ -15,8 +20,7 @@ export const useTagsQuery = () => {
         throw new Error('タグの取得に失敗しました');
       }
       
-      if (!data || data.length === 0) {
-        console.warn('No tags found');
+      if (!data) {
         return [];
       }
       
@@ -25,6 +29,6 @@ export const useTagsQuery = () => {
     retry: 3,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000),
     staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
-    gcTime: 1000 * 60 * 30, // Keep in cache for 30 minutes (formerly cacheTime)
+    gcTime: 1000 * 60 * 30, // Keep in cache for 30 minutes
   });
 };

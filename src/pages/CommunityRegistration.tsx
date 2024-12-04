@@ -41,41 +41,52 @@ const CommunityRegistration = () => {
             <div className="space-y-6">
               <div className="prose">
                 <h1 className="text-3xl md:text-4xl font-bold text-slate-800">
-                  {t('community.joinTitle')}
+                  JJFA会員登録（有料会員）
                 </h1>
                 <p className="text-lg text-slate-600 mb-6">
-                  {t('community.joinSubtitle')}
+                  JJFA会員として登録すると、大会への参加、限定コンテンツの閲覧、コミュニティ活動への参加が可能になります
                 </p>
+                <div className="text-sm text-slate-500">
+                  ※年会費：10,000円（税込）
+                </div>
               </div>
               <RegistrationForm />
             </div>
-            <div>
+            <div className="space-y-8">
               <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-slate-800">
-                    {t('community.benefits.title')}
+                    JJFA会員登録（無料会員）
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-6">
-                    {[
-                      { icon: Trophy, title: t('community.benefits.tournament.title'), description: t('community.benefits.tournament.description') },
-                      { icon: BookOpen, title: t('community.benefits.training.title'), description: t('community.benefits.training.description') },
-                      { icon: Users, title: t('community.benefits.community.title'), description: t('community.benefits.community.description') },
-                      { icon: Award, title: t('community.benefits.ranking.title'), description: t('community.benefits.ranking.description') },
-                      { icon: Vote, title: t('community.benefits.dao.title'), description: t('community.benefits.dao.description') },
-                      { icon: Coins, title: t('community.benefits.token.title'), description: t('community.benefits.token.description') }
-                    ].map((benefit, index) => (
-                      <div key={index} className="flex items-start space-x-4">
-                        <div className="flex-shrink-0">
-                          <benefit.icon className="w-6 h-6 text-slate-700" />
+                  <p className="text-lg text-slate-600 mb-6">
+                    JJFA会員として登録すると、大会への参加、限定コンテンツの閲覧、コミュニティ活動への参加が可能になります
+                  </p>
+                  <p className="text-sm text-slate-500">
+                    ※一部のコンテンツやサービスは有料会員限定となります
+                  </p>
+                  <div className="mt-6">
+                    <div className="space-y-6">
+                      {[
+                        { icon: Trophy, title: t('community.benefits.tournament.title'), description: t('community.benefits.tournament.description') },
+                        { icon: BookOpen, title: t('community.benefits.training.title'), description: t('community.benefits.training.description') },
+                        { icon: Users, title: t('community.benefits.community.title'), description: t('community.benefits.community.description') },
+                        { icon: Award, title: t('community.benefits.ranking.title'), description: t('community.benefits.ranking.description') },
+                        { icon: Vote, title: t('community.benefits.dao.title'), description: t('community.benefits.dao.description') },
+                        { icon: Coins, title: t('community.benefits.token.title'), description: t('community.benefits.token.description') }
+                      ].map((benefit, index) => (
+                        <div key={index} className="flex items-start space-x-4">
+                          <div className="flex-shrink-0">
+                            <benefit.icon className="w-6 h-6 text-slate-700" />
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-slate-800">{benefit.title}</h3>
+                            <p className="text-slate-600">{benefit.description}</p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="font-semibold text-slate-800">{benefit.title}</h3>
-                          <p className="text-slate-600">{benefit.description}</p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>

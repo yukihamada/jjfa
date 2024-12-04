@@ -17,7 +17,7 @@ export const AgeCategories = () => {
         />
         <RuleItem
           title="アダルト部門"
-          description="18-29歳：標準的なルールが適用され、最もコンペティティブな部門となります。"
+          description="18歳以上：標準的なルールが適用され、最もコンペティティブな部門となります。"
           ruleNumber="3.3"
         />
         <RuleItem

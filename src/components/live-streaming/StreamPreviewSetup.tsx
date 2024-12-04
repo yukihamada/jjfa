@@ -15,28 +15,31 @@ export const StreamPreviewSetup = ({ onPreviewReady }: StreamPreviewSetupProps) 
   const requestPermissions = async () => {
     try {
       setIsLoading(true);
-      console.log("Requesting media permissions...");
+      
+      // First check if we have permissions
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: true, 
+        audio: true 
+      });
+      stream.getTracks().forEach(track => track.stop());
       
       const videoTrack = await createLocalVideoTrack({
         resolution: { width: 1280, height: 720 },
       });
-      console.log("Video track created");
       
       const audioTrack = await createLocalAudioTrack();
-      console.log("Audio track created");
 
       const video = document.createElement('video');
       video.autoplay = true;
       video.muted = true;
       video.playsInline = true;
       videoTrack.attach(video);
-      console.log("Video element created and track attached");
 
       setHasPermissions(true);
       onPreviewReady(video, videoTrack, audioTrack);
     } catch (error) {
       console.error('Failed to get media permissions:', error);
-      toast.error("カメラとマイクの許可が必要です");
+      toast.error("カメラとマイクの許可が必要です。ブラウザの設定を確認してください。");
     } finally {
       setIsLoading(false);
     }

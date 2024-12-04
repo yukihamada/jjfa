@@ -83,7 +83,14 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         }
       });
 
-      if (tokenError) throw tokenError;
+      if (tokenError) {
+        console.error("Token error:", tokenError);
+        throw new Error("配信トークンの取得に失敗しました");
+      }
+
+      if (!tokenData.token) {
+        throw new Error("配信トークンが無効です");
+      }
 
       console.log("Got token, connecting to room");
       const newRoom = new Room({
@@ -123,7 +130,6 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         .eq('stream_key', streamKey);
 
       onStreamStart?.();
-      toast.success("配信を開始しました");
     } catch (error) {
       console.error('Failed to start stream:', error);
       throw error;

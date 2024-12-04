@@ -39,6 +39,7 @@ export const BrowserStreamControls = ({
     // Generate public URL when stream starts
     const url = `${window.location.origin}/live/${streamKey}`;
     setStreamUrl(url);
+    toast.success("配信を開始しました！");
   }, onStreamEnd);
 
   const handlePreviewReady = (video: HTMLVideoElement, vTrack: any, aTrack: any) => {
@@ -48,6 +49,11 @@ export const BrowserStreamControls = ({
   };
 
   const handleStartStream = async () => {
+    if (!videoTrack || !audioTrack) {
+      toast.error("カメラとマイクの設定を確認してください");
+      return;
+    }
+
     try {
       await startStream(videoTrack, audioTrack);
     } catch (error) {

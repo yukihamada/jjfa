@@ -1,34 +1,26 @@
-import { useState, useCallback } from 'react';
-
-export interface FormErrors {
-  title?: string;
-  content?: string;
-}
-
-export const MAX_TITLE_LENGTH = 100;
-export const MAX_CONTENT_LENGTH = 2000;
+import { useState, useEffect } from 'react';
 
 export const useFormValidation = (title: string, content: string) => {
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<{ title?: string; content?: string }>({});
+  
+  const MAX_TITLE_LENGTH = 100;
+  const MAX_CONTENT_LENGTH = 2000;
 
-  const validate = useCallback(() => {
-    const newErrors: FormErrors = {};
-
-    if (!title.trim()) {
-      newErrors.title = 'タイトルを入力してください';
-    } else if (title.length > MAX_TITLE_LENGTH) {
+  useEffect(() => {
+    const newErrors: { title?: string; content?: string } = {};
+    
+    if (title.length > MAX_TITLE_LENGTH) {
       newErrors.title = `タイトルは${MAX_TITLE_LENGTH}文字以内で入力してください`;
     }
-
-    if (!content.trim()) {
-      newErrors.content = '内容を入力してください';
-    } else if (content.length > MAX_CONTENT_LENGTH) {
+    
+    if (content.length > MAX_CONTENT_LENGTH) {
       newErrors.content = `本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`;
     }
-
+    
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   }, [title, content]);
 
-  return { errors, validate };
+  const isValid = Object.keys(errors).length === 0 && title.trim() !== '' && content.trim() !== '';
+
+  return { errors, isValid, MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH };
 };

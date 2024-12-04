@@ -20,7 +20,6 @@ export const DiscussionFormPreview = ({ formState }: DiscussionFormPreviewProps)
       <PostPreview
         title={formState.title}
         content={formState.content}
-        tag={null}
         visibility={formState.visibility}
       />
     </motion.div>

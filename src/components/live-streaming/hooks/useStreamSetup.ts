@@ -13,15 +13,20 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
 
   useEffect(() => {
     const fetchStreamDetails = async () => {
-      const { data } = await supabase
-        .from('live_streams')
-        .select('title, description')
-        .eq('stream_key', streamKey)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('live_streams')
+          .select('title, description')
+          .eq('stream_key', streamKey)
+          .single();
 
-      if (data) {
-        setTitle(data.title);
-        setDescription(data.description || "");
+        if (error) throw error;
+        if (data) {
+          setTitle(data.title);
+          setDescription(data.description || "");
+        }
+      } catch (error) {
+        console.error('Failed to fetch stream details:', error);
       }
     };
 
@@ -92,6 +97,11 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         throw new Error("配信トークンが無効です");
       }
 
+      const wsUrl = import.meta.env.VITE_LIVEKIT_WS_URL;
+      if (!wsUrl) {
+        throw new Error("LiveKit WebSocket URLが設定されていません");
+      }
+
       console.log("Got token, connecting to room");
       const newRoom = new Room({
         adaptiveStream: true,
@@ -101,7 +111,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         }
       });
 
-      await newRoom.connect(import.meta.env.VITE_LIVEKIT_WS_URL, tokenData.token);
+      await newRoom.connect(wsUrl, tokenData.token);
       console.log("Connected to room");
 
       await Promise.all([

@@ -1,103 +1,27 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Eye, PenSquare } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { AttachmentUpload } from "./AttachmentUpload";
-import { AttachmentPreview } from "./AttachmentPreview";
+import { AnimatePresence } from "framer-motion";
 import { FormTips } from "./form/FormTips";
-import { VisibilitySelect } from "./form/VisibilitySelect";
-import { PostPreview } from "./form/PostPreview";
-import { useDiscussionSubmit } from "./form/useDiscussionSubmit";
-import { toast } from "sonner";
-import { useFormValidation } from "./form/useFormValidation";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { useDiscussionForm } from "./form/useDiscussionForm";
+import { DiscussionFormInputs } from "./form/DiscussionFormInputs";
+import { DiscussionFormPreview } from "./form/DiscussionFormPreview";
+import { DiscussionConfirmDialog } from "./form/DiscussionConfirmDialog";
 
 interface DiscussionFormProps {
   onSuccess?: () => void;
 }
 
 export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [visibility, setVisibility] = useState("public");
-  const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
-  const [showPreview, setShowPreview] = useState(false);
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-
-  const { errors, isValid, MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } = useFormValidation(title, content);
-  const createDiscussion = useDiscussionSubmit();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!isValid) {
-      if (errors.title) toast.error(errors.title);
-      if (errors.content) toast.error(errors.content);
-      if (!title.trim() || !content.trim()) {
-        toast.error("タイトルと内容を入力してください");
-      }
-      return;
-    }
-
-    setShowConfirmDialog(true);
-  };
-
-  const handleConfirmedSubmit = () => {
-    try {
-      createDiscussion.mutate(
-        { 
-          title, 
-          content, 
-          tagId: null, // Set tagId to null since we're removing the category selection
-          visibility, 
-          attachments 
-        },
-        {
-          onSuccess: () => {
-            setTitle("");
-            setContent("");
-            setVisibility("public");
-            setAttachments([]);
-            setShowPreview(false);
-            setShowConfirmDialog(false);
-            onSuccess?.();
-          },
-          onError: (error) => {
-            toast.error(`投稿に失敗しました: ${error.message}`);
-            setShowConfirmDialog(false);
-          }
-        }
-      );
-    } catch (error) {
-      toast.error("予期せぬエラーが発生しました。もう一度お試しください。");
-      setShowConfirmDialog(false);
-    }
-  };
-
-  const handleAttachmentUpload = (newAttachments: { url: string; type: string }[]) => {
-    setAttachments(prev => [...prev, ...newAttachments]);
-  };
-
-  const removeAttachment = (index: number) => {
-    setAttachments(prev => prev.filter((_, i) => i !== index));
-  };
-
-  const titleCharCount = title.length;
-  const contentCharCount = content.length;
-  const titleCharCountColor = titleCharCount > MAX_TITLE_LENGTH * 0.8 ? "text-red-500" : "text-gray-400";
-  const contentCharCountColor = contentCharCount > MAX_CONTENT_LENGTH * 0.8 ? "text-red-500" : "text-gray-400";
+  const {
+    formState,
+    setFormState,
+    errors,
+    isValid,
+    MAX_TITLE_LENGTH,
+    MAX_CONTENT_LENGTH,
+    createDiscussion,
+    handleSubmit,
+    handleConfirmedSubmit,
+  } = useDiscussionForm(onSuccess);
 
   return (
     <>
@@ -110,124 +34,27 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
         </CardHeader>
         <CardContent>
           <FormTips />
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4">
-              <div className="relative">
-                <Input
-                  placeholder="印象的なタイトルを付けてください"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  className={`pr-16 text-lg font-medium ${errors.title ? 'border-red-500' : ''}`}
-                  maxLength={MAX_TITLE_LENGTH}
-                />
-                <span className={`absolute right-3 top-1/2 -translate-y-1/2 text-sm ${titleCharCountColor}`}>
-                  {titleCharCount}/{MAX_TITLE_LENGTH}
-                </span>
-              </div>
-
-              <div>
-                <VisibilitySelect value={visibility} onChange={setVisibility} />
-              </div>
-
-              <div className="relative">
-                <Textarea
-                  placeholder="技術的な詳細、質問、アドバイスなど、できるだけ具体的に書いてみましょう"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  className={`min-h-[200px] resize-y text-base leading-relaxed ${errors.content ? 'border-red-500' : ''}`}
-                  maxLength={MAX_CONTENT_LENGTH}
-                />
-                <span className={`absolute right-3 top-3 text-sm ${contentCharCountColor}`}>
-                  {contentCharCount}/{MAX_CONTENT_LENGTH}
-                </span>
-              </div>
-            </div>
-
-            <AttachmentUpload onUploadComplete={handleAttachmentUpload} />
-            <AttachmentPreview attachments={attachments} onRemove={removeAttachment} />
-            
-            <div className="flex items-center gap-4 justify-end pt-4 border-t">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShowPreview(!showPreview)}
-                className="gap-2"
-              >
-                <Eye className="w-4 h-4" />
-                プレビュー
-              </Button>
-              <Button 
-                type="submit" 
-                className="min-w-[120px] gap-2"
-                disabled={createDiscussion.isPending || !isValid}
-              >
-                {createDiscussion.isPending ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    投稿中...
-                  </>
-                ) : (
-                  <>
-                    <PenSquare className="w-4 h-4" />
-                    投稿する
-                  </>
-                )}
-              </Button>
-            </div>
-
-            <AnimatePresence>
-              {showPreview && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.2 }}
-                  className="mt-6 border-t pt-6"
-                >
-                  <PostPreview
-                    title={title}
-                    content={content}
-                    tag={null}
-                    visibility={visibility}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </form>
+          <DiscussionFormInputs
+            formState={formState}
+            setFormState={setFormState}
+            errors={errors}
+            MAX_TITLE_LENGTH={MAX_TITLE_LENGTH}
+            MAX_CONTENT_LENGTH={MAX_CONTENT_LENGTH}
+            isSubmitting={createDiscussion.isPending}
+            onSubmit={handleSubmit}
+          />
+          <AnimatePresence>
+            <DiscussionFormPreview formState={formState} />
+          </AnimatePresence>
         </CardContent>
       </Card>
 
-      <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>投稿の確認</AlertDialogTitle>
-            <AlertDialogDescription>
-              この内容で投稿してよろしいですか？
-              {attachments.length > 0 && (
-                <p className="mt-2">
-                  添付ファイル: {attachments.length}件
-                </p>
-              )}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>キャンセル</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleConfirmedSubmit}
-              disabled={createDiscussion.isPending}
-            >
-              {createDiscussion.isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  投稿中...
-                </>
-              ) : (
-                "投稿する"
-              )}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DiscussionConfirmDialog
+        formState={formState}
+        setFormState={setFormState}
+        onConfirm={handleConfirmedSubmit}
+        isSubmitting={createDiscussion.isPending}
+      />
     </>
   );
 };

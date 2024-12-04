@@ -1,81 +1,41 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, ThumbsUp, Calendar, Heart, Megaphone, Trash2 } from "lucide-react";
-import { format } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
-import { AttachmentPreview } from "./AttachmentPreview";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { CommentForm } from "./CommentForm";
-import { CommentList } from "./CommentList";
-import { DiscussionHeader } from "./DiscussionHeader";
-import { DiscussionContent } from "./DiscussionContent";
+import { MessageSquare, ThumbsUp } from "lucide-react";
 import { DiscussionActions } from "./DiscussionActions";
+import { DiscussionContent } from "./DiscussionContent";
+import { DiscussionHeader } from "./DiscussionHeader";
 
 interface DiscussionCardProps {
   discussion: any;
 }
 
 export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
-  const [showCommentForm, setShowCommentForm] = useState(false);
-  const queryClient = useQueryClient();
-
-  // Fetch comments with profiles data
-  const { data: comments } = useQuery({
-    queryKey: ['discussion', discussion.id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('comments')
-        .select(`
-          *,
-          profiles (
-            id,
-            username,
-            avatar_url
-          )
-        `)
-        .eq('discussion_id', discussion.id)
-        .order('created_at', { ascending: true });
-
-      if (error) throw error;
-      return data;
-    },
-  });
-
   return (
-    <Card className={`group bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 border-l-4 ${
-      discussion.tags?.some((tag: any) => tag.name === '運営') ? 'border-l-orange-500' : 'border-l-indigo-500'
-    }`}>
-      <CardContent className="p-6">
+    <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
+      <Link to={`/community/discussion/${discussion.id}`} className="block">
         <DiscussionHeader discussion={discussion} />
         <DiscussionContent discussion={discussion} />
-        <DiscussionActions 
-          discussion={discussion}
-          showCommentForm={showCommentForm}
-          onCommentClick={() => setShowCommentForm(!showCommentForm)}
-        />
-
-        {showCommentForm && (
-          <div className="mt-6">
-            <CommentForm
-              discussionId={discussion.id}
-              onCancel={() => setShowCommentForm(false)}
-            />
+        
+        <div className="mt-4 flex items-center gap-4 text-sm text-slate-600">
+          <div className="flex items-center gap-1">
+            <ThumbsUp className="w-4 h-4" />
+            <span>{discussion.likes?.length || 0}</span>
           </div>
-        )}
-
-        {comments && comments.length > 0 && (
-          <div className="mt-6">
-            <CommentList
-              comments={comments}
-              discussionId={discussion.id}
-            />
+          <div className="flex items-center gap-1">
+            <MessageSquare className="w-4 h-4" />
+            <span>{discussion.comments?.length || 0}</span>
           </div>
-        )}
-      </CardContent>
-    </Card>
+          {discussion.tags?.map((tag: any) => (
+            <Badge key={tag.id} variant="secondary">
+              {tag.name}
+            </Badge>
+          ))}
+        </div>
+      </Link>
+      <DiscussionActions discussion={discussion} />
+    </div>
   );
 };

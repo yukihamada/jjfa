@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { createLocalVideoTrack, createLocalAudioTrack } from "livekit-client";
 import { toast } from "sonner";
-import { Video } from "lucide-react";
+import { Video, Loader2 } from "lucide-react";
 
 interface StreamPreviewSetupProps {
   onPreviewReady: (video: HTMLVideoElement, videoTrack: any, audioTrack: any) => void;
@@ -37,15 +37,23 @@ export const StreamPreviewSetup = ({ onPreviewReady }: StreamPreviewSetupProps) 
   };
 
   return (
-    <div className="space-y-4">
-      <Button
-        onClick={requestPermissions}
-        disabled={isLoading}
-        className="w-full"
-      >
-        <Video className="w-4 h-4 mr-2" />
-        カメラとマイクを許可する
-      </Button>
-    </div>
+    <Button
+      onClick={requestPermissions}
+      disabled={isLoading}
+      size="lg"
+      className="w-full sm:w-auto min-w-[200px]"
+    >
+      {isLoading ? (
+        <>
+          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+          デバイスを確認中...
+        </>
+      ) : (
+        <>
+          <Video className="w-4 h-4 mr-2" />
+          カメラとマイクを許可する
+        </>
+      )}
+    </Button>
   );
 };

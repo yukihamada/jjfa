@@ -41,6 +41,11 @@ export const BrowserStreamControls = ({
   };
 
   const handleStartStream = async () => {
+    if (!title.trim()) {
+      toast.error("配信タイトルを入力してください");
+      return;
+    }
+
     if (!videoTrack || !audioTrack) {
       toast.error("カメラとマイクの設定を確認してください");
       return;
@@ -54,13 +59,17 @@ export const BrowserStreamControls = ({
   };
 
   const handleUpdateStreamDetails = () => {
+    if (!title.trim()) {
+      toast.error("配信タイトルを入力してください");
+      return;
+    }
     updateStreamDetails(streamKey, title, description);
   };
 
   return (
-    <div className="space-y-4">
-      <Card className="p-4">
-        <div className="space-y-4">
+    <div className="max-w-4xl mx-auto p-4">
+      <Card className="overflow-hidden bg-white shadow-lg">
+        <div className="p-4 space-y-6">
           <StreamInfoForm
             title={title}
             description={description}
@@ -76,43 +85,43 @@ export const BrowserStreamControls = ({
             )}
           </div>
           
-          <div className="space-y-4">
-            <div className="flex justify-end">
-              {!previewElement ? (
-                <StreamPreviewSetup onPreviewReady={handlePreviewReady} />
-              ) : !isStreaming ? (
-                <Button
-                  onClick={handleStartStream}
-                  disabled={isLoading}
-                  className="w-full sm:w-auto"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      配信を開始中...
-                    </>
-                  ) : (
-                    "配信を開始"
-                  )}
-                </Button>
-              ) : (
-                <Button
-                  onClick={stopStream}
-                  disabled={isLoading}
-                  variant="destructive"
-                  className="w-full sm:w-auto"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      配信を終了中...
-                    </>
-                  ) : (
-                    "配信を終了"
-                  )}
-                </Button>
-              )}
-            </div>
+          <div className="flex justify-center">
+            {!previewElement ? (
+              <StreamPreviewSetup onPreviewReady={handlePreviewReady} />
+            ) : !isStreaming ? (
+              <Button
+                onClick={handleStartStream}
+                disabled={isLoading}
+                size="lg"
+                className="w-full sm:w-auto min-w-[200px]"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    配信を開始中...
+                  </>
+                ) : (
+                  "配信を開始"
+                )}
+              </Button>
+            ) : (
+              <Button
+                onClick={stopStream}
+                disabled={isLoading}
+                variant="destructive"
+                size="lg"
+                className="w-full sm:w-auto min-w-[200px]"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    配信を終了中...
+                  </>
+                ) : (
+                  "配信を終了"
+                )}
+              </Button>
+            )}
           </div>
         </div>
       </Card>

@@ -37,6 +37,19 @@ export const PointSystem = () => {
             </div>
           </div>
         </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Shield className="w-6 h-6 text-blue-500" />
+            勝敗の決定方式
+          </h3>
+          <div className="grid gap-4">
+            <div className="flex items-center gap-2">
+              <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
+              <p>サドンデスはなく、ラウンドマスト方式を採用しています。各ラウンドの勝者を必ず決定し、より多くのラウンドを取得した選手が試合の勝者となります。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </RuleSection>
   );

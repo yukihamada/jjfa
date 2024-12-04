@@ -25,8 +25,11 @@ export const useRoomSetup = () => {
     });
 
     if (tokenError || !tokenData) {
+      console.error('Failed to get token:', tokenError);
       throw new Error("配信トークンの取得に失敗しました");
     }
+
+    console.log('Creating room with token:', tokenData);
 
     const room = new Room({
       adaptiveStream: true,
@@ -38,15 +41,21 @@ export const useRoomSetup = () => {
         simulcast: true,
         videoCodec: 'vp8',
         dtx: true,
-        red: true
+        red: true,
+        forceStereo: true
       }
     });
 
-    await room.connect(tokenData.wsUrl, tokenData.token, {
-      autoSubscribe: true
-    });
-
-    return room;
+    try {
+      await room.connect(tokenData.wsUrl, tokenData.token, {
+        autoSubscribe: true
+      });
+      console.log('Room connected successfully');
+      return room;
+    } catch (error) {
+      console.error('Failed to connect to room:', error);
+      throw error;
+    }
   };
 
   return {

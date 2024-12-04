@@ -12,15 +12,13 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
   const { data: tags, isLoading, error } = useTagsQuery();
 
   if (error) {
-    // Show error toast only once when error occurs
     toast.error("カテゴリの読み込みに失敗しました。再度お試しください。", {
       icon: <AlertCircle className="h-5 w-5" />,
     });
 
-    // Return disabled select with error state
     return (
       <Select disabled>
-        <SelectTrigger className="border-red-500">
+        <SelectTrigger className="bg-white/80 backdrop-blur-sm border-red-500">
           <SelectValue placeholder="カテゴリを読み込めませんでした" />
         </SelectTrigger>
       </Select>
@@ -42,7 +40,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
   if (isLoading) {
     return (
       <Select disabled>
-        <SelectTrigger>
+        <SelectTrigger className="bg-white/80 backdrop-blur-sm animate-pulse">
           <SelectValue placeholder="読み込み中..." />
         </SelectTrigger>
       </Select>
@@ -51,13 +49,13 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger>
+      <SelectTrigger className="bg-white/80 backdrop-blur-sm">
         <SelectValue placeholder="カテゴリを選択" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-white/95 backdrop-blur-sm">
         {videoTags && videoTags.length > 0 && (
           <>
-            <SelectItem value="" disabled>
+            <SelectItem value="" disabled className="font-semibold">
               動画
             </SelectItem>
             {videoTags.map((tag) => (
@@ -69,7 +67,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
         )}
         {techniqueTags && techniqueTags.length > 0 && (
           <>
-            <SelectItem value="" disabled>
+            <SelectItem value="" disabled className="font-semibold">
               技術
             </SelectItem>
             {techniqueTags.map((tag) => (
@@ -81,7 +79,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
         )}
         {flowTags && flowTags.length > 0 && (
           <>
-            <SelectItem value="" disabled>
+            <SelectItem value="" disabled className="font-semibold">
               技のフロー
             </SelectItem>
             {flowTags.map((tag) => (

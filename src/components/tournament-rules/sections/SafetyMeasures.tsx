@@ -54,8 +54,7 @@ export const SafetyMeasures = () => {
             メディカルチェック
           </h3>
           <p className="text-slate-600">
-            試合前に選手の健康状態をデジタル記録し、ブロックチェーンで管理します。
-            以下の項目を確認します：
+            試合前に選手の健康状態を確認し、記録します。以下の項目を確認します：
           </p>
           <ul className="list-disc pl-5 mt-2 space-y-2 text-slate-600">
             <li>血圧測定</li>

@@ -22,8 +22,9 @@ serve(async (req) => {
 
     const apiKey = Deno.env.get('LIVEKIT_API_KEY')
     const apiSecret = Deno.env.get('LIVEKIT_API_SECRET')
+    const wsUrl = Deno.env.get('LIVEKIT_WS_URL')
 
-    if (!apiKey || !apiSecret) {
+    if (!apiKey || !apiSecret || !wsUrl) {
       throw new Error('Missing LiveKit credentials')
     }
 
@@ -61,7 +62,10 @@ serve(async (req) => {
     console.log('Token created successfully')
 
     return new Response(
-      JSON.stringify({ token }),
+      JSON.stringify({ 
+        token,
+        wsUrl // Return the WebSocket URL along with the token
+      }),
       { 
         headers: { 
           ...corsHeaders,

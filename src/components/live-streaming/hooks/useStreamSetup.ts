@@ -93,13 +93,8 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         throw new Error("配信トークンの取得に失敗しました");
       }
 
-      if (!tokenData.token) {
-        throw new Error("配信トークンが無効です");
-      }
-
-      const wsUrl = import.meta.env.LIVEKIT_WS_URL;
-      if (!wsUrl) {
-        throw new Error("LiveKit WebSocket URLが設定されていません");
+      if (!tokenData.token || !tokenData.wsUrl) {
+        throw new Error("配信トークンまたはWebSocket URLが無効です");
       }
 
       console.log("Got token, connecting to room");
@@ -111,7 +106,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         }
       });
 
-      await newRoom.connect(wsUrl, tokenData.token);
+      await newRoom.connect(tokenData.wsUrl, tokenData.token);
       console.log("Connected to room");
 
       await Promise.all([

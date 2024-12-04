@@ -28,11 +28,14 @@ export const useStreamSetup = (
     }
 
     const room = new Room({
+      // シンプルな設定で安定性を重視
       adaptiveStream: true,
       dynacast: true,
+      // ビデオ設定をデフォルトに近い形に
       videoCaptureDefaults: {
         resolution: VideoPresets.h720,
       },
+      // コーデック設定を明示的に指定しない
     });
 
     await room.connect(tokenData.wsUrl, tokenData.token);

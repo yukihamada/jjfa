@@ -97,7 +97,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         throw new Error("配信トークンが無効です");
       }
 
-      const wsUrl = import.meta.env.VITE_LIVEKIT_WS_URL;
+      const wsUrl = import.meta.env.LIVEKIT_WS_URL;
       if (!wsUrl) {
         throw new Error("LiveKit WebSocket URLが設定されていません");
       }

@@ -1,13 +1,15 @@
 import { PostPreview } from "./PostPreview";
-import { useFormContext } from "react-hook-form";
 
-export const DiscussionFormPreview = () => {
-  const { watch } = useFormContext();
-  const title = watch("title");
-  const content = watch("content");
-  const visibility = watch("visibility");
+interface DiscussionFormPreviewProps {
+  formState: {
+    title: string;
+    content: string;
+    visibility: string;
+  };
+}
 
-  if (!title && !content) {
+export const DiscussionFormPreview = ({ formState }: DiscussionFormPreviewProps) => {
+  if (!formState.title && !formState.content) {
     return (
       <div className="text-center text-gray-500 p-4">
         プレビューはここに表示されます
@@ -18,9 +20,9 @@ export const DiscussionFormPreview = () => {
   return (
     <div className="space-y-4">
       <PostPreview
-        title={title || "無題"}
-        content={content || ""}
-        visibility={visibility || "public"}
+        title={formState.title || "無題"}
+        content={formState.content || ""}
+        visibility={formState.visibility || "public"}
       />
     </div>
   );

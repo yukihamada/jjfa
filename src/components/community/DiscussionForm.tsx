@@ -44,7 +44,7 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
             onSubmit={handleSubmit}
           />
           <AnimatePresence>
-            <DiscussionFormPreview formState={formState} />
+            {formState.showPreview && <DiscussionFormPreview formState={formState} />}
           </AnimatePresence>
         </CardContent>
       </Card>

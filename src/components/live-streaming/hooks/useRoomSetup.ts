@@ -74,18 +74,30 @@ export const useRoomSetup = (
       
       const newRoom = await createRoom();
       
-      // iOS Safariでの制限に対応するため、低めのビットレートを設定
+      // デバイスとブラウザに応じて最適な設定を選択
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isAndroid = /Android/.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
       const videoPublishOptions = {
         simulcast: false,
         videoEncoding: {
-          maxBitrate: 800_000, // iOSでより安定した配信のため、ビットレートを調整
+          maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000, // モバイルデバイスは低めのビットレート
           maxFramerate: 30
         }
       };
 
-      // オーディオトラックを先に公開（iOSでの安定性向上）
+      // オーディオトラックを先に公開（モバイルデバイスでの安定性向上）
       await newRoom.localParticipant.publishTrack(audioTrack);
-      await newRoom.localParticipant.publishTrack(videoTrack, videoPublishOptions);
+      
+      // ビデオトラックの公開を試みる
+      try {
+        await newRoom.localParticipant.publishTrack(videoTrack, videoPublishOptions);
+      } catch (error) {
+        console.error('Failed to publish video track:', error);
+        toast.error("カメラの接続に問題が発生しました。カメラへのアクセスを許可してください。");
+        throw error;
+      }
 
       newRoom.on(RoomEvent.Disconnected, () => {
         setIsStreaming(false);

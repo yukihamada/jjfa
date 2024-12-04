@@ -90,8 +90,8 @@ export const LiveStreamList = () => {
               配信を始める
             </Button>
           </DrawerTrigger>
-          <DrawerContent className="p-4">
-            <div className="max-w-xl mx-auto w-full">
+          <DrawerContent className="max-h-[90vh] overflow-y-auto">
+            <div className="max-w-xl mx-auto w-full p-4">
               <BrowserStreamControls
                 streamKey={crypto.randomUUID()}
                 onStreamStart={() => {

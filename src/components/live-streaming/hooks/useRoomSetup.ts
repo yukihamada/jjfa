@@ -39,7 +39,7 @@ export const useRoomSetup = () => {
       },
       publishDefaults: {
         simulcast: true,
-        codec: 'vp8',
+        videoCodec: 'vp8',
         dtx: true,
         red: true,
         audioPreset: {

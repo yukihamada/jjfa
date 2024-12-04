@@ -74,16 +74,18 @@ export const useRoomSetup = (
       
       const newRoom = await createRoom();
       
-      await Promise.all([
-        newRoom.localParticipant.publishTrack(videoTrack, {
-          simulcast: false,
-          videoEncoding: {
-            maxBitrate: 1_500_000,
-            maxFramerate: 30
-          }
-        }),
-        newRoom.localParticipant.publishTrack(audioTrack)
-      ]);
+      // iOS Safariでの制限に対応するため、低めのビットレートを設定
+      const videoPublishOptions = {
+        simulcast: false,
+        videoEncoding: {
+          maxBitrate: 800_000, // iOSでより安定した配信のため、ビットレートを調整
+          maxFramerate: 30
+        }
+      };
+
+      // オーディオトラックを先に公開（iOSでの安定性向上）
+      await newRoom.localParticipant.publishTrack(audioTrack);
+      await newRoom.localParticipant.publishTrack(videoTrack, videoPublishOptions);
 
       newRoom.on(RoomEvent.Disconnected, () => {
         setIsStreaming(false);

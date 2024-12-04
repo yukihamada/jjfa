@@ -48,6 +48,16 @@ export const PointSystem = () => {
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <p>サドンデスはなく、ラウンドマスト方式を採用しています。各ラウンドの勝者を必ず決定し、より多くのラウンドを取得した選手が試合の勝者となります。</p>
             </div>
+            <div className="flex items-center gap-2">
+              <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
+              <p>同点の場合の勝敗決定基準：</p>
+            </div>
+            <div className="pl-6 space-y-2 text-slate-600">
+              <p>1. 最後に上位ポジションを確保していた選手が勝利</p>
+              <p>2. ポジションが同等の場合、DOWNの回数が多い選手が勝利</p>
+              <p>3. DOWNの回数が同じ場合、ドミナントポジション（マウント、バック）の獲得回数が多い選手が勝利</p>
+              <p>4. 上記も同数の場合、より積極的な攻撃（サブミッションの仕掛け）を行った選手が勝利</p>
+            </div>
           </div>
         </div>
       </div>

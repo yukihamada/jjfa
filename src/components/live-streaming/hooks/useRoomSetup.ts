@@ -77,7 +77,7 @@ export const useRoomSetup = (
       await Promise.all([
         newRoom.localParticipant.publishTrack(videoTrack, {
           simulcast: false,
-          encodings: {
+          videoEncoding: {
             maxBitrate: 1_500_000,
             maxFramerate: 30
           }

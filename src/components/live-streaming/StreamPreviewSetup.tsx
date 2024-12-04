@@ -10,21 +10,13 @@ interface StreamPreviewSetupProps {
 
 export const StreamPreviewSetup = ({ onPreviewReady }: StreamPreviewSetupProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [hasPermissions, setHasPermissions] = useState(false);
 
   const requestPermissions = async () => {
     try {
       setIsLoading(true);
       
-      // First check if we have permissions
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: true, 
-        audio: true 
-      });
-      stream.getTracks().forEach(track => track.stop());
-      
       const videoTrack = await createLocalVideoTrack({
-        resolution: { width: 1280, height: 720 },
+        resolution: { width: 1280, height: 720 }
       });
       
       const audioTrack = await createLocalAudioTrack();
@@ -35,11 +27,10 @@ export const StreamPreviewSetup = ({ onPreviewReady }: StreamPreviewSetupProps) 
       video.playsInline = true;
       videoTrack.attach(video);
 
-      setHasPermissions(true);
       onPreviewReady(video, videoTrack, audioTrack);
     } catch (error) {
       console.error('Failed to get media permissions:', error);
-      toast.error("カメラとマイクの許可が必要です。ブラウザの設定を確認してください。");
+      toast.error("カメラとマイクの許可が必要です");
     } finally {
       setIsLoading(false);
     }
@@ -47,16 +38,14 @@ export const StreamPreviewSetup = ({ onPreviewReady }: StreamPreviewSetupProps) 
 
   return (
     <div className="space-y-4">
-      {!hasPermissions && (
-        <Button
-          onClick={requestPermissions}
-          disabled={isLoading}
-          className="w-full"
-        >
-          <Video className="w-4 h-4 mr-2" />
-          カメラとマイクを許可する
-        </Button>
-      )}
+      <Button
+        onClick={requestPermissions}
+        disabled={isLoading}
+        className="w-full"
+      >
+        <Video className="w-4 h-4 mr-2" />
+        カメラとマイクを許可する
+      </Button>
     </div>
   );
 };

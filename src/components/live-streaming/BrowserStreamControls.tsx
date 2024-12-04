@@ -5,8 +5,7 @@ import { StreamPreviewSetup } from "./StreamPreviewSetup";
 import { StreamInfoForm } from "./StreamInfoForm";
 import { useStreamSetup } from "./hooks/useStreamSetup";
 import { toast } from "sonner";
-import { Copy, Loader2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 
 interface BrowserStreamControlsProps {
   streamKey: string;
@@ -22,7 +21,6 @@ export const BrowserStreamControls = ({
   const [previewElement, setPreviewElement] = useState<HTMLVideoElement | null>(null);
   const [videoTrack, setVideoTrack] = useState<any>(null);
   const [audioTrack, setAudioTrack] = useState<any>(null);
-  const [streamUrl, setStreamUrl] = useState<string>("");
 
   const {
     isLoading,
@@ -31,16 +29,10 @@ export const BrowserStreamControls = ({
     setTitle,
     description,
     setDescription,
-    updateStreamDetails: updateDetails,
+    updateStreamDetails,
     startStream,
     stopStream
-  } = useStreamSetup(streamKey, () => {
-    onStreamStart?.();
-    // Generate public URL when stream starts
-    const url = `${window.location.origin}/live/${streamKey}`;
-    setStreamUrl(url);
-    toast.success("配信を開始しました！");
-  }, onStreamEnd);
+  } = useStreamSetup(streamKey, onStreamStart, onStreamEnd);
 
   const handlePreviewReady = (video: HTMLVideoElement, vTrack: any, aTrack: any) => {
     setPreviewElement(video);
@@ -58,22 +50,11 @@ export const BrowserStreamControls = ({
       await startStream(videoTrack, audioTrack);
     } catch (error) {
       console.error('Failed to start stream:', error);
-      toast.error("配信の開始に失敗しました。再度お試しください。");
     }
   };
 
   const handleUpdateStreamDetails = () => {
-    updateDetails(streamKey, title, description);
-  };
-
-  const copyStreamUrl = async () => {
-    try {
-      await navigator.clipboard.writeText(streamUrl);
-      toast.success("配信URLをコピーしました");
-    } catch (error) {
-      console.error('Failed to copy URL:', error);
-      toast.error("URLのコピーに失敗しました");
-    }
+    updateStreamDetails(streamKey, title, description);
   };
 
   return (
@@ -96,23 +77,6 @@ export const BrowserStreamControls = ({
           </div>
           
           <div className="space-y-4">
-            {isStreaming && streamUrl && (
-              <div className="flex gap-2">
-                <Input 
-                  value={streamUrl} 
-                  readOnly 
-                  className="bg-slate-50"
-                />
-                <Button
-                  onClick={copyStreamUrl}
-                  variant="outline"
-                  size="icon"
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
-              </div>
-            )}
-
             <div className="flex justify-end">
               {!previewElement ? (
                 <StreamPreviewSetup onPreviewReady={handlePreviewReady} />

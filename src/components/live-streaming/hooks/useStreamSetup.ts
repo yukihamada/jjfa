@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
-import { Room, RoomEvent } from "livekit-client";
+import { useState } from "react";
+import { Room, RoomEvent, VideoPresets } from "livekit-client";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useStreamQueries } from "./useStreamQueries";
-import { useRoomSetup } from "./useRoomSetup";
 
 export const useStreamSetup = (
   streamKey: string,
@@ -15,51 +13,42 @@ export const useStreamSetup = (
   const [room, setRoom] = useState<Room | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [quality, setQuality] = useState("720p");
 
-  const { fetchStreamDetails, updateStreamDetails } = useStreamQueries();
-  const { createRoom } = useRoomSetup();
-
-  useEffect(() => {
-    const loadStreamDetails = async () => {
-      const data = await fetchStreamDetails(streamKey);
-      if (data) {
-        setTitle(data.title);
-        setDescription(data.description || "");
+  const createRoom = async () => {
+    const { data: tokenData, error: tokenError } = await supabase.functions.invoke('livekit', {
+      body: {
+        roomName: streamKey,
+        participantName: `broadcaster-${streamKey}`,
+        isPublisher: true
       }
-    };
+    });
 
-    loadStreamDetails();
-
-    return () => {
-      if (room) {
-        room.disconnect();
-      }
-    };
-  }, [room, streamKey]);
-
-  const startStream = async (videoTrack: any, audioTrack: any) => {
-    if (!videoTrack || !audioTrack) {
-      throw new Error("カメラとマイクの準備ができていません");
+    if (tokenError || !tokenData) {
+      throw new Error("配信トークンの取得に失敗しました");
     }
 
+    const room = new Room({
+      adaptiveStream: true,
+      dynacast: true,
+      videoCaptureDefaults: {
+        resolution: VideoPresets.h720
+      }
+    });
+
+    await room.connect(tokenData.wsUrl, tokenData.token);
+    return room;
+  };
+
+  const startStream = async (videoTrack: any, audioTrack: any) => {
     try {
       setIsLoading(true);
-      console.log("Starting stream with key:", streamKey);
-
-      const newRoom = await createRoom(streamKey, quality);
-      console.log("Connected to room");
-
+      
+      const newRoom = await createRoom();
+      
       await Promise.all([
-        newRoom.localParticipant.publishTrack(videoTrack, {
-          simulcast: true,
-        }),
-        newRoom.localParticipant.publishTrack(audioTrack, {
-          dtx: true,
-          red: true
-        }),
+        newRoom.localParticipant.publishTrack(videoTrack),
+        newRoom.localParticipant.publishTrack(audioTrack)
       ]);
-      console.log("Published tracks");
 
       newRoom.on(RoomEvent.Disconnected, () => {
         setIsStreaming(false);
@@ -81,6 +70,7 @@ export const useStreamSetup = (
         .eq('stream_key', streamKey);
 
       onStreamStart?.();
+      toast.success("配信を開始しました！");
     } catch (error: any) {
       console.error('Failed to start stream:', error);
       toast.error(`配信の開始に失敗しました: ${error.message}`);
@@ -118,6 +108,20 @@ export const useStreamSetup = (
     }
   };
 
+  const updateStreamDetails = async (streamKey: string, title: string, description: string) => {
+    try {
+      await supabase
+        .from('live_streams')
+        .update({ title, description })
+        .eq('stream_key', streamKey);
+      
+      toast.success("配信情報を更新しました");
+    } catch (error) {
+      console.error("Failed to update stream details:", error);
+      toast.error("配信情報の更新に失敗しました");
+    }
+  };
+
   return {
     isLoading,
     isStreaming,
@@ -125,8 +129,6 @@ export const useStreamSetup = (
     setTitle,
     description,
     setDescription,
-    quality,
-    setQuality,
     updateStreamDetails,
     startStream,
     stopStream

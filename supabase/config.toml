@@ -1,4 +1,7 @@
 project_id = "hipoantgjdtzsgtkohxa"
 
+[functions.create-checkout]
+verify_jwt = false
+
 [functions.livekit]
-verify_jwt = true
+verify_jwt = false

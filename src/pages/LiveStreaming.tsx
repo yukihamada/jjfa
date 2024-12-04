@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { LiveStreamList } from "@/components/live-streaming/LiveStreamList";
-import { CreateStreamDialog } from "@/components/live-streaming/CreateStreamDialog";
 import { StreamInstructions } from "@/components/live-streaming/StreamInstructions";
 import { Button } from "@/components/ui/button";
 import { Plus, Video, Users, Trophy } from "lucide-react";
@@ -10,7 +9,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 const LiveStreaming = () => {
-  const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [currentStreamKey, setCurrentStreamKey] = useState("");
   const navigate = useNavigate();

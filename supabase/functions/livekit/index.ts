@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { create, verify } from "https://deno.land/x/djwt@v2.8/mod.ts"
+import { create } from "https://deno.land/x/djwt@v2.8/mod.ts"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -14,7 +14,7 @@ serve(async (req) => {
 
   try {
     const { roomName, participantName, isPublisher } = await req.json()
-    console.log(`Creating token for room: ${roomName}, participant: ${participantName}`)
+    console.log(`Creating token for room: ${roomName}, participant: ${participantName}, isPublisher: ${isPublisher}`)
 
     if (!roomName || !participantName) {
       throw new Error('Missing required parameters')
@@ -25,7 +25,8 @@ serve(async (req) => {
     const wsUrl = Deno.env.get('LIVEKIT_WS_URL')
 
     if (!apiKey || !apiSecret || !wsUrl) {
-      throw new Error('Missing LiveKit credentials')
+      console.error('Missing LiveKit credentials')
+      throw new Error('Server configuration error')
     }
 
     // Create JWT claims for LiveKit
@@ -42,6 +43,7 @@ serve(async (req) => {
         name: participantName
       }),
       video: {
+        room: roomName,
         roomCreate: true,
         roomJoin: true,
         canPublish: isPublisher,
@@ -64,7 +66,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         token,
-        wsUrl // Return the WebSocket URL along with the token
+        wsUrl
       }),
       { 
         headers: { 

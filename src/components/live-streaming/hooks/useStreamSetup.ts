@@ -83,21 +83,22 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         body: {
           roomName: streamKey,
           participantName: `broadcaster-${streamKey}`,
-          isPublisher: true,
-          videoQuality: quality
+          isPublisher: true
         }
       });
 
-      if (tokenError) {
+      if (tokenError || !tokenData) {
         console.error("Token error:", tokenError);
         throw new Error("配信トークンの取得に失敗しました");
       }
+
+      console.log("Got token response:", tokenData);
 
       if (!tokenData.token || !tokenData.wsUrl) {
         throw new Error("配信トークンまたはWebSocket URLが無効です");
       }
 
-      console.log("Got token, connecting to room");
+      console.log("Connecting to room with URL:", tokenData.wsUrl);
       const newRoom = new Room({
         adaptiveStream: true,
         dynacast: true,
@@ -135,8 +136,9 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         .eq('stream_key', streamKey);
 
       onStreamStart?.();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to start stream:', error);
+      toast.error(`配信の開始に失敗しました: ${error.message}`);
       throw error;
     } finally {
       setIsLoading(false);

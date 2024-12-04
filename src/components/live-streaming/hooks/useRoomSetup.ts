@@ -40,7 +40,7 @@ export const useRoomSetup = () => {
           resolution: getVideoPreset(quality),
         },
         publishDefaults: {
-          simulcast: true,
+          simulcast: false,
           videoCodec: 'vp8',
           dtx: true,
           red: true,

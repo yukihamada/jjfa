@@ -7,12 +7,19 @@ import { MessageSquare, ThumbsUp } from "lucide-react";
 import { DiscussionActions } from "./DiscussionActions";
 import { DiscussionContent } from "./DiscussionContent";
 import { DiscussionHeader } from "./DiscussionHeader";
+import { useState } from "react";
 
 interface DiscussionCardProps {
   discussion: any;
 }
 
 export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
+  const [showCommentForm, setShowCommentForm] = useState(false);
+
+  const handleCommentClick = () => {
+    setShowCommentForm(!showCommentForm);
+  };
+
   return (
     <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
       <Link to={`/community/discussion/${discussion.id}`} className="block">
@@ -35,7 +42,11 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
           ))}
         </div>
       </Link>
-      <DiscussionActions discussion={discussion} />
+      <DiscussionActions 
+        discussion={discussion} 
+        showCommentForm={showCommentForm}
+        onCommentClick={handleCommentClick}
+      />
     </div>
   );
 };

@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LiveStreamList } from "@/components/live-streaming/LiveStreamList";
 import { StreamInstructions } from "@/components/live-streaming/StreamInstructions";
 import { Button } from "@/components/ui/button";
 import { Plus, Video, Users, Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useStreamQueries } from "@/components/live-streaming/hooks/useStreamQueries";
-import { toast } from "sonner";
+import { useLiveStreams } from "@/hooks/useLiveStreams";
 
 const LiveStreaming = () => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [currentStreamKey, setCurrentStreamKey] = useState("");
   const navigate = useNavigate();
-  const { data: streams, isLoading } = useStreamQueries();
+  const { streams, isLoading } = useLiveStreams();
 
   const handleStartStream = () => {
     navigate('/studio');
@@ -82,7 +81,7 @@ const LiveStreaming = () => {
         </div>
       </div>
 
-      <LiveStreamList streams={streams || []} isLoading={isLoading} />
+      <LiveStreamList />
 
       <StreamInstructions
         open={showInstructions}

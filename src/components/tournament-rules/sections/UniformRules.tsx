@@ -6,24 +6,39 @@ export const UniformRules = () => {
     <RuleSection id="uniform-rules" title="服装規定" sectionNumber="2">
       <div className="space-y-4">
         <RuleItem
-          title="道着の素材"
-          description="綿または綿ポリエステル混紡の丈夫な生地を使用すること。薄すぎる生地や伸縮性の高い生地は禁止"
+          title="道着の色"
+          description="白、青、黒の3色のみ許可。その他の色やカラフルなデザインは禁止"
           ruleNumber="2.1"
         />
         <RuleItem
-          title="道着のサイズ"
-          description="袖は手首から4cm以上、裾は足首から5cm以上の余裕が必要"
+          title="サイズとフィット"
+          description="袖は手首から5cm以内、パンツは足首から10cm以内。相手が適切に掴めるよう余裕を持たせること"
           ruleNumber="2.2"
         />
         <RuleItem
-          title="パッチの配置"
-          description="パッチは以下の位置のみ許可：肩（左右）、胸（左右）、背中（上部中央）、袖（上腕部）、ズボン（太もも部）。サイズは各部位の面積の25%以下"
+          title="生地の仕様"
+          description="耐久性のあるコットンまたは類似素材を使用。摩擦や引っ張りに耐えられる強度と適切な厚さ・織りの密度が必要"
           ruleNumber="2.3"
         />
         <RuleItem
-          title="安全性の確認"
-          description="破れや危険な装飾がないか、試合前に確認。選手の安全を最優先"
+          title="襟（ラペル）の要件"
+          description="適切な厚さと硬さを持つ襟。プラスチックまたは類似素材の使用が認められる"
           ruleNumber="2.4"
+        />
+        <RuleItem
+          title="パッチと刺繍"
+          description="チーム、アカデミー、スポンサーのパッチは指定された位置（襟、肩、脚の特定エリア）にのみ付けることが可能"
+          ruleNumber="2.5"
+        />
+        <RuleItem
+          title="帯の着用"
+          description="各自の級に応じた帯を使用し、試合中に解けないようしっかりと結ぶこと"
+          ruleNumber="2.6"
+        />
+        <RuleItem
+          title="清潔さの維持"
+          description="道着は清潔で、汚れ、悪臭、破れ、穴がないこと。試合前のチェックで不適合となる場合がある"
+          ruleNumber="2.7"
         />
       </div>
     </RuleSection>

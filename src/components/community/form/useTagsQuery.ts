@@ -25,6 +25,6 @@ export const useTagsQuery = () => {
     retry: 3,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000),
     staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
-    cacheTime: 1000 * 60 * 30, // Keep in cache for 30 minutes
+    gcTime: 1000 * 60 * 30, // Keep in cache for 30 minutes (formerly cacheTime)
   });
 };

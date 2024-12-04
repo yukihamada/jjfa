@@ -35,22 +35,19 @@ export const useRoomSetup = () => {
       adaptiveStream: true,
       dynacast: true,
       videoCaptureDefaults: {
-        resolution: getVideoPreset(quality),
-        preferredCodec: 'vp8'
+        resolution: getVideoPreset(quality)
       },
       publishDefaults: {
         simulcast: true,
-        videoCodec: 'vp8',
+        codec: 'vp8',
         dtx: true,
         red: true,
-        forceStereo: true,
+        audioPreset: {
+          maxBitrate: 128000
+        },
         videoEncoding: {
           maxBitrate: 1_500_000,
           maxFramerate: 30
-        },
-        audioPreset: {
-          maxBitrate: 128000,
-          stereo: true
         }
       }
     };

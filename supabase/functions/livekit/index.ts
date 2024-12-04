@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { AccessToken } from 'https://esm.sh/livekit-server-sdk@1.2.7'
+import { create, verify } from "https://deno.land/x/djwt@v2.8/mod.ts"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { roomName, participantName, isPublisher, videoQuality } = await req.json()
+    const { roomName, participantName, isPublisher } = await req.json()
     console.log(`Creating token for room: ${roomName}, participant: ${participantName}`)
 
     if (!roomName || !participantName) {
@@ -27,19 +27,37 @@ serve(async (req) => {
       throw new Error('Missing LiveKit credentials')
     }
 
-    const at = new AccessToken(apiKey, apiSecret, {
-      identity: participantName,
-      name: participantName,
-    })
-
-    at.addGrant({
+    // Create JWT claims for LiveKit
+    const now = Math.floor(Date.now() / 1000)
+    const exp = now + (24 * 60 * 60) // 24 hours
+    
+    const claims = {
+      iss: apiKey,
+      sub: participantName,
+      exp: exp,
+      nbf: now,
       room: roomName,
-      roomJoin: true,
-      canPublish: isPublisher,
-      canSubscribe: true,
-    })
+      metadata: JSON.stringify({
+        name: participantName
+      }),
+      video: {
+        roomCreate: true,
+        roomJoin: true,
+        canPublish: isPublisher,
+        canSubscribe: true,
+      }
+    }
 
-    const token = at.toJwt()
+    // Create JWT token
+    const key = await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(apiSecret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    )
+
+    const token = await create({ alg: "HS256", typ: "JWT" }, claims, key)
     console.log('Token created successfully')
 
     return new Response(

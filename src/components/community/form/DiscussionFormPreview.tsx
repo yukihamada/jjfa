@@ -1,11 +1,12 @@
 import { PostPreview } from "./PostPreview";
-import { useFormContext } from "react-hook-form";
+import { DiscussionFormState } from "./useDiscussionForm";
 
-export const DiscussionFormPreview = () => {
-  const { watch } = useFormContext();
-  const title = watch("title");
-  const content = watch("content");
-  const visibility = watch("visibility");
+interface DiscussionFormPreviewProps {
+  formState: DiscussionFormState;
+}
+
+export const DiscussionFormPreview = ({ formState }: DiscussionFormPreviewProps) => {
+  const { title, content, visibility } = formState;
 
   if (!title && !content) {
     return (

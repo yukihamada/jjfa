@@ -13,30 +13,23 @@ serve(async (req) => {
   }
 
   try {
-    const { roomName, participantName, isPublisher } = await req.json()
-    
+    const { roomName, participantName, isPublisher, videoQuality } = await req.json()
+    console.log(`Creating token for room: ${roomName}, participant: ${participantName}`)
+
     if (!roomName || !participantName) {
-      return new Response(
-        JSON.stringify({ error: 'Missing required fields' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
+      throw new Error('Missing required parameters')
     }
 
-    // Get LiveKit API Key and Secret from environment variables
     const apiKey = Deno.env.get('LIVEKIT_API_KEY')
     const apiSecret = Deno.env.get('LIVEKIT_API_SECRET')
-    
+
     if (!apiKey || !apiSecret) {
-      return new Response(
-        JSON.stringify({ error: 'Server configuration error' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
+      throw new Error('Missing LiveKit credentials')
     }
 
-    // Create access token
     const at = new AccessToken(apiKey, apiSecret, {
       identity: participantName,
-      ttl: 3600 * 4, // 4 hours
+      name: participantName,
     })
 
     at.addGrant({
@@ -47,15 +40,28 @@ serve(async (req) => {
     })
 
     const token = at.toJwt()
+    console.log('Token created successfully')
 
     return new Response(
       JSON.stringify({ token }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        headers: { 
+          ...corsHeaders,
+          'Content-Type': 'application/json' 
+        } 
+      },
     )
   } catch (error) {
+    console.error('Error creating token:', error)
     return new Response(
-      JSON.stringify({ error: error.message }),
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify({ error: error.message }), 
+      { 
+        status: 400,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json'
+        }
+      }
     )
   }
 })

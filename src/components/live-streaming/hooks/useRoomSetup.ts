@@ -36,7 +36,7 @@ export const useRoomSetup = () => {
       },
       publishDefaults: {
         simulcast: true,
-        videoCodec: 'vp8', // Changed from H264 to VP8
+        videoCodec: 'vp8',
         dtx: true,
         red: true
       }

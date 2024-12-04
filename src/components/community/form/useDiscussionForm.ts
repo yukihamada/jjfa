@@ -9,7 +9,7 @@ export interface DiscussionFormState {
   title: string;
   content: string;
   visibility: string;
-  attachments: { url: string; type: string }[];
+  attachments: { url: string; type: string; }[];
   showPreview: boolean;
   showConfirmDialog: boolean;
 }
@@ -26,8 +26,7 @@ const initialFormState: DiscussionFormState = {
 export const useDiscussionForm = (onSuccess?: () => void) => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState<DiscussionFormState>(initialFormState);
-
-  const { errors, isValid } = useFormValidation(formState.title, formState.content);
+  const { errors, validate } = useFormValidation(formState.title, formState.content);
 
   const createDiscussion = useMutation({
     mutationFn: async (data: Omit<DiscussionFormState, 'showPreview' | 'showConfirmDialog'>) => {
@@ -36,32 +35,40 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
         throw new Error("ログインが必要です");
       }
 
-      const { error } = await supabase
-        .from("discussions")
-        .insert([{
-          title: data.title,
-          content: data.content,
-          visibility: data.visibility,
-          attachments: data.attachments,
-          user_id: user.id,
-        }]);
+      const { data: result, error } = await supabase
+        .from('discussions')
+        .insert([
+          {
+            title: data.title,
+            content: data.content,
+            visibility: data.visibility,
+            attachments: data.attachments,
+            user_id: user.id
+          }
+        ])
+        .select()
+        .single();
 
       if (error) throw error;
+      return result;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success("投稿が完了しました");
-      navigate("/community");
       onSuccess?.();
+      navigate(`/community/discussion/${data.id}`);
     },
     onError: (error) => {
-      console.error("Error submitting discussion:", error);
-      toast.error("投稿中にエラーが発生しました");
+      console.error("Error creating discussion:", error);
+      toast.error("投稿に失敗しました");
     }
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormState(prev => ({ ...prev, showConfirmDialog: true }));
+    const isValid = validate();
+    if (isValid) {
+      setFormState(prev => ({ ...prev, showConfirmDialog: true }));
+    }
   };
 
   const handleConfirmedSubmit = () => {
@@ -73,10 +80,7 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
     formState,
     setFormState,
     errors,
-    isValid,
-    MAX_TITLE_LENGTH,
-    MAX_CONTENT_LENGTH,
-    createDiscussion,
+    isSubmitting: createDiscussion.isPending,
     handleSubmit,
     handleConfirmedSubmit
   };

@@ -7,7 +7,6 @@ import { CommunityGuidelines } from "./CommunityGuidelines";
 import { DiscussionCard } from "./DiscussionCard";
 import { DiscussionSearch } from "./DiscussionSearch";
 import { DiscussionSort } from "./DiscussionSort";
-import { TagFilter } from "./TagFilter";
 import { NFTHoldersSection } from "./NFTHoldersSection";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -15,11 +14,10 @@ import { useDebounce } from "@/hooks/useDebounce";
 export const DiscussionList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const debouncedSearch = useDebounce(searchQuery, 300);
 
   const { data: discussions, isLoading, error } = useQuery({
-    queryKey: ['discussions', debouncedSearch, sortBy, selectedTags],
+    queryKey: ['discussions', debouncedSearch, sortBy],
     queryFn: async () => {
       let query = supabase
         .from('discussions')
@@ -27,19 +25,11 @@ export const DiscussionList = () => {
           *,
           profiles (username, avatar_url),
           likes (user_id),
-          comments (id),
-          tags (
-            id,
-            name
-          )
+          comments (id)
         `);
 
       if (debouncedSearch) {
         query = query.or(`title.ilike.%${debouncedSearch}%,content.ilike.%${debouncedSearch}%`);
-      }
-
-      if (selectedTags.length > 0) {
-        query = query.in('tags.id', selectedTags);
       }
 
       switch (sortBy) {
@@ -63,14 +53,6 @@ export const DiscussionList = () => {
       return data;
     },
   });
-
-  const handleTagSelect = (tagId: string) => {
-    setSelectedTags(prev => 
-      prev.includes(tagId) 
-        ? prev.filter(id => id !== tagId)
-        : [...prev, tagId]
-    );
-  };
 
   if (error) {
     return (
@@ -99,8 +81,8 @@ export const DiscussionList = () => {
     );
   }
 
-  const adminDiscussions = discussions?.filter(d => d.tags?.some((tag: any) => tag.name === '運営')) || [];
-  const otherDiscussions = discussions?.filter(d => !d.tags?.some((tag: any) => tag.name === '運営')) || [];
+  const adminDiscussions = discussions?.filter(d => d.visibility === 'admin') || [];
+  const otherDiscussions = discussions?.filter(d => d.visibility !== 'admin') || [];
 
   return (
     <div className="space-y-6">
@@ -110,8 +92,6 @@ export const DiscussionList = () => {
         <DiscussionSearch onSearch={setSearchQuery} />
         <DiscussionSort onSort={setSortBy} />
       </div>
-
-      <TagFilter selectedTags={selectedTags} onTagSelect={handleTagSelect} />
 
       <Tabs defaultValue="all" className="space-y-4">
         <TabsList className="grid w-full grid-cols-3">

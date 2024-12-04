@@ -49,8 +49,7 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
       createDiscussion.mutate(
         { 
           title: formState.title, 
-          content: formState.content, 
-          tagId: null,
+          content: formState.content,
           visibility: formState.visibility, 
           attachments: formState.attachments 
         },

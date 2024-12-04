@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useFormValidation } from "./useFormValidation";
 
 const MAX_TITLE_LENGTH = 100;
 const MAX_CONTENT_LENGTH = 2000;
@@ -86,8 +87,7 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
     });
   };
 
-  const { errors } = useFormValidation(formState.title, formState.content);
-  const isValid = Object.keys(errors).length === 0 && formState.title.trim() !== "" && formState.content.trim() !== "";
+  const { errors, isValid } = useFormValidation(formState.title, formState.content);
 
   return {
     formState,

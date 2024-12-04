@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Room, RoomEvent, VideoPresets } from "livekit-client";
+import { Room, RoomEvent, VideoPresets, Codec } from "livekit-client";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -103,16 +103,31 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         adaptiveStream: true,
         dynacast: true,
         videoCaptureDefaults: {
-          resolution: getVideoPreset(quality)
+          resolution: getVideoPreset(quality),
+          preferredCodec: "vp8" // H264の代わりにVP8を使用
+        },
+        publishDefaults: {
+          videoCodec: "vp8", // H264の代わりにVP8を使用
+          dtx: true,
+          red: true,
+          simulcast: true
         }
       });
 
-      await newRoom.connect(tokenData.wsUrl, tokenData.token);
+      await newRoom.connect(tokenData.wsUrl, tokenData.token, {
+        autoSubscribe: true
+      });
       console.log("Connected to room");
 
       await Promise.all([
-        newRoom.localParticipant.publishTrack(videoTrack),
-        newRoom.localParticipant.publishTrack(audioTrack),
+        newRoom.localParticipant.publishTrack(videoTrack, {
+          simulcast: true,
+          codec: Codec.VP8
+        }),
+        newRoom.localParticipant.publishTrack(audioTrack, {
+          dtx: true,
+          red: true
+        }),
       ]);
       console.log("Published tracks");
 

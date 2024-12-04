@@ -1,7 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 
-interface PostPreviewProps {
+export interface PostPreviewProps {
   title: string;
   content: string;
   visibility: string;
@@ -9,22 +8,14 @@ interface PostPreviewProps {
 
 export const PostPreview = ({ title, content, visibility }: PostPreviewProps) => {
   return (
-    <Card className="mt-4">
-      <CardHeader>
-        <CardTitle>プレビュー</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <h3 className="text-xl font-bold">{title}</h3>
-        <div className="flex gap-2">
-          <Badge variant="outline">
-            {visibility === 'public' ? '公開' : 
-             visibility === 'private' ? '非公開' :
-             visibility === 'dojo' ? '道場のみ' : 
-             '指導者のみ'}
-          </Badge>
+    <Card className="p-4">
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-lg font-semibold">{title}</h3>
+          <p className="text-sm text-gray-500">公開範囲: {visibility}</p>
         </div>
-        <p className="whitespace-pre-wrap">{content}</p>
-      </CardContent>
+        <p className="text-gray-700 whitespace-pre-wrap">{content}</p>
+      </div>
     </Card>
   );
 };

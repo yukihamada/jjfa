@@ -1,27 +1,27 @@
-import { motion } from "framer-motion";
 import { PostPreview } from "./PostPreview";
-import { DiscussionFormState } from "./useDiscussionForm";
+import { useFormContext } from "react-hook-form";
 
-interface DiscussionFormPreviewProps {
-  formState: DiscussionFormState;
-}
+export const DiscussionFormPreview = () => {
+  const { watch } = useFormContext();
+  const title = watch("title");
+  const content = watch("content");
+  const visibility = watch("visibility");
 
-export const DiscussionFormPreview = ({ formState }: DiscussionFormPreviewProps) => {
-  if (!formState.showPreview) return null;
+  if (!title && !content) {
+    return (
+      <div className="text-center text-gray-500 p-4">
+        プレビューはここに表示されます
+      </div>
+    );
+  }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.2 }}
-      className="mt-6 border-t pt-6"
-    >
+    <div className="space-y-4">
       <PostPreview
-        title={formState.title}
-        content={formState.content}
-        visibility={formState.visibility}
+        title={title || "無題"}
+        content={content || ""}
+        visibility={visibility || "public"}
       />
-    </motion.div>
+    </div>
   );
 };

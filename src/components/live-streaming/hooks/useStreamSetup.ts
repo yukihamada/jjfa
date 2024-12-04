@@ -41,7 +41,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
       case "720p":
         return VideoPresets.h720;
       case "480p":
-        return VideoPresets.h540; // LiveKitは480pを直接サポートしていないため、540pを使用
+        return VideoPresets.h540;
       default:
         return VideoPresets.h720;
     }
@@ -49,6 +49,7 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
 
   const updateStreamDetails = async () => {
     try {
+      setIsLoading(true);
       const { error } = await supabase
         .from('live_streams')
         .update({ title, description })
@@ -59,13 +60,14 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
     } catch (error) {
       console.error("Failed to update stream details:", error);
       toast.error("配信情報の更新に失敗しました");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const startStream = async (videoTrack: any, audioTrack: any) => {
     if (!videoTrack || !audioTrack) {
-      toast.error("カメラとマイクの準備ができていません");
-      return;
+      throw new Error("カメラとマイクの準備ができていません");
     }
 
     try {
@@ -109,7 +111,6 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
 
       setRoom(newRoom);
       setIsStreaming(true);
-      onStreamStart?.();
 
       await supabase
         .from('live_streams')
@@ -121,10 +122,11 @@ export const useStreamSetup = (streamKey: string, onStreamStart?: () => void, on
         })
         .eq('stream_key', streamKey);
 
+      onStreamStart?.();
       toast.success("配信を開始しました");
     } catch (error) {
       console.error('Failed to start stream:', error);
-      toast.error("配信の開始に失敗しました");
+      throw error;
     } finally {
       setIsLoading(false);
     }

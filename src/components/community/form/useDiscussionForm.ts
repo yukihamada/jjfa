@@ -1,15 +1,9 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import { useFormValidation } from "./useFormValidation";
-
-const MAX_TITLE_LENGTH = 100;
-const MAX_CONTENT_LENGTH = 2000;
+import { useFormValidation, MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "./useFormValidation";
 
 export interface DiscussionFormState {
   title: string;
@@ -20,31 +14,23 @@ export interface DiscussionFormState {
   showConfirmDialog: boolean;
 }
 
-const discussionFormSchema = z.object({
-  title: z.string().min(1, "タイトルを入力してください").max(MAX_TITLE_LENGTH, `タイトルは${MAX_TITLE_LENGTH}文字以内で入力してください`),
-  content: z.string().min(1, "内容を入力してください").max(MAX_CONTENT_LENGTH, `本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`),
-  visibility: z.string(),
-  attachments: z.array(z.object({
-    url: z.string(),
-    type: z.string()
-  })).default([])
-});
-
-type DiscussionFormValues = z.infer<typeof discussionFormSchema>;
+const initialFormState: DiscussionFormState = {
+  title: "",
+  content: "",
+  visibility: "public",
+  attachments: [],
+  showPreview: false,
+  showConfirmDialog: false
+};
 
 export const useDiscussionForm = (onSuccess?: () => void) => {
   const navigate = useNavigate();
-  const [formState, setFormState] = useState<DiscussionFormState>({
-    title: "",
-    content: "",
-    visibility: "public",
-    attachments: [],
-    showPreview: false,
-    showConfirmDialog: false
-  });
+  const [formState, setFormState] = useState<DiscussionFormState>(initialFormState);
+
+  const { errors, isValid } = useFormValidation(formState.title, formState.content);
 
   const createDiscussion = useMutation({
-    mutationFn: async (data: DiscussionFormValues) => {
+    mutationFn: async (data: Omit<DiscussionFormState, 'showPreview' | 'showConfirmDialog'>) => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         throw new Error("ログインが必要です");
@@ -79,15 +65,9 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
   };
 
   const handleConfirmedSubmit = () => {
-    createDiscussion.mutate({
-      title: formState.title,
-      content: formState.content,
-      visibility: formState.visibility,
-      attachments: formState.attachments
-    });
+    const { showPreview, showConfirmDialog, ...submitData } = formState;
+    createDiscussion.mutate(submitData);
   };
-
-  const { errors, isValid } = useFormValidation(formState.title, formState.content);
 
   return {
     formState,

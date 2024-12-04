@@ -31,8 +31,8 @@ export const useStreamSetup = (
       adaptiveStream: true,
       dynacast: true,
       videoCaptureDefaults: {
-        resolution: VideoPresets.h720
-      }
+        resolution: VideoPresets.h720,
+      },
     });
 
     await room.connect(tokenData.wsUrl, tokenData.token);

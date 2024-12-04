@@ -31,6 +31,10 @@ export const PointSystem = () => {
               <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <p>ダブルガードから立ち上がり：2点</p>
             </div>
+            <div className="flex items-center gap-2">
+              <Info className="w-5 h-5 text-slate-600 flex-shrink-0" />
+              <p>タイムアップ時のスクランブル：上下が決まって3秒キープした選手の勝利</p>
+            </div>
           </div>
         </div>
       </div>

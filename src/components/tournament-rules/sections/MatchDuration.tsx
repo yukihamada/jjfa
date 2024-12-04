@@ -20,11 +20,6 @@ export const MatchDuration = () => {
           description="6分一本勝負。決勝戦は3分×3ラウンド、インターバル1分"
           ruleNumber="4.3"
         />
-        <RuleItem
-          title="タイムアップ時のスクランブル"
-          description="スクランブルの場合、上下が決まって3秒キープした選手の勝利となります"
-          ruleNumber="4.4"
-        />
       </div>
     </RuleSection>
   );

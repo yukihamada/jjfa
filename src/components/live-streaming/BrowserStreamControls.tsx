@@ -31,7 +31,7 @@ export const BrowserStreamControls = ({
     setTitle,
     description,
     setDescription,
-    updateStreamDetails,
+    updateStreamDetails: updateDetails,
     startStream,
     stopStream
   } = useStreamSetup(streamKey, () => {
@@ -62,6 +62,10 @@ export const BrowserStreamControls = ({
     }
   };
 
+  const handleUpdateStreamDetails = () => {
+    updateDetails(streamKey, title, description);
+  };
+
   const copyStreamUrl = async () => {
     try {
       await navigator.clipboard.writeText(streamUrl);
@@ -81,7 +85,7 @@ export const BrowserStreamControls = ({
             description={description}
             onTitleChange={setTitle}
             onDescriptionChange={setDescription}
-            onUpdate={updateStreamDetails}
+            onUpdate={handleUpdateStreamDetails}
             isStreaming={isStreaming}
           />
 

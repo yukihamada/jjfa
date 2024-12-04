@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 interface DiscussionSubmitParams {
   title: string;
   content: string;
-  tagId: string;
   visibility: string;
   attachments: { url: string; type: string }[];
 }
@@ -16,7 +15,7 @@ export const useDiscussionSubmit = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: async ({ title, content, tagId, visibility, attachments }: DiscussionSubmitParams) => {
+    mutationFn: async ({ title, content, visibility, attachments }: DiscussionSubmitParams) => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("ログインが必要です");
 
@@ -36,7 +35,7 @@ export const useDiscussionSubmit = () => {
         throw new Error("プロフィールが見つかりません");
       }
 
-      // First create the discussion with profile information
+      // Create the discussion with profile information
       const { data: discussion, error: discussionError } = await supabase
         .from("discussions")
         .insert([
@@ -59,28 +58,6 @@ export const useDiscussionSubmit = () => {
 
       if (!discussion) {
         throw new Error("投稿の作成に失敗しました");
-      }
-
-      // Then create the tag association if a tag was selected
-      if (tagId) {
-        const { error: tagError } = await supabase
-          .from("discussion_tags")
-          .insert([
-            {
-              discussion_id: discussion.id,
-              tag_id: tagId,
-            },
-          ]);
-
-        if (tagError) {
-          console.error('Tag association error:', tagError);
-          // If tag insertion fails, delete the discussion to maintain consistency
-          await supabase
-            .from("discussions")
-            .delete()
-            .eq('id', discussion.id);
-          throw new Error("タグの関連付けに失敗しました");
-        }
       }
 
       return discussion;

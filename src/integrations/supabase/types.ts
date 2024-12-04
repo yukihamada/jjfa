@@ -301,36 +301,6 @@ export type Database = {
         }
         Relationships: []
       }
-      discussion_tags: {
-        Row: {
-          discussion_id: string
-          tag_id: string
-        }
-        Insert: {
-          discussion_id: string
-          tag_id: string
-        }
-        Update: {
-          discussion_id?: string
-          tag_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "discussion_tags_discussion_id_fkey"
-            columns: ["discussion_id"]
-            isOneToOne: false
-            referencedRelation: "discussions"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "discussion_tags_tag_id_fkey"
-            columns: ["tag_id"]
-            isOneToOne: false
-            referencedRelation: "tags"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       discussions: {
         Row: {
           attachments: Json | null
@@ -993,21 +963,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      tags: {
-        Row: {
-          id: string
-          name: string
-        }
-        Insert: {
-          id?: string
-          name: string
-        }
-        Update: {
-          id?: string
-          name?: string
-        }
-        Relationships: []
       }
       user_roles: {
         Row: {

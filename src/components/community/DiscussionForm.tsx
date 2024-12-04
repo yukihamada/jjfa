@@ -19,6 +19,7 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
     MAX_TITLE_LENGTH,
     MAX_CONTENT_LENGTH,
     createDiscussion,
+    isSubmitting,
     handleSubmit,
     handleConfirmedSubmit,
   } = useDiscussionForm(onSuccess);
@@ -40,7 +41,7 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
             errors={errors}
             MAX_TITLE_LENGTH={MAX_TITLE_LENGTH}
             MAX_CONTENT_LENGTH={MAX_CONTENT_LENGTH}
-            isSubmitting={createDiscussion.isPending}
+            isSubmitting={isSubmitting}
             onSubmit={handleSubmit}
           />
           <AnimatePresence>
@@ -53,7 +54,7 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
         formState={formState}
         setFormState={setFormState}
         onConfirm={handleConfirmedSubmit}
-        isSubmitting={createDiscussion.isPending}
+        isSubmitting={isSubmitting}
       />
     </>
   );

@@ -80,6 +80,10 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
     formState,
     setFormState,
     errors,
+    isValid: validate(),
+    MAX_TITLE_LENGTH,
+    MAX_CONTENT_LENGTH,
+    createDiscussion,
     isSubmitting: createDiscussion.isPending,
     handleSubmit,
     handleConfirmedSubmit

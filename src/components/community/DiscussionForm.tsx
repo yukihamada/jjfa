@@ -11,7 +11,6 @@ import { FormTips } from "./form/FormTips";
 import { VisibilitySelect } from "./form/VisibilitySelect";
 import { PostPreview } from "./form/PostPreview";
 import { useDiscussionSubmit } from "./form/useDiscussionSubmit";
-import { CategorySelect } from "./form/CategorySelect";
 import { toast } from "sonner";
 import { useFormValidation } from "./form/useFormValidation";
 import {
@@ -32,7 +31,6 @@ interface DiscussionFormProps {
 export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [selectedTag, setSelectedTag] = useState("");
   const [visibility, setVisibility] = useState("public");
   const [attachments, setAttachments] = useState<{ url: string; type: string }[]>([]);
   const [showPreview, setShowPreview] = useState(false);
@@ -59,17 +57,22 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
   const handleConfirmedSubmit = () => {
     try {
       createDiscussion.mutate(
-        { title, content, tagId: selectedTag, visibility, attachments },
+        { 
+          title, 
+          content, 
+          tagId: null, // Set tagId to null since we're removing the category selection
+          visibility, 
+          attachments 
+        },
         {
           onSuccess: () => {
             setTitle("");
             setContent("");
-            setSelectedTag("");
             setVisibility("public");
             setAttachments([]);
             setShowPreview(false);
             setShowConfirmDialog(false);
-            onSuccess?.(); // Call onSuccess if provided
+            onSuccess?.();
           },
           onError: (error) => {
             toast.error(`投稿に失敗しました: ${error.message}`);
@@ -122,8 +125,7 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
                 </span>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <CategorySelect value={selectedTag} onChange={setSelectedTag} />
+              <div>
                 <VisibilitySelect value={visibility} onChange={setVisibility} />
               </div>
 
@@ -185,7 +187,7 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
                   <PostPreview
                     title={title}
                     content={content}
-                    tag={selectedTag}
+                    tag={null}
                     visibility={visibility}
                   />
                 </motion.div>

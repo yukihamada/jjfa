@@ -28,14 +28,16 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
   // Group tags by category
   const videoTags = tags?.filter(tag => 
     tag.name.includes('動画')
-  );
+  ) || [];
+  
   const techniqueTags = tags?.filter(tag => 
     !tag.name.includes('動画') && 
     !tag.name.includes('から')
-  );
+  ) || [];
+  
   const flowTags = tags?.filter(tag => 
     tag.name.includes('から')
-  );
+  ) || [];
 
   if (isLoading) {
     return (
@@ -47,13 +49,23 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
     );
   }
 
+  if (!tags || tags.length === 0) {
+    return (
+      <Select disabled>
+        <SelectTrigger className="bg-white/80 backdrop-blur-sm">
+          <SelectValue placeholder="カテゴリがありません" />
+        </SelectTrigger>
+      </Select>
+    );
+  }
+
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="bg-white/80 backdrop-blur-sm">
         <SelectValue placeholder="カテゴリを選択" />
       </SelectTrigger>
       <SelectContent className="bg-white/95 backdrop-blur-sm">
-        {videoTags && videoTags.length > 0 && (
+        {videoTags.length > 0 && (
           <>
             <SelectItem value="" disabled className="font-semibold">
               動画
@@ -65,7 +77,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
             ))}
           </>
         )}
-        {techniqueTags && techniqueTags.length > 0 && (
+        {techniqueTags.length > 0 && (
           <>
             <SelectItem value="" disabled className="font-semibold">
               技術
@@ -77,7 +89,7 @@ export const CategorySelect = ({ value, onChange }: CategorySelectProps) => {
             ))}
           </>
         )}
-        {flowTags && flowTags.length > 0 && (
+        {flowTags.length > 0 && (
           <>
             <SelectItem value="" disabled className="font-semibold">
               技のフロー

@@ -15,13 +15,16 @@ export const useTagsQuery = () => {
         throw new Error('タグの取得に失敗しました');
       }
       
-      if (!data) {
-        throw new Error('タグが見つかりませんでした');
+      if (!data || data.length === 0) {
+        console.warn('No tags found');
+        return [];
       }
       
       return data;
     },
-    retry: 2, // Retry failed requests up to 2 times
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000),
     staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
+    cacheTime: 1000 * 60 * 30, // Keep in cache for 30 minutes
   });
 };

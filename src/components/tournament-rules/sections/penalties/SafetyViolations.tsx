@@ -7,7 +7,7 @@ export const SafetyViolations = () => {
         <Shield className="w-6 h-6 text-red-500" />
         8.1 安全に関わる反則行為
       </h3>
-      <ul className="list-disc pl-5 space-y-2 text-slate-600">
+      <ul className="list-decimal pl-5 space-y-2 text-slate-600">
         <li>8.1.1 指を1本または2本だけ掴むこと</li>
         <li>8.1.2 相手の髪の毛、耳、鼻、性器を掴むこと</li>
         <li>8.1.3 相手の関節を逆方向に過度に曲げる行為</li>

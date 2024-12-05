@@ -7,7 +7,7 @@ export const UniformViolations = () => {
         <Siren className="w-6 h-6 text-red-500" />
         8.5 服装・規定違反
       </h3>
-      <ul className="list-disc pl-5 space-y-2 text-slate-600">
+      <ul className="list-decimal pl-5 space-y-2 text-slate-600">
         <li>8.5.1 規定に反した道着（Gi）やノーギウェアの着用</li>
         <li>8.5.2 金属類（指輪、ピアス）や爪の長さなど安全上の問題がある状態で試合を行うこと</li>
       </ul>

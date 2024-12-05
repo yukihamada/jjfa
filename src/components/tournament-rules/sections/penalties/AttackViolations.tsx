@@ -7,7 +7,7 @@ export const AttackViolations = () => {
         <XCircle className="w-6 h-6 text-red-500" />
         8.2 相手への攻撃に関する反則
       </h3>
-      <ul className="list-disc pl-5 space-y-2 text-slate-600">
+      <ul className="list-decimal pl-5 space-y-2 text-slate-600">
         <li>8.2.1 打撃や蹴り、エルボーなどの打撃行為</li>
         <li>8.2.2 指で目を攻撃する行為</li>
         <li>8.2.3 魚フック（指で相手の口の中を引っ張る行為）</li>

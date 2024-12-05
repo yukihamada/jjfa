@@ -1,5 +1,4 @@
 import { RuleSection } from "../RuleSection";
-import { RuleItem } from "../RuleItem";
 import { Shield, Heart, FileCheck, Stethoscope } from "lucide-react";
 
 export const SafetyMeasures = () => {
@@ -9,6 +8,7 @@ export const SafetyMeasures = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">9.0</span>
             大会保険
           </h3>
           <div className="space-y-4">
@@ -51,6 +51,7 @@ export const SafetyMeasures = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Heart className="w-6 h-6 text-red-500" />
+            <span className="text-blue-600">9.1</span>
             メディカルチェック
           </h3>
           <p className="text-slate-600">
@@ -67,6 +68,7 @@ export const SafetyMeasures = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Stethoscope className="w-6 h-6 text-green-500" />
+            <span className="text-blue-600">9.2</span>
             緊急対応
           </h3>
           <p className="text-slate-600">
@@ -83,6 +85,7 @@ export const SafetyMeasures = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <FileCheck className="w-6 h-6 text-purple-500" />
+            <span className="text-blue-600">9.3</span>
             感染症対策
           </h3>
           <p className="text-slate-600">

@@ -1,58 +1,43 @@
 import { RuleSection } from "../RuleSection";
-import { Shield, Users, UserCheck, Users2 } from "lucide-react";
+import { RuleItem } from "../RuleItem";
+import { Shield, AlertTriangle, Users } from "lucide-react";
 
 export const CodeOfConduct = () => {
   return (
-    <RuleSection id="code-of-conduct" title="行動規範" sectionNumber="18">
+    <RuleSection id="code-of-conduct" title="行動規範" sectionNumber="15">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
-            基本原則
+            選手、コーチ、スタッフ、観客のガイドライン
           </h3>
-          <p className="text-slate-600 mb-4">
-            競技者、コーチ、スタッフ、及びその他の代表者らはスポーツマンシップの最高原則を実践・実証し、競争の倫理を守る責任及び義務があります。
-          </p>
+          <RuleItem
+            title="スポーツマンシップ"
+            description="全ての参加者は、相手選手、審判、スタッフ、観客に対して敬意を持って接する必要があります。"
+            ruleNumber="15.1"
+          />
+          <RuleItem
+            title="マナー"
+            description="試合場での不適切な言動、挑発的な行為、過度な抗議は禁止されています。"
+            ruleNumber="15.2"
+          />
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <UserCheck className="w-6 h-6 text-blue-500" />
-            競技者のガイドライン
+            <AlertTriangle className="w-6 h-6 text-red-500" />
+            違反と懲罰
           </h3>
-          <ul className="list-disc pl-5 space-y-2 text-slate-600">
-            <li>対戦相手に敬意を持って接すること</li>
-            <li>試合中はルールの範囲内で一生懸命プレーすること</li>
-            <li>常に自制心を働かせること</li>
-            <li>他人が従うような良き手本となること</li>
-            <li>試合前後に、競技者はお互いに握手をし、レフェリーにも握手をすること</li>
-          </ul>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Users className="w-6 h-6 text-blue-500" />
-            コーチのガイドライン
-          </h3>
-          <ul className="list-disc pl-5 space-y-2 text-slate-600">
-            <li>競技者及び対戦相手に敬意を持って接すること</li>
-            <li>格闘技への愛と公正に戦いたいという思いを競技者に抱かせること</li>
-            <li>他人が従いたくなるような良きお手本となること</li>
-            <li>スポーツマンらしくないふるまいには懲罰を与えること</li>
-          </ul>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Users2 className="w-6 h-6 text-blue-500" />
-            観客のガイドライン
-          </h3>
-          <ul className="list-disc pl-5 space-y-2 text-slate-600">
-            <li>競技のルールとその意図を知り、理解しようとすること</li>
-            <li>良いプレーには、誰がしているかに関わらず評価をし、称賛すること</li>
-            <li>積極的な応援に協力し、熱心な反応を示すこと</li>
-            <li>負傷した競技者に対して思いやりを示すこと</li>
-          </ul>
+          <RuleItem
+            title="警告"
+            description="軽微な違反に対しては警告が発せられ、記録されます。"
+            ruleNumber="15.3"
+          />
+          <RuleItem
+            title="重大な違反"
+            description="重大な違反や繰り返しの違反は、出場停止や資格剥奪につながる可能性があります。"
+            ruleNumber="15.4"
+          />
         </div>
       </div>
     </RuleSection>

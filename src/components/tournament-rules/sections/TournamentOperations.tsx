@@ -8,7 +8,6 @@ export const TournamentOperations = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Building className="w-6 h-6 text-blue-500" />
-            <span className="text-blue-600">14.0</span>
             会場レイアウト
           </h3>
           <p className="text-slate-600">
@@ -25,8 +24,7 @@ export const TournamentOperations = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Users className="w-6 h-6 text-blue-500" />
-            <span className="text-blue-600">14.1</span>
-            運営スタッフの責任
+            大会運営スタッフの責任
           </h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>大会ディレクター：全体の統括と進行管理</li>
@@ -40,7 +38,6 @@ export const TournamentOperations = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Trophy className="w-6 h-6 text-blue-500" />
-            <span className="text-blue-600">14.2</span>
             表彰式と賞品
           </h3>
           <p className="text-slate-600">

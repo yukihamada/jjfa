@@ -4,6 +4,8 @@ import { PageTitle } from "@/components/PageTitle";
 import { TableOfContents } from "@/components/tournament-rules/TableOfContents";
 import { Button } from "@/components/ui/button";
 import { Printer, History as HistoryIcon } from "lucide-react";
+
+// Import all sections
 import { Introduction } from "@/components/tournament-rules/sections/Introduction";
 import { MatchFormat } from "@/components/tournament-rules/sections/MatchFormat";
 import { UniformRules } from "@/components/tournament-rules/sections/UniformRules";
@@ -18,11 +20,9 @@ import { BracketSystem } from "@/components/tournament-rules/sections/BracketSys
 import { TeamPoints } from "@/components/tournament-rules/sections/TeamPoints";
 import { Rankings } from "@/components/tournament-rules/sections/Rankings";
 import { BlackBeltSystem } from "@/components/tournament-rules/sections/BlackBeltSystem";
-import { TeamRules } from "@/components/tournament-rules/sections/TeamRules";
-import { VenueLayout } from "@/components/tournament-rules/sections/VenueLayout";
-import { StaffResponsibilities } from "@/components/tournament-rules/sections/StaffResponsibilities";
-import { AwardCeremony } from "@/components/tournament-rules/sections/AwardCeremony";
+import { TournamentOperations } from "@/components/tournament-rules/sections/TournamentOperations";
 import { CodeOfConduct } from "@/components/tournament-rules/sections/CodeOfConduct";
+import { AntiDoping } from "@/components/tournament-rules/sections/AntiDoping";
 import { TechnologyIntegration } from "@/components/tournament-rules/sections/TechnologyIntegration";
 import { CareerDevelopment } from "@/components/tournament-rules/sections/CareerDevelopment";
 import { GlobalStandards } from "@/components/tournament-rules/sections/GlobalStandards";
@@ -81,11 +81,9 @@ const TournamentRules = () => {
               <TeamPoints />
               <Rankings />
               <BlackBeltSystem />
-              <TeamRules />
-              <VenueLayout />
-              <StaffResponsibilities />
-              <AwardCeremony />
+              <TournamentOperations />
               <CodeOfConduct />
+              <AntiDoping />
               <TechnologyIntegration />
               <CareerDevelopment />
               <GlobalStandards />

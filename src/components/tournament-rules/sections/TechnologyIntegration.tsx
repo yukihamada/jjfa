@@ -1,15 +1,14 @@
 import { RuleSection } from "../RuleSection";
-import { RuleItem } from "../RuleItem";
 import { Database, Bot, BarChart, Video, HeartPulse } from "lucide-react";
 
 export const TechnologyIntegration = () => {
   return (
-    <RuleSection id="technology-integration" title="テクノロジー統合" sectionNumber="19">
+    <RuleSection id="technology-integration" title="テクノロジー統合" sectionNumber="17">
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Database className="w-6 h-6 text-blue-500" />
-            データ管理システム
+            SJJIFソフトウェアとデータベース
           </h3>
           <p className="text-slate-600">
             試合結果、スコア、選手のパフォーマンスデータを永続的なデータベースに記録し、改ざん不可能な形で保存します。
@@ -19,7 +18,7 @@ export const TechnologyIntegration = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Bot className="w-6 h-6 text-blue-500" />
-            AIアシスタントレフェリー
+            レフェリー支援技術
           </h3>
           <p className="text-slate-600">
             最新のAI技術を活用して、審判の判定をサポートし、より公平で正確な判定を実現します。

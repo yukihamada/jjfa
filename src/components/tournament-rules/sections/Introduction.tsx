@@ -9,6 +9,7 @@ export const Introduction = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Book className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">0.0</span>
             柔術の定義
           </h3>
           <p className="text-slate-600">
@@ -21,6 +22,7 @@ export const Introduction = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Heart className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">0.1</span>
             コミュニティの価値
           </h3>
           <p className="text-slate-600">
@@ -32,6 +34,7 @@ export const Introduction = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Target className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">0.2</span>
             適用範囲
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
@@ -43,6 +46,7 @@ export const Introduction = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Users className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">0.3</span>
             大会参加資格
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
@@ -62,6 +66,7 @@ export const Introduction = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">0.4</span>
             倫理規定とフェアプレー
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">

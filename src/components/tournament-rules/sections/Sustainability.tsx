@@ -5,7 +5,7 @@ import { Leaf, Recycle, TreePine, Sprout } from "lucide-react";
 
 export const Sustainability = () => {
   return (
-    <RuleSection id="sustainability" title="持続可能性への取り組み" sectionNumber="23">
+    <RuleSection id="sustainability" title="持続可能性への取り組み" sectionNumber="21">
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-100">
           <CardHeader>

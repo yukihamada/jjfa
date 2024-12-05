@@ -5,7 +5,7 @@ import { Users, Building, GraduationCap, Heart } from "lucide-react";
 
 export const CommunityEngagement = () => {
   return (
-    <RuleSection id="community-engagement" title="コミュニティ参加" sectionNumber="22">
+    <RuleSection id="community-engagement" title="コミュニティ参加" sectionNumber="20">
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>

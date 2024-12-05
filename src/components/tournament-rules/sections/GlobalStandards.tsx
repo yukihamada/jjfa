@@ -5,7 +5,7 @@ import { Globe, Languages, Award, Users } from "lucide-react";
 
 export const GlobalStandards = () => {
   return (
-    <RuleSection id="global-standards" title="国際標準化" sectionNumber="21">
+    <RuleSection id="global-standards" title="国際標準化" sectionNumber="19">
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardHeader>

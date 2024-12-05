@@ -8,7 +8,7 @@ export const Penalties = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-red-500" />
-            安全に関わる反則行為
+            8.1 安全に関わる反則行為
           </h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>指を1本または2本だけ掴むこと</li>
@@ -21,7 +21,7 @@ export const Penalties = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <XCircle className="w-6 h-6 text-red-500" />
-            相手への攻撃に関する反則
+            8.2 相手への攻撃に関する反則
           </h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>打撃や蹴り</li>
@@ -34,7 +34,7 @@ export const Penalties = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <AlertTriangle className="w-6 h-6 text-yellow-500" />
-            技術の制限
+            8.3 技術の制限
           </h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>帯の色や年齢カテゴリによって特定の技（例：ヒールフックやスラム）が禁止</li>
@@ -45,7 +45,7 @@ export const Penalties = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <UserX className="w-6 h-6 text-red-500" />
-            スポーツマンシップに反する行為
+            8.4 スポーツマンシップに反する行為
           </h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>言葉での挑発や相手への不適切な発言</li>
@@ -57,7 +57,7 @@ export const Penalties = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Siren className="w-6 h-6 text-red-500" />
-            服装・規定違反
+            8.5 服装・規定違反
           </h3>
           <ul className="list-disc pl-5 space-y-2 text-slate-600">
             <li>規定に反した道着（Gi）やノーギウェアの着用</li>
@@ -66,7 +66,7 @@ export const Penalties = () => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <h3 className="text-xl font-bold mb-4">ペナルティの種類</h3>
+          <h3 className="text-xl font-bold mb-4">8.6 ペナルティの種類</h3>
           <div className="space-y-4">
             <div className="bg-yellow-50 p-4 rounded-lg">
               <p className="font-semibold text-yellow-800">軽度の反則</p>

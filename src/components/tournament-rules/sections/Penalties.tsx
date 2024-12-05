@@ -1,65 +1,88 @@
 import { RuleSection } from "../RuleSection";
-import { AlertTriangle, Shield, UserX } from "lucide-react";
+import { AlertTriangle, Shield, UserX, XCircle, Siren } from "lucide-react";
 
 export const Penalties = () => {
   return (
     <RuleSection id="penalties" title="ペナルティ" sectionNumber="8">
-      <p className="mb-4 text-slate-600">
-        ペナルティの種類と適用について説明します。
-      </p>
       <div className="space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <AlertTriangle className="w-6 h-6 text-yellow-500" />
-            消極的行動
+            <Shield className="w-6 h-6 text-red-500" />
+            安全に関わる反則行為
           </h3>
-          <p className="text-slate-600">
-            過度に防御的な行動や、アクションを避ける行為には警告が与えられます。警告が3回続くと、相手に1ポイントが加算されます。
-          </p>
+          <ul className="list-disc pl-5 space-y-2 text-slate-600">
+            <li>指を1本または2本だけ掴むこと</li>
+            <li>相手の髪の毛、耳、鼻、性器を掴むこと</li>
+            <li>相手の関節を逆方向に過度に曲げる行為</li>
+            <li>相手の背中を踏む行為</li>
+          </ul>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Shield className="w-6 h-6 text-red-500" />
-            禁止技と危険行為
+            <XCircle className="w-6 h-6 text-red-500" />
+            相手への攻撃に関する反則
           </h3>
-          <div className="space-y-4">
-            <p className="text-slate-600">
-              以下の技や行為は禁止されており、使用した場合は即座に失格となる可能性があります：
-            </p>
-            <div className="pl-4">
-              <h4 className="font-semibold text-slate-800 mb-2">関節技に関する禁止事項</h4>
-              <ul className="list-disc pl-5 space-y-2 text-slate-600">
-                <li>脊椎への捻り（スパイナルロック）</li>
-                <li>頸椎への過度な負荷がかかる技</li>
-                <li>膝関節への横方向からの圧力</li>
-                <li>足の指への関節技</li>
-              </ul>
-            </div>
-            <div className="pl-4">
-              <h4 className="font-semibold text-slate-800 mb-2">その他の禁止行為</h4>
-              <ul className="list-disc pl-5 space-y-2 text-slate-600">
-                <li>相手の顔面への打撃や圧力</li>
-                <li>目、鼻、耳への攻撃</li>
-                <li>噛みつき行為</li>
-                <li>相手の道着を掴んで投げる行為</li>
-                <li>マットの外に意図的に出る行為</li>
-              </ul>
-            </div>
-            <p className="text-slate-600 mt-2">
-              これらの行為は選手の安全を確保し、柔術の技術的な面を重視するために禁止されています。
-            </p>
-          </div>
+          <ul className="list-disc pl-5 space-y-2 text-slate-600">
+            <li>打撃や蹴り</li>
+            <li>指で目を攻撃する</li>
+            <li>魚フック（指で相手の口の中を引っ張る行為）</li>
+            <li>相手を絞める際に首を絞める器具として襟以外を使うこと（例：指）</li>
+          </ul>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <AlertTriangle className="w-6 h-6 text-yellow-500" />
+            技術の制限
+          </h3>
+          <ul className="list-disc pl-5 space-y-2 text-slate-600">
+            <li>帯の色や年齢カテゴリによって特定の技（例：ヒールフックやスラム）が禁止</li>
+            <li>一部のカテゴリーでは、スパイキング（相手を頭から地面に落とす行為）が禁止</li>
+          </ul>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <UserX className="w-6 h-6 text-red-500" />
-            マナー違反
+            スポーツマンシップに反する行為
           </h3>
-          <p className="text-slate-600">
-            礼儀を欠いた行動や暴言があった場合、即時失格や大会からの追放となることがあります。スポーツマンシップに反する行為は厳しく対処されます。
-          </p>
+          <ul className="list-disc pl-5 space-y-2 text-slate-600">
+            <li>言葉での挑発や相手への不適切な発言</li>
+            <li>故意に試合から逃げる行為、たとえば場外に出てポイントを避ける</li>
+            <li>自らの帯を外し、試合を一時停止させる行為</li>
+          </ul>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Siren className="w-6 h-6 text-red-500" />
+            服装・規定違反
+          </h3>
+          <ul className="list-disc pl-5 space-y-2 text-slate-600">
+            <li>規定に反した道着（Gi）やノーギウェアの着用</li>
+            <li>金属類（指輪、ピアス）や爪の長さなど安全上の問題がある状態で試合を行うこと</li>
+          </ul>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 className="text-xl font-bold mb-4">ペナルティの種類</h3>
+          <div className="space-y-4">
+            <div className="bg-yellow-50 p-4 rounded-lg">
+              <p className="font-semibold text-yellow-800">軽度の反則</p>
+              <ul className="list-disc pl-5 mt-2 text-yellow-700">
+                <li>警告</li>
+                <li>相手にアドバンテージ</li>
+              </ul>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <p className="font-semibold text-red-800">重大な反則</p>
+              <ul className="list-disc pl-5 mt-2 text-red-700">
+                <li>ポイントの減点</li>
+                <li>反則負け（失格）</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </RuleSection>

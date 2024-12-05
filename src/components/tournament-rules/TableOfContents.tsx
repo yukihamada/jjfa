@@ -16,16 +16,14 @@ export const TableOfContents = () => {
     { id: "team-points", title: "11. チームポイント" },
     { id: "rankings", title: "12. ランキングシステム" },
     { id: "black-belt-system", title: "13. 黒帯制度" },
-    { id: "team-rules", title: "14. 団体戦ルール" },
-    { id: "venue-layout", title: "15. 会場レイアウト" },
-    { id: "staff-responsibilities", title: "16. 大会運営スタッフの責任" },
-    { id: "award-ceremony", title: "17. 表彰式" },
-    { id: "code-of-conduct", title: "18. 行動規範" },
-    { id: "technology-integration", title: "19. テクノロジー統合" },
-    { id: "career-development", title: "20. キャリア開発" },
-    { id: "global-standards", title: "21. 国際標準化" },
-    { id: "community-engagement", title: "22. コミュニティ参加" },
-    { id: "sustainability", title: "23. 持続可能性への取り組み" }
+    { id: "tournament-operations", title: "14. 大会運営" },
+    { id: "code-of-conduct", title: "15. 行動規範" },
+    { id: "anti-doping", title: "16. ドーピング管理と公正な競技" },
+    { id: "technology-integration", title: "17. テクノロジー統合" },
+    { id: "career-development", title: "18. キャリア開発" },
+    { id: "global-standards", title: "19. 国際標準化" },
+    { id: "community-engagement", title: "20. コミュニティ参加" },
+    { id: "sustainability", title: "21. 持続可能性への取り組み" }
   ];
 
   return (

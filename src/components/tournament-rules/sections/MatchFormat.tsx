@@ -8,6 +8,7 @@ export const MatchFormat = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Scale className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">1.0</span>
             計量ルール
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
@@ -20,6 +21,7 @@ export const MatchFormat = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Award className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">1.1</span>
             トーナメント方式
           </h3>
           <p className="text-slate-600">
@@ -30,6 +32,7 @@ export const MatchFormat = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Timer className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">1.2</span>
             試合時間・ラウンド
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
@@ -42,6 +45,7 @@ export const MatchFormat = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Layout className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">1.3</span>
             マットサイズ
           </h3>
           <ul className="list-disc pl-5 text-slate-600 space-y-2">
@@ -53,6 +57,7 @@ export const MatchFormat = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Award className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">1.4</span>
             特別ルール
           </h3>
           <p className="text-slate-600">

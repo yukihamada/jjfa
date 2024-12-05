@@ -8,6 +8,7 @@ export const PointSystem = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">6.0</span>
             基本ポイント（全て3秒キープ）
           </h3>
           <div className="grid gap-4">
@@ -41,6 +42,7 @@ export const PointSystem = () => {
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
           <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Shield className="w-6 h-6 text-blue-500" />
+            <span className="text-blue-600">6.1</span>
             勝敗の決定方式
           </h3>
           <div className="grid gap-4">

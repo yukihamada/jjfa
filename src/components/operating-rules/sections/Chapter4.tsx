@@ -3,29 +3,18 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter4 = () => {
   return (
-    <OperatingRulesSection id="tournament" title="第4章 トークン管理とセキュリティ">
-      <OperatingRulesArticle title="第8条（トークンの発行および管理）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>トークンの発行・配分・再発行は、スマートコントラクトに基づき実施する。</li>
-          <li>発行状況、取引履歴、保有者分布は公式プラットフォーム上でリアルタイムで公開される。</li>
-        </ol>
+    <OperatingRulesSection id="token" title="第4章 トークン管理とセキュリティ">
+      <OperatingRulesArticle title="第8条（トークン発行・管理）">
+        <p>トークンの発行、割当、再発行はスマートコントラクトを通じて行われ、公式プラットフォームで常に状況を確認できます。これにより、発行数や保有者構成が常にオープンで公正に保たれます。</p>
       </OperatingRulesArticle>
 
-      <OperatingRulesArticle title="第9条（紛失および不正利用の対応）">
+      <OperatingRulesArticle title="第9条（紛失・不正利用対応）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>紛失時の対応
-            <ul className="list-disc pl-6 mt-2">
-              <li>保有者がウォレット紛失を申請する場合、以下のプロセスを経る：</li>
-              <li>本人確認（例：ID提出とビデオ認証）。</li>
-              <li>DAO総会の承認後、紛失トークンを無効化し新しいトークンを発行。</li>
-            </ul>
+          <li>紛失時：
+            <p className="mt-2">所有者がウォレットを紛失した場合、本人確認（ID提出・ビデオ認証など）を経て、DAO総会でその再発行が承認されれば、古いトークンを無効化し、新しいトークンを付与します。</p>
           </li>
-          <li>不正利用時の対応
-            <ul className="list-disc pl-6 mt-2">
-              <li>不正使用が確認された場合、運営チームは以下を実施する：</li>
-              <li>該当トークンの凍結：スマートコントラクトで即時凍結。</li>
-              <li>法的措置：被害者救済および加害者に対する追及措置。</li>
-            </ul>
+          <li className="mt-4">不正利用時：
+            <p className="mt-2">不正使用が発覚した場合、運営チームは該当トークンを即座に凍結します。その後、法的措置や被害者救済対応を行い、問題解決に努めます。</p>
           </li>
         </ol>
       </OperatingRulesArticle>

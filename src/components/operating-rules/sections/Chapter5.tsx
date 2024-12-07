@@ -3,21 +3,19 @@ import { OperatingRulesArticle } from "../OperatingRulesArticle";
 
 export const Chapter5 = () => {
   return (
-    <OperatingRulesSection id="token" title="第5章 ガバナンスおよび透明性">
-      <OperatingRulesArticle title="第10条（運営報告の具体化）">
+    <OperatingRulesSection id="token" title="第5章 ガバナンスと透明性">
+      <OperatingRulesArticle title="第10条（運営報告）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>四半期ごとの運営報告
+          <li>四半期報告：
+            <p className="mt-2">各専門チームは四半期ごとに運営報告書を作成します。この中には以下が含まれます。</p>
             <ul className="list-disc pl-6 mt-2">
-              <li>各専門チームは、以下を含む報告書を作成する：</li>
-              <li>トークン発行状況と取引履歴。</li>
-              <li>DAO総会の決議事項と進捗状況。</li>
-              <li>利益配分の詳細および予算執行状況。</li>
+              <li>トークン発行状況と取引履歴の概要</li>
+              <li>DAO総会で決議された事項の進捗</li>
+              <li>予算執行状況や利益配分の報告</li>
             </ul>
           </li>
-          <li>報告の公開と質疑応答
-            <ul className="list-disc pl-6 mt-2">
-              <li>報告書は公式プラットフォームで公開され、保有者からの質疑に対応するセッションを設ける。</li>
-            </ul>
+          <li className="mt-4">公開と質疑応答：
+            <p className="mt-2">報告書は公式プラットフォームで公開し、トークン保有者からの質問を受け付けます。質問には運営チームが可能な限り回答し、コミュニティメンバーと双方向のコミュニケーションを図ります。</p>
           </li>
         </ol>
       </OperatingRulesArticle>

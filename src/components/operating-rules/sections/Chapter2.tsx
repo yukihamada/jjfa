@@ -6,57 +6,41 @@ export const Chapter2 = () => {
     <OperatingRulesSection id="organization" title="第2章 運営体制">
       <OperatingRulesArticle title="第4条（運営組織の構成）">
         <ol className="list-decimal pl-6 mb-4">
-          <li>DAO総会
+          <li>DAO総会：
             <ul className="list-disc pl-6 mt-2">
-              <li>役割：最高意思決定機関であり、トークン保有者全員で構成される。</li>
-              <li>議題の例：トークンの総発行量変更、新規プロジェクトの採択、規程改定の承認。</li>
-              <li>開催頻度：四半期ごと（必要に応じて臨時開催）。</li>
-              <li>議事録公開：議事録は総会終了後7日以内に公式プラットフォームで公開する。</li>
+              <li>役割：コミュニティの最高意思決定機関。保有トークンによる投票で方針を決定します。</li>
+              <li>決定事項の例：トークン総発行量の変更、新規プロジェクトの採否、運営規程の改定。</li>
+              <li>開催頻度：原則として四半期ごと。必要に応じて臨時開催も行います。</li>
+              <li>議事録公開：総会終了後7日以内に公式プラットフォームで公開します。</li>
             </ul>
           </li>
-          <li>運営チーム
+          <li className="mt-4">運営チーム：
+            <p className="mt-2">DAO総会で決まった方針を現実に動かす専門チームで構成されます。</p>
             <ul className="list-disc pl-6 mt-2">
-              <li>構成と役割：以下の専門チームで構成される。</li>
-              <li>技術チーム：スマートコントラクト運用、トークンセキュリティ監視。
-                <ul className="list-disc pl-6">
-                  <li>例：スマートコントラクトのバグ報告対応、外部監査依頼。</li>
-                </ul>
-              </li>
-              <li>コミュニティチーム：意見収集、保有者間の調整、広報活動。
-                <ul className="list-disc pl-6">
-                  <li>例：SNSを活用した提案の意見収集キャンペーン。</li>
-                </ul>
-              </li>
-              <li>財務チーム：予算編成、利益配分の管理。
-                <ul className="list-disc pl-6">
-                  <li>例：トークン配分の進捗報告書の作成と公開。</li>
-                </ul>
-              </li>
-              <li>法務チーム：規程改定案作成、規制遵守確認。
-                <ul className="list-disc pl-6">
-                  <li>例：各国の暗号資産規制に基づく運営方針の助言。</li>
-                </ul>
-              </li>
+              <li>技術チーム：スマートコントラクトの維持管理、不具合対応、外部セキュリティ監査依頼など。</li>
+              <li>コミュニティチーム：提案受付、トークン保有者間の意見調整、SNSや公式サイトでの情報発信。</li>
+              <li>財務チーム：予算編成、利益配分計画の作成と実行、収支報告。</li>
+              <li>法務チーム：規定改定案や運営方針が法令や規制に適合しているかを確認。</li>
             </ul>
           </li>
         </ol>
       </OperatingRulesArticle>
 
       <OperatingRulesArticle title="第5条（責任と権限の分担）">
-        <ol className="list-decimal pl-6 mb-4">
+        <ul className="list-disc pl-6 mb-4">
           <li>DAO総会：
             <ul className="list-disc pl-6 mt-2">
-              <li>責任：重要事項の審議・決議。</li>
-              <li>権限：提案採択、新規プロジェクトの承認、規程改定の承認。</li>
+              <li>責任：コミュニティの重要方針や大規模変更を審議し、方向性を決定する。</li>
+              <li>権限：提案採択、新プロジェクトの承認、規程改定の承認など。</li>
             </ul>
           </li>
-          <li>運営チーム：
+          <li className="mt-4">運営チーム：
             <ul className="list-disc pl-6 mt-2">
-              <li>責任：決議内容の実行と進捗管理。</li>
-              <li>権限：日常業務の遂行、トークン管理、トラブル対応。</li>
+              <li>責任：DAO総会で決まったことを実行に移し、日々の運営を円滑に進める。</li>
+              <li>権限：日常業務の実行、トークン管理、不正対応など、総会で定められた範囲内での独自判断。</li>
             </ul>
           </li>
-        </ol>
+        </ul>
       </OperatingRulesArticle>
     </OperatingRulesSection>
   );

@@ -28,18 +28,44 @@ export const useStreamSetup = (
     }
 
     const room = new Room({
-      // シンプルな設定で安定性を重視
       adaptiveStream: true,
       dynacast: true,
-      // ビデオ設定をデフォルトに近い形に
       videoCaptureDefaults: {
         resolution: VideoPresets.h720,
       },
-      // コーデック設定を明示的に指定しない
+      publishDefaults: {
+        simulcast: false,
+        dtx: true,
+        red: true,
+        audioPreset: {
+          maxBitrate: 128000,
+        },
+        videoEncoding: {
+          maxBitrate: 1_500_000,
+          maxFramerate: 30,
+        }
+      }
     });
 
-    await room.connect(tokenData.wsUrl, tokenData.token);
-    return room;
+    try {
+      await room.connect(tokenData.wsUrl, tokenData.token, {
+        autoSubscribe: true,
+        rtcConfig: {
+          iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' },
+            { urls: 'stun:stun1.l.google.com:19302' }
+          ],
+          bundlePolicy: 'max-bundle',
+          iceCandidatePoolSize: 10
+        }
+      });
+      
+      console.log('Room connected successfully');
+      return room;
+    } catch (error) {
+      console.error('Failed to connect to room:', error);
+      throw error;
+    }
   };
 
   const startStream = async (videoTrack: any, audioTrack: any) => {
@@ -48,10 +74,30 @@ export const useStreamSetup = (
       
       const newRoom = await createRoom();
       
-      await Promise.all([
-        newRoom.localParticipant.publishTrack(videoTrack),
-        newRoom.localParticipant.publishTrack(audioTrack)
-      ]);
+      // デバイスとブラウザに応じて最適な設定を選択
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isAndroid = /Android/.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+      const videoPublishOptions = {
+        simulcast: false,
+        videoEncoding: {
+          maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000, // モバイルデバイスは低めのビットレート
+          maxFramerate: 30
+        }
+      };
+
+      // オーディオトラックを先に公開（モバイルデバイスでの安定性向上）
+      await newRoom.localParticipant.publishTrack(audioTrack);
+      
+      // ビデオトラックの公開を試みる
+      try {
+        await newRoom.localParticipant.publishTrack(videoTrack, videoPublishOptions);
+      } catch (error) {
+        console.error('Failed to publish video track:', error);
+        toast.error("カメラの接続に問題が発生しました。カメラへのアクセスを許可してください。");
+        throw error;
+      }
 
       newRoom.on(RoomEvent.Disconnected, () => {
         setIsStreaming(false);

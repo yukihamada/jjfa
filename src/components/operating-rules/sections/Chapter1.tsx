@@ -1,6 +1,5 @@
 import { OperatingRulesSection } from "../OperatingRulesSection";
 import { OperatingRulesArticle } from "../OperatingRulesArticle";
-import { Link } from "react-router-dom";
 
 export const Chapter1 = () => {
   return (
@@ -25,9 +24,6 @@ export const Chapter1 = () => {
           <li>「公式プラットフォーム」とは、提案閲覧・投票・報告確認ができる公式サイトやWebアプリを指します。</li>
           <li>「JJFAエコシステム」とは、柔術を軸にした当社提供のサービス・コミュニティ全体を指します。</li>
         </ul>
-        <div className="mt-4 text-sm text-slate-600">
-          <p>トークンに関する詳細な技術仕様や管理手順は<Link to="/token-rules" className="text-blue-600 hover:underline">トークン規程</Link>を参照してください。</p>
-        </div>
       </OperatingRulesArticle>
 
       <OperatingRulesArticle title="第4条（準拠法および法的管轄）">

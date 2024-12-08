@@ -3,11 +3,11 @@ import { Link } from "react-scroll";
 export const TableOfContents = () => {
   const sections = [
     { id: "purpose", title: "第1章 総則" },
-    { id: "organization", title: "第2章 組織" },
-    { id: "dao", title: "第3章 DAO運営" },
-    { id: "tournament", title: "第4章 トーナメント運営" },
-    { id: "token", title: "第5章 トークン" },
-    { id: "other", title: "第6章 その他" },
+    { id: "organization", title: "第2章 運営体制" },
+    { id: "dao", title: "第3章 提案および意思決定プロセス" },
+    { id: "token", title: "第4章 トークン管理とセキュリティ" },
+    { id: "governance", title: "第5章 ガバナンスと透明性" },
+    { id: "other", title: "第6章 附則" },
   ];
 
   return (

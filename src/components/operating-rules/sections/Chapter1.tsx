@@ -33,7 +33,6 @@ export const Chapter1 = () => {
           <li>公式プラットフォーム：提案閲覧、投票実行、報告確認ができる公式サイトやWebアプリ等の総称。</li>
           <li>JJFAエコシステム：柔術を軸にした、当社が提供するオンライン・オフラインのサービスやコミュニティ群。</li>
         </ul>
-
         <div className="mt-4 text-sm text-slate-600">
           <p>トークンに関する詳細な技術仕様や管理手順は<Link to="/token-rules" className="text-blue-600 hover:underline">トークン規程</Link>を参照してください。</p>
         </div>

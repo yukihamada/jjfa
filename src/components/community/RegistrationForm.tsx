@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -24,15 +24,7 @@ export const RegistrationForm = () => {
 
   return (
     <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-bottom-4">
-      <CardHeader className="space-y-2">
-        <CardTitle className="text-2xl font-bold text-center text-slate-800">
-          {t('community.joinTitle')}
-        </CardTitle>
-        <CardDescription className="text-center text-slate-600">
-          {t('community.joinSubtitle')}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="pt-6">
         <div className="space-y-4">
           <Auth
             supabaseClient={supabase}

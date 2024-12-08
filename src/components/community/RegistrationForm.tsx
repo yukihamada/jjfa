@@ -1,11 +1,10 @@
 import { useTranslation } from "react-i18next";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
-import { AuthForm } from "./registration/AuthForm";
-import { BenefitsList } from "./registration/BenefitsList";
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
@@ -21,41 +20,74 @@ export const RegistrationForm = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  const redirectUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-slate-50 to-white py-12">
-      <div className="w-full max-w-6xl mx-auto px-4 space-y-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center space-y-6"
-        >
-          <div className="inline-flex items-center justify-center space-x-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200 shadow-sm">
-            <Sparkles className="w-5 h-5 text-amber-500" />
-            <span className="text-slate-600 font-medium">新しい柔術の世界へようこそ</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 tracking-tight">
-            {t('community.joinTitle')}
-          </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            {t('community.joinSubtitle')}
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-100/50 to-fuchsia-100/50 rounded-2xl blur-3xl" />
-            <AuthForm />
-          </motion.div>
-
-          <BenefitsList />
+    <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm shadow-lg animate-in fade-in slide-in-from-bottom-4">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-2xl font-bold text-center text-slate-800">
+          {t('community.joinTitle')}
+        </CardTitle>
+        <CardDescription className="text-center text-slate-600">
+          {t('community.joinSubtitle')}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{
+              theme: ThemeSupa,
+              variables: {
+                default: {
+                  colors: {
+                    brand: '#1e293b',
+                    brandAccent: '#334155'
+                  }
+                }
+              },
+              className: {
+                container: 'space-y-4',
+                button: 'bg-slate-800 hover:bg-slate-700 text-white',
+                anchor: 'text-slate-600 hover:text-slate-800',
+                divider: 'bg-slate-200',
+                message: 'text-slate-600',
+                label: 'text-slate-700'
+              }
+            }}
+            providers={['google']}
+            redirectTo={redirectUrl}
+            view="sign_up"
+            localization={{
+              variables: {
+                sign_up: {
+                  email_label: t('community.form.email'),
+                  password_label: t('community.form.password'),
+                  button_label: "新規登録",
+                  link_text: "すでにアカウントをお持ちの方",
+                  password_input_placeholder: t('community.form.passwordPlaceholder'),
+                  email_input_placeholder: t('community.form.emailPlaceholder'),
+                  confirmation_text: "確認メールを送信しました。メールをご確認ください。",
+                },
+                sign_in: {
+                  email_label: t('community.form.email'),
+                  password_label: t('community.form.password'),
+                  button_label: "ログイン",
+                  link_text: "アカウントをお持ちでない方",
+                  password_input_placeholder: t('community.form.passwordPlaceholder'),
+                  email_input_placeholder: t('community.form.emailPlaceholder'),
+                },
+                forgotten_password: {
+                  link_text: "パスワードをお忘れの方",
+                  button_label: t('community.form.resetPassword'),
+                  email_label: t('community.form.email'),
+                  email_input_placeholder: t('community.form.emailPlaceholder'),
+                }
+              }
+            }}
+          />
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

@@ -3,47 +3,41 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter2 = () => {
   return (
-    <TokenRulesSection title="第2章 トークンの発行と管理">
-      <TokenRulesArticle title="第4条（トークン発行総量と方針）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>トークン発行総量は以下の通り制限する：
-            <ul className="list-disc pl-6 mt-2">
-              <li>社員権トークン：最大発行総数10,000トークン（変更には特別決議を要する）。</li>
-              <li>ガバナンストークン：年間インフレ率は3～5%以内とし、追加発行はDAO総会で承認を必要とする。</li>
-            </ul>
-          </li>
-          <li>発行済トークンの明細は公式ウェブサイトにリアルタイムで公開する。</li>
-        </ol>
+    <TokenRulesSection title="第2章 トークンの発行・配分方法">
+      <TokenRulesArticle title="第5条（発行数と変更）">
+        <ul className="list-disc pl-6 mb-4">
+          <li>社員権トークンは最大10,000枚まで。増やしたり減らしたりするときは、コミュニティ投票で多数の同意が必要です。</li>
+          <li>ガバナンストークンは必要に応じて少しずつ増やせる仕組みですが、ここもDAOでの承認が求められます。</li>
+          <li>発行状況はいつでも公式サイトで確認可能で、透明性を確保します。</li>
+        </ul>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第5条（配分基準と取得方法）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>社員権トークン
+      <TokenRulesArticle title="第6条（初期アロケーション）">
+        <ul className="list-disc pl-6 mb-4">
+          <li>社員権トークンは設立時の出資者や特別に貢献してきた人たちに配られます。</li>
+          <li>ガバナンストークンは：
             <ul className="list-disc pl-6 mt-2">
-              <li>設立時の出資額10万円につき1トークンを初期配分する。</li>
-              <li>柔術コミュニティへの特別貢献が認められた者に追加付与される。</li>
+              <li>創設者A・B：各10%（ただしロックアップ期間あり）</li>
+              <li>運営チーム・初期貢献者：15%以内で配分</li>
+              <li>初期参加者や貢献者：10%程度を配布</li>
+              <li>残りは将来のイベントや新企画に応じて配布</li>
             </ul>
           </li>
-          <li>ガバナンストークン
-            <ul className="list-disc pl-6 mt-2">
-              <li>プラットフォーム活動（例：貢献度、DAOプロジェクト、バグ報告）に基づき報酬として配布される。</li>
-              <li>柔術イベントや教育プログラムへの参加を通じて取得可能。</li>
-            </ul>
-          </li>
-        </ol>
+        </ul>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第6条（トークン管理体制）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>トークンの発行、譲渡、停止、再発行はすべてスマートコントラクトにより自動化され、ブロックチェーン上に記録される。</li>
-          <li>セキュリティ確保のため、以下の体制を整備する：
-            <ul className="list-disc pl-6 mt-2">
-              <li>第三者機関による年次セキュリティ監査：スマートコントラクトとシステムの安全性を保証。</li>
-              <li>不正利用防止システム：リアルタイム監視と自動アラート機能。</li>
-              <li>トークン紛失時の対応ポリシー：本人確認後の再発行手続き。</li>
-            </ul>
-          </li>
-        </ol>
+      <TokenRulesArticle title="第7条（ブロックチェーンと透明性）">
+        <p className="mb-4">
+          トークンは、世界中で使われている安全性の高いブロックチェーン上に発行されます。
+          プログラムは公開され、誰でもその仕組みをチェック可能です。
+        </p>
+      </TokenRulesArticle>
+
+      <TokenRulesArticle title="第8条（セキュリティ対策）">
+        <p className="mb-4">
+          定期的にセキュリティチェックを行い、不正があればすぐに対応します。
+          ウォレットをなくした場合も、本人確認とコミュニティの同意があれば救済措置が可能です。
+        </p>
       </TokenRulesArticle>
     </TokenRulesSection>
   );

@@ -3,28 +3,26 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter5 = () => {
   return (
-    <TokenRulesSection title="第5章 ガバナンスと規程改定">
-      <TokenRulesArticle title="第11条（DAOガバナンス）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>議決方法
-            <ul className="list-disc pl-6 mt-2">
-              <li>特別決議（議決権の3分の2以上の賛成）：トークン総量変更、規程改定、会社解散など。</li>
-              <li>普通決議（過半数の賛成）：プロジェクト提案、資金配分、新規イベント計画など。</li>
-            </ul>
-          </li>
-          <li>投票システムの透明性
-            <ul className="list-disc pl-6 mt-2">
-              <li>スマートコントラクトにより投票プロセスを管理し、結果を即時公開。</li>
-            </ul>
-          </li>
-        </ol>
+    <TokenRulesSection title="第5章 法令順守、個人情報、知的財産">
+      <TokenRulesArticle title="第15条（コンプライアンス）">
+        <p className="mb-4">
+          法令に合わせて本人確認（KYC）や資金洗浄防止（AML）などを行う場合があります。
+          社会的信用を重視し、柔術界の健全な発展を支えます。
+        </p>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第12条（規程改定手続き）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>規程改定案は、公式ウェブサイトで全保有者に公開し、1週間の意見募集期間を設ける。</li>
-          <li>改定案はDAO総会で承認後、直ちに施行される。</li>
-        </ol>
+      <TokenRulesArticle title="第16条（個人情報保護）">
+        <p className="mb-4">
+          ウォレット紛失対応やKYCで個人情報を集める場合は必要最低限。
+          プライバシーポリシーを公開し、情報は安全に扱います。
+        </p>
+      </TokenRulesArticle>
+
+      <TokenRulesArticle title="第17条（知的財産）">
+        <p className="mb-4">
+          「JJFA」ブランドやロゴは当社の財産です。
+          NFTや独自コンテンツについては別途ルールを設ける場合があります。
+        </p>
       </TokenRulesArticle>
     </TokenRulesSection>
   );

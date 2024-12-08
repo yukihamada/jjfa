@@ -3,29 +3,27 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter4 = () => {
   return (
-    <TokenRulesSection title="第4章 紛失・不正利用への対応">
-      <TokenRulesArticle title="第9条（紛失時の対応）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>ウォレットの秘密鍵を紛失した場合、以下の手順を経てトークンを再発行する：
-            <ul className="list-disc pl-6 mt-2">
-              <li>本人確認書類の提出および審査。</li>
-              <li>DAO総会の承認後、紛失トークンを無効化し、新トークンを発行。</li>
-            </ul>
-          </li>
-          <li>再発行には合理的な手数料を請求する場合がある。</li>
-        </ol>
+    <TokenRulesSection title="第4章 意思決定の仕組み（DAO）と緊急時対応">
+      <TokenRulesArticle title="第12条（DAOで決める）">
+        <ul className="list-disc pl-6 mb-4">
+          <li>重大な変更（トークン総量、重要規程改定、会社解散など）は特別決議（3分の2以上賛成）が必要。</li>
+          <li>日常的なこと（大会予算、イベント企画）は過半数の賛成でOK。</li>
+          <li>すべて結果はすぐに公開され、誰もが確認できるので不信感が生まれにくい。</li>
+        </ul>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第10条（不正利用への対策）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>不正利用が確認された場合、当会社は以下の措置を講じる：
-            <ul className="list-disc pl-6 mt-2">
-              <li>スマートコントラクトによる不正トークンの一時停止または無効化。</li>
-              <li>被害者に対するトークン回復措置を実施。</li>
-              <li>必要に応じて法的措置を講じる。</li>
-            </ul>
-          </li>
-        </ol>
+      <TokenRulesArticle title="第13条（不正防止）">
+        <p className="mb-4">
+          特定の人がトークンを買い占めて不正な意思決定をしようとすれば、投票権に上限をかけたり、そのウォレットを一時的に制限する対策を講じます。
+          これで一部の人が柔術界を私物化しないようにします。
+        </p>
+      </TokenRulesArticle>
+
+      <TokenRulesArticle title="第14条（紛争や緊急事態）">
+        <ul className="list-disc pl-6 mb-4">
+          <li>意見が対立したときはまずDAO内で話し合い、それでもダメなら最終的には日本の裁判所に委ねます。</li>
+          <li>ハッキングやシステムトラブル、法令変更など緊急時は「緊急動議」で素早く対応し、柔術家たちが困らないように最善策を取ります。</li>
+        </ul>
       </TokenRulesArticle>
     </TokenRulesSection>
   );

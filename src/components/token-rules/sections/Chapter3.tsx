@@ -3,31 +3,27 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter3 = () => {
   return (
-    <TokenRulesSection title="第3章 トークンの利用と譲渡">
-      <TokenRulesArticle title="第7条（利用権利）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>社員権トークン保有者
-            <ul className="list-disc pl-6 mt-2">
-              <li>利益配分：事業利益を保有割合に基づいて分配。</li>
-              <li>議決権行使：DAO総会での重要事項に対する投票。</li>
-              <li>優待特典：柔術イベント、教育プログラム、限定プロジェクトへの優先参加権。</li>
-            </ul>
-          </li>
-          <li>ガバナンストークン保有者
-            <ul className="list-disc pl-6 mt-2">
-              <li>提案・投票権：DAOのプロジェクトや機能改善に対する意思決定参加。</li>
-              <li>報酬受領権：貢献活動に基づきインセンティブを受領。</li>
-            </ul>
-          </li>
-        </ol>
+    <TokenRulesSection title="第3章 トークンの使い方と権利">
+      <TokenRulesArticle title="第9条（使えること・できること）">
+        <ul className="list-disc pl-6 mb-4">
+          <li>社員権トークン：柔術コミュニティの重要な決定に参加でき、利益分配も受けられます。特別なイベントに優先参加できるため、柔術界の中核になれます。</li>
+          <li>ガバナンストークン：柔術大会の新ルール提案、地域の道場支援策、教育プログラムの作成など、あなたのアイデアで柔術界を豊かにし、その貢献に応じて報酬も受け取れます。</li>
+          <li>ユーティリティトークン：道場での稽古費用、大会エントリー料、指導動画購入など、柔術を学ぶ・楽しむための支払いが簡単に。</li>
+        </ul>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第8条（譲渡の透明性）">
-        <ol className="list-decimal pl-6 mb-4">
-          <li>社員権トークンおよびガバナンストークンは、ブロックチェーン上で自由に譲渡可能とする。</li>
-          <li>社員権トークンの譲渡は、社員資格および関連する権利の移転を伴う。</li>
-          <li>譲渡は公式プラットフォームを通じ、スマートコントラクトにより記録される。</li>
-        </ol>
+      <TokenRulesArticle title="第10条（譲渡）">
+        <p className="mb-4">
+          トークンはブロックチェーン上で自由にやりとりできます。
+          社員権トークンを譲れば、その社員資格も次の人に移るので、コミュニティメンバーが入れ替わりながら柔術界を発展させていけます。
+        </p>
+      </TokenRulesArticle>
+
+      <TokenRulesArticle title="第11条（エコシステム外での利用）">
+        <p className="mb-4">
+          トークンは主にJJFAエコシステム（大会、道場、関連サービス）で使うことを想定しています。
+          外部サービスで使う場合、そのサービスの安全性までは保証できません。
+        </p>
       </TokenRulesArticle>
     </TokenRulesSection>
   );

@@ -3,27 +3,26 @@ import { TokenRulesArticle } from "../TokenRulesArticle";
 
 export const Chapter4 = () => {
   return (
-    <TokenRulesSection title="第4章 意思決定の仕組み（DAO）と緊急時対応">
-      <TokenRulesArticle title="第12条（DAOで決める）">
-        <ul className="list-disc pl-6 mb-4">
-          <li>重大な変更（トークン総量、重要規程改定、会社解散など）は特別決議（3分の2以上賛成）が必要。</li>
-          <li>日常的なこと（大会予算、イベント企画）は過半数の賛成でOK。</li>
-          <li>すべて結果はすぐに公開され、誰もが確認できるので不信感が生まれにくい。</li>
-        </ul>
+    <TokenRulesSection title="第4章 ガバナンスと緊急対応">
+      <TokenRulesArticle title="第12条（DAOによる意思決定）">
+        <p className="mb-4">
+          重大事項は特別決議、日常案件は普通決議。
+          結果は即時公開し、不正を許しません。
+        </p>
       </TokenRulesArticle>
 
       <TokenRulesArticle title="第13条（不正防止）">
         <p className="mb-4">
-          特定の人がトークンを買い占めて不正な意思決定をしようとすれば、投票権に上限をかけたり、そのウォレットを一時的に制限する対策を講じます。
-          これで一部の人が柔術界を私物化しないようにします。
+          トークン独占による市場支配を防ぎ、フラットなコミュニティを維持。
+          不正者には投票権限制限など厳正対処。
         </p>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第14条（紛争や緊急事態）">
-        <ul className="list-disc pl-6 mb-4">
-          <li>意見が対立したときはまずDAO内で話し合い、それでもダメなら最終的には日本の裁判所に委ねます。</li>
-          <li>ハッキングやシステムトラブル、法令変更など緊急時は「緊急動議」で素早く対応し、柔術家たちが困らないように最善策を取ります。</li>
-        </ul>
+      <TokenRulesArticle title="第14条（紛争・緊急時対応）">
+        <p className="mb-4">
+          話し合いで解決を目指し、無理なら日本裁判所に委ねる明確なルール。
+          ハッキング等緊急時は「緊急動議」で素早く対処。
+        </p>
       </TokenRulesArticle>
     </TokenRulesSection>
   );

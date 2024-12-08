@@ -6,30 +6,36 @@ export const Chapter6 = () => {
     <TokenRulesSection title="第6章 改定・施行・言語">
       <TokenRulesArticle title="第18条（規程改定）">
         <p className="mb-4">
-          このルールを変えたい時は、コミュニティ投票（特別決議）で決めます。
-          承認後は公式発表してすぐ適用します。
+          特別決議で変更可能。承認後、即時公表。
         </p>
       </TokenRulesArticle>
 
-      <TokenRulesArticle title="第19条（言語と優先度）">
+      <TokenRulesArticle title="第19条（言語優先）">
         <p className="mb-4">
-          この規程は日本語が基本で、別言語版と食い違いがあれば日本語を優先。
-          法令やガイドラインに書かれていないことがあれば、それらに従います。
+          日本語版が正式。
+          法令やガイドラインが優先。
         </p>
       </TokenRulesArticle>
 
       <TokenRulesArticle title="第20条（施行日）">
         <p className="mb-4">
-          この規程は2024年●月●日から有効です。
+          2024年●月●日から有効。
         </p>
       </TokenRulesArticle>
 
-      <div className="mt-8 p-6 bg-slate-50 rounded-lg">
-        <h3 className="font-bold mb-4">まとめ</h3>
-        <p className="text-slate-700">
-          この規程によって、柔術を始める人、すでに練習している人、教える人、支える人、すべてが安心して参加できる「Web3時代の柔術コミュニティ」を築けます。
-          トークンを使って柔術大会や道場運営をサポートし、自分のアイデアで柔術界を盛り上げられます。
-          こうした仕組みが、世界中の新しい練習者を呼び込み、柔術をより身近で親しみやすい存在にしてくれます。
+      <div className="mt-8 p-4 bg-slate-50 rounded-lg">
+        <h3 className="font-bold mb-2">まとめ：</h3>
+        <p className="mb-4">
+          この規程は、柔術初心者からベテランまで、世界中の人が柔術に参加しやすくなる仕組みを具体的に示しています。
+        </p>
+        <ul className="list-disc pl-6 mb-4">
+          <li>初心者でも、動画ガイド制作や道場情報共有などでトークンをもらえ、練習費用に充てられる。</li>
+          <li>有名師範の講習や、特別イベントへの優先参加で高いモチベーションを維持できる。</li>
+          <li>道場主やイベント主催者は、トークンを通じて世界中から支援や参加者を集めやすくなり、新しい柔術市場が開ける。</li>
+        </ul>
+        <p>
+          こうした具体例やルール整備によって、トークンを使いながら柔術を楽しむ人が増え、柔術界全体の活性化につながります。
+          初心者が安心して一歩を踏み出し、経験者が知識や技術を共有し、柔術文化が豊かに発展していく未来を、この規程はサポートします。
         </p>
       </div>
     </TokenRulesSection>

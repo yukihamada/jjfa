@@ -1,12 +1,13 @@
 import { TokenRulesSection } from "../TokenRulesSection";
 import { TokenRulesArticle } from "../TokenRulesArticle";
+import { Link } from "react-router-dom";
 
 export const Appendix = () => {
   return (
     <TokenRulesSection title="第6章 附則">
       <TokenRulesArticle title="第13条（技術仕様と運用指針）">
         <p className="mb-4">
-          トークン運用の詳細は「トークン技術仕様書」に基づき実施する。本規程に記載のない事項については、日本の法令および定款を優先適用する。
+          トークン運用の詳細は<Link to="/token-specification" className="text-primary hover:underline">トークン技術仕様書</Link>に基づき実施する。本規程に記載のない事項については、日本の法令および定款を優先適用する。
         </p>
       </TokenRulesArticle>
 

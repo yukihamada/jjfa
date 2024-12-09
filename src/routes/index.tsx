@@ -1,21 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "@/App";
+import { Route, Routes } from "react-router-dom";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
+import Whitepaper from "@/pages/Whitepaper";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Index />,
-      },
-      {
-        path: "about",
-        element: <About />,
-      },
-    ],
-  },
-]);
+export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+  return (
+    <Routes>
+      <Route index element={<Index />} />
+      <Route path="about" element={<About />} />
+      <Route path="whitepaper" element={<Whitepaper />} />
+    </Routes>
+  );
+};

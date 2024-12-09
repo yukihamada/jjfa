@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { NotificationBell } from "@/components/community/NotificationBell";
 import { OnlineUsersDisplay } from "@/components/community/OnlineUsersDisplay";
 import { Button } from "@/components/ui/button";
-import { PenSquare, Users } from "lucide-react";
+import { PenSquare, Users, AlertCircle } from "lucide-react";
 import { CommunityGuidelines } from "@/components/community/CommunityGuidelines";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -58,8 +58,16 @@ const Community = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const handleNewPostClick = () => {
-    setActiveTab("create");
+  const handleEventClick = () => {
+    if (!user) {
+      toast.error("TODOリストを表示するにはログインが必要です", {
+        description: "会員登録を完了してください",
+        icon: <AlertCircle className="h-5 w-5" />,
+      });
+      navigate('/community-registration');
+      return;
+    }
+    setShowTodoDialog(true);
   };
 
   const todoItems = [
@@ -91,7 +99,7 @@ const Community = () => {
         </div>
 
         <div className="max-w-6xl mx-auto space-y-6">
-          <div onClick={() => setShowTodoDialog(true)} className="cursor-pointer">
+          <div onClick={handleEventClick} className="cursor-pointer">
             <EventsSection />
           </div>
           

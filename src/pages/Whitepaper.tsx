@@ -50,36 +50,8 @@ const Whitepaper = () => {
               <p className="text-xl text-slate-600">{t('whitepaper.subtitle')}</p>
             </div>
 
-            {/* 規程リンク一覧 */}
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6 text-center">関連規程・計画書</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {regulations.map((reg) => {
-                  const Icon = reg.icon;
-                  return (
-                    <Link 
-                      key={reg.title}
-                      to={reg.link}
-                      className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <Icon className="w-6 h-6 text-slate-600" />
-                        <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
-                          {reg.title}
-                        </h3>
-                      </div>
-                      <p className="text-slate-600 text-sm">
-                        {reg.description}
-                      </p>
-                    </Link>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className="border-t border-slate-200 pt-8">
-              <h2 className="text-2xl font-bold mb-6 text-center">ホワイトペーパー本文</h2>
-              <div className="prose prose-slate max-w-none">
+            {/* ホワイトペーパー本文 */}
+            <div className="prose prose-slate max-w-none mb-12">
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
@@ -160,6 +132,32 @@ const Whitepaper = () => {
               <section className="mt-8 p-6 bg-slate-50 rounded-lg">
                 <p className="text-slate-700">{t('whitepaper.footer.text')}</p>
               </section>
+            </div>
+
+            {/* 関連規程・計画書 */}
+            <div className="border-t border-slate-200 pt-8">
+              <h2 className="text-2xl font-bold mb-6 text-center">関連規程・計画書</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {regulations.map((reg) => {
+                  const Icon = reg.icon;
+                  return (
+                    <Link 
+                      key={reg.title}
+                      to={reg.link}
+                      className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <Icon className="w-6 h-6 text-slate-600" />
+                        <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
+                          {reg.title}
+                        </h3>
+                      </div>
+                      <p className="text-slate-600 text-sm">
+                        {reg.description}
+                      </p>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </CardContent>

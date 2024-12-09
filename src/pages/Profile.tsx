@@ -9,6 +9,7 @@ import { DAOCard } from "@/components/profile/DAOCard";
 import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { AccountSettings } from "@/components/profile/AccountSettings";
 import { ProfileForm } from "@/components/profile/ProfileForm";
+import { FighterStats } from "@/components/profile/FighterStats";
 import { Profile } from "@/integrations/supabase/types/profiles";
 
 const ProfilePage = () => {
@@ -137,6 +138,16 @@ const ProfilePage = () => {
           </div>
           <DAOCard onPurchaseNFT={handlePurchaseNFT} />
         </div>
+
+        {/* 選手情報セクション */}
+        {fighter && (
+          <div className="mt-8">
+            <FighterStats 
+              fighter={fighter}
+              onUpdate={refreshFighterData}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

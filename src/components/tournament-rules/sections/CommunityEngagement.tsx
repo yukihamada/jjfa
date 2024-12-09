@@ -14,12 +14,12 @@ export const CommunityEngagement = () => {
             <RuleItem
               title="意思決定プロセス"
               description="ルール改定や大会運営に関する提案をコミュニティから募集し、オープンな議論と投票システムを通じて決定します。"
-              ruleNumber="9.1"
+              ruleNumber="20.1"
             />
             <RuleItem
               title="透明性確保"
               description="意思決定プロセスや財務情報をウェブサイトで公開し、定期的な報告会を開催します。"
-              ruleNumber="9.2"
+              ruleNumber="20.2"
             />
           </CardHeader>
         </Card>

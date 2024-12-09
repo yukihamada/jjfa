@@ -20,7 +20,7 @@ export const NavItems = ({ menuItems, onItemClick }: NavItemsProps) => {
             <Link 
               key={item.to}
               to={item.to} 
-              className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-md hover:bg-white transition-all duration-200 text-sm"
+              className="text-slate-700 hover:text-slate-900 font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-md hover:bg-white transition-all duration-200 text-sm selection:bg-slate-100 selection:text-slate-900"
               onClick={onItemClick}
             >
               <Icon className="w-4 h-4" />

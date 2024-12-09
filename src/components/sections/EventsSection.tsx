@@ -3,7 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Calendar } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 
-export const EventsSection = () => {
+interface EventsSectionProps {
+  onClick?: () => void;
+}
+
+export const EventsSection = ({ onClick }: EventsSectionProps) => {
   const { t, i18n } = useTranslation();
   const isJapanese = i18n.language === 'ja';
 
@@ -13,7 +17,10 @@ export const EventsSection = () => {
         {t('events.title')}
       </h2>
       <div className="max-w-4xl mx-auto">
-        <Card className="bg-white/10 backdrop-blur-md border-white/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4">
+        <Card 
+          className="bg-white/10 backdrop-blur-md border-white/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-4 cursor-pointer"
+          onClick={onClick}
+        >
           <CardHeader className="flex flex-row items-center gap-4">
             <Calendar className="w-10 h-10 text-slate-800" />
             <div>
@@ -57,6 +64,7 @@ export const EventsSection = () => {
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block"
+              onClick={(e) => e.stopPropagation()}
             >
               <Button 
                 variant="outline" 

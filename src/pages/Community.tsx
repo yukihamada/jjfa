@@ -12,12 +12,17 @@ import { OnlineUsersDisplay } from "@/components/community/OnlineUsersDisplay";
 import { Button } from "@/components/ui/button";
 import { PenSquare, Users } from "lucide-react";
 import { CommunityGuidelines } from "@/components/community/CommunityGuidelines";
+import { EventsSection } from "@/components/sections/EventsSection";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const Community = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("discussions");
+  const [showTodoDialog, setShowTodoDialog] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +62,16 @@ const Community = () => {
     setActiveTab("create");
   };
 
+  const todoItems = [
+    { id: 1, label: "JJFA会員登録を完了する" },
+    { id: 2, label: "大会エントリーを行う" },
+    { id: 3, label: "健康診断書を提出する" },
+    { id: 4, label: "出場費用を支払う" },
+    { id: 5, label: "計量の予約を行う" },
+    { id: 6, label: "試合用のギを準備する" },
+    { id: 7, label: "保険に加入する" }
+  ];
+
   if (isLoading) {
     return null;
   }
@@ -76,6 +91,10 @@ const Community = () => {
         </div>
 
         <div className="max-w-6xl mx-auto space-y-6">
+          <div onClick={() => setShowTodoDialog(true)} className="cursor-pointer">
+            <EventsSection />
+          </div>
+          
           <CommunityGuidelines />
           
           <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6">
@@ -118,6 +137,31 @@ const Community = () => {
           <PenSquare className="w-6 h-6" />
         </Button>
       )}
+
+      <Dialog open={showTodoDialog} onOpenChange={setShowTodoDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>JiuFight 2025 参加準備リスト</DialogTitle>
+          </DialogHeader>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4">
+                {todoItems.map((item) => (
+                  <div key={item.id} className="flex items-center space-x-2">
+                    <Checkbox id={`todo-${item.id}`} />
+                    <label
+                      htmlFor={`todo-${item.id}`}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {item.label}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

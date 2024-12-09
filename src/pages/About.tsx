@@ -15,6 +15,8 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
+import { PageTitle } from "@/components/PageTitle";
 
 const AboutPage = () => {
   const { t } = useTranslation();
@@ -27,6 +29,12 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <SEO 
+        title="JJFAについて" 
+        description="JJFA（Jiu-Jitsu For ALL）は、ブラジリアン柔術が持つ可能性を最大限に引き出し、世界中の人々が公平かつ持続的にこのスポーツと文化を楽しめるエコシステムを創出する組織です。" 
+      />
+      <PageTitle title="JJFAについて" />
+
       {/* Hero Section */}
       <motion.section 
         className="relative py-20 px-4 overflow-hidden"
@@ -46,7 +54,7 @@ const AboutPage = () => {
             {...fadeInUpVariants}
             transition={{ delay: 0.2 }}
           >
-            ブラジリアン柔術が持つ可能性を最大限に引き出し、世界中の人々が公平かつ持続的にこのスポーツと文化を楽しめるエコシステムを創出する組織です。
+            ブラジリアン柔術が持つ可能性を最大限に引き出し、世界中の人々が公平かつ持続的にこのスポーツと文化を楽しめるエコシステムを創出する組織です。私たちはWeb3技術とトークンエコノミーを活用し、多様な背景を持つ参加者が対等に交流・協力できる、新しい柔術コミュニティの在り方を模索しています。
           </motion.p>
         </div>
       </motion.section>

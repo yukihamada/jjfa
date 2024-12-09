@@ -7,11 +7,6 @@ import { Card, CardContent } from "@/components/ui/card";
 const Whitepaper = () => {
   const { t } = useTranslation();
 
-  const getTranslatedArray = (key: string): string[] => {
-    const items = t(key, { returnObjects: true });
-    return Array.isArray(items) ? items : [];
-  };
-
   const regulations = [
     {
       title: "定款",
@@ -56,6 +51,17 @@ const Whitepaper = () => {
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
                 <p className="mb-4">{t('whitepaper.intro.backgroundText')}</p>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-2">{t('whitepaper.intro.challenges.title')}</h4>
+                  <p className="mb-4">{t('whitepaper.intro.challenges.description')}</p>
+                  <ul className="list-disc pl-6 mb-4">
+                    {t('whitepaper.intro.challenges.items', { returnObjects: true }).map((item: string, index: number) => (
+                      <li key={index} className="mb-2">{item}</li>
+                    ))}
+                  </ul>
+                  <p className="mb-4">{t('whitepaper.intro.challenges.conclusion')}</p>
+                </div>
                 
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.overview')}</h3>
                 <p className="mb-4">{t('whitepaper.intro.overviewText')}</p>
@@ -65,14 +71,14 @@ const Whitepaper = () => {
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.currentState.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.globalSpread.title')}</h3>
                 <ul className="list-disc pl-6 mb-4">
-                  {getTranslatedArray('whitepaper.currentState.globalSpread.items').map((item, index) => (
+                  {t('whitepaper.currentState.globalSpread.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.currentIssues.title')}</h3>
                 <ul className="list-disc pl-6 mb-4">
-                  {getTranslatedArray('whitepaper.currentState.currentIssues.items').map((item, index) => (
+                  {t('whitepaper.currentState.currentIssues.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
@@ -88,7 +94,7 @@ const Whitepaper = () => {
 
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.longTermGoals.title')}</h3>
                 <ul className="list-disc pl-6 mb-4">
-                  {getTranslatedArray('whitepaper.vision.longTermGoals.items').map((item, index) => (
+                  {t('whitepaper.vision.longTermGoals.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
@@ -102,7 +108,7 @@ const Whitepaper = () => {
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.token.types.title')}</h3>
                 <p className="mb-4">{t('whitepaper.token.types.description')}</p>
                 <ul className="list-disc pl-6 mb-4">
-                  {getTranslatedArray('whitepaper.token.types.items').map((item, index) => (
+                  {t('whitepaper.token.types.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>

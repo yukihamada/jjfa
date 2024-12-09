@@ -4,10 +4,6 @@ import { ExternalLink, FileText, Calendar, Coins, Book } from "lucide-react";
 import { PageTitle } from "@/components/PageTitle";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface ChallengeItem {
-  text: string;
-}
-
 const Whitepaper = () => {
   const { t } = useTranslation();
 
@@ -49,11 +45,23 @@ const Whitepaper = () => {
               <p className="text-xl text-slate-600">{t('whitepaper.subtitle')}</p>
             </div>
 
+            {/* ホワイトペーパー本文 */}
             <div className="prose prose-slate max-w-none mb-12">
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
                 <p className="mb-4">{t('whitepaper.intro.backgroundText')}</p>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-2">{t('whitepaper.intro.challenges.title')}</h4>
+                  <p className="mb-4">{t('whitepaper.intro.challenges.description')}</p>
+                  <ul className="list-disc pl-6 mb-4">
+                    {t('whitepaper.intro.challenges.items', { returnObjects: true }).map((item: string, index: number) => (
+                      <li key={index} className="mb-2">{item}</li>
+                    ))}
+                  </ul>
+                  <p className="mb-4">{t('whitepaper.intro.challenges.conclusion')}</p>
+                </div>
                 
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.overview')}</h3>
                 <p className="mb-4">{t('whitepaper.intro.overviewText')}</p>
@@ -63,14 +71,14 @@ const Whitepaper = () => {
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.currentState.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.globalSpread.title')}</h3>
                 <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.currentState.globalSpread.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  {t('whitepaper.currentState.globalSpread.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
 
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.currentIssues.title')}</h3>
                 <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.currentState.currentIssues.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  {t('whitepaper.currentState.currentIssues.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
@@ -86,7 +94,7 @@ const Whitepaper = () => {
 
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.longTermGoals.title')}</h3>
                 <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.vision.longTermGoals.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  {t('whitepaper.vision.longTermGoals.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
@@ -100,7 +108,7 @@ const Whitepaper = () => {
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.token.types.title')}</h3>
                 <p className="mb-4">{t('whitepaper.token.types.description')}</p>
                 <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.token.types.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  {t('whitepaper.token.types.items', { returnObjects: true }).map((item: string, index: number) => (
                     <li key={index} className="mb-2">{item}</li>
                   ))}
                 </ul>
@@ -126,8 +134,13 @@ const Whitepaper = () => {
                 <h2 className="text-lg font-bold mb-2">{t('whitepaper.disclaimer.title')}</h2>
                 <p>{t('whitepaper.disclaimer.content')}</p>
               </section>
+
+              <section className="mt-8 p-6 bg-slate-50 rounded-lg">
+                <p className="text-slate-700">{t('whitepaper.footer.text')}</p>
+              </section>
             </div>
 
+            {/* 関連規程・計画書 */}
             <div className="border-t border-slate-200 pt-8">
               <h2 className="text-2xl font-bold mb-6 text-center">関連規程・計画書</h2>
               <div className="grid md:grid-cols-2 gap-6">

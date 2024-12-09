@@ -49,6 +49,45 @@ serve(async (req) => {
       )
     }
 
+    // Check NFT sales config
+    const { data: salesConfig, error: salesConfigError } = await supabaseClient
+      .from('nft_sales_config')
+      .select('*')
+      .single()
+
+    if (salesConfigError) {
+      console.error('販売設定の取得に失敗:', salesConfigError)
+      return new Response(
+        JSON.stringify({ error: '販売設定の取得に失敗しました' }), 
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
+
+    // Check if sale has ended
+    if (new Date() > new Date(salesConfig.end_date)) {
+      return new Response(
+        JSON.stringify({ error: '販売期間が終了しました' }), 
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
+
+    // Check if sold out
+    if (salesConfig.current_supply >= salesConfig.max_supply) {
+      return new Response(
+        JSON.stringify({ error: '完売しました' }), 
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
+    }
+
     // Check if user already has an active DAO membership
     const { data: existingMembership, error: membershipError } = await supabaseClient
       .from('dao_memberships')
@@ -88,7 +127,7 @@ serve(async (req) => {
               currency: 'jpy',
               product_data: {
                 name: 'JJFA DAO NFT',
-                description: 'JJFA DAOの社員権NFT',
+                description: 'JJFA DAOの社員権NFT（限定100枚）',
               },
               unit_amount: 100000,
             },

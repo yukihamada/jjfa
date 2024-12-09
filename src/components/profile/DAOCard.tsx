@@ -4,6 +4,7 @@ import { Coins, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 
 interface DAOCardProps {
   onPurchaseNFT: () => void;
@@ -12,6 +13,19 @@ interface DAOCardProps {
 export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
   const [loading, setLoading] = useState(false);
 
+  const { data: salesConfig, isLoading: isLoadingSalesConfig } = useQuery({
+    queryKey: ['nftSalesConfig'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('nft_sales_config')
+        .select('*')
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
   const handlePurchase = async () => {
     try {
       setLoading(true);
@@ -19,6 +33,18 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         toast.error("購入するにはログインが必要です");
+        return;
+      }
+
+      // Check if sale has ended
+      if (salesConfig && new Date() > new Date(salesConfig.end_date)) {
+        toast.error("販売期間が終了しました");
+        return;
+      }
+
+      // Check if sold out
+      if (salesConfig && salesConfig.current_supply >= salesConfig.max_supply) {
+        toast.error("完売しました");
         return;
       }
 
@@ -80,6 +106,14 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -94,12 +128,27 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
             <li>収益の分配</li>
             <li>特別なコミュニティアクセス</li>
           </ul>
-          <p className="mt-4 font-medium">価格: ¥100,000</p>
+          <div className="mt-4">
+            <p className="font-medium">価格: ¥100,000</p>
+            {salesConfig && (
+              <>
+                <p className="mt-2">販売期限: {formatDate(salesConfig.end_date)}</p>
+                <p>残り: {Math.max(0, salesConfig.max_supply - salesConfig.current_supply)}枚 
+                  <span className="text-xs text-gray-500">（限定{salesConfig.max_supply}枚）</span>
+                </p>
+              </>
+            )}
+          </div>
         </div>
         <Button 
           onClick={handlePurchase}
           className="w-full"
-          disabled={loading}
+          disabled={loading || isLoadingSalesConfig || 
+            (salesConfig && (
+              new Date() > new Date(salesConfig.end_date) || 
+              salesConfig.current_supply >= salesConfig.max_supply
+            ))
+          }
         >
           {loading ? (
             <>
@@ -113,6 +162,12 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
             </>
           )}
         </Button>
+        {salesConfig && salesConfig.current_supply >= salesConfig.max_supply && (
+          <p className="text-sm text-red-600 text-center">完売しました</p>
+        )}
+        {salesConfig && new Date() > new Date(salesConfig.end_date) && (
+          <p className="text-sm text-red-600 text-center">販売期間が終了しました</p>
+        )}
       </CardContent>
     </Card>
   );

@@ -15,17 +15,18 @@ const Index = () => {
       <SEO 
         title="JJFA - 柔術 for ALL"
         description="JJFAは柔術の普及とコミュニティの発展を目指すプラットフォームです。トーナメント運営、教育コンテンツの提供、グローバルなコミュニティ作りを通じて、柔術の魅力を全ての人々に届けます。"
-        keywords="柔術,JJFA,Jiu-Jitsu,大会,トーナメント,コミュニティ,教育,MASTER NFT,VOTE Token,BJJ Token,DAO"
       />
       <BackgroundGradient />
-      <HeroSection />
-      <JiujitsuBenefitsSection />
-      <EventsSection />
-      <ExternalLinks />
-      <ComingSoonSection />
-      <TeamSection />
-      <TokenSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <JiujitsuBenefitsSection />
+        <EventsSection />
+        <ExternalLinks />
+        <ComingSoonSection />
+        <TeamSection />
+        <TokenSection />
+        <ContactSection />
+      </main>
     </div>
   );
 };

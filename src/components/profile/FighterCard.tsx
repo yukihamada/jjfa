@@ -50,8 +50,14 @@ export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps
               <Shield className="w-4 h-4 text-purple-500" />
               <span className="font-medium">帯:</span>
               <span 
-                className={`px-2 py-0.5 rounded ${fighter.belt?.color === '#FFFFFF' ? 'bg-gray-100 text-gray-900' : ''}`}
-                style={{ color: fighter.belt?.color !== '#FFFFFF' ? fighter.belt?.color : undefined }}
+                className={`px-2 py-0.5 rounded ${
+                  fighter.belt?.color === '#FFFFFF' 
+                    ? 'bg-gray-100 text-gray-900' 
+                    : 'text-white'
+                }`}
+                style={{ 
+                  backgroundColor: fighter.belt?.color !== '#FFFFFF' ? fighter.belt?.color : undefined
+                }}
               >
                 {fighter.belt?.name || "未設定"}
               </span>

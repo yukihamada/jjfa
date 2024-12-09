@@ -1,5 +1,7 @@
 export const nav = {
   home: "トップページ",
+  about: "JJFAについて",
+  project: "プロジェクト",
   community: "コミュニティ",
   benefits: "柔術の魅力",
   whitepaper: "ホワイトペーパー",
@@ -9,6 +11,7 @@ export const nav = {
   careers: "採用情報",
   operatingRules: "運営規則",
   tokenRules: "トークン規程",
+  tournamentRules: "大会規則",
   live: "ライブ配信",
   roadmap: "ロードマップ"
 };

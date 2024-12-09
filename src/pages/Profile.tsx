@@ -77,7 +77,7 @@ const ProfilePage = () => {
   };
 
   const handlePurchaseNFT = () => {
-    toast.info("社員権NFTの購入機能は準備中です");
+    // Remove the toast message and let the DAOCard handle the purchase
   };
 
   const refreshFighterData = async () => {

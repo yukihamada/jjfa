@@ -3,14 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { FighterCard } from "@/components/profile/FighterCard";
-import { MembershipCard } from "@/components/profile/MembershipCard";
-import { DAOCard } from "@/components/profile/DAOCard";
-import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
-import { AccountSettings } from "@/components/profile/AccountSettings";
-import { ProfileForm } from "@/components/profile/ProfileForm";
-import { FighterStats } from "@/components/profile/FighterStats";
 import { Profile } from "@/integrations/supabase/types/profiles";
+import { ProfileLayout } from "@/components/profile/ProfileLayout";
+import { Outlet } from "react-router-dom";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -105,51 +100,17 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="container max-w-4xl mx-auto px-4 py-8 mt-16">
-      <h1 className="text-2xl font-bold mb-8">プロフィール設定</h1>
-
-      <div className="space-y-8">
-        {/* プロフィール写真セクション */}
-        <div className="mb-8">
-          <ProfilePhotoUpload
-            userId={user.id}
-            currentPhotoUrl={profile?.avatar_url}
-            onPhotoUpdate={handlePhotoUpdate}
-          />
-        </div>
-
-        {/* 基本情報セクション */}
-        <div className="grid gap-6 md:grid-cols-2">
-          <AccountSettings userEmail={user?.email} />
-          <ProfileForm profile={profile} user={user} />
-        </div>
-
-        {/* 会員情報セクション */}
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="space-y-6">
-            <FighterCard 
-              fighter={fighter} 
-              onRegistrationSuccess={refreshFighterData}
-            />
-            <MembershipCard 
-              member={member} 
-              onPurchaseNFT={handlePurchaseNFT} 
-            />
-          </div>
-          <DAOCard onPurchaseNFT={handlePurchaseNFT} />
-        </div>
-
-        {/* 選手情報セクション */}
-        {fighter && (
-          <div className="mt-8">
-            <FighterStats 
-              fighter={fighter}
-              onUpdate={refreshFighterData}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+    <ProfileLayout>
+      <Outlet context={{
+        user,
+        profile,
+        fighter,
+        member,
+        onPhotoUpdate: handlePhotoUpdate,
+        onPurchaseNFT: handlePurchaseNFT,
+        onFighterUpdate: refreshFighterData
+      }} />
+    </ProfileLayout>
   );
 };
 

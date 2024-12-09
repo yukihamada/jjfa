@@ -17,6 +17,11 @@ import Profile from "@/pages/Profile";
 import LiveStreaming from "@/pages/LiveStreaming";
 import StreamingStudio from "@/pages/StreamingStudio";
 import DiscussionDetail from "@/pages/DiscussionDetail";
+import BasicInfo from "@/pages/profile/BasicInfo";
+import Membership from "@/pages/profile/Membership";
+import Fighter from "@/pages/profile/Fighter";
+import FighterStats from "@/pages/profile/FighterStats";
+import Settings from "@/pages/profile/Settings";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -52,7 +57,13 @@ export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => 
       <Route path="/contact" element={<Contact />} />
       <Route path="/careers" element={<Careers />} />
       <Route path="/roadmap" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Roadmap /></ProtectedRoute>} />
-      <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile /></ProtectedRoute>}>
+        <Route index element={<BasicInfo />} />
+        <Route path="membership" element={<Membership />} />
+        <Route path="fighter" element={<Fighter />} />
+        <Route path="techniques" element={<FighterStats />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
       <Route path="/live" element={<LiveStreaming />} />
       <Route path="/live/:streamId" element={<LiveStreaming />} />
       <Route path="/studio/:streamKey" element={<StreamingStudio />} />

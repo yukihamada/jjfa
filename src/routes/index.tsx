@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Index from "@/pages/Index";
+import About from "@/pages/About";
 import Whitepaper from "@/pages/Whitepaper";
 import Community from "@/pages/Community";
 import CommunityRegistration from "@/pages/CommunityRegistration";
@@ -37,6 +38,7 @@ export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => 
   return (
     <Routes>
       <Route path="/" element={<Index />} />
+      <Route path="/about" element={<About />} />
       <Route path="/whitepaper" element={<Whitepaper />} />
       <Route path="/community-registration" element={<CommunityRegistration />} />
       <Route path="/community" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Community /></ProtectedRoute>} />

@@ -133,7 +133,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
             {salesConfig && (
               <>
                 <p className="mt-2">販売期限: {formatDate(salesConfig.end_date)}</p>
-                <p>残り: {Math.max(0, salesConfig.max_supply - salesConfig.current_supply)}枚 
+                <p>残り: {Math.max(0, salesConfig.max_supply - (salesConfig.current_supply || 0))}枚 
                   <span className="text-xs text-gray-500">（限定{salesConfig.max_supply}枚）</span>
                 </p>
               </>
@@ -146,7 +146,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
           disabled={loading || isLoadingSalesConfig || 
             (salesConfig && (
               new Date() > new Date(salesConfig.end_date) || 
-              salesConfig.current_supply >= salesConfig.max_supply
+              (salesConfig.current_supply || 0) >= salesConfig.max_supply
             ))
           }
         >
@@ -162,7 +162,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
             </>
           )}
         </Button>
-        {salesConfig && salesConfig.current_supply >= salesConfig.max_supply && (
+        {salesConfig && (salesConfig.current_supply || 0) >= salesConfig.max_supply && (
           <p className="text-sm text-red-600 text-center">完売しました</p>
         )}
         {salesConfig && new Date() > new Date(salesConfig.end_date) && (

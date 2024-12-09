@@ -6,6 +6,7 @@ import { MobileMenu } from "./navigation/MobileMenu";
 import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
+import { LanguageSelector } from "./LanguageSelector";
 import { Home, Users, Star, FileText, Video, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -83,6 +84,7 @@ export const GlobalNav = () => {
           <NavItems menuItems={navItems} liveStreams={liveStreams} onItemClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="flex items-center gap-4">
+          <LanguageSelector />
           <UserMenu user={user} />
           <MobileMenu 
             menuItems={navItems} 

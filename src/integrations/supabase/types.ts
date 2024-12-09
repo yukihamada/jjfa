@@ -386,7 +386,7 @@ export type Database = {
           description_en?: string | null
           email?: string | null
           id?: string
-          name: string
+          name?: string
           name_en?: string | null
           owner_id?: string | null
           phone?: string | null
@@ -559,7 +559,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          discussion_id: string
+          discussion_id?: string
           user_id?: string
         }
         Relationships: [
@@ -827,27 +827,27 @@ export type Database = {
       }
       nft_sales_config: {
         Row: {
+          created_at: string
+          current_supply: number | null
+          end_date: string
           id: string
           max_supply: number
-          end_date: string
-          current_supply: number | null
-          created_at: string
           updated_at: string
         }
         Insert: {
+          created_at?: string
+          current_supply?: number | null
+          end_date: string
           id?: string
           max_supply: number
-          end_date: string
-          current_supply?: number | null
-          created_at?: string
           updated_at?: string
         }
         Update: {
+          created_at?: string
+          current_supply?: number | null
+          end_date?: string
           id?: string
           max_supply?: number
-          end_date?: string
-          current_supply?: number | null
-          created_at?: string
           updated_at?: string
         }
         Relationships: []
@@ -1035,7 +1035,7 @@ export type Database = {
           competition_type?: string | null
           created_at?: string | null
           description?: string | null
-          id: string
+          id?: string
           short_id: string
           thumbnail_url?: string | null
           title: string
@@ -1055,7 +1055,7 @@ export type Database = {
           title?: string
           updated_at?: string | null
           user_id?: string | null
-          video_url: string
+          video_url?: string
           views?: number | null
         }
         Relationships: []

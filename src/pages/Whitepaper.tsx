@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileText, Calendar, Coins } from "lucide-react";
 import { PageTitle } from "@/components/PageTitle";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -11,6 +11,27 @@ const Whitepaper = () => {
     const items = t(key, { returnObjects: true });
     return Array.isArray(items) ? items : [];
   };
+
+  const regulations = [
+    {
+      title: "運営規程",
+      description: "DAOの運営方針、意思決定プロセス、ガバナンス構造などを定めた規程です。",
+      icon: FileText,
+      link: "/operating-rules"
+    },
+    {
+      title: "ロードマップ",
+      description: "JJFAの開発・運営計画を時系列で示した計画書です。",
+      icon: Calendar,
+      link: "/roadmap"
+    },
+    {
+      title: "トークン規程",
+      description: "JJFAトークンの発行・管理・利用に関する規程です。",
+      icon: Coins,
+      link: "/token-rules"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
@@ -23,35 +44,28 @@ const Whitepaper = () => {
               <p className="text-xl text-slate-600">{t('whitepaper.subtitle')}</p>
             </div>
 
-            <div className="flex flex-wrap gap-4 justify-center mb-8">
-              <Link 
-                to="/articles" 
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                {t('whitepaper.links.articles')}
-              </Link>
-              <Link 
-                to="/operating-rules" 
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                {t('whitepaper.links.operatingRules')}
-              </Link>
-              <Link 
-                to="/token-rules" 
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                {t('whitepaper.links.tokenRules')}
-              </Link>
-              <Link 
-                to="/roadmap" 
-                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md text-slate-700 transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                {t('whitepaper.links.roadmap')}
-              </Link>
+            {/* 規程リンク一覧 */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {regulations.map((reg) => {
+                const Icon = reg.icon;
+                return (
+                  <Link 
+                    key={reg.title}
+                    to={reg.link}
+                    className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <Icon className="w-6 h-6 text-slate-600" />
+                      <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
+                        {reg.title}
+                      </h3>
+                    </div>
+                    <p className="text-slate-600 text-sm">
+                      {reg.description}
+                    </p>
+                  </Link>
+                )
+              })}
             </div>
 
             <div className="prose prose-slate max-w-none">

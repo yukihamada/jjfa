@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -10,11 +9,10 @@ interface MobileMenuProps {
     label: string;
     icon: any;
   }>;
-  liveStreams: number;
   onItemClick: () => void;
 }
 
-export const MobileMenu = ({ isOpen, menuItems, liveStreams, onItemClick }: MobileMenuProps) => {
+export const MobileMenu = ({ isOpen, menuItems, onItemClick }: MobileMenuProps) => {
   return (
     <div className="lg:hidden">
       <Button
@@ -43,11 +41,6 @@ export const MobileMenu = ({ isOpen, menuItems, liveStreams, onItemClick }: Mobi
               >
                 <Icon className="w-4 h-4" />
                 <span>{item.label}</span>
-                {item.to === "/live" && liveStreams > 0 && (
-                  <Badge variant="destructive" className="ml-auto">
-                    {liveStreams}
-                  </Badge>
-                )}
               </Link>
             );
           })}

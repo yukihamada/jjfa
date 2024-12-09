@@ -9,12 +9,19 @@ const GlobalFooter = () => {
     {
       title: t('footer.about'),
       links: [
-        { to: "/", label: t('nav.home') },
+        { to: "/about", label: t('nav.about') },
+        { to: "/articles", label: t('nav.articles') },
+        { to: "/careers", label: t('nav.careers') },
+      ]
+    },
+    {
+      title: t('footer.project'),
+      links: [
         { to: "/whitepaper", label: t('nav.whitepaper') },
         { to: "/roadmap", label: t('nav.roadmap') },
         { to: "/operating-rules", label: t('nav.operatingRules') },
         { to: "/token-rules", label: t('nav.tokenRules') },
-        { to: "/tournament-rules", label: "大会ルール" },
+        { to: "/tournament-rules", label: t('nav.tournamentRules') },
       ]
     },
     {
@@ -22,14 +29,7 @@ const GlobalFooter = () => {
       links: [
         { to: "/community", label: t('nav.community') },
         { to: "/jiujitsu-benefits", label: t('nav.benefits') },
-        { to: "/articles", label: t('nav.articles') },
-      ]
-    },
-    {
-      title: t('footer.company'),
-      links: [
-        { to: "/careers", label: t('nav.careers') },
-        { to: "/contact", label: t('nav.contact') },
+        { to: "/live", label: t('nav.live') },
       ]
     }
   ];

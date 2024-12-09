@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useFormValidation } from "./useFormValidation";
 
 interface FighterRegistrationData {
   dojoId: string | null;
@@ -17,58 +18,7 @@ interface FighterRegistrationData {
 
 export const useFighterRegistration = (onSuccess: () => void) => {
   const [loading, setLoading] = useState(false);
-
-  const validateForm = (data: FighterRegistrationData) => {
-    if (!data.beltId) {
-      toast.error("帯を選択してください");
-      return false;
-    }
-
-    if (!data.instructor.trim()) {
-      toast.error("指導者名を入力してください");
-      return false;
-    }
-
-    if (!data.weight || isNaN(parseFloat(data.weight))) {
-      toast.error("有効な体重を入力してください");
-      return false;
-    }
-
-    if (!data.height || isNaN(parseFloat(data.height))) {
-      toast.error("有効な身長を入力してください");
-      return false;
-    }
-
-    // Only validate these fields for new registrations
-    if (data.phone !== undefined) {
-      if (!data.phone.trim()) {
-        toast.error("電話番号を入力してください");
-        return false;
-      }
-
-      if (!data.address?.trim()) {
-        toast.error("住所を入力してください");
-        return false;
-      }
-
-      if (!data.emergencyContact?.trim()) {
-        toast.error("緊急連絡先の氏名を入力してください");
-        return false;
-      }
-
-      if (!data.emergencyPhone?.trim()) {
-        toast.error("緊急連絡先の電話番号を入力してください");
-        return false;
-      }
-
-      if (!data.emergencyRelation?.trim()) {
-        toast.error("緊急連絡先の続柄を入力してください");
-        return false;
-      }
-    }
-
-    return true;
-  };
+  const { validateForm } = useFormValidation();
 
   const registerFighter = async (data: FighterRegistrationData) => {
     setLoading(true);
@@ -76,14 +26,8 @@ export const useFighterRegistration = (onSuccess: () => void) => {
     try {
       const { data: { user }, error: userError } = await supabase.auth.getUser();
       
-      if (userError) {
-        console.error("Auth error:", userError);
+      if (userError || !user) {
         toast.error("認証エラー: ログインが必要です");
-        return;
-      }
-
-      if (!user) {
-        toast.error("ログインが必要です");
         return;
       }
 
@@ -141,14 +85,7 @@ export const useFighterRegistration = (onSuccess: () => void) => {
         });
 
       if (insertError) {
-        console.error("Insert error:", insertError);
-        if (insertError.code === "23503") {
-          toast.error("選択された道場または帯が無効です");
-        } else if (insertError.code === "23505") {
-          toast.error("すでに選手登録が完了しています");
-        } else {
-          toast.error(`選手登録に失敗しました: ${insertError.message}`);
-        }
+        handleInsertError(insertError);
         return;
       }
 
@@ -194,6 +131,17 @@ export const useFighterRegistration = (onSuccess: () => void) => {
       toast.error("予期せぬエラーが発生しました。もう一度お試しください。");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleInsertError = (error: any) => {
+    console.error("Insert error:", error);
+    if (error.code === "23503") {
+      toast.error("選択された道場または帯が無効です");
+    } else if (error.code === "23505") {
+      toast.error("すでに選手登録が完了しています");
+    } else {
+      toast.error(`選手登録に失敗しました: ${error.message}`);
     }
   };
 

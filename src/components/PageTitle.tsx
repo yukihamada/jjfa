@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 interface PageTitleProps {
   title: string;
+  description?: string;
 }
 
-export const PageTitle = ({ title }: PageTitleProps) => {
+export const PageTitle = ({ title, description }: PageTitleProps) => {
   const { t } = useTranslation();
 
   useEffect(() => {

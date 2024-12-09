@@ -22,6 +22,7 @@ import Membership from "@/pages/profile/Membership";
 import Fighter from "@/pages/profile/Fighter";
 import FighterStats from "@/pages/profile/FighterStats";
 import Settings from "@/pages/profile/Settings";
+import { useOutletContext } from "react-router-dom";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -58,11 +59,11 @@ export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => 
       <Route path="/careers" element={<Careers />} />
       <Route path="/roadmap" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Roadmap /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile /></ProtectedRoute>}>
-        <Route index element={<BasicInfo />} />
-        <Route path="membership" element={<Membership />} />
-        <Route path="fighter" element={<Fighter />} />
+        <Route index element={<OutletBasicInfo />} />
+        <Route path="membership" element={<OutletMembership />} />
+        <Route path="fighter" element={<OutletFighter />} />
         <Route path="techniques" element={<FighterStats />} />
-        <Route path="settings" element={<Settings />} />
+        <Route path="settings" element={<OutletSettings />} />
       </Route>
       <Route path="/live" element={<LiveStreaming />} />
       <Route path="/live/:streamId" element={<LiveStreaming />} />
@@ -70,4 +71,25 @@ export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => 
       <Route path="/studio" element={<StreamingStudio />} />
     </Routes>
   );
+};
+
+// Wrapper components to handle outlet context
+const OutletBasicInfo = () => {
+  const { user, profile, onPhotoUpdate } = useOutletContext<any>();
+  return <BasicInfo user={user} profile={profile} onPhotoUpdate={onPhotoUpdate} />;
+};
+
+const OutletMembership = () => {
+  const { member, onPurchaseNFT } = useOutletContext<any>();
+  return <Membership member={member} onPurchaseNFT={onPurchaseNFT} />;
+};
+
+const OutletFighter = () => {
+  const { fighter, onFighterUpdate } = useOutletContext<any>();
+  return <Fighter fighter={fighter} onRegistrationSuccess={onFighterUpdate} />;
+};
+
+const OutletSettings = () => {
+  const { user } = useOutletContext<any>();
+  return <Settings userEmail={user?.email} />;
 };

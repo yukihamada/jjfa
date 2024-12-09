@@ -138,7 +138,7 @@ const Community = () => {
       
       {activeTab !== "create" && (
         <Button
-          onClick={handleNewPostClick}
+          onClick={() => setActiveTab("create")}
           className="fixed bottom-6 right-6 rounded-full w-16 h-16 shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90 text-white"
           size="icon"
         >

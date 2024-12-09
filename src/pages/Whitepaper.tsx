@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ExternalLink, FileText, Calendar, Coins } from "lucide-react";
+import { ExternalLink, FileText, Calendar, Coins, Book } from "lucide-react";
 import { PageTitle } from "@/components/PageTitle";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -14,22 +14,28 @@ const Whitepaper = () => {
 
   const regulations = [
     {
+      title: "定款",
+      description: "JJFAの組織としての基本的な枠組みを定めた規程です。",
+      icon: Book,
+      link: "/articles"
+    },
+    {
       title: "運営規程",
       description: "DAOの運営方針、意思決定プロセス、ガバナンス構造などを定めた規程です。",
       icon: FileText,
       link: "/operating-rules"
     },
     {
-      title: "ロードマップ",
-      description: "JJFAの開発・運営計画を時系列で示した計画書です。",
-      icon: Calendar,
-      link: "/roadmap"
-    },
-    {
       title: "トークン規程",
       description: "JJFAトークンの発行・管理・利用に関する規程です。",
       icon: Coins,
       link: "/token-rules"
+    },
+    {
+      title: "ロードマップ",
+      description: "JJFAの開発・運営計画を時系列で示した計画書です。",
+      icon: Calendar,
+      link: "/roadmap"
     }
   ];
 
@@ -45,30 +51,35 @@ const Whitepaper = () => {
             </div>
 
             {/* 規程リンク一覧 */}
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              {regulations.map((reg) => {
-                const Icon = reg.icon;
-                return (
-                  <Link 
-                    key={reg.title}
-                    to={reg.link}
-                    className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <Icon className="w-6 h-6 text-slate-600" />
-                      <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
-                        {reg.title}
-                      </h3>
-                    </div>
-                    <p className="text-slate-600 text-sm">
-                      {reg.description}
-                    </p>
-                  </Link>
-                )
-              })}
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold mb-6 text-center">関連規程・計画書</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {regulations.map((reg) => {
+                  const Icon = reg.icon;
+                  return (
+                    <Link 
+                      key={reg.title}
+                      to={reg.link}
+                      className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <Icon className="w-6 h-6 text-slate-600" />
+                        <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
+                          {reg.title}
+                        </h3>
+                      </div>
+                      <p className="text-slate-600 text-sm">
+                        {reg.description}
+                      </p>
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
 
-            <div className="prose prose-slate max-w-none">
+            <div className="border-t border-slate-200 pt-8">
+              <h2 className="text-2xl font-bold mb-6 text-center">ホワイトペーパー本文</h2>
+              <div className="prose prose-slate max-w-none">
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
@@ -149,6 +160,7 @@ const Whitepaper = () => {
               <section className="mt-8 p-6 bg-slate-50 rounded-lg">
                 <p className="text-slate-700">{t('whitepaper.footer.text')}</p>
               </section>
+              </div>
             </div>
           </CardContent>
         </Card>

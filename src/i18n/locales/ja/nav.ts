@@ -1,8 +1,8 @@
 export const nav = {
   home: "トップページ",
+  about: "JJFAについて",
+  project: "プロジェクト情報",
   community: "コミュニティ",
-  benefits: "柔術の魅力",
-  whitepaper: "ホワイトペーパー",
   contact: "お問い合わせ",
   trial: "体験申し込み",
   articles: "定款",
@@ -10,5 +10,6 @@ export const nav = {
   operatingRules: "運営規則",
   tokenRules: "トークン規程",
   live: "ライブ配信",
-  roadmap: "ロードマップ"
+  roadmap: "ロードマップ",
+  whitepaper: "ホワイトペーパー"
 };

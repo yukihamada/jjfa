@@ -100,17 +100,19 @@ const ProfilePage = () => {
   }
 
   return (
-    <ProfileLayout>
-      <Outlet context={{
-        user,
-        profile,
-        fighter,
-        member,
-        onPhotoUpdate: handlePhotoUpdate,
-        onPurchaseNFT: handlePurchaseNFT,
-        onFighterUpdate: refreshFighterData
-      }} />
-    </ProfileLayout>
+    <div>
+      <ProfileLayout>
+        <Outlet context={{
+          user,
+          profile,
+          fighter,
+          member,
+          onPhotoUpdate: handlePhotoUpdate,
+          onPurchaseNFT: handlePurchaseNFT,
+          onFighterUpdate: refreshFighterData
+        }} />
+      </ProfileLayout>
+    </div>
   );
 };
 

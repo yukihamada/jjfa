@@ -1,18 +1,8 @@
-import { MembershipCard } from "@/components/profile/MembershipCard";
-import { DAOCard } from "@/components/profile/DAOCard";
+import { useOutletContext } from "react-router-dom";
 
-interface MembershipProps {
-  member: any;
-  onPurchaseNFT: () => void;
-}
-
-const Membership = ({ member, onPurchaseNFT }: MembershipProps) => {
-  return (
-    <div className="space-y-6">
-      <MembershipCard member={member} onPurchaseNFT={onPurchaseNFT} />
-      <DAOCard onPurchaseNFT={onPurchaseNFT} />
-    </div>
-  );
+const Membership = () => {
+  const context = useOutletContext<any>();
+  return <div>Membership Page</div>;
 };
 
 export default Membership;

@@ -1,15 +1,8 @@
-import { AccountSettings } from "@/components/profile/AccountSettings";
+import { useOutletContext } from "react-router-dom";
 
-interface SettingsProps {
-  userEmail: string;
-}
-
-const Settings = ({ userEmail }: SettingsProps) => {
-  return (
-    <div className="space-y-6">
-      <AccountSettings userEmail={userEmail} />
-    </div>
-  );
+const Settings = () => {
+  const context = useOutletContext<any>();
+  return <div>Settings Page</div>;
 };
 
 export default Settings;

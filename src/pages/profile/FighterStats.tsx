@@ -1,11 +1,8 @@
-import { FighterStatsCard } from "@/components/profile/FighterStatsCard";
+import { useOutletContext } from "react-router-dom";
 
 const FighterStats = () => {
-  return (
-    <div className="space-y-6">
-      <FighterStatsCard />
-    </div>
-  );
+  const context = useOutletContext<any>();
+  return <div>Fighter Stats Page</div>;
 };
 
 export default FighterStats;

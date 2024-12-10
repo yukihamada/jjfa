@@ -1,19 +1,8 @@
-import { FighterCard } from "@/components/profile/FighterCard";
+import { useOutletContext } from "react-router-dom";
 
-interface FighterProps {
-  fighter: any;
-  onRegistrationSuccess: () => void;
-}
-
-const Fighter = ({ fighter, onRegistrationSuccess }: FighterProps) => {
-  return (
-    <div className="space-y-6">
-      <FighterCard 
-        fighter={fighter} 
-        onRegistrationSuccess={onRegistrationSuccess}
-      />
-    </div>
-  );
+const Fighter = () => {
+  const context = useOutletContext<any>();
+  return <div>Fighter Profile Page</div>;
 };
 
 export default Fighter;

@@ -3,9 +3,10 @@ import { PageTitle } from "@/components/PageTitle";
 import { TokenSpecificationHeader } from "@/components/token-specification/TokenSpecificationHeader";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { TokenOverview } from "@/components/token-specification/sections/TokenOverview";
-import { TokenTypes } from "@/components/token-specification/sections/TokenTypes";
 import { NetworkSelection } from "@/components/token-specification/sections/NetworkSelection";
+import { TokenArchitecture } from "@/components/token-specification/sections/TokenArchitecture";
 import { SecurityMeasures } from "@/components/token-specification/sections/SecurityMeasures";
+import { TokenTypes } from "@/components/token-specification/sections/TokenTypes";
 import { UserExperience } from "@/components/token-specification/sections/UserExperience";
 import { Compliance } from "@/components/token-specification/sections/Compliance";
 import { Transparency } from "@/components/token-specification/sections/Transparency";
@@ -22,9 +23,10 @@ const TokenSpecification = () => {
             <TokenSpecificationHeader />
             <div className="prose prose-slate max-w-none">
               <TokenOverview />
-              <TokenTypes />
               <NetworkSelection />
+              <TokenArchitecture />
               <SecurityMeasures />
+              <TokenTypes />
               <UserExperience />
               <Compliance />
               <Transparency />

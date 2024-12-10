@@ -3,9 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Loader2, User } from "lucide-react";
+import { Loader2, User, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 interface ProfileFormProps {
   profile: any;
@@ -56,8 +57,21 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
     <form onSubmit={handleUpdate}>
       <Card>
         <CardHeader>
-          <CardTitle>プロフィール情報</CardTitle>
-          <CardDescription>基本的な情報を更新</CardDescription>
+          <div className="flex justify-between items-center">
+            <div>
+              <CardTitle>プロフィール情報</CardTitle>
+              <CardDescription>基本的な情報を更新</CardDescription>
+            </div>
+            {profile?.username && (
+              <Link 
+                to={`/profile/${profile.username}`}
+                className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
+              >
+                <ExternalLink className="w-4 h-4" />
+                公開プロフィールを見る
+              </Link>
+            )}
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">

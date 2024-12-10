@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
@@ -18,77 +18,35 @@ import Careers from "@/pages/Careers";
 import Whitepaper from "@/pages/Whitepaper";
 import TokenSpecification from "@/pages/TokenSpecification";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Index />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
-  },
-  {
-    path: "/articles",
-    element: <Articles />,
-  },
-  {
-    path: "/operating-rules",
-    element: <OperatingRules />,
-  },
-  {
-    path: "/token-rules",
-    element: <TokenRules />,
-  },
-  {
-    path: "/tournament-rules",
-    element: <TournamentRules />,
-  },
-  {
-    path: "/community",
-    element: <Community />,
-  },
-  {
-    path: "/community/register",
-    element: <CommunityRegistration />,
-  },
-  {
-    path: "/discussions/:id",
-    element: <DiscussionDetail />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/nft",
-    element: <NFT />,
-  },
-  {
-    path: "/live",
-    element: <LiveStreaming />,
-  },
-  {
-    path: "/studio",
-    element: <StreamingStudio />,
-  },
-  {
-    path: "/benefits",
-    element: <JiujitsuBenefits />,
-  },
-  {
-    path: "/careers",
-    element: <Careers />,
-  },
-  {
-    path: "/whitepaper",
-    element: <Whitepaper />,
-  },
-  {
-    path: "/token-specification",
-    element: <TokenSpecification />,
-  },
-]);
+interface AppRoutesProps {
+  isAuthenticated: boolean;
+}
+
+export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/articles" element={<Articles />} />
+      <Route path="/operating-rules" element={<OperatingRules />} />
+      <Route path="/token-rules" element={<TokenRules />} />
+      <Route path="/tournament-rules" element={<TournamentRules />} />
+      <Route path="/community" element={<Community />} />
+      <Route path="/community/register" element={<CommunityRegistration />} />
+      <Route path="/discussions/:id" element={<DiscussionDetail />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/nft" element={<NFT />} />
+      <Route path="/live" element={<LiveStreaming />} />
+      <Route path="/studio" element={<StreamingStudio />} />
+      <Route path="/benefits" element={<JiujitsuBenefits />} />
+      <Route path="/careers" element={<Careers />} />
+      <Route path="/whitepaper" element={<Whitepaper />} />
+      <Route path="/token-specification" element={<TokenSpecification />} />
+    </Routes>
+  );
+};

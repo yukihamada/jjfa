@@ -1,5 +1,6 @@
 export const footer = {
   about: "About JJFA",
+  project: "Project",
   community: "Community",
   company: "Company Information",
   links: {

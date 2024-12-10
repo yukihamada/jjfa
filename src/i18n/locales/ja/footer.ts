@@ -1,5 +1,6 @@
 export const footer = {
   about: "JJFAについて",
+  project: "プロジェクト",
   community: "コミュニティ",
   company: "会社情報",
   links: {

@@ -79,6 +79,18 @@ export default {
     email: "อีเมล",
     phone: "โทรศัพท์"
   },
+  footer: {
+    about: "เกี่ยวกับ JJFA",
+    project: "โครงการ",
+    community: "ชุมชน",
+    company: "ข้อมูลบริษัท",
+    links: {
+      whitepaper: "เอกสารขาว",
+      roadmap: "แผนงาน",
+      operatingRules: "กฎการดำเนินงาน",
+      tokenRules: "กฎโทเคน"
+    }
+  },
   whitepaper: {
     title: "เอกสารขาว JJFA",
     subtitle: "สร้างอนาคตของยูยิตสูผ่าน Web3",

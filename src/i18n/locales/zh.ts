@@ -98,7 +98,19 @@ export default {
       background: "背景",
       backgroundText: "巴西柔术作为一种武术和竞技运动在全球范围内持续发展。然而，在可持续发展和公平价值分配方面，社区面临着各种挑战。",
       overview: "项目概述",
-      overviewText: "JJFA（Jiu-Jitsu For ALL）旨在通过创建一个连接全球练习者、道馆和比赛组织者的去中心化平台来解决这些挑战。"
+      overviewText: "JJFA（Jiu-Jitsu For ALL）旨在通过创建一个连接全球练习者、道馆和比赛组织者的去中心化平台来解决这些挑战。",
+    },
+  },
+  footer: {
+    about: "关于JJFA",
+    project: "项目",
+    community: "社区",
+    company: "公司信息",
+    links: {
+      whitepaper: "白皮书",
+      roadmap: "路线图",
+      operatingRules: "运营规则",
+      tokenRules: "代币规则"
     }
   }
 };

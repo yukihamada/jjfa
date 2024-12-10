@@ -69,5 +69,17 @@ export default {
       }
     },
     bookTrial: "Agende uma Aula Experimental Gratuita"
+  },
+  footer: {
+    about: "Sobre a JJFA",
+    project: "Projeto",
+    community: "Comunidade",
+    company: "Informações da Empresa",
+    links: {
+      whitepaper: "Whitepaper",
+      roadmap: "Roadmap",
+      operatingRules: "Regras de Operação",
+      tokenRules: "Regras do Token"
+    }
   }
 };

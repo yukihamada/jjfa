@@ -69,5 +69,17 @@ export default {
       }
     },
     bookTrial: "Reserva una Clase de Prueba Gratuita"
+  },
+  footer: {
+    about: "Sobre JJFA",
+    project: "Proyecto",
+    community: "Comunidad",
+    company: "Información de la Empresa",
+    links: {
+      whitepaper: "Libro Blanco",
+      roadmap: "Hoja de Ruta",
+      operatingRules: "Reglas de Operación",
+      tokenRules: "Reglas de Tokens"
+    }
   }
 };

@@ -14,6 +14,20 @@ JJFAは、柔術の普及とコミュニティの発展を目指すプロジェ�
 - [運営規程](https://jjforall.com/operating-rules)
 - [定款](https://jjforall.com/articles)
 
+## 🛠 技術スタック
+
+- フロントエンド: React + TypeScript
+- バックエンド: [Supabase](https://supabase.com)
+- デプロイ: Vercel
+
+## 👥 コントリビューション
+
+プロジェクトへの貢献を歓迎します！以下の手順で参加できます：
+
+1. [プロジェクトページ](https://lovable.dev/projects/4983e516-a49a-409d-925c-a5f07a5da8ea)からプルリクエストを送信
+2. コントリビューションガイドラインに従ってコードを作成
+3. レビュー後、マージされます
+
 ## 📞 お問い合わせ
 
 - Website: [jjforall.com](https://jjforall.com)

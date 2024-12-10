@@ -1,4 +1,3 @@
-<lov-code>
 export default {
   nav: {
     whitepaper: "백서",
@@ -56,4 +55,14 @@ export default {
       tateishi: {
         name: "타테이시 슈야",
         role: "주짓수 선수・운동가",
-        description: "YAWARA 브라질리안 주짓수 아카데미 소속의 주짓수 선수. 게이오 대학교 경제학부 졸업 후 2022년에 본격적으로 주짓수에 입문. 경기 경력 2년 미만임에도 급
+        description: "YAWARA 브라질리안 주짓수 아카데미 소속의 주짓수 선수. 게이오 대학교 경제학부 졸업 후 2022년에 본격적으로 주짓수에 입문. 경기 경력 2년 미만임에도 급속한 성장을 보이며 주목받고 있음."
+      }
+    }
+  },
+  footer: {
+    project: "프로젝트",
+    community: "커뮤니티",
+    documents: "문서",
+    contact: "문의하기"
+  }
+};

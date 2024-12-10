@@ -78,6 +78,33 @@ export type Database = {
         }
         Relationships: []
       }
+      classes: {
+        Row: {
+          capacity: number
+          created_at: string
+          id: string
+          name: string
+          time: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          created_at?: string
+          id?: string
+          name: string
+          time: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          id?: string
+          name?: string
+          time?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       comments: {
         Row: {
           content: string
@@ -444,6 +471,7 @@ export type Database = {
           profile_photo: string | null
           reach: number | null
           social_media_links: Json | null
+          stripes: number | null
           total_matches: number | null
           updated_at: string
           user_id: string | null
@@ -470,6 +498,7 @@ export type Database = {
           profile_photo?: string | null
           reach?: number | null
           social_media_links?: Json | null
+          stripes?: number | null
           total_matches?: number | null
           updated_at?: string
           user_id?: string | null
@@ -496,6 +525,7 @@ export type Database = {
           profile_photo?: string | null
           reach?: number | null
           social_media_links?: Json | null
+          stripes?: number | null
           total_matches?: number | null
           updated_at?: string
           user_id?: string | null

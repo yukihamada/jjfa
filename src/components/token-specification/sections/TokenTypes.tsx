@@ -3,12 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export const TokenTypes = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">3. トークンの特徴</h2>
+      <h2 className="text-2xl font-semibold mb-4">5. トークンの特徴</h2>
 
       <div className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>3.1 JJM (メンバートークン)</CardTitle>
+            <CardTitle>5.1 JJM (メンバートークン)</CardTitle>
           </CardHeader>
           <CardContent>
             <h3 className="font-semibold mb-2">主な用途:</h3>
@@ -26,7 +26,7 @@ export const TokenTypes = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>3.2 JJG (ガバナンストークン)</CardTitle>
+            <CardTitle>5.2 JJG (ガバナンストークン)</CardTitle>
           </CardHeader>
           <CardContent>
             <h3 className="font-semibold mb-2">主な用途:</h3>
@@ -43,7 +43,7 @@ export const TokenTypes = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>3.3 JJU (ユーティリティトークン)</CardTitle>
+            <CardTitle>5.3 JJU (ユーティリティトークン)</CardTitle>
           </CardHeader>
           <CardContent>
             <h3 className="font-semibold mb-2">主な用途:</h3>

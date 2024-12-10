@@ -4,7 +4,7 @@ import { Link } from "lucide-react";
 export const TokenArchitecture = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">2. トークンアーキテクチャ</h2>
+      <h2 className="text-2xl font-semibold mb-4">3. トークンアーキテクチャ</h2>
       
       <Card>
         <CardHeader>
@@ -24,7 +24,7 @@ export const TokenArchitecture = () => {
         <CardContent>
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold mb-2">2.1 トークン規格</h3>
+              <h3 className="font-semibold mb-2">3.1 トークン規格</h3>
               <p>
                 オープンソースで提供されるSolanaのトークン規格を使用し、以下の特徴を実装します：
               </p>
@@ -37,7 +37,7 @@ export const TokenArchitecture = () => {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-2">2.2 スマートコントラクト機能</h3>
+              <h3 className="font-semibold mb-2">3.2 スマートコントラクト機能</h3>
               <ul className="list-disc pl-6">
                 <li>トークン発行・移転・焼却の制御</li>
                 <li>投票権重の計算ロジック</li>

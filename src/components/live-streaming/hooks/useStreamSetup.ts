@@ -34,7 +34,8 @@ export const useStreamSetup = (
         resolution: VideoPresets.h720,
       },
       publishDefaults: {
-        simulcast: false,
+        simulcast: true,
+        videoCodec: 'vp8', // VP8を優先的に使用
         dtx: true,
         red: true,
         audioPreset: {
@@ -77,12 +78,12 @@ export const useStreamSetup = (
       // デバイスとブラウザに応じて最適な設定を選択
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       const isAndroid = /Android/.test(navigator.userAgent);
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
       const videoPublishOptions = {
-        simulcast: false,
+        simulcast: true,
+        videoCodec: 'vp8', // VP8を優先的に使用
         videoEncoding: {
-          maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000, // モバイルデバイスは低めのビットレート
+          maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000,
           maxFramerate: 30
         }
       };

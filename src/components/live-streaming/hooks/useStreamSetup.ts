@@ -48,9 +48,14 @@ export const useStreamSetup = (
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       const isAndroid = /Android/.test(navigator.userAgent);
 
-      await room.localParticipant.publishTrack(audioTrack);
+      // オーディオトラックを先に公開
+      await room.localParticipant.publishTrack(audioTrack, {
+        dtx: true,
+        red: true
+      });
       
       try {
+        // ビデオトラックの公開
         await room.localParticipant.publishTrack(
           videoTrack, 
           getVideoPublishOptions(isIOS, isAndroid, isDAOMember)

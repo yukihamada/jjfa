@@ -8,16 +8,15 @@ export const createRoomConfig = (): RoomOptions => ({
   },
   publishDefaults: {
     simulcast: false,
-    videoCodec: 'vp8',
     dtx: true,
     red: true,
     audioPreset: {
-      maxBitrate: 128000, // 音声ビットレート（128kbps）
+      maxBitrate: 128000,
     },
     videoEncoding: {
-      maxBitrate: 1_500_000, // 最大1.5Mbps
+      maxBitrate: 1_500_000,
       maxFramerate: 30,
-    },
+    }
   },
 });
 
@@ -35,13 +34,14 @@ export const getRoomConnectionConfig = () => ({
 
 export const getVideoPublishOptions = (isIOS: boolean, isAndroid: boolean, isDAOMember: boolean) => ({
   simulcast: false,
-  videoCodec: 'vp8' as const,
-  videoEncoding: {
-    // DAOメンバーは高画質（最大4Mbps）、非メンバーは標準画質（最大1.5Mbps）
-    // モバイルの場合は帯域を抑える
+  encodings: [{
     maxBitrate: isDAOMember 
-      ? (isIOS || isAndroid ? 2_000_000 : 4_000_000)  // DAOメンバー: モバイル2Mbps, デスクトップ4Mbps
-      : (isIOS || isAndroid ? 800_000 : 1_500_000),   // 非メンバー: モバイル800kbps, デスクトップ1.5Mbps
-    maxFramerate: isDAOMember ? 60 : 30, // DAOメンバーは60fps、非メンバーは30fps
-  },
+      ? (isIOS || isAndroid ? 2_000_000 : 4_000_000)
+      : (isIOS || isAndroid ? 800_000 : 1_500_000),
+    maxFramerate: isDAOMember ? 60 : 30,
+  }],
+  // VP8を明示的に指定
+  codecs: [
+    { mimeType: 'video/VP8', sdpFmtpLine: '' }
+  ]
 });

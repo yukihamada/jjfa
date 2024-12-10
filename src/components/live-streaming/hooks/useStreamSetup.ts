@@ -35,7 +35,7 @@ export const useStreamSetup = (
       },
       publishDefaults: {
         simulcast: true,
-        videoCodec: 'vp8', // VP8を優先的に使用
+        videoCodec: 'vp8' as const,
         dtx: true,
         red: true,
         audioPreset: {
@@ -81,7 +81,7 @@ export const useStreamSetup = (
 
       const videoPublishOptions = {
         simulcast: true,
-        videoCodec: 'vp8', // VP8を優先的に使用
+        videoCodec: 'vp8' as const,
         videoEncoding: {
           maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000,
           maxFramerate: 30

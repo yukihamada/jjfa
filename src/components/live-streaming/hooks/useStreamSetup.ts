@@ -32,7 +32,6 @@ export const useStreamSetup = (
       // オーディオトラックを先に公開（モバイルデバイスでの安定性向上）
       await room.localParticipant.publishTrack(audioTrack);
       
-      // ビデオトラックの公開を試みる
       try {
         await room.localParticipant.publishTrack(videoTrack, getVideoPublishOptions(isIOS, isAndroid));
       } catch (error) {
@@ -41,10 +40,11 @@ export const useStreamSetup = (
         throw error;
       }
 
-      room.on(RoomEvent.Disconnected, () => {
+      room.on(RoomEvent.Disconnected, async () => {
         setIsStreaming(false);
+        await updateStreamStatus(streamKey, 'ended');
         onStreamEnd?.();
-        toast.info("配信が終了しました");
+        toast.info("配信が終了しました。アーカイブの作成を開始します。");
       });
 
       setRoom(room);
@@ -52,6 +52,7 @@ export const useStreamSetup = (
 
       await updateStreamStatus(streamKey, 'live', title, description);
       onStreamStart?.();
+      toast.success("配信を開始しました！");
     } catch (error: any) {
       console.error('Failed to start stream:', error);
       toast.error(`配信の開始に失敗しました: ${error.message}`);
@@ -73,6 +74,7 @@ export const useStreamSetup = (
       await updateStreamStatus(streamKey, 'ended');
       setIsStreaming(false);
       onStreamEnd?.();
+      toast.success("配信を終了しました。アーカイブの作成を開始します。");
     } catch (error) {
       console.error('Failed to stop stream:', error);
       toast.error("配信の終了に失敗しました");
@@ -84,6 +86,7 @@ export const useStreamSetup = (
   const updateStreamDetails = async (streamKey: string, title: string, description: string) => {
     try {
       await updateStreamStatus(streamKey, 'live', title, description);
+      toast.success("配信情報を更新しました");
     } catch (error) {
       console.error("Failed to update stream details:", error);
       toast.error("配信情報の更新に失敗しました");

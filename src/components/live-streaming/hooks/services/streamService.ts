@@ -37,6 +37,8 @@ export const updateStreamStatus = async (
     if (description) updateData.description = description;
   } else if (status === 'ended') {
     updateData.ended_at = endedAt || new Date().toISOString();
+    // Generate archive URL using stream key and timestamp
+    updateData.archive_url = `https://stream.jjfa.org/archives/${streamKey}`;
   }
 
   const { error } = await supabase

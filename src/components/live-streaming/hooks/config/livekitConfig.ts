@@ -7,7 +7,7 @@ export const createRoomConfig = (): RoomOptions => ({
     resolution: VideoPresets.h720,
   },
   publishDefaults: {
-    simulcast: true,
+    simulcast: false,
     videoCodec: 'vp8',
     dtx: true,
     red: true,
@@ -34,7 +34,7 @@ export const getRoomConnectionConfig = (): RoomConnectOptions => ({
 });
 
 export const getVideoPublishOptions = (isIOS: boolean, isAndroid: boolean) => ({
-  simulcast: true,
+  simulcast: false,
   videoCodec: 'vp8' as const,
   videoEncoding: {
     maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000,

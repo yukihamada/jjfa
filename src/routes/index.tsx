@@ -17,6 +17,7 @@ import JiujitsuBenefits from "@/pages/JiujitsuBenefits";
 import Careers from "@/pages/Careers";
 import Whitepaper from "@/pages/Whitepaper";
 import TokenSpecification from "@/pages/TokenSpecification";
+import Roadmap from "@/pages/Roadmap";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -47,6 +48,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/careers" element={<Careers />} />
       <Route path="/whitepaper" element={<Whitepaper />} />
       <Route path="/token-specification" element={<TokenSpecification />} />
+      <Route path="/roadmap" element={<Roadmap />} />
     </Routes>
   );
 };

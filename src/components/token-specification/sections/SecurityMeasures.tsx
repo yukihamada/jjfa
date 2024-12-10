@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield } from "lucide-react";
 
 export const SecurityMeasures = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">4. セキュリティ対策</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <Shield className="w-6 h-6" />
+        4. セキュリティ対策
+      </h2>
       
       <Card>
         <CardHeader>

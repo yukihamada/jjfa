@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BookText } from "lucide-react";
 
 export const Transparency = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">8. 情報公開と改善</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <BookText className="w-6 h-6" />
+        8. 情報公開と改善
+      </h2>
       
       <Card>
         <CardHeader>

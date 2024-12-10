@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Info } from "lucide-react";
 
 export const TokenOverview = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">1. 概要</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <Info className="w-6 h-6" />
+        1. 概要
+      </h2>
       
       <Card>
         <CardHeader>

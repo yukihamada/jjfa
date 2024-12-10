@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ListChecks } from "lucide-react";
 
 export const TokenTypes = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">5. トークンの特徴</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <ListChecks className="w-6 h-6" />
+        5. トークンの特徴
+      </h2>
 
       <div className="space-y-6">
         <Card>

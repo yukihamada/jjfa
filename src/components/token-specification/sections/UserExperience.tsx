@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BookOpen } from "lucide-react";
 
 export const UserExperience = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">6. ユーザーの使いやすさ</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <BookOpen className="w-6 h-6" />
+        6. ユーザーの使いやすさ
+      </h2>
       
       <Card>
         <CardHeader>

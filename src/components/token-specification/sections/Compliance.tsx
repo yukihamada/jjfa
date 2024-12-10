@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Lock } from "lucide-react";
 
 export const Compliance = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">7. 法令遵守と信頼性</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <Lock className="w-6 h-6" />
+        7. 法令遵守と信頼性
+      </h2>
       
       <Card>
         <CardHeader>

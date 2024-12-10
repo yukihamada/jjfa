@@ -1,9 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Database } from "lucide-react";
 
 export const NetworkSelection = () => {
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold mb-4">2. ブロックチェーンネットワークの選定</h2>
+      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+        <Database className="w-6 h-6" />
+        2. ブロックチェーンネットワークの選定
+      </h2>
       
       <Card>
         <CardHeader>

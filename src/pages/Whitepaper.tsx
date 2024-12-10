@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ExternalLink, FileText, Calendar, Coins, Book } from "lucide-react";
+import { FileText, Book, Coins, Calendar } from "lucide-react";
 import { PageTitle } from "@/components/PageTitle";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Whitepaper = () => {
   const { t } = useTranslation();
 
-  const regulations = [
+  const documents = [
     {
       title: "定款",
       description: "JJFAの組織としての基本的な枠組みを定めた規程です。",
@@ -25,6 +25,12 @@ const Whitepaper = () => {
       description: "JJFAトークンの発行・管理・利用に関する規程です。",
       icon: Coins,
       link: "/token-rules"
+    },
+    {
+      title: "トークン技術仕様書",
+      description: "JJFAトークンの技術的な仕様と実装詳細を説明した文書です。",
+      icon: FileText,
+      link: "/token-specification"
     },
     {
       title: "ロードマップ",
@@ -45,7 +51,31 @@ const Whitepaper = () => {
               <p className="text-xl text-slate-600">{t('whitepaper.subtitle')}</p>
             </div>
 
-            <div className="prose prose-slate max-w-none mb-12">
+            {/* ドキュメントグリッド */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {documents.map((doc) => {
+                const Icon = doc.icon;
+                return (
+                  <Link 
+                    key={doc.title}
+                    to={doc.link}
+                    className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <Icon className="w-6 h-6 text-slate-600" />
+                      <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
+                        {doc.title}
+                      </h3>
+                    </div>
+                    <p className="text-slate-600 text-sm">
+                      {doc.description}
+                    </p>
+                  </Link>
+                )
+              })}
+            </div>
+
+            <div className="prose prose-slate max-w-none">
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.intro.title')}</h2>
                 <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.background')}</h3>
@@ -137,33 +167,6 @@ const Whitepaper = () => {
               <section className="mt-8 p-6 bg-slate-50 rounded-lg">
                 <p className="text-slate-700">{t('whitepaper.footer.text')}</p>
               </section>
-            </div>
-
-            {/* 関連規程・計画書 */}
-            <div className="border-t border-slate-200 pt-8">
-              <h2 className="text-2xl font-bold mb-6 text-center">関連規程・計画書</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {regulations.map((reg) => {
-                  const Icon = reg.icon;
-                  return (
-                    <Link 
-                      key={reg.title}
-                      to={reg.link}
-                      className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        <Icon className="w-6 h-6 text-slate-600" />
-                        <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
-                          {reg.title}
-                        </h3>
-                      </div>
-                      <p className="text-slate-600 text-sm">
-                        {reg.description}
-                      </p>
-                    </Link>
-                  )
-                })}
-              </div>
             </div>
           </CardContent>
         </Card>

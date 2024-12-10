@@ -21,9 +21,12 @@ export const useLiveStreams = () => {
         .from('live_streams')
         .select(`
           *,
-          profiles (
-            username,
-            avatar_url
+          user:user_id (
+            id,
+            profiles:profiles (
+              username,
+              avatar_url
+            )
           )
         `)
         .order('created_at', { ascending: false });

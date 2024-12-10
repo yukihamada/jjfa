@@ -1,14 +1,17 @@
+import { useOutletContext } from "react-router-dom";
 import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { Profile } from "@/integrations/supabase/types/profiles";
 
-interface BasicInfoProps {
+interface OutletContextType {
   user: any;
   profile: Profile | null;
   onPhotoUpdate: (url: string) => void;
 }
 
-const BasicInfo = ({ user, profile, onPhotoUpdate }: BasicInfoProps) => {
+const BasicInfo = () => {
+  const { user, profile, onPhotoUpdate } = useOutletContext<OutletContextType>();
+
   return (
     <div className="space-y-6">
       <div className="mb-8">

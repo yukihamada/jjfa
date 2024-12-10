@@ -1,8 +1,11 @@
 import { supabase } from "@/integrations/supabase/client";
-import { Room } from "livekit-client";
-import { toast } from "sonner";
 
-export const createStreamRoom = async (streamKey: string): Promise<Room> => {
+interface TokenResponse {
+  token: string;
+  wsUrl: string;
+}
+
+export const createStreamRoom = async (streamKey: string): Promise<TokenResponse> => {
   const { data: tokenData, error: tokenError } = await supabase.functions.invoke('livekit', {
     body: {
       roomName: streamKey,
@@ -15,7 +18,7 @@ export const createStreamRoom = async (streamKey: string): Promise<Room> => {
     throw new Error("配信トークンの取得に失敗しました");
   }
 
-  return tokenData;
+  return tokenData as TokenResponse;
 };
 
 export const updateStreamStatus = async (
@@ -36,18 +39,14 @@ export const updateStreamStatus = async (
     updateData.ended_at = endedAt || new Date().toISOString();
   }
 
-  try {
-    await supabase
-      .from('live_streams')
-      .update(updateData)
-      .eq('stream_key', streamKey);
+  const { error } = await supabase
+    .from('live_streams')
+    .update(updateData)
+    .eq('stream_key', streamKey);
 
-    const message = status === 'live' ? "配信を開始しました！" : "配信を終了しました";
-    toast.success(message);
-  } catch (error) {
+  if (error) {
     console.error(`Failed to update stream status:`, error);
     const action = status === 'live' ? "開始" : "終了";
-    toast.error(`配信の${action}に失敗しました`);
-    throw error;
+    throw new Error(`配信の${action}に失敗しました`);
   }
 };

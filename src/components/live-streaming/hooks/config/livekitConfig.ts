@@ -1,6 +1,6 @@
-import { Room, VideoPresets } from "livekit-client";
+import { RoomOptions, VideoPresets, RoomConnectOptions } from "livekit-client";
 
-export const createRoomConfig = () => ({
+export const createRoomConfig = (): RoomOptions => ({
   adaptiveStream: true,
   dynacast: true,
   videoCaptureDefaults: {
@@ -8,7 +8,7 @@ export const createRoomConfig = () => ({
   },
   publishDefaults: {
     simulcast: true,
-    videoCodec: 'vp8' as const,
+    videoCodec: 'vp8',
     dtx: true,
     red: true,
     audioPreset: {
@@ -21,14 +21,14 @@ export const createRoomConfig = () => ({
   }
 });
 
-export const getRoomConnectionConfig = () => ({
+export const getRoomConnectionConfig = (): RoomConnectOptions => ({
   autoSubscribe: true,
   rtcConfig: {
     iceServers: [
       { urls: 'stun:stun.l.google.com:19302' },
       { urls: 'stun:stun1.l.google.com:19302' }
     ],
-    bundlePolicy: 'max-bundle',
+    bundlePolicy: 'max-bundle' as RTCBundlePolicy,
     iceCandidatePoolSize: 10
   }
 });

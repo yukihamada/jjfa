@@ -20,9 +20,9 @@ export const useStreamSetup = (
       setIsLoading(true);
       
       const room = new Room(createRoomConfig());
-      const tokenData = await createStreamRoom(streamKey);
+      const { wsUrl, token } = await createStreamRoom(streamKey);
       
-      await room.connect(tokenData.wsUrl, tokenData.token, getRoomConnectionConfig());
+      await room.connect(wsUrl, token, getRoomConnectionConfig());
       console.log('Room connected successfully');
 
       // デバイスとブラウザに応じて最適な設定を選択

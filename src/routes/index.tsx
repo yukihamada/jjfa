@@ -1,11 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Articles from "@/pages/Articles";
+import TournamentRules from "@/pages/TournamentRules";
 import OperatingRules from "@/pages/OperatingRules";
 import TokenRules from "@/pages/TokenRules";
-import TournamentRules from "@/pages/TournamentRules";
 import Community from "@/pages/Community";
 import CommunityRegistration from "@/pages/CommunityRegistration";
 import DiscussionDetail from "@/pages/DiscussionDetail";
@@ -23,29 +23,70 @@ interface AppRoutesProps {
 }
 
 export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
-  if (!isAuthenticated) {
-    return null;
-  }
-
   return (
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/articles" element={<Articles />} />
+      <Route path="/tournament-rules" element={<TournamentRules />} />
       <Route path="/operating-rules" element={<OperatingRules />} />
       <Route path="/token-rules" element={<TokenRules />} />
-      <Route path="/tournament-rules" element={<TournamentRules />} />
-      <Route path="/community" element={<Community />} />
-      <Route path="/community/register" element={<CommunityRegistration />} />
-      <Route path="/community/discussion/:id" element={<DiscussionDetail />} />
-      <Route path="/profile/*" element={<Profile />} />
+      <Route 
+        path="/community" 
+        element={
+          isAuthenticated ? (
+            <Community />
+          ) : (
+            <Navigate to="/community-registration" replace />
+          )
+        } 
+      />
+      <Route path="/community-registration" element={<CommunityRegistration />} />
+      <Route 
+        path="/community/discussion/:id" 
+        element={
+          isAuthenticated ? (
+            <DiscussionDetail />
+          ) : (
+            <Navigate to="/community-registration" replace />
+          )
+        } 
+      />
+      <Route 
+        path="/profile/*" 
+        element={
+          isAuthenticated ? (
+            <Profile />
+          ) : (
+            <Navigate to="/community-registration" replace />
+          )
+        } 
+      />
       <Route path="/nft" element={<NFT />} />
       <Route path="/benefits" element={<JiujitsuBenefits />} />
       <Route path="/token-specification" element={<TokenSpecification />} />
       <Route path="/roadmap" element={<Roadmap />} />
-      <Route path="/live" element={<LiveStreaming />} />
-      <Route path="/studio" element={<StreamingStudio />} />
+      <Route 
+        path="/live" 
+        element={
+          isAuthenticated ? (
+            <LiveStreaming />
+          ) : (
+            <Navigate to="/community-registration" replace />
+          )
+        } 
+      />
+      <Route 
+        path="/studio" 
+        element={
+          isAuthenticated ? (
+            <StreamingStudio />
+          ) : (
+            <Navigate to="/community-registration" replace />
+          )
+        } 
+      />
       <Route path="/careers" element={<Careers />} />
     </Routes>
   );

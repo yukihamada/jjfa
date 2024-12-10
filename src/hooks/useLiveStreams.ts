@@ -21,7 +21,7 @@ export const useLiveStreams = () => {
         .from('live_streams')
         .select(`
           *,
-          profiles:user_id (
+          profiles (
             username,
             avatar_url
           )

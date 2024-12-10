@@ -78,6 +78,95 @@ export type Database = {
         }
         Relationships: []
       }
+      class_bookings: {
+        Row: {
+          class_id: string
+          created_at: string
+          id: string
+          status: string
+          ticket_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          id?: string
+          status?: string
+          ticket_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          id?: string
+          status?: string
+          ticket_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "class_bookings_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "class_bookings_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "user_class_tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      class_ticket_types: {
+        Row: {
+          created_at: string
+          description: string | null
+          dojo_id: string
+          id: string
+          name: string
+          price: number
+          updated_at: string
+          uses: number
+          validity_days: number | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          dojo_id: string
+          id?: string
+          name: string
+          price: number
+          updated_at?: string
+          uses?: number
+          validity_days?: number | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          dojo_id?: string
+          id?: string
+          name?: string
+          price?: number
+          updated_at?: string
+          uses?: number
+          validity_days?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "class_ticket_types_dojo_id_fkey"
+            columns: ["dojo_id"]
+            isOneToOne: false
+            referencedRelation: "dojos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       classes: {
         Row: {
           capacity: number
@@ -1017,6 +1106,54 @@ export type Database = {
             columns: ["stream_id"]
             isOneToOne: false
             referencedRelation: "live_streams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_class_tickets: {
+        Row: {
+          created_at: string
+          dojo_id: string
+          expires_at: string | null
+          id: string
+          remaining_uses: number
+          ticket_type_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dojo_id: string
+          expires_at?: string | null
+          id?: string
+          remaining_uses: number
+          ticket_type_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dojo_id?: string
+          expires_at?: string | null
+          id?: string
+          remaining_uses?: number
+          ticket_type_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_class_tickets_dojo_id_fkey"
+            columns: ["dojo_id"]
+            isOneToOne: false
+            referencedRelation: "dojos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_class_tickets_ticket_type_id_fkey"
+            columns: ["ticket_type_id"]
+            isOneToOne: false
+            referencedRelation: "class_ticket_types"
             referencedColumns: ["id"]
           },
         ]

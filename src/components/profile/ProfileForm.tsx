@@ -14,7 +14,11 @@ interface ProfileFormProps {
 
 export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
   const [updating, setUpdating] = useState(false);
-  const [formData, setFormData] = useState(profile);
+  const [formData, setFormData] = useState({
+    username: profile?.username || "",
+    full_name: profile?.full_name || "",
+    bio: profile?.bio || "",
+  });
 
   const validateUsername = (username: string) => {
     return /^[a-zA-Z0-9_]*$/.test(username);
@@ -40,6 +44,7 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
       .eq("id", user.id);
 
     if (error) {
+      console.error("Profile update error:", error);
       toast.error("プロフィールの更新に失敗しました");
     } else {
       toast.success("プロフィールを更新しました");
@@ -60,10 +65,11 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
             <div className="flex gap-2">
               <User className="w-4 h-4 mt-3 text-gray-500" />
               <Input
-                value={formData?.username || ""}
+                value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 pattern="^[a-zA-Z0-9_]*$"
                 title="半角英数字とアンダースコアのみ使用できます"
+                placeholder="username123"
               />
             </div>
           </div>
@@ -72,23 +78,23 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
             <div className="flex gap-2">
               <User className="w-4 h-4 mt-3 text-gray-500" />
               <Input
-                value={formData?.full_name || ""}
+                value={formData.full_name}
                 onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+                placeholder="山田 太郎"
               />
             </div>
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">自己紹介</label>
             <Textarea
-              value={formData?.bio || ""}
+              value={formData.bio}
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               rows={4}
+              placeholder="あなたについて教えてください"
             />
           </div>
           <Button type="submit" className="w-full" disabled={updating}>
-            {updating ? (
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            ) : null}
+            {updating && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             保存する
           </Button>
         </CardContent>

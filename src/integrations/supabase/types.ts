@@ -636,6 +636,13 @@ export type Database = {
             referencedRelation: "dojos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "fighters_profile_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       jjfa_members: {

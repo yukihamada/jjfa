@@ -51,9 +51,12 @@ export const NFTPurchase = () => {
         return;
       }
 
+      // Get Supabase project URL from the client
+      const supabaseUrl = supabase.supabaseUrl;
+      
       // Create checkout session
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`,
+        `${supabaseUrl}/functions/v1/create-checkout`,
         {
           method: 'POST',
           headers: {
@@ -64,7 +67,8 @@ export const NFTPurchase = () => {
       );
 
       if (!response.ok) {
-        throw new Error("チェックアウトの作成に失敗しました");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "チェックアウトの作成に失敗しました");
       }
 
       const data = await response.json();

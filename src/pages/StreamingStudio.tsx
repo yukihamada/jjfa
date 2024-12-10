@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,12 +8,24 @@ import { useStreamSetup } from "@/components/live-streaming/hooks/useStreamSetup
 import { StreamPreviewSetup } from "@/components/live-streaming/StreamPreviewSetup";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const StreamingStudio = () => {
   const navigate = useNavigate();
   const [previewElement, setPreviewElement] = useState<HTMLVideoElement | null>(null);
   const [videoTrack, setVideoTrack] = useState<any>(null);
   const [audioTrack, setAudioTrack] = useState<any>(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("配信を開始するにはログインが必要です");
+        navigate('/live');
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const {
     isLoading,

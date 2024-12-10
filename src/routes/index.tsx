@@ -1,95 +1,94 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
-import Whitepaper from "@/pages/Whitepaper";
-import Community from "@/pages/Community";
-import CommunityRegistration from "@/pages/CommunityRegistration";
-import JiujitsuBenefits from "@/pages/JiujitsuBenefits";
+import Contact from "@/pages/Contact";
 import Articles from "@/pages/Articles";
 import OperatingRules from "@/pages/OperatingRules";
 import TokenRules from "@/pages/TokenRules";
 import TournamentRules from "@/pages/TournamentRules";
-import NFT from "@/pages/NFT";
-import Contact from "@/pages/Contact";
-import Careers from "@/pages/Careers";
-import Roadmap from "@/pages/Roadmap";
+import Community from "@/pages/Community";
+import CommunityRegistration from "@/pages/CommunityRegistration";
+import DiscussionDetail from "@/pages/DiscussionDetail";
 import Profile from "@/pages/Profile";
+import NFT from "@/pages/NFT";
 import LiveStreaming from "@/pages/LiveStreaming";
 import StreamingStudio from "@/pages/StreamingStudio";
-import DiscussionDetail from "@/pages/DiscussionDetail";
-import BasicInfo from "@/pages/profile/BasicInfo";
-import Membership from "@/pages/profile/Membership";
-import Fighter from "@/pages/profile/Fighter";
-import FighterStats from "@/pages/profile/FighterStats";
-import Settings from "@/pages/profile/Settings";
-import { useOutletContext } from "react-router-dom";
+import JiujitsuBenefits from "@/pages/JiujitsuBenefits";
+import Careers from "@/pages/Careers";
+import Whitepaper from "@/pages/Whitepaper";
+import TokenSpecification from "@/pages/TokenSpecification";
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-  isAuthenticated: boolean;
-}
-
-const ProtectedRoute = ({ children, isAuthenticated }: ProtectedRouteProps) => {
-  const currentPath = window.location.pathname;
-  const protectedRoutes = ['/community', '/profile', '/roadmap'];
-  
-  if (!isAuthenticated && protectedRoutes.includes(currentPath)) {
-    return <Navigate to="/community-registration" />;
-  }
-  
-  return <>{children}</>;
-};
-
-export const AppRoutes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
-  return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/whitepaper" element={<Whitepaper />} />
-      <Route path="/community-registration" element={<CommunityRegistration />} />
-      <Route path="/community" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Community /></ProtectedRoute>} />
-      <Route path="/community/discussion/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated}><DiscussionDetail /></ProtectedRoute>} />
-      <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
-      <Route path="/articles" element={<Articles />} />
-      <Route path="/operating-rules" element={<OperatingRules />} />
-      <Route path="/token-rules" element={<TokenRules />} />
-      <Route path="/tournament-rules" element={<TournamentRules />} />
-      <Route path="/nft" element={<NFT />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/careers" element={<Careers />} />
-      <Route path="/roadmap" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Roadmap /></ProtectedRoute>} />
-      <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Profile /></ProtectedRoute>}>
-        <Route index element={<OutletBasicInfo />} />
-        <Route path="membership" element={<OutletMembership />} />
-        <Route path="fighter" element={<OutletFighter />} />
-        <Route path="techniques" element={<FighterStats />} />
-        <Route path="settings" element={<OutletSettings />} />
-      </Route>
-      <Route path="/live" element={<LiveStreaming />} />
-      <Route path="/live/:streamId" element={<LiveStreaming />} />
-      <Route path="/studio/:streamKey" element={<StreamingStudio />} />
-      <Route path="/studio" element={<StreamingStudio />} />
-    </Routes>
-  );
-};
-
-// Wrapper components to handle outlet context
-const OutletBasicInfo = () => {
-  const { user, profile, onPhotoUpdate } = useOutletContext<any>();
-  return <BasicInfo user={user} profile={profile} onPhotoUpdate={onPhotoUpdate} />;
-};
-
-const OutletMembership = () => {
-  const { member, onPurchaseNFT } = useOutletContext<any>();
-  return <Membership member={member} onPurchaseNFT={onPurchaseNFT} />;
-};
-
-const OutletFighter = () => {
-  const { fighter, onFighterUpdate } = useOutletContext<any>();
-  return <Fighter fighter={fighter} onRegistrationSuccess={onFighterUpdate} />;
-};
-
-const OutletSettings = () => {
-  const { user } = useOutletContext<any>();
-  return <Settings userEmail={user?.email} />;
-};
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Index />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "/articles",
+    element: <Articles />,
+  },
+  {
+    path: "/operating-rules",
+    element: <OperatingRules />,
+  },
+  {
+    path: "/token-rules",
+    element: <TokenRules />,
+  },
+  {
+    path: "/tournament-rules",
+    element: <TournamentRules />,
+  },
+  {
+    path: "/community",
+    element: <Community />,
+  },
+  {
+    path: "/community/register",
+    element: <CommunityRegistration />,
+  },
+  {
+    path: "/discussions/:id",
+    element: <DiscussionDetail />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/nft",
+    element: <NFT />,
+  },
+  {
+    path: "/live",
+    element: <LiveStreaming />,
+  },
+  {
+    path: "/studio",
+    element: <StreamingStudio />,
+  },
+  {
+    path: "/benefits",
+    element: <JiujitsuBenefits />,
+  },
+  {
+    path: "/careers",
+    element: <Careers />,
+  },
+  {
+    path: "/whitepaper",
+    element: <Whitepaper />,
+  },
+  {
+    path: "/token-specification",
+    element: <TokenSpecification />,
+  },
+]);

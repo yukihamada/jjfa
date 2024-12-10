@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Index from "@/pages/Index";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
@@ -11,13 +11,12 @@ import CommunityRegistration from "@/pages/CommunityRegistration";
 import DiscussionDetail from "@/pages/DiscussionDetail";
 import Profile from "@/pages/Profile";
 import NFT from "@/pages/NFT";
-import LiveStreaming from "@/pages/LiveStreaming";
-import StreamingStudio from "@/pages/StreamingStudio";
 import JiujitsuBenefits from "@/pages/JiujitsuBenefits";
-import Careers from "@/pages/Careers";
-import Whitepaper from "@/pages/Whitepaper";
 import TokenSpecification from "@/pages/TokenSpecification";
 import Roadmap from "@/pages/Roadmap";
+import LiveStreaming from "@/pages/LiveStreaming";
+import StreamingStudio from "@/pages/StreamingStudio";
+import Careers from "@/pages/Careers";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -25,7 +24,7 @@ interface AppRoutesProps {
 
 export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
   if (!isAuthenticated) {
-    return <Navigate to="/" />;
+    return null;
   }
 
   return (
@@ -39,16 +38,15 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/tournament-rules" element={<TournamentRules />} />
       <Route path="/community" element={<Community />} />
       <Route path="/community/register" element={<CommunityRegistration />} />
-      <Route path="/discussions/:id" element={<DiscussionDetail />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/community/discussion/:id" element={<DiscussionDetail />} />
+      <Route path="/profile/*" element={<Profile />} />
       <Route path="/nft" element={<NFT />} />
-      <Route path="/live" element={<LiveStreaming />} />
-      <Route path="/studio" element={<StreamingStudio />} />
       <Route path="/benefits" element={<JiujitsuBenefits />} />
-      <Route path="/careers" element={<Careers />} />
-      <Route path="/whitepaper" element={<Whitepaper />} />
       <Route path="/token-specification" element={<TokenSpecification />} />
       <Route path="/roadmap" element={<Roadmap />} />
+      <Route path="/live" element={<LiveStreaming />} />
+      <Route path="/studio" element={<StreamingStudio />} />
+      <Route path="/careers" element={<Careers />} />
     </Routes>
   );
 };

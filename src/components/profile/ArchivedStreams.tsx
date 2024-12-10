@@ -19,7 +19,7 @@ export const ArchivedStreams = ({ userId }: ArchivedStreamsProps) => {
         .from('live_streams')
         .select(`
           *,
-          profiles:user_id(
+          profiles (
             username,
             avatar_url
           )
@@ -30,7 +30,7 @@ export const ArchivedStreams = ({ userId }: ArchivedStreamsProps) => {
         .order('ended_at', { ascending: false });
 
       if (error) throw error;
-      return data as LiveStream[];
+      return data as unknown as LiveStream[];
     },
   });
 

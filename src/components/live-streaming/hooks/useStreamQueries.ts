@@ -9,7 +9,7 @@ export const useStreamQueries = () => {
         .select(`
           title,
           description,
-          profiles:user_id (
+          profiles (
             username,
             avatar_url
           )

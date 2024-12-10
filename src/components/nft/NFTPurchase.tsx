@@ -51,12 +51,9 @@ export const NFTPurchase = () => {
         return;
       }
 
-      // Get Supabase project URL from the client
-      const supabaseUrl = supabase.supabaseUrl;
-      
-      // Create checkout session
+      // Create checkout session using the Edge Function URL
       const response = await fetch(
-        `${supabaseUrl}/functions/v1/create-checkout`,
+        `https://hipoantgjdtzsgtkohxa.supabase.co/functions/v1/create-checkout`,
         {
           method: 'POST',
           headers: {

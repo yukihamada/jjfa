@@ -17,6 +17,7 @@ import Roadmap from "@/pages/Roadmap";
 import LiveStreaming from "@/pages/LiveStreaming";
 import StreamingStudio from "@/pages/StreamingStudio";
 import Careers from "@/pages/Careers";
+import Archives from "@/pages/profile/Archives";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -62,7 +63,15 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
             <Navigate to="/community-registration" replace />
           )
         } 
-      />
+      >
+        <Route path="basic-info" element={<BasicInfo />} />
+        <Route path="fighter" element={<Fighter />} />
+        <Route path="fighter-stats" element={<FighterStats />} />
+        <Route path="membership" element={<Membership />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="archives" element={<Archives />} />
+        <Route index element={<Navigate to="basic-info" replace />} />
+      </Route>
       <Route path="/nft" element={<NFT />} />
       <Route path="/benefits" element={<JiujitsuBenefits />} />
       <Route path="/token-specification" element={<TokenSpecification />} />

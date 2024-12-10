@@ -35,7 +35,7 @@ export const useStreamSetup = (
       },
       publishDefaults: {
         simulcast: true,
-        videoCodec: 'vp8' as const,
+        videoCodec: 'vp8',
         dtx: true,
         red: true,
         audioPreset: {

@@ -23,6 +23,7 @@ import FighterStats from "@/pages/profile/FighterStats";
 import Membership from "@/pages/profile/Membership";
 import Settings from "@/pages/profile/Settings";
 import Archives from "@/pages/profile/Archives";
+import PublicProfile from "@/pages/profile/PublicProfile";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -59,6 +60,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
           )
         } 
       />
+      <Route path="/profile/:username" element={<PublicProfile />} />
       <Route 
         path="/profile/*" 
         element={

@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Loader2, User, ExternalLink } from "lucide-react";
+import { Loader2, User, ExternalLink, Link as LinkIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
@@ -53,6 +53,8 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
     setUpdating(false);
   };
 
+  const publicProfileUrl = profile?.username ? `${window.location.origin}/profile/${profile.username}` : null;
+
   return (
     <form onSubmit={handleUpdate}>
       <Card>
@@ -63,13 +65,19 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
               <CardDescription>基本的な情報を更新</CardDescription>
             </div>
             {profile?.username && (
-              <Link 
-                to={`/profile/${profile.username}`}
-                className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
-              >
-                <ExternalLink className="w-4 h-4" />
-                公開プロフィールを見る
-              </Link>
+              <div className="space-y-2">
+                <Link 
+                  to={`/profile/${profile.username}`}
+                  className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  公開プロフィールを見る
+                </Link>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <LinkIcon className="w-4 h-4" />
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{publicProfileUrl}</code>
+                </div>
+              </div>
             )}
           </div>
         </CardHeader>

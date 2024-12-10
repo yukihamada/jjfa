@@ -79,25 +79,17 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
         }
       );
 
+      const responseData = await response.json();
+      
       if (!response.ok) {
-        const errorText = await response.text();
-        let errorMessage;
-        try {
-          const errorData = JSON.parse(errorText);
-          errorMessage = errorData.error;
-        } catch {
-          errorMessage = "チェックアウトの作成に失敗しました";
-        }
-        throw new Error(errorMessage);
+        throw new Error(responseData.error || "チェックアウトの作成に失敗しました");
       }
 
-      const data = await response.json();
-      
-      if (!data.url) {
+      if (!responseData.url) {
         throw new Error("チェックアウトURLの取得に失敗しました");
       }
 
-      window.location.href = data.url;
+      window.location.href = responseData.url;
     } catch (error) {
       console.error("購入エラー:", error);
       toast.error(error instanceof Error ? error.message : "予期せぬエラーが発生しました。もう一度お試しください。");

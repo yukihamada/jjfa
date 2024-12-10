@@ -21,14 +21,17 @@ export const useLiveStreams = () => {
         .from('live_streams')
         .select(`
           *,
-          profiles (
+          profiles:user_id(
             username,
             avatar_url
           )
         `)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching streams:', error);
+        throw error;
+      }
       return data as unknown as LiveStream[];
     },
   });

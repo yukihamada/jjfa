@@ -13,7 +13,6 @@ export const createRoomConfig = (): RoomOptions => ({
     red: true,
     audioPreset: {
       maxBitrate: 128000, // 音声ビットレート（128kbps）
-      stereo: false, // モノラル音声で帯域節約
     },
     videoEncoding: {
       maxBitrate: 1_500_000, // 最大1.5Mbps
@@ -29,16 +28,20 @@ export const getRoomConnectionConfig = () => ({
       { urls: 'stun:stun.l.google.com:19302' },
       { urls: 'stun:stun1.l.google.com:19302' },
     ],
-    bundlePolicy: 'max-bundle',
+    bundlePolicy: 'max-bundle' as RTCBundlePolicy,
     iceCandidatePoolSize: 10,
   },
 });
 
-export const getVideoPublishOptions = (isIOS: boolean, isAndroid: boolean) => ({
+export const getVideoPublishOptions = (isIOS: boolean, isAndroid: boolean, isDAOMember: boolean) => ({
   simulcast: false,
   videoCodec: 'vp8' as const,
   videoEncoding: {
-    maxBitrate: isIOS || isAndroid ? 800_000 : 1_500_000, // モバイルは800kbps、デスクトップは1.5Mbps
-    maxFramerate: 30,
+    // DAOメンバーは高画質（最大4Mbps）、非メンバーは標準画質（最大1.5Mbps）
+    // モバイルの場合は帯域を抑える
+    maxBitrate: isDAOMember 
+      ? (isIOS || isAndroid ? 2_000_000 : 4_000_000)  // DAOメンバー: モバイル2Mbps, デスクトップ4Mbps
+      : (isIOS || isAndroid ? 800_000 : 1_500_000),   // 非メンバー: モバイル800kbps, デスクトップ1.5Mbps
+    maxFramerate: isDAOMember ? 60 : 30, // DAOメンバーは60fps、非メンバーは30fps
   },
 });

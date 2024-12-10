@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Room, RoomEvent } from "livekit-client";
 import { toast } from "sonner";
 import { createRoomConfig, getRoomConnectionConfig, getVideoPublishOptions } from "./config/livekitConfig";
 import { createStreamRoom, updateStreamStatus } from "./services/streamService";
+import { supabase } from "@/integrations/supabase/client";
 
 export const useStreamSetup = (
   streamKey: string,
@@ -14,6 +15,25 @@ export const useStreamSetup = (
   const [room, setRoom] = useState<Room | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isDAOMember, setIsDAOMember] = useState(false);
+
+  useEffect(() => {
+    const checkDAOMembership = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: daoMembership } = await supabase
+          .from('dao_memberships')
+          .select('status')
+          .eq('user_id', user.id)
+          .eq('status', 'active')
+          .single();
+        
+        setIsDAOMember(!!daoMembership);
+      }
+    };
+
+    checkDAOMembership();
+  }, []);
 
   const startStream = async (videoTrack: any, audioTrack: any) => {
     try {
@@ -25,15 +45,16 @@ export const useStreamSetup = (
       await room.connect(wsUrl, token, getRoomConnectionConfig());
       console.log('Room connected successfully');
 
-      // デバイスとブラウザに応じて最適な設定を選択
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       const isAndroid = /Android/.test(navigator.userAgent);
 
-      // オーディオトラックを先に公開（モバイルデバイスでの安定性向上）
       await room.localParticipant.publishTrack(audioTrack);
       
       try {
-        await room.localParticipant.publishTrack(videoTrack, getVideoPublishOptions(isIOS, isAndroid));
+        await room.localParticipant.publishTrack(
+          videoTrack, 
+          getVideoPublishOptions(isIOS, isAndroid, isDAOMember)
+        );
       } catch (error) {
         console.error('Failed to publish video track:', error);
         toast.error("カメラの接続に問題が発生しました。カメラへのアクセスを許可してください。");
@@ -52,7 +73,7 @@ export const useStreamSetup = (
 
       await updateStreamStatus(streamKey, 'live', title, description);
       onStreamStart?.();
-      toast.success("配信を開始しました！");
+      toast.success(`配信を開始しました！${isDAOMember ? '（高画質モード）' : ''}`);
     } catch (error: any) {
       console.error('Failed to start stream:', error);
       toast.error(`配信の開始に失敗しました: ${error.message}`);
@@ -102,6 +123,7 @@ export const useStreamSetup = (
     setDescription,
     updateStreamDetails,
     startStream,
-    stopStream
+    stopStream,
+    isDAOMember
   };
 };

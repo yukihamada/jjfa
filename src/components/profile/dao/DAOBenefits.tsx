@@ -1,14 +1,21 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle2 } from "lucide-react";
 
 export const DAOBenefits = () => {
+  const benefits = [
+    "DAO投票権の取得",
+    "収益分配への参加",
+    "限定コミュニティへのアクセス",
+    "大会優先参加権"
+  ];
+
   return (
-    <div className="text-sm text-gray-600">
-      <p>JJFA DAOの社員権NFTを購入することで、以下の特典が得られます：</p>
-      <ul className="list-disc pl-5 mt-2 space-y-1">
-        <li>DAOの意思決定への参加権</li>
-        <li>収益の分配</li>
-        <li>特別なコミュニティアクセス</li>
-      </ul>
-    </div>
+    <ul className="space-y-2">
+      {benefits.map((benefit, index) => (
+        <li key={index} className="flex items-center text-sm text-gray-600">
+          <CheckCircle2 className="w-4 h-4 mr-2 text-green-500" />
+          {benefit}
+        </li>
+      ))}
+    </ul>
   );
 };

@@ -41,19 +41,37 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
         throw new Error("ログインが必要です");
       }
 
-      const { error } = await supabase
+      // Get the user's profile
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) {
+        console.error('Profile fetch error:', profileError);
+        throw new Error("プロフィールの取得に失敗しました");
+      }
+
+      if (!profile) {
+        throw new Error("プロフィールが見つかりません");
+      }
+
+      // Create the discussion with profile information
+      const { error: discussionError } = await supabase
         .from("discussions")
         .insert([
           {
             title: formState.title,
             content: formState.content,
-            visibility: formState.visibility,
             user_id: user.id,
+            profile_id: profile.id,
+            visibility: formState.visibility,
             attachments: formState.attachments,
           },
         ]);
 
-      if (error) throw error;
+      if (discussionError) throw discussionError;
     },
     onSuccess: () => {
       toast.success("投稿が完了しました");

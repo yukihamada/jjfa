@@ -17,6 +17,7 @@ import Roadmap from "@/pages/Roadmap";
 import LiveStreaming from "@/pages/LiveStreaming";
 import StreamingStudio from "@/pages/StreamingStudio";
 import Careers from "@/pages/Careers";
+import Project from "@/pages/Project";
 import BasicInfo from "@/pages/profile/BasicInfo";
 import Fighter from "@/pages/profile/Fighter";
 import FighterStats from "@/pages/profile/FighterStats";
@@ -34,6 +35,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/about" element={<About />} />
+      <Route path="/project" element={<Project />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/articles" element={<Articles />} />
       <Route path="/tournament-rules" element={<TournamentRules />} />

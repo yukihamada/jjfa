@@ -12,7 +12,7 @@ const Project = () => {
         description="JJFAのプロジェクト概要、ロードマップ、トークンエコノミーについての詳細をご覧いただけます。"
       />
       
-      <PageTitle>プロジェクト概要</PageTitle>
+      <PageTitle title="プロジェクト概要" />
       
       <div className="mt-8 space-y-8">
         <section className="prose prose-slate max-w-none">

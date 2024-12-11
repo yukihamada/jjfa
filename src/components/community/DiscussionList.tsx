@@ -12,7 +12,17 @@ export const DiscussionList = () => {
         .from('discussions')
         .select(`
           *,
-          profile: profiles(*)
+          profile:profiles(
+            id,
+            username,
+            avatar_url
+          ),
+          likes (user_id),
+          comments (id),
+          tags (
+            id,
+            name
+          )
         `)
         .order('created_at', { ascending: false });
 

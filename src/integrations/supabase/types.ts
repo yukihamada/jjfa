@@ -1016,12 +1016,103 @@ export type Database = {
           },
         ]
       }
+      product_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          dojo_id: string
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          dojo_id: string
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          dojo_id?: string
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_categories_dojo_id_fkey"
+            columns: ["dojo_id"]
+            isOneToOne: false
+            referencedRelation: "dojos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          description: string | null
+          dojo_id: string
+          id: string
+          image_url: string | null
+          name: string
+          price: number
+          stock: number
+          updated_at: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          dojo_id: string
+          id?: string
+          image_url?: string | null
+          name: string
+          price: number
+          stock?: number
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          dojo_id?: string
+          id?: string
+          image_url?: string | null
+          name?: string
+          price?: number
+          stock?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "product_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_dojo_id_fkey"
+            columns: ["dojo_id"]
+            isOneToOne: false
+            referencedRelation: "dojos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           address: string | null
           avatar_url: string | null
           bio: string | null
+          company_name: string | null
           created_at: string
+          email: string | null
           emergency_contact: string | null
           emergency_phone: string | null
           emergency_relation: string | null
@@ -1036,6 +1127,8 @@ export type Database = {
           membership_number: string | null
           membership_status: string | null
           phone: string | null
+          position: string | null
+          subscription_plan: string | null
           updated_at: string
           username: string | null
         }
@@ -1043,7 +1136,9 @@ export type Database = {
           address?: string | null
           avatar_url?: string | null
           bio?: string | null
+          company_name?: string | null
           created_at?: string
+          email?: string | null
           emergency_contact?: string | null
           emergency_phone?: string | null
           emergency_relation?: string | null
@@ -1058,6 +1153,8 @@ export type Database = {
           membership_number?: string | null
           membership_status?: string | null
           phone?: string | null
+          position?: string | null
+          subscription_plan?: string | null
           updated_at?: string
           username?: string | null
         }
@@ -1065,7 +1162,9 @@ export type Database = {
           address?: string | null
           avatar_url?: string | null
           bio?: string | null
+          company_name?: string | null
           created_at?: string
+          email?: string | null
           emergency_contact?: string | null
           emergency_phone?: string | null
           emergency_relation?: string | null
@@ -1080,6 +1179,8 @@ export type Database = {
           membership_number?: string | null
           membership_status?: string | null
           phone?: string | null
+          position?: string | null
+          subscription_plan?: string | null
           updated_at?: string
           username?: string | null
         }

@@ -18,6 +18,7 @@ import LiveStreaming from "@/pages/LiveStreaming";
 import StreamingStudio from "@/pages/StreamingStudio";
 import Careers from "@/pages/Careers";
 import Project from "@/pages/Project";
+import Whitepaper from "@/pages/Whitepaper";
 import BasicInfo from "@/pages/profile/BasicInfo";
 import Fighter from "@/pages/profile/Fighter";
 import FighterStats from "@/pages/profile/FighterStats";
@@ -41,6 +42,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/tournament-rules" element={<TournamentRules />} />
       <Route path="/operating-rules" element={<OperatingRules />} />
       <Route path="/token-rules" element={<TokenRules />} />
+      <Route path="/whitepaper" element={<Whitepaper />} />
       <Route 
         path="/community" 
         element={

@@ -30,6 +30,39 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          new_data: Json | null
+          old_data: Json | null
+          record_id: string | null
+          table_name: string
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          new_data?: Json | null
+          old_data?: Json | null
+          record_id?: string | null
+          table_name: string
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          new_data?: Json | null
+          old_data?: Json | null
+          record_id?: string | null
+          table_name?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       belts: {
         Row: {
           belt_order: number
@@ -1128,6 +1161,7 @@ export type Database = {
           membership_status: string | null
           phone: string | null
           position: string | null
+          signup_domain: string | null
           subscription_plan: string | null
           updated_at: string
           username: string | null
@@ -1154,6 +1188,7 @@ export type Database = {
           membership_status?: string | null
           phone?: string | null
           position?: string | null
+          signup_domain?: string | null
           subscription_plan?: string | null
           updated_at?: string
           username?: string | null
@@ -1180,6 +1215,7 @@ export type Database = {
           membership_status?: string | null
           phone?: string | null
           position?: string | null
+          signup_domain?: string | null
           subscription_plan?: string | null
           updated_at?: string
           username?: string | null

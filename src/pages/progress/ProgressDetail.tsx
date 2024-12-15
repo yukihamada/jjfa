@@ -14,12 +14,11 @@ type ProgressDetail = {
   learned_at: string;
   skill_level: string;
   user_id: string;
-  description?: string | null;
-  video_url?: string | null;
+  description: string | null;
+  video_url: string | null;
   created_at: string;
   profiles: {
     full_name: string | null;
-    username: string | null;
   } | null;
 };
 
@@ -34,8 +33,7 @@ const ProgressDetail = () => {
         .select(`
           *,
           profiles:user_id (
-            full_name,
-            username
+            full_name
           )
         `)
         .eq('id', id)

@@ -8,9 +8,9 @@ import { TokenSection } from "@/components/sections/TokenSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { SEO } from "@/components/SEO";
-import { TechniqueLearningProgress } from "@/components/TechniqueLearningProgress";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Navigate } from "react-router-dom";
 
 const Index = () => {
   const { data: session } = useQuery({
@@ -21,6 +21,10 @@ const Index = () => {
     },
   });
 
+  if (session) {
+    return <Navigate to="/profile" replace />;
+  }
+
   return (
     <div className="min-h-screen">
       <SEO 
@@ -29,22 +33,14 @@ const Index = () => {
         keywords="柔術,JJFA,Jiu-Jitsu,大会,トーナメント,コミュニティ,教育,MASTER NFT,VOTE Token,BJJ Token,DAO"
       />
       <BackgroundGradient />
-      {session ? (
-        <div className="container mx-auto px-4 py-12">
-          <TechniqueLearningProgress />
-        </div>
-      ) : (
-        <>
-          <HeroSection />
-          <JiujitsuBenefitsSection />
-          <EventsSection />
-          <ExternalLinks />
-          <ComingSoonSection />
-          <TeamSection />
-          <TokenSection />
-          <ContactSection />
-        </>
-      )}
+      <HeroSection />
+      <JiujitsuBenefitsSection />
+      <EventsSection />
+      <ExternalLinks />
+      <ComingSoonSection />
+      <TeamSection />
+      <TokenSection />
+      <ContactSection />
     </div>
   );
 };

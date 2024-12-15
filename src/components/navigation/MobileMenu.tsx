@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -13,21 +15,39 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu = ({ isOpen, menuItems, onItemClick }: MobileMenuProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node) && isOpen) {
+        onItemClick();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen, onItemClick]);
+
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden" ref={menuRef}>
       <Button
         variant="ghost"
         size="icon"
         className="lg:hidden"
         onClick={onItemClick}
       >
-        <Menu className="h-6 w-6" />
+        {isOpen ? (
+          <X className="h-6 w-6 transition-transform duration-300 rotate-90" />
+        ) : (
+          <Menu className="h-6 w-6 transition-transform duration-300" />
+        )}
       </Button>
       
       <div 
-        className={`lg:hidden fixed top-16 right-0 w-56 h-screen bg-white/90 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out ${
+        className={cn(
+          "lg:hidden fixed top-16 right-0 w-56 h-screen bg-white/90 backdrop-blur-md shadow-lg transform transition-all duration-300 ease-in-out",
           isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        )}
       >
         <nav className="flex flex-col p-4 gap-2">
           {menuItems.map((item) => {

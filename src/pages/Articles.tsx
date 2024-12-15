@@ -88,10 +88,10 @@ const Articles = () => {
                   <li>{isJapanese ? 'Governance Token：DAO内の意思決定投票で重要な役割を果たすトークン' : 'Governance Token: playing a crucial role in DAO decision-making votes'}</li>
                   <li>{isJapanese ? 'JJFAトークン：大会参加費やサービス利用料など、プラットフォーム内の支払い手段となるトークン' : 'JJFA Token: used as a payment method within the platform for tournament entry fees and service charges'}</li>
                 </ul>
-                <p>{isJapanese ? 'これらトークンの発行・譲渡・再発行・ウォレット管理などの細かいルールは、「トークン規程」に詳しく定めます。' : 'Detailed rules regarding token issuance, transfer, reissuance, and wallet management are specified in the "Token Regulations".'}</p>
+                <p>{isJapanese ? 'これらトークンの発行・譲渡・再発行・ウォレット管理などの細かいルールは、<Link to="/token-rules" className="text-blue-600 hover:underline">「トークン規程」</Link>に詳しく定めます。' : 'Detailed rules regarding token issuance, transfer, reissuance, and wallet management are specified in the "Token Regulations".'}</p>
 
                 <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第7条（社員の加入・脱退）' : 'Article 7 (Joining and Withdrawal of Members)'}</h3>
-                <p>{isJapanese ? '新たに当社に参加したい人は、社員権トークンを取得すれば社員になれます。社員が自分のトークンを他者へ譲ると、その人が新たな社員になります。脱退時のトークン処理方法などは、「トークン規程」に従って決められています。' : 'New members can join the company by acquiring membership tokens. When a member transfers their tokens to another person, that person becomes a new member. Token handling procedures for withdrawal are determined according to the "Token Regulations".'}</p>
+                <p>{isJapanese ? '新たに当社に参加したい人は、社員権トークンを取得すれば社員になれます。社員が自分のトークンを他者へ譲ると、その人が新たな社員になります。脱退時のトークン処理方法などは、<Link to="/token-rules" className="text-blue-600 hover:underline">「トークン規程」</Link>に従って決められています。' : 'New members can join the company by acquiring membership tokens. When a member transfers their tokens to another person, that person becomes a new member. Token handling procedures for withdrawal are determined according to the "Token Regulations".'}</p>
               </ArticlesSection>
 
               <ArticlesSection title={isJapanese ? '第3章 業務執行および代表' : 'Chapter 3: Business Execution and Representation'}>

@@ -31,6 +31,14 @@ export const TechniqueLearningProgress = () => {
     setEditingProgress(null);
   };
 
+  const handleEdit = async (progressId: string) => {
+    if (!userProgress) return;
+    const progressToEdit = userProgress.find(p => p.id === progressId);
+    if (progressToEdit) {
+      setEditingProgress(progressToEdit);
+    }
+  };
+
   if (isLoadingProgress) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -47,7 +55,7 @@ export const TechniqueLearningProgress = () => {
         <h3 className="text-lg sm:text-xl font-semibold text-slate-800 mb-4">進捗一覧</h3>
         <ProgressList 
           userProgress={userProgress} 
-          onEdit={setEditingProgress}
+          onEdit={handleEdit}
         />
       </div>
     </div>

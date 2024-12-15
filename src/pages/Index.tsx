@@ -29,7 +29,7 @@ const Index = () => {
         keywords="柔術,JJFA,Jiu-Jitsu,大会,トーナメント,コミュニティ,教育,MASTER NFT,VOTE Token,BJJ Token,DAO"
       />
       <BackgroundGradient />
-      <HeroSection />
+      {!session && <HeroSection />}
       {session && (
         <div className="container mx-auto px-4 py-12">
           <TechniqueLearningProgress />

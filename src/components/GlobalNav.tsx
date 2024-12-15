@@ -8,6 +8,7 @@ import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
 import { Home, Info, FileText, Users, MessageCircle } from "lucide-react";
+import { TournamentSchedule } from "./navigation/TournamentSchedule";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -74,6 +75,7 @@ export const GlobalNav = () => {
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />
+          {user && <TournamentSchedule />}
           <UserMenu user={user} />
           <MobileMenu 
             menuItems={navItems} 

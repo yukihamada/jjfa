@@ -13,7 +13,8 @@ type ProgressDetail = {
   notes: string;
   learned_at: string;
   skill_level: string;
-  user: {
+  user_id: string;
+  profiles: {
     full_name: string | null;
     username: string | null;
   };
@@ -29,7 +30,7 @@ const ProgressDetail = () => {
         .from('learning_progress')
         .select(`
           *,
-          user:user_id (
+          profiles:user_id (
             full_name,
             username
           )
@@ -123,7 +124,7 @@ const ProgressDetail = () => {
             <h1 className="text-2xl font-bold text-slate-900">{progress.technique}</h1>
             <p className="text-slate-600 whitespace-pre-wrap">{progress.notes}</p>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span>{progress.user?.full_name || "ユーザー"}</span>
+              <span>{progress.profiles?.full_name || "ユーザー"}</span>
               <span>•</span>
               <span>{format(new Date(progress.learned_at), 'yyyy年MM月dd日')}</span>
             </div>

@@ -11,15 +11,26 @@ import { SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Navigate } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 
 const Index = () => {
-  const { data: session } = useQuery({
+  const { data: session, isLoading } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
       const { data: { session } } = await supabase.auth.getSession();
       return session;
     },
+    staleTime: 0,
+    cacheTime: 0
   });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (session) {
     return <Navigate to="/profile" replace />;

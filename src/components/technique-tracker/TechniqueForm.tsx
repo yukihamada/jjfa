@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -12,9 +12,10 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface TechniqueFormProps {
   onSuccess: () => void;
+  editingProgress?: any;
 }
 
-export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
+export const TechniqueForm = ({ onSuccess, editingProgress }: TechniqueFormProps) => {
   const [selectedTechnique, setSelectedTechnique] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [skillLevel, setSkillLevel] = useState<SkillLevel>("beginner");
@@ -24,6 +25,14 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
   const [error, setError] = useState<string | null>(null);
   
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (editingProgress) {
+      setSelectedTechnique(editingProgress.technique || "");
+      setSkillLevel(editingProgress.skill_level || "beginner");
+      setNotes(editingProgress.notes || "");
+    }
+  }, [editingProgress]);
 
   const updateProgress = useMutation({
     mutationFn: async () => {
@@ -55,20 +64,34 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
         videoUrl = publicUrl;
       }
 
-      const { error } = await supabase
-        .from("learning_progress")
-        .insert({
-          user_id: user.id,
-          technique: selectedTechnique,
-          skill_level: skillLevel,
-          notes,
-          video_url: videoUrl || null,
-        });
+      if (editingProgress) {
+        const { error } = await supabase
+          .from("learning_progress")
+          .update({
+            technique: selectedTechnique,
+            skill_level: skillLevel,
+            notes,
+            video_url: videoUrl || editingProgress.video_url,
+          })
+          .eq('id', editingProgress.id);
 
-      if (error) throw error;
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from("learning_progress")
+          .insert({
+            user_id: user.id,
+            technique: selectedTechnique,
+            skill_level: skillLevel,
+            notes,
+            video_url: videoUrl || null,
+          });
+
+        if (error) throw error;
+      }
     },
     onSuccess: () => {
-      toast.success("進捗を保存しました！");
+      toast.success(editingProgress ? "進捗を更新しました！" : "進捗を保存しました！");
       queryClient.invalidateQueries({ queryKey: ["learningProgress"] });
       setNotes("");
       setVideoFile(null);
@@ -77,9 +100,8 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
     },
     onError: (error: any) => {
       console.error("Error updating progress:", error);
-      let errorMessage = "進捗の保存に失敗しました。";
+      let errorMessage = editingProgress ? "進捗の更新に失敗しました。" : "進捗の保存に失敗しました。";
       
-      // Handle specific database errors
       if (error.code === "23514" && error.message.includes("valid_skill_level")) {
         errorMessage = "選択された熟練度が無効です。もう一度選択してください。";
       } else if (error.message) {
@@ -162,10 +184,10 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
         {isUploading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            アップロード中...
+            {editingProgress ? "更新中..." : "アップロード中..."}
           </>
         ) : (
-          "進捗を保存"
+          editingProgress ? "進捗を更新" : "進捗を保存"
         )}
       </Button>
     </div>

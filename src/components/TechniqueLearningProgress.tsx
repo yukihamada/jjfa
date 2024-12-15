@@ -3,9 +3,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
 import { TechniqueForm } from "./technique-tracker/TechniqueForm";
 import { ProgressList } from "./technique-tracker/ProgressList";
+import { useState } from "react";
 
 export const TechniqueLearningProgress = () => {
   const queryClient = useQueryClient();
+  const [editingProgress, setEditingProgress] = useState<any | null>(null);
 
   const { data: userProgress, isLoading: isLoadingProgress } = useQuery({
     queryKey: ["learningProgress"],
@@ -26,6 +28,7 @@ export const TechniqueLearningProgress = () => {
 
   const handleSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["learningProgress"] });
+    setEditingProgress(null);
   };
 
   if (isLoadingProgress) {
@@ -39,8 +42,11 @@ export const TechniqueLearningProgress = () => {
   return (
     <div className="space-y-6 p-6 bg-white rounded-lg shadow-sm">
       <h2 className="text-2xl font-bold text-slate-800">柔術技術の習熟度トラッカー</h2>
-      <TechniqueForm onSuccess={handleSuccess} />
-      <ProgressList userProgress={userProgress} />
+      <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
+      <ProgressList 
+        userProgress={userProgress} 
+        onEdit={setEditingProgress}
+      />
     </div>
   );
 };

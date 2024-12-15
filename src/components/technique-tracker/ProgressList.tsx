@@ -13,10 +13,10 @@ import { ProgressComments } from "./ProgressComments";
 
 interface ProgressListProps {
   userProgress: any[] | undefined;
+  onEdit: (progress: any) => void;
 }
 
-export const ProgressList = ({ userProgress }: ProgressListProps) => {
-  const [editingProgress, setEditingProgress] = useState<any | null>(null);
+export const ProgressList = ({ userProgress, onEdit }: ProgressListProps) => {
   const [selectedProgress, setSelectedProgress] = useState<any | null>(null);
   const queryClient = useQueryClient();
 
@@ -49,7 +49,7 @@ export const ProgressList = ({ userProgress }: ProgressListProps) => {
             key={progress.id}
             progress={progress}
             onDelete={(id) => deleteProgress.mutate(id)}
-            onEdit={setEditingProgress}
+            onEdit={onEdit}
             onCommentClick={setSelectedProgress}
           />
         ))}

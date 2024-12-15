@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { PageTitle } from "@/components/PageTitle";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import { UserManagement } from "@/components/admin/UserManagement";
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -55,13 +56,8 @@ const AdminPage = () => {
       
       <div className="grid gap-6 mt-8">
         <Card>
-          <CardHeader>
-            <CardTitle>管理者メニュー</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-600">
-              ここに管理者用の機能を実装していきます。
-            </p>
+          <CardContent className="pt-6">
+            <UserManagement />
           </CardContent>
         </Card>
       </div>

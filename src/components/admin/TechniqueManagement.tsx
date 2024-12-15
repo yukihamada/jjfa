@@ -104,7 +104,7 @@ export const TechniqueManagement = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-2">
           <BookOpen className="h-5 w-5" />
           <h2 className="text-xl font-semibold">技の管理</h2>
@@ -112,7 +112,7 @@ export const TechniqueManagement = () => {
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button>新しい技を追加</Button>
+            <Button className="w-full sm:w-auto whitespace-nowrap">新しい技を追加</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -165,34 +165,36 @@ export const TechniqueManagement = () => {
         </Dialog>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>カテゴリー</TableHead>
-            <TableHead>技名</TableHead>
-            <TableHead>説明</TableHead>
-            <TableHead>アクション</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {techniques?.map((technique) => (
-            <TableRow key={technique.id}>
-              <TableCell>{technique.category}</TableCell>
-              <TableCell>{technique.technique_name}</TableCell>
-              <TableCell>{technique.description}</TableCell>
-              <TableCell>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => deleteTechniqueMutation.mutate(technique.id)}
-                >
-                  削除
-                </Button>
-              </TableCell>
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="whitespace-nowrap">カテゴリー</TableHead>
+              <TableHead className="whitespace-nowrap">技名</TableHead>
+              <TableHead className="whitespace-nowrap">説明</TableHead>
+              <TableHead className="whitespace-nowrap">アクション</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {techniques?.map((technique) => (
+              <TableRow key={technique.id}>
+                <TableCell className="whitespace-nowrap">{technique.category}</TableCell>
+                <TableCell className="whitespace-nowrap">{technique.technique_name}</TableCell>
+                <TableCell className="break-all">{technique.description}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => deleteTechniqueMutation.mutate(technique.id)}
+                  >
+                    削除
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

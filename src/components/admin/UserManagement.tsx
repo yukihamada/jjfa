@@ -100,40 +100,42 @@ export const UserManagement = () => {
         <h2 className="text-xl font-semibold">ユーザー管理</h2>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>名前</TableHead>
-            <TableHead>メール</TableHead>
-            <TableHead>役割</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {profiles?.map((profile) => (
-            <TableRow key={profile.id}>
-              <TableCell>{profile.full_name || "未設定"}</TableCell>
-              <TableCell>{profile.email}</TableCell>
-              <TableCell>
-                <Select
-                  disabled={updating === profile.id}
-                  value={profile.user_roles?.[0]?.role_type || "none"}
-                  onValueChange={(value) => handleRoleChange(profile.id, value)}
-                >
-                  <SelectTrigger className="w-[200px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">一般ユーザー</SelectItem>
-                    <SelectItem value="admin">管理者</SelectItem>
-                    <SelectItem value="instructor">道場指導責任者</SelectItem>
-                    <SelectItem value="referee">審判</SelectItem>
-                  </SelectContent>
-                </Select>
-              </TableCell>
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="whitespace-nowrap">名前</TableHead>
+              <TableHead className="whitespace-nowrap min-w-[200px]">メール</TableHead>
+              <TableHead className="whitespace-nowrap">役割</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {profiles?.map((profile) => (
+              <TableRow key={profile.id}>
+                <TableCell className="whitespace-nowrap">{profile.full_name || "未設定"}</TableCell>
+                <TableCell className="break-all">{profile.email}</TableCell>
+                <TableCell>
+                  <Select
+                    disabled={updating === profile.id}
+                    value={profile.user_roles?.[0]?.role_type || "none"}
+                    onValueChange={(value) => handleRoleChange(profile.id, value)}
+                  >
+                    <SelectTrigger className="w-[200px] max-w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">一般ユーザー</SelectItem>
+                      <SelectItem value="admin">管理者</SelectItem>
+                      <SelectItem value="instructor">道場指導責任者</SelectItem>
+                      <SelectItem value="referee">審判</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

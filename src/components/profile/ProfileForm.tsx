@@ -59,13 +59,13 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
     <form onSubmit={handleUpdate}>
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <CardTitle>プロフィール情報</CardTitle>
               <CardDescription>基本的な情報を更新</CardDescription>
             </div>
             {profile?.username && (
-              <div className="space-y-2">
+              <div className="space-y-2 min-w-[200px]">
                 <Link 
                   to={`/profile/${profile.username}`}
                   className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800"
@@ -74,8 +74,8 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
                   公開プロフィールを見る
                 </Link>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <LinkIcon className="w-4 h-4" />
-                  <code className="text-xs bg-muted px-2 py-1 rounded">{publicProfileUrl}</code>
+                  <LinkIcon className="w-4 h-4 shrink-0" />
+                  <code className="text-xs bg-muted px-2 py-1 rounded break-all">{publicProfileUrl}</code>
                 </div>
               </div>
             )}

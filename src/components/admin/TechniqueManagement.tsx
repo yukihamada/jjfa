@@ -104,7 +104,7 @@ export const TechniqueManagement = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <BookOpen className="h-5 w-5" />
           <h2 className="text-xl font-semibold">技の管理</h2>
@@ -112,9 +112,9 @@ export const TechniqueManagement = () => {
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="w-full sm:w-auto whitespace-nowrap">新しい技を追加</Button>
+            <Button className="w-full sm:w-auto">新しい技を追加</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>新しい技を追加</DialogTitle>
             </DialogHeader>
@@ -129,6 +129,7 @@ export const TechniqueManagement = () => {
                     setNewTechnique({ ...newTechnique, category: e.target.value })
                   }
                   required
+                  className="w-full"
                 />
               </div>
               <div>
@@ -142,6 +143,7 @@ export const TechniqueManagement = () => {
                     })
                   }
                   required
+                  className="w-full"
                 />
               </div>
               <div>
@@ -155,6 +157,7 @@ export const TechniqueManagement = () => {
                     })
                   }
                   required
+                  className="w-full"
                 />
               </div>
               <Button type="submit" className="w-full">
@@ -165,27 +168,28 @@ export const TechniqueManagement = () => {
         </Dialog>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="whitespace-nowrap">カテゴリー</TableHead>
-              <TableHead className="whitespace-nowrap">技名</TableHead>
-              <TableHead className="whitespace-nowrap">説明</TableHead>
-              <TableHead className="whitespace-nowrap">アクション</TableHead>
+              <TableHead className="whitespace-nowrap min-w-[100px]">カテゴリー</TableHead>
+              <TableHead className="whitespace-nowrap min-w-[100px]">技名</TableHead>
+              <TableHead className="min-w-[200px]">説明</TableHead>
+              <TableHead className="w-[100px]">アクション</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {techniques?.map((technique) => (
               <TableRow key={technique.id}>
-                <TableCell className="whitespace-nowrap">{technique.category}</TableCell>
-                <TableCell className="whitespace-nowrap">{technique.technique_name}</TableCell>
-                <TableCell className="break-all">{technique.description}</TableCell>
+                <TableCell className="font-medium">{technique.category}</TableCell>
+                <TableCell>{technique.technique_name}</TableCell>
+                <TableCell className="break-words">{technique.description}</TableCell>
                 <TableCell>
                   <Button
                     variant="destructive"
                     size="sm"
                     onClick={() => deleteTechniqueMutation.mutate(technique.id)}
+                    className="whitespace-nowrap"
                   >
                     削除
                   </Button>

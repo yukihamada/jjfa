@@ -28,7 +28,7 @@ type Profile = {
   id: string;
   email: string;
   full_name: string | null;
-  roles: UserRole[];
+  user_roles: UserRole[];
 };
 
 export const UserManagement = () => {

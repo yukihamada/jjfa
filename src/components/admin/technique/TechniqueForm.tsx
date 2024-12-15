@@ -12,6 +12,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+interface TechniqueDetail {
+  id: string;
+  technique_name: string;
+  description: string;
+  category: string;
+}
+
 interface TechniqueFormProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
@@ -29,7 +36,7 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
     mutationFn: async (technique: Omit<TechniqueDetail, "id">) => {
       const { error } = await supabase
         .from("technique_details")
-        .insert([technique]);
+        .insert(technique);
 
       if (error) throw error;
     },

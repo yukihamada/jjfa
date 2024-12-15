@@ -116,39 +116,39 @@ const Calendar = () => {
       <Helmet>
         <title>{isJapanese ? "大会カレンダー | JJFA" : "Tournament Calendar | JJFA"}</title>
       </Helmet>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
           {isJapanese ? "大会カレンダー" : "Tournament Calendar"}
         </h1>
         <Tabs defaultValue="upcoming" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="upcoming">
+          <TabsList className="grid w-full grid-cols-2 mb-4 sm:mb-6">
+            <TabsTrigger value="upcoming" className="text-sm sm:text-base">
               {isJapanese ? "今後の大会" : "Upcoming Tournaments"}
             </TabsTrigger>
-            <TabsTrigger value="past">
+            <TabsTrigger value="past" className="text-sm sm:text-base">
               {isJapanese ? "過去の大会" : "Past Tournaments"}
             </TabsTrigger>
           </TabsList>
           <TabsContent value="upcoming">
-            <ScrollArea className="h-[calc(100vh-12rem)]">
-              <div className="space-y-4">
+            <ScrollArea className="h-[calc(100vh-10rem)]">
+              <div className="space-y-3">
                 {upcomingTournaments.map((tournament, index) => (
-                  <Card key={index}>
-                    <CardHeader className="pb-2">
-                      <div className="flex justify-between items-start">
-                        <CardTitle className="text-lg font-bold">
+                  <Card key={index} className="border shadow-sm">
+                    <CardHeader className="pb-2 px-3 sm:px-4">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-2">
+                        <CardTitle className="text-base sm:text-lg font-bold break-words">
                           {tournament.name}
                         </CardTitle>
-                        <span className="text-sm font-semibold text-muted-foreground">
+                        <span className="text-xs sm:text-sm font-semibold text-muted-foreground whitespace-nowrap">
                           {tournament.organization}
                         </span>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <div className="space-y-1 text-sm">
-                        <p className="font-medium">{tournament.date}</p>
-                        <p className="text-muted-foreground">{tournament.location}</p>
-                        <p className="text-muted-foreground italic">{tournament.notes}</p>
+                    <CardContent className="px-3 sm:px-4">
+                      <div className="space-y-1.5 text-sm">
+                        <p className="font-medium text-primary">{tournament.date}</p>
+                        <p className="text-muted-foreground text-xs sm:text-sm">{tournament.location}</p>
+                        <p className="text-muted-foreground italic text-xs sm:text-sm">{tournament.notes}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -157,25 +157,25 @@ const Calendar = () => {
             </ScrollArea>
           </TabsContent>
           <TabsContent value="past">
-            <ScrollArea className="h-[calc(100vh-12rem)]">
-              <div className="space-y-4">
+            <ScrollArea className="h-[calc(100vh-10rem)]">
+              <div className="space-y-3">
                 {pastTournaments.map((tournament, index) => (
-                  <Card key={index}>
-                    <CardHeader className="pb-2">
-                      <div className="flex justify-between items-start">
-                        <CardTitle className="text-lg font-bold">
+                  <Card key={index} className="border shadow-sm">
+                    <CardHeader className="pb-2 px-3 sm:px-4">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-2">
+                        <CardTitle className="text-base sm:text-lg font-bold break-words">
                           {tournament.name}
                         </CardTitle>
-                        <span className="text-sm font-semibold text-muted-foreground">
+                        <span className="text-xs sm:text-sm font-semibold text-muted-foreground whitespace-nowrap">
                           {tournament.organization}
                         </span>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <div className="space-y-1 text-sm">
-                        <p className="font-medium">{tournament.date}</p>
-                        <p className="text-muted-foreground">{tournament.location}</p>
-                        <p className="text-muted-foreground italic">{tournament.notes}</p>
+                    <CardContent className="px-3 sm:px-4">
+                      <div className="space-y-1.5 text-sm">
+                        <p className="font-medium text-primary">{tournament.date}</p>
+                        <p className="text-muted-foreground text-xs sm:text-sm">{tournament.location}</p>
+                        <p className="text-muted-foreground italic text-xs sm:text-sm">{tournament.notes}</p>
                       </div>
                     </CardContent>
                   </Card>

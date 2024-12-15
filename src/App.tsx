@@ -52,7 +52,9 @@ const App = () => {
     checkSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
+      if (event === 'SIGNED_IN') {
+        setIsAuthenticated(true);
+      } else if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
         setIsAuthenticated(!!session);
         if (!session) {
           toast.error("セッションが終了しました。再度ログインしてください。");

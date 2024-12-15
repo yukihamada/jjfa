@@ -8,8 +8,19 @@ import { TokenSection } from "@/components/sections/TokenSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { BackgroundGradient } from "@/components/BackgroundGradient";
 import { SEO } from "@/components/SEO";
+import { TechniqueLearningProgress } from "@/components/TechniqueLearningProgress";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
+  const { data: session } = useQuery({
+    queryKey: ["session"],
+    queryFn: async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      return session;
+    },
+  });
+
   return (
     <div className="min-h-screen">
       <SEO 
@@ -19,6 +30,11 @@ const Index = () => {
       />
       <BackgroundGradient />
       <HeroSection />
+      {session && (
+        <div className="container mx-auto px-4 py-12">
+          <TechniqueLearningProgress />
+        </div>
+      )}
       <JiujitsuBenefitsSection />
       <EventsSection />
       <ExternalLinks />

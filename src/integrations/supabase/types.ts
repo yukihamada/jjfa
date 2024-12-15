@@ -705,6 +705,42 @@ export type Database = {
         }
         Relationships: []
       }
+      learning_progress: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          learned_at: string
+          notes: string | null
+          skill_level: string
+          technique: string
+          user_id: string
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          learned_at?: string
+          notes?: string | null
+          skill_level?: string
+          technique: string
+          user_id: string
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          learned_at?: string
+          notes?: string | null
+          skill_level?: string
+          technique?: string
+          user_id?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       likes: {
         Row: {
           created_at: string
@@ -829,6 +865,7 @@ export type Database = {
           round: number
           technique: string
           time_stamp: string
+          timestamp_ms: number | null
         }
         Insert: {
           fighter_id?: string | null
@@ -838,6 +875,7 @@ export type Database = {
           round: number
           technique: string
           time_stamp?: string
+          timestamp_ms?: number | null
         }
         Update: {
           fighter_id?: string | null
@@ -847,6 +885,7 @@ export type Database = {
           round?: number
           technique?: string
           time_stamp?: string
+          timestamp_ms?: number | null
         }
         Relationships: [
           {
@@ -872,6 +911,9 @@ export type Database = {
           competition_id: number | null
           created_at: string
           id: string
+          is_displayed: boolean | null
+          match_date: string | null
+          match_name: string | null
           match_number: number
           match_result: string | null
           match_time: string | null
@@ -883,6 +925,7 @@ export type Database = {
           round_duration: number | null
           status: string | null
           updated_at: string
+          weight_division: string | null
           winner_id: string | null
         }
         Insert: {
@@ -891,6 +934,9 @@ export type Database = {
           competition_id?: number | null
           created_at?: string
           id?: string
+          is_displayed?: boolean | null
+          match_date?: string | null
+          match_name?: string | null
           match_number: number
           match_result?: string | null
           match_time?: string | null
@@ -902,6 +948,7 @@ export type Database = {
           round_duration?: number | null
           status?: string | null
           updated_at?: string
+          weight_division?: string | null
           winner_id?: string | null
         }
         Update: {
@@ -910,6 +957,9 @@ export type Database = {
           competition_id?: number | null
           created_at?: string
           id?: string
+          is_displayed?: boolean | null
+          match_date?: string | null
+          match_name?: string | null
           match_number?: number
           match_result?: string | null
           match_time?: string | null
@@ -921,6 +971,7 @@ export type Database = {
           round_duration?: number | null
           status?: string | null
           updated_at?: string
+          weight_division?: string | null
           winner_id?: string | null
         }
         Relationships: [
@@ -1254,6 +1305,33 @@ export type Database = {
           },
         ]
       }
+      technique_details: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          id: string
+          technique_name: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          id?: string
+          technique_name: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          technique_name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_class_tickets: {
         Row: {
           created_at: string
@@ -1439,6 +1517,63 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      yawara_cup_2024: {
+        Row: {
+          created_at: string
+          fighter_name: string
+          id: string
+          match_number: number | null
+          match_time: string | null
+          side: string | null
+        }
+        Insert: {
+          created_at?: string
+          fighter_name: string
+          id?: string
+          match_number?: number | null
+          match_time?: string | null
+          side?: string | null
+        }
+        Update: {
+          created_at?: string
+          fighter_name?: string
+          id?: string
+          match_number?: number | null
+          match_time?: string | null
+          side?: string | null
+        }
+        Relationships: []
+      }
+      yawara_cup_2024_scores: {
+        Row: {
+          created_at: string
+          fighter_name: string
+          id: string
+          match_number: number
+          points: number
+          technique: string
+          timestamp_ms: number
+        }
+        Insert: {
+          created_at?: string
+          fighter_name: string
+          id?: string
+          match_number: number
+          points: number
+          technique: string
+          timestamp_ms: number
+        }
+        Update: {
+          created_at?: string
+          fighter_name?: string
+          id?: string
+          match_number?: number
+          points?: number
+          technique?: string
+          timestamp_ms?: number
+        }
+        Relationships: []
       }
     }
     Views: {

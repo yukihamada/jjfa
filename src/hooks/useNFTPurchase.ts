@@ -15,7 +15,7 @@ export const useNFTPurchase = (onPurchaseNFT: () => void) => {
         return;
       }
 
-      // Create checkout session
+      // Create checkout session using the correct URL
       const response = await fetch(
         `${process.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`,
         {

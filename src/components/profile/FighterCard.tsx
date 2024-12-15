@@ -43,18 +43,18 @@ export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps
   return (
     <Card>
       <CardHeader>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <CardTitle>選手登録情報</CardTitle>
             <CardDescription>選手としての状態</CardDescription>
           </div>
           {fighter && !isEditing && (
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap sm:flex-nowrap">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setIsEditing(true)}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 w-full sm:w-auto"
               >
                 <Edit2 className="w-4 h-4" />
                 編集
@@ -64,7 +64,7 @@ export const FighterCard = ({ fighter, onRegistrationSuccess }: FighterCardProps
                 size="sm"
                 onClick={toggleActiveStatus}
                 disabled={loading}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 w-full sm:w-auto whitespace-nowrap"
               >
                 <Power className="w-4 h-4" />
                 {fighter.is_active ? "活動停止" : "活動再開"}

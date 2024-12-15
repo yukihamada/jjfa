@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Loader2, Upload } from "lucide-react";
 import { TechniqueSelect } from "./TechniqueSelect";
 import { SkillLevelSelect, type SkillLevel } from "./SkillLevelSelect";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface TechniqueFormProps {
   onSuccess: () => void;
@@ -20,6 +21,7 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
   const [notes, setNotes] = useState("");
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const queryClient = useQueryClient();
 
@@ -33,6 +35,7 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
       if (!user) throw new Error("Not authenticated");
 
       setIsUploading(true);
+      setError(null);
       let videoUrl = "";
 
       if (videoFile) {
@@ -69,11 +72,22 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
       queryClient.invalidateQueries({ queryKey: ["learningProgress"] });
       setNotes("");
       setVideoFile(null);
+      setError(null);
       onSuccess();
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Error updating progress:", error);
-      toast.error("進捗の保存に失敗しました。");
+      let errorMessage = "進捗の保存に失敗しました。";
+      
+      // Handle specific database errors
+      if (error.code === "23514" && error.message.includes("valid_skill_level")) {
+        errorMessage = "選択された熟練度が無効です。もう一度選択してください。";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      setError(errorMessage);
+      toast.error(errorMessage);
     },
     onSettled: () => {
       setIsUploading(false);
@@ -88,6 +102,12 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
 
   return (
     <div className="space-y-4">
+      {error && (
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
       <TechniqueSelect
         selectedCategory={selectedCategory}
         selectedTechnique={selectedTechnique}

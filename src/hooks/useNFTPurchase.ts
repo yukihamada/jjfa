@@ -13,9 +13,9 @@ export const useNFTPurchase = (onPurchaseNFT?: () => void) => {
         throw new Error("ログインが必要です");
       }
 
-      // Supabaseのクライアントから直接URLを取得
+      // Use the full URL directly instead of accessing supabaseUrl
       const response = await fetch(
-        `${supabase.supabaseUrl}/functions/v1/create-checkout`,
+        `https://hipoantgjdtzsgtkohxa.supabase.co/functions/v1/create-checkout`,
         {
           method: "POST",
           headers: {

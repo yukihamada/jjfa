@@ -13,5 +13,6 @@ export const nav = {
   tokenRules: "トークン規程",
   tournamentRules: "大会規則",
   live: "ライブ配信",
-  roadmap: "ロードマップ"
+  roadmap: "ロードマップ",
+  calendar: "大会カレンダー"
 };

@@ -19,6 +19,7 @@ import Careers from "@/pages/Careers";
 import Project from "@/pages/Project";
 import Whitepaper from "@/pages/Whitepaper";
 import Admin from "@/pages/Admin";
+import Calendar from "@/pages/Calendar";
 import BasicInfo from "@/pages/profile/BasicInfo";
 import Fighter from "@/pages/profile/Fighter";
 import FighterStats from "@/pages/profile/FighterStats";
@@ -48,6 +49,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/token-rules" element={<TokenRules />} />
       <Route path="/whitepaper" element={<Whitepaper />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/calendar" element={<Calendar />} />
       <Route 
         path="/community" 
         element={

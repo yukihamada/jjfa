@@ -7,7 +7,7 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
-import { Home, Info, FileText, Users, MessageCircle } from "lucide-react";
+import { Home, Info, FileText, Users, MessageCircle, Calendar } from "lucide-react";
 import { TournamentSchedule } from "./navigation/TournamentSchedule";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -52,6 +52,11 @@ export const GlobalNav = () => {
       label: t("nav.contact"),
       to: "/contact",
       icon: MessageCircle,
+    },
+    {
+      label: t("nav.calendar"),
+      to: "/calendar",
+      icon: Calendar,
     },
   ];
 

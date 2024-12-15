@@ -13,5 +13,6 @@ export const nav = {
   tokenRules: "Token Rules",
   tournamentRules: "Tournament Rules",
   live: "Live Streaming",
-  roadmap: "Roadmap"
+  roadmap: "Roadmap",
+  calendar: "Tournament Calendar"
 };

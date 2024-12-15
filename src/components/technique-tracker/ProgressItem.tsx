@@ -2,6 +2,7 @@ import { Trash2, Edit2, MessageSquare, CircleDot, CircleDashed, CircleDotDashed,
 import { Button } from "@/components/ui/button";
 import { SkillLevel } from "./SkillLevelSelect";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
 interface ProgressItemProps {
   progress: {
@@ -67,7 +68,10 @@ export const ProgressItem = ({
   return (
     <div className="p-4 border rounded-lg bg-slate-50">
       <div className="space-y-4">
-        <div className="flex flex-col space-y-2">
+        <Link 
+          to={`/progress/${progress.id}`}
+          className="block space-y-2 hover:opacity-75 transition-opacity"
+        >
           <div className="flex items-center gap-1">
             {getSkillLevelIcons(progress.skill_level as SkillLevel)}
           </div>
@@ -76,7 +80,7 @@ export const ProgressItem = ({
           <p className="text-xs text-slate-500">
             {format(new Date(progress.learned_at), 'yyyy年MM月dd日')}に学習
           </p>
-        </div>
+        </Link>
         <div className="flex justify-end gap-2">
           <Button
             variant="ghost"

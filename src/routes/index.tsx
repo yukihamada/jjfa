@@ -26,6 +26,7 @@ import Membership from "@/pages/profile/Membership";
 import Settings from "@/pages/profile/Settings";
 import Archives from "@/pages/profile/Archives";
 import PublicProfile from "@/pages/profile/PublicProfile";
+import ProgressDetail from "@/pages/progress/ProgressDetail";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -74,6 +75,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
         <Route path="archives" element={<Archives />} />
       </Route>
       <Route path="/profile/:id" element={<PublicProfile />} />
+      <Route path="/progress/:id" element={<ProgressDetail />} />
       <Route path="/articles" element={<Articles />} />
       <Route path="/careers" element={<Careers />} />
     </Routes>

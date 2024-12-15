@@ -4,33 +4,11 @@ import { PageTitle } from "@/components/PageTitle";
 import { ArticlesHeader } from "@/components/articles/ArticlesHeader";
 import { ArticlesSection } from "@/components/articles/ArticlesSection";
 import { ArticlesArticle } from "@/components/articles/ArticlesArticle";
-import { Link } from "react-router-dom";
-import { FileText, Book, Coins } from "lucide-react";
+import { RelatedDocuments } from "@/components/articles/RelatedDocuments";
 
 const Articles = () => {
   const { t, i18n } = useTranslation();
   const isJapanese = i18n.language === 'ja';
-
-  const relatedDocs = [
-    {
-      title: isJapanese ? "ホワイトペーパー" : "Whitepaper",
-      description: isJapanese ? "JJFAの目的とビジョンを詳しく説明した文書です。" : "A document detailing JJFA's purpose and vision.",
-      icon: Book,
-      link: "/whitepaper"
-    },
-    {
-      title: isJapanese ? "運営規程" : "Operating Rules",
-      description: isJapanese ? "DAOの運営方針や意思決定プロセスを定めた規程です。" : "Rules governing DAO operations and decision-making processes.",
-      icon: FileText,
-      link: "/operating-rules"
-    },
-    {
-      title: isJapanese ? "トークン規程" : "Token Rules",
-      description: isJapanese ? "JJFAトークンの発行・管理・利用に関する規程です。" : "Regulations for JJFA token issuance, management, and usage.",
-      icon: Coins,
-      link: "/token-rules"
-    }
-  ];
 
   return (
     <div className="min-h-screen">
@@ -39,30 +17,6 @@ const Articles = () => {
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
             <ArticlesHeader />
-
-            {/* Related Documents Grid */}
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
-              {relatedDocs.map((doc) => {
-                const Icon = doc.icon;
-                return (
-                  <Link 
-                    key={doc.title}
-                    to={doc.link}
-                    className="group p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 mb-2">
-                      <Icon className="w-5 h-5 text-slate-600" />
-                      <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
-                        {doc.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-slate-600">
-                      {doc.description}
-                    </p>
-                  </Link>
-                )
-              })}
-            </div>
             
             <div className="prose prose-slate max-w-none">
               <ArticlesSection title={isJapanese ? '第1章 総則' : 'Chapter 1: General Provisions'}>
@@ -180,7 +134,6 @@ const Articles = () => {
 
                 <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第15条（利益配分）' : 'Article 15 (Profit Distribution)'}</h3>
                 <p>{isJapanese ? '得られた利益は、社員権トークンの保有数に応じて分配します。どれくらいの割合で、いつ、どのような形で配分するかは、DAO総会の議決で決まります。これにより、当社の成長が、社員権トークン保有者全員に還元される仕組みを目指します。' : 'Profits shall be distributed according to the number of membership tokens held. The ratio, timing, and method of distribution shall be determined by DAO general meeting resolution. This aims to create a mechanism where the company\'s growth is returned to all membership token holders.'}</p>
-
               </ArticlesSection>
 
               <ArticlesSection title={isJapanese ? '第6章 解散' : 'Chapter 6: Dissolution'}>
@@ -209,6 +162,9 @@ const Articles = () => {
                 <p>{isJapanese ? '以上の定款は、世界中の柔術コミュニティと共に学び、成長し、共創していく道標となります。' : 'These articles of incorporation shall serve as a guideline for learning, growing, and co-creating with the global Jiu-Jitsu community.'}</p>
                 <p className="mt-2">{isJapanese ? 'この定款によって、当社は従来の枠組みにとらわれず、テクノロジーと伝統武道文化を結び付け、誰もが参加可能な、開かれた柔術エコシステムづくりを進めていくことを約束します。' : 'Through these articles, the company pledges to advance the creation of an open Jiu-Jitsu ecosystem that connects technology with traditional martial arts culture, unrestricted by conventional frameworks, where anyone can participate.'}</p>
               </div>
+
+              {/* Related Documents moved to bottom */}
+              <RelatedDocuments isJapanese={isJapanese} />
             </div>
           </CardContent>
         </Card>

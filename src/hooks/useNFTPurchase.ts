@@ -1,31 +1,27 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-export const useNFTPurchase = () => {
-  const [isLoading, setIsLoading] = useState(false);
+export const useNFTPurchase = (onPurchaseNFT?: () => void) => {
+  const [loading, setLoading] = useState(false);
 
   const handlePurchase = async () => {
     try {
-      setIsLoading(true);
+      setLoading(true);
 
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
         throw new Error("ログインが必要です");
-        return;
       }
 
-      // 正しいURLを使用してチェックアウトセッションを作成
+      // Supabaseのクライアントから直接URLを取得
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`,
+        `${supabase.supabaseUrl}/functions/v1/create-checkout`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${supabase.auth.getSession()}`
-          },
-          body: JSON.stringify({
-            userId: user.id,
-          }),
+            Authorization: `Bearer ${session.access_token}`
+          }
         }
       );
 
@@ -40,12 +36,12 @@ export const useNFTPurchase = () => {
       console.error("購入処理中にエラーが発生しました:", error);
       throw error;
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return {
     handlePurchase,
-    isLoading,
+    loading,
   };
 };

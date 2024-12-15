@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { ProgressItem } from "./ProgressItem";
 import { ProgressComments } from "./ProgressComments";
@@ -59,6 +60,9 @@ export const ProgressList = ({ userProgress, onEdit }: ProgressListProps) => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>コメント - {selectedProgress?.technique}</DialogTitle>
+            <DialogDescription>
+              この技に関するコメントを追加・確認できます
+            </DialogDescription>
           </DialogHeader>
           {selectedProgress && (
             <ProgressComments progressId={selectedProgress.id} />

@@ -73,19 +73,21 @@ export const ProgressComments = ({ progressId }: ProgressCommentsProps) => {
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2">
+      <div className="space-y-2 max-h-[300px] overflow-y-auto">
         {comments?.map((comment: any) => (
-          <div key={comment.id} className="flex items-start justify-between bg-slate-50 p-2 rounded">
-            <div>
-              <p className="text-sm font-medium">{comment.profiles?.full_name || "ユーザー"}</p>
-              <p className="text-sm text-slate-600">{comment.content}</p>
+          <div key={comment.id} className="flex items-start justify-between bg-slate-50 p-3 rounded">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-slate-900 break-all">{comment.profiles?.full_name || "ユーザー"}</p>
+              <p className="text-sm text-slate-600 break-all">{comment.content}</p>
             </div>
             <Button
               variant="ghost"
-              size="icon"
+              size="sm"
               onClick={() => deleteComment.mutate(comment.id)}
+              className="ml-2 shrink-0"
             >
               <X className="h-4 w-4" />
+              <span className="sr-only">削除</span>
             </Button>
           </div>
         ))}
@@ -95,7 +97,7 @@ export const ProgressComments = ({ progressId }: ProgressCommentsProps) => {
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           placeholder="コメントを入力..."
-          className="flex-1"
+          className="flex-1 min-h-[80px]"
         />
         <Button
           onClick={() => {
@@ -104,6 +106,7 @@ export const ProgressComments = ({ progressId }: ProgressCommentsProps) => {
             }
           }}
           disabled={!commentText.trim()}
+          className="shrink-0"
         >
           送信
         </Button>

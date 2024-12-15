@@ -34,8 +34,9 @@ export const useFormValidation = () => {
       return false;
     }
 
-    // Only validate these fields for new registrations
-    if (data.phone !== undefined) {
+    // Only validate contact information fields if they are present in the data
+    // This means we're doing a new registration, not an update
+    if (typeof data.phone !== 'undefined') {
       if (!data.phone.trim()) {
         toast.error("電話番号を入力してください");
         return false;

@@ -16,8 +16,8 @@ type ProgressDetail = {
   profiles: {
     full_name: string | null;
     username: string | null;
-  };
-}
+  }[];
+};
 
 const ProgressDetail = () => {
   const { id } = useParams();
@@ -112,6 +112,8 @@ const ProgressDetail = () => {
     );
   }
 
+  const userProfile = progress.profiles[0];
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -123,7 +125,7 @@ const ProgressDetail = () => {
             <h1 className="text-2xl font-bold text-slate-900">{progress.technique}</h1>
             <p className="text-slate-600 whitespace-pre-wrap">{progress.notes}</p>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span>{progress.profiles?.full_name || "ユーザー"}</span>
+              <span>{userProfile?.full_name || "ユーザー"}</span>
               <span>•</span>
               <span>{format(new Date(progress.learned_at), 'yyyy年MM月dd日')}</span>
             </div>

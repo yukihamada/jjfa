@@ -38,34 +38,50 @@ export const UserManagement = () => {
   const { data: users, isLoading, error } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("認証が必要です");
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error("認証が必要です");
 
-      // 管理者権限の確認
-      const { data: roleCheck } = await supabase
-        .from("user_roles")
-        .select("role_type")
-        .eq("user_id", user.id)
-        .eq("role_type", "admin")
-        .single();
+        // 管理者権限の確認
+        const { data: roleCheck, error: roleError } = await supabase
+          .from("user_roles")
+          .select("role_type")
+          .eq("user_id", user.id)
+          .eq("role_type", "admin")
+          .single();
 
-      if (!roleCheck) {
-        throw new Error("管理者権限がありません");
+        if (roleError || !roleCheck) {
+          console.error("Role check error:", roleError);
+          throw new Error("管理者権限がありません");
+        }
+
+        // ユーザー一覧の取得
+        const { data: { users }, error: usersError } = await supabase.auth.admin.listUsers();
+        if (usersError) {
+          console.error("Users fetch error:", usersError);
+          throw usersError;
+        }
+
+        // ユーザーの役割を取得
+        const { data: roles, error: rolesError } = await supabase
+          .from("user_roles")
+          .select("user_id, role_type");
+
+        if (rolesError) {
+          console.error("Roles fetch error:", rolesError);
+          throw rolesError;
+        }
+
+        return users.map((user: AuthUser) => ({
+          id: user.id,
+          email: user.email,
+          full_name: user.user_metadata?.full_name,
+          user_roles: roles?.filter((role: UserRole) => role.user_id === user.id) || []
+        }));
+      } catch (error) {
+        console.error("Query error:", error);
+        throw error;
       }
-
-      const { data: { users }, error: usersError } = await supabase.auth.admin.listUsers();
-      if (usersError) throw usersError;
-
-      const { data: roles } = await supabase
-        .from("user_roles")
-        .select("user_id, role_type");
-
-      return users.map((user: AuthUser) => ({
-        id: user.id,
-        email: user.email,
-        full_name: user.user_metadata?.full_name,
-        user_roles: roles?.filter((role: UserRole) => role.user_id === user.id) || []
-      }));
     },
   });
 

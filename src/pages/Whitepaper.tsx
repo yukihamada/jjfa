@@ -10,7 +10,7 @@ const Whitepaper = () => {
   const documents = [
     {
       title: "定款",
-      description: "JJFAの組織としての基本的な枠組みを定めた規程です。",
+      description: "組織としての基本的な枠組みを定めた規程です。",
       icon: Book,
       link: "/articles"
     },
@@ -22,19 +22,19 @@ const Whitepaper = () => {
     },
     {
       title: "トークン規程",
-      description: "JJFAトークンの発行・管理・利用に関する規程です。",
+      description: "トークンの発行・管理・利用に関する規程です。",
       icon: Coins,
       link: "/token-rules"
     },
     {
       title: "トークン技術仕様書",
-      description: "JJFAトークンの技術的な仕様と実装詳細を説明した文書です。",
+      description: "トークンの技術的な仕様と実装詳細を説明した文書です。",
       icon: FileText,
       link: "/token-specification"
     },
     {
       title: "ロードマップ",
-      description: "JJFAの開発・運営計画を時系列で示した計画書です。",
+      description: "開発・運営計画を時系列で示した計画書です。",
       icon: Calendar,
       link: "/roadmap"
     }
@@ -47,32 +47,8 @@ const Whitepaper = () => {
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">{t('whitepaper.title')}</h1>
+              <h1 className="text-3xl font-bold mb-2">{t('whitepaper.title').replace('JJFA', '')}</h1>
               <p className="text-xl text-slate-600">{t('whitepaper.subtitle')}</p>
-            </div>
-
-            {/* ドキュメントグリッド */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {documents.map((doc) => {
-                const Icon = doc.icon;
-                return (
-                  <Link 
-                    key={doc.title}
-                    to={doc.link}
-                    className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <Icon className="w-6 h-6 text-slate-600" />
-                      <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
-                        {doc.title}
-                      </h3>
-                    </div>
-                    <p className="text-slate-600 text-sm">
-                      {doc.description}
-                    </p>
-                  </Link>
-                )
-              })}
             </div>
 
             <div className="prose prose-slate max-w-none">
@@ -148,6 +124,33 @@ const Whitepaper = () => {
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.governance.title')}</h2>
                 <p className="mb-4">{t('whitepaper.governance.description')}</p>
                 <p className="mb-4">{t('whitepaper.governance.additionalInfo')}</p>
+              </section>
+
+              {/* ドキュメントグリッド - 最後に移動 */}
+              <section className="mt-12">
+                <h2 className="text-2xl font-bold mb-6">関連ドキュメント</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {documents.map((doc) => {
+                    const Icon = doc.icon;
+                    return (
+                      <Link 
+                        key={doc.title}
+                        to={doc.link}
+                        className="group p-6 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          <Icon className="w-6 h-6 text-slate-600" />
+                          <h3 className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
+                            {doc.title}
+                          </h3>
+                        </div>
+                        <p className="text-slate-600 text-sm">
+                          {doc.description}
+                        </p>
+                      </Link>
+                    )
+                  })}
+                </div>
               </section>
 
               <section className="border-t border-slate-200 pt-8 mt-8">

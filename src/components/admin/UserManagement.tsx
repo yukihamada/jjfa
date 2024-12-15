@@ -19,42 +19,40 @@ import {
 import { toast } from "sonner";
 import { Loader2, Users } from "lucide-react";
 
+interface AuthUser {
+  id: string;
+  email?: string;
+  user_metadata: {
+    full_name?: string;
+  };
+}
+
 type UserRole = {
   user_id: string;
   role_type: string;
 };
 
-interface Profile {
-  id: string;
-  email: string;
-  full_name: string | null;
-  user_roles: UserRole[];
-}
-
 export const UserManagement = () => {
   const [updating, setUpdating] = useState<string | null>(null);
 
-  const { data: profiles, isLoading } = useQuery({
+  const { data: users, isLoading } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
-      const { data: profiles, error } = await supabase
-        .from("profiles")
-        .select(`
-          id,
-          email,
-          full_name,
-          user_roles (
-            user_id,
-            role_type
-          )
-        `);
+      const { data: { users }, error } = await supabase.auth.admin.listUsers();
+      if (error) throw error;
 
-      if (error) {
-        console.error("Error fetching profiles:", error);
-        throw error;
-      }
+      // Fetch roles for all users
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("user_id, role_type");
 
-      return profiles as Profile[];
+      // Map roles to users
+      return users.map((user: AuthUser) => ({
+        id: user.id,
+        email: user.email,
+        full_name: user.user_metadata?.full_name,
+        user_roles: roles?.filter((role: UserRole) => role.user_id === user.id) || []
+      }));
     },
   });
 
@@ -100,25 +98,25 @@ export const UserManagement = () => {
         <h2 className="text-xl font-semibold">ユーザー管理</h2>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto border rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="whitespace-nowrap">名前</TableHead>
-              <TableHead className="whitespace-nowrap min-w-[200px]">メール</TableHead>
-              <TableHead className="whitespace-nowrap">役割</TableHead>
+              <TableHead className="whitespace-nowrap p-2 sm:p-4">名前</TableHead>
+              <TableHead className="whitespace-nowrap min-w-[200px] p-2 sm:p-4">メール</TableHead>
+              <TableHead className="whitespace-nowrap p-2 sm:p-4">役割</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {profiles?.map((profile) => (
-              <TableRow key={profile.id}>
-                <TableCell className="whitespace-nowrap">{profile.full_name || "未設定"}</TableCell>
-                <TableCell className="break-all">{profile.email}</TableCell>
-                <TableCell>
+            {users?.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell className="whitespace-nowrap p-2 sm:p-4">{user.full_name || "未設定"}</TableCell>
+                <TableCell className="break-all p-2 sm:p-4">{user.email}</TableCell>
+                <TableCell className="p-2 sm:p-4">
                   <Select
-                    disabled={updating === profile.id}
-                    value={profile.user_roles?.[0]?.role_type || "none"}
-                    onValueChange={(value) => handleRoleChange(profile.id, value)}
+                    disabled={updating === user.id}
+                    value={user.user_roles?.[0]?.role_type || "none"}
+                    onValueChange={(value) => handleRoleChange(user.id, value)}
                   >
                     <SelectTrigger className="w-[200px] max-w-full">
                       <SelectValue />

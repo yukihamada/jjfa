@@ -1,40 +1,35 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ProgressContent } from "@/components/technique-tracker/ProgressContent";
+import { Loader2 } from "lucide-react";
 
-type ProgressDetail = {
+interface ProgressDetail {
   id: string;
   technique: string;
   notes: string;
   learned_at: string;
   skill_level: string;
-  user_id: string;
-  description: string | null;
-  video_url: string | null;
-  created_at: string;
   user: {
     full_name: string | null;
   } | null;
-};
+}
 
-const ProgressDetail = () => {
-  const { id } = useParams();
+export const ProgressDetail = () => {
+  const { id } = useParams<{ id: string }>();
 
-  const { data: progress, isLoading, error } = useQuery({
-    queryKey: ['learningProgress', id],
+  const { data: progress, isLoading } = useQuery({
+    queryKey: ["progress", id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('learning_progress')
+        .from("learning_progress")
         .select(`
           *,
-          user:profiles (
+          user:profiles!learning_progress_user_id_fkey (
             full_name
           )
         `)
-        .eq('id', id)
+        .eq("id", id)
         .single();
 
       if (error) throw error;
@@ -42,41 +37,17 @@ const ProgressDetail = () => {
     },
   });
 
-  if (error) {
-    return (
-      <Alert variant="destructive" className="max-w-4xl mx-auto mt-8">
-        <AlertDescription>
-          進捗の取得中にエラーが発生しました。({error.message})
-        </AlertDescription>
-      </Alert>
-    );
-  }
-
   if (isLoading) {
     return (
-      <div className="max-w-4xl mx-auto mt-8">
-        <Skeleton className="h-[200px] w-full" />
+      <div className="flex items-center justify-center p-8">
+        <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
   }
 
   if (!progress) {
-    return (
-      <Alert className="max-w-4xl mx-auto mt-8">
-        <AlertDescription>
-          進捗が見つかりませんでした。
-        </AlertDescription>
-      </Alert>
-    );
+    return <div>Progress not found</div>;
   }
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto space-y-6">
-        <ProgressContent progress={progress} />
-      </div>
-    </div>
-  );
+  return <ProgressContent progress={progress} />;
 };
-
-export default ProgressDetail;

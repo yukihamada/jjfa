@@ -44,20 +44,23 @@ export const UserManagement = () => {
         if (userError) throw userError;
         if (!user) throw new Error("認証が必要です");
 
-        // 管理者権限の確認 - 修正版
+        // 管理者権限の確認 - デバッグログを追加
+        console.log("Checking admin role for user:", user.id);
         const { data: roleCheck, error: roleError } = await supabase
           .from("user_roles")
           .select("role_type")
           .eq("user_id", user.id)
           .eq("role_type", "admin");
 
+        console.log("Role check result:", roleCheck);
+        
         if (roleError) {
           console.error("Role check error:", roleError);
           throw new Error(`管理者権限の確認中にエラーが発生しました: ${roleError.message}`);
         }
 
-        // 配列の最初の要素をチェック
         if (!roleCheck || roleCheck.length === 0) {
+          console.error("No admin role found for user:", user.id);
           throw new Error("管理者権限がありません。適切な権限が必要です。");
         }
 

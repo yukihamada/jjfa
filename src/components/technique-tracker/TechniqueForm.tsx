@@ -25,6 +25,10 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
 
   const updateProgress = useMutation({
     mutationFn: async () => {
+      if (!selectedTechnique) {
+        throw new Error("技を選択してください");
+      }
+
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
@@ -50,7 +54,7 @@ export const TechniqueForm = ({ onSuccess }: TechniqueFormProps) => {
 
       const { error } = await supabase
         .from("learning_progress")
-        .upsert({
+        .insert({
           user_id: user.id,
           technique: selectedTechnique,
           skill_level: skillLevel,

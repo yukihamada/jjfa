@@ -49,24 +49,24 @@ export const TechniqueTable = ({ techniques }: TechniqueTableProps) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="whitespace-nowrap min-w-[100px]">カテゴリー</TableHead>
-            <TableHead className="whitespace-nowrap min-w-[100px]">技名</TableHead>
-            <TableHead className="min-w-[200px]">説明</TableHead>
-            <TableHead className="w-[100px]">アクション</TableHead>
+            <TableHead className="whitespace-nowrap min-w-[100px] p-2 sm:p-4">カテゴリー</TableHead>
+            <TableHead className="whitespace-nowrap min-w-[100px] p-2 sm:p-4">技名</TableHead>
+            <TableHead className="min-w-[200px] p-2 sm:p-4">説明</TableHead>
+            <TableHead className="w-[100px] p-2 sm:p-4">アクション</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {techniques?.map((technique) => (
             <TableRow key={technique.id}>
-              <TableCell className="font-medium">{technique.category}</TableCell>
-              <TableCell>{technique.technique_name}</TableCell>
-              <TableCell className="break-words">{technique.description}</TableCell>
-              <TableCell>
+              <TableCell className="font-medium p-2 sm:p-4">{technique.category}</TableCell>
+              <TableCell className="p-2 sm:p-4">{technique.technique_name}</TableCell>
+              <TableCell className="break-words p-2 sm:p-4">{technique.description}</TableCell>
+              <TableCell className="p-2 sm:p-4">
                 <Button
                   variant="destructive"
                   size="sm"
                   onClick={() => deleteTechniqueMutation.mutate(technique.id)}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap w-full sm:w-auto"
                 >
                   削除
                 </Button>

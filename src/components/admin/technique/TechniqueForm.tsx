@@ -62,7 +62,7 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
       <DialogTrigger asChild>
         <Button className="w-full sm:w-auto">新しい技を追加</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] w-[95vw] max-w-[95vw] sm:w-full">
         <DialogHeader>
           <DialogTitle>新しい技を追加</DialogTitle>
         </DialogHeader>

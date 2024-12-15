@@ -5,6 +5,7 @@ import { PageTitle } from "@/components/PageTitle";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { UserManagement } from "@/components/admin/UserManagement";
+import { TechniqueManagement } from "@/components/admin/TechniqueManagement";
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -58,6 +59,12 @@ const AdminPage = () => {
         <Card>
           <CardContent className="pt-6">
             <UserManagement />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="pt-6">
+            <TechniqueManagement />
           </CardContent>
         </Card>
       </div>

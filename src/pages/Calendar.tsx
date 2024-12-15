@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 
 const Calendar = () => {
   const { t, i18n } = useTranslation();
@@ -87,18 +88,98 @@ const Calendar = () => {
     {
       organization: "JBJJF",
       name: "第17回関東柔術選手権",
-      date: "2024年12月29日",
+      date: "2025年1月19日",
+      location: "横浜武道館（神奈川県）",
+      notes: "階級別およびオープンクラスの試合が行われる",
+      timestamp: new Date('2025-01-19')
+    },
+    {
+      organization: "ASJJF",
+      name: "東京国際冬季柔術選手権",
+      date: "2025年1月19日",
       location: "墨田区総合体育館（東京都）",
-      notes: "年末に行われる関東エリアの大会",
-      timestamp: new Date('2024-12-29')
+      notes: "道着（ギ）部門の大会",
+      timestamp: new Date('2025-01-19')
+    },
+    {
+      organization: "ASJJF",
+      name: "東京国際冬季ノーギ選手権",
+      date: "2025年1月19日",
+      location: "墨田区総合体育館（東京都）",
+      notes: "ノーギ（道着なし）部門の大会",
+      timestamp: new Date('2025-01-19')
+    },
+    {
+      organization: "ASJJF",
+      name: "MARIANAS PRO JAPAN",
+      date: "2025年2月8日",
+      location: "駒沢オリンピック公園体育館（東京都）",
+      notes: "国際的な柔術大会",
+      timestamp: new Date('2025-02-08')
+    },
+    {
+      organization: "ASJJF",
+      name: "アジア柔術カップ2025",
+      date: "2025年2月9日",
+      location: "駒沢オリンピック公園体育館（東京都）",
+      notes: "アジア規模の柔術大会",
+      timestamp: new Date('2025-02-09')
+    },
+    {
+      organization: "ASJJF",
+      name: "アジアノーギカップ2025",
+      date: "2025年2月9日",
+      location: "駒沢オリンピック公園体育館（東京都）",
+      notes: "ノーギ部門の大会",
+      timestamp: new Date('2025-02-09')
+    },
+    {
+      organization: "ASJJF",
+      name: "2025 Flipsports Japan International Jiu Jitsu Open",
+      date: "2025年2月15日",
+      location: "愛知県武道館（愛知県名古屋市）",
+      notes: "国際オープントーナメント",
+      timestamp: new Date('2025-02-15')
+    },
+    {
+      organization: "ASJJF",
+      name: "2025 Flipsports Japan International No-Gi Open",
+      date: "2025年2月15日",
+      location: "愛知県武道館（愛知県名古屋市）",
+      notes: "ノーギ部門の国際大会",
+      timestamp: new Date('2025-02-15')
+    },
+    {
+      organization: "ASJJF",
+      name: "第12回Copa Dumau De Jiu Jitsu 2025",
+      date: "2025年2月16日",
+      location: "愛知県武道館（愛知県名古屋市）",
+      notes: "国内外の選手が参加する柔術大会",
+      timestamp: new Date('2025-02-16')
     },
     {
       organization: "その他",
-      name: "RIZIN甲子園柔術フェスティバルカップ2024",
-      date: "2024年12月30日",
-      location: "さいたまスーパーアリーナ（埼玉県）",
-      notes: "柔術とエンターテインメントを融合したイベント",
-      timestamp: new Date('2024-12-30')
+      name: "KIT10 (プロ柔術大会)",
+      date: "2025年2月23日",
+      location: "新百合21ホール（神奈川県川崎市）",
+      notes: "プロ選手が集う有観客の柔術イベント",
+      timestamp: new Date('2025-02-23')
+    },
+    {
+      organization: "JBJJF",
+      name: "第19回全日本マスター柔術選手権",
+      date: "2025年2月28日",
+      location: "高崎アリーナ（群馬県）",
+      notes: "マスター世代（30歳以上）向けの全国大会",
+      timestamp: new Date('2025-02-28')
+    },
+    {
+      organization: "SJJJF",
+      name: "The 3rd リバーサル柔術カップ福岡",
+      date: "2025年2月11日",
+      location: "春日市総合スポーツセンター（福岡県）",
+      notes: "地域密着型の柔術大会",
+      timestamp: new Date('2025-02-11')
     }
   ];
 
@@ -131,24 +212,32 @@ const Calendar = () => {
           </TabsList>
           <TabsContent value="upcoming">
             <ScrollArea className="h-[calc(100vh-10rem)]">
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {upcomingTournaments.map((tournament, index) => (
-                  <Card key={index} className="border shadow-sm">
-                    <CardHeader className="pb-2 px-3 sm:px-4">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-2">
-                        <CardTitle className="text-base sm:text-lg font-bold break-words">
-                          {tournament.name}
-                        </CardTitle>
-                        <span className="text-xs sm:text-sm font-semibold text-muted-foreground whitespace-nowrap">
-                          {tournament.organization}
-                        </span>
+                  <Card key={index} className="border shadow-sm hover:shadow-md transition-shadow">
+                    <CardHeader className="pb-2 px-4">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                        <div className="space-y-1">
+                          <CardTitle className="text-base sm:text-lg font-bold line-clamp-2">
+                            {tournament.name}
+                          </CardTitle>
+                          <Badge variant="outline" className="text-xs font-semibold">
+                            {tournament.organization}
+                          </Badge>
+                        </div>
+                        <p className="text-sm font-medium text-primary whitespace-nowrap">
+                          {tournament.date}
+                        </p>
                       </div>
                     </CardHeader>
-                    <CardContent className="px-3 sm:px-4">
-                      <div className="space-y-1.5 text-sm">
-                        <p className="font-medium text-primary">{tournament.date}</p>
-                        <p className="text-muted-foreground text-xs sm:text-sm">{tournament.location}</p>
-                        <p className="text-muted-foreground italic text-xs sm:text-sm">{tournament.notes}</p>
+                    <CardContent className="px-4 pt-2">
+                      <div className="space-y-2 text-sm">
+                        <p className="text-muted-foreground">
+                          <span className="font-medium">開催場所:</span> {tournament.location}
+                        </p>
+                        <p className="text-muted-foreground italic text-xs">
+                          {tournament.notes}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>
@@ -158,24 +247,32 @@ const Calendar = () => {
           </TabsContent>
           <TabsContent value="past">
             <ScrollArea className="h-[calc(100vh-10rem)]">
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {pastTournaments.map((tournament, index) => (
-                  <Card key={index} className="border shadow-sm">
-                    <CardHeader className="pb-2 px-3 sm:px-4">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-2">
-                        <CardTitle className="text-base sm:text-lg font-bold break-words">
-                          {tournament.name}
-                        </CardTitle>
-                        <span className="text-xs sm:text-sm font-semibold text-muted-foreground whitespace-nowrap">
-                          {tournament.organization}
-                        </span>
+                  <Card key={index} className="border shadow-sm hover:shadow-md transition-shadow">
+                    <CardHeader className="pb-2 px-4">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                        <div className="space-y-1">
+                          <CardTitle className="text-base sm:text-lg font-bold line-clamp-2">
+                            {tournament.name}
+                          </CardTitle>
+                          <Badge variant="outline" className="text-xs font-semibold">
+                            {tournament.organization}
+                          </Badge>
+                        </div>
+                        <p className="text-sm font-medium text-primary whitespace-nowrap">
+                          {tournament.date}
+                        </p>
                       </div>
                     </CardHeader>
-                    <CardContent className="px-3 sm:px-4">
-                      <div className="space-y-1.5 text-sm">
-                        <p className="font-medium text-primary">{tournament.date}</p>
-                        <p className="text-muted-foreground text-xs sm:text-sm">{tournament.location}</p>
-                        <p className="text-muted-foreground italic text-xs sm:text-sm">{tournament.notes}</p>
+                    <CardContent className="px-4 pt-2">
+                      <div className="space-y-2 text-sm">
+                        <p className="text-muted-foreground">
+                          <span className="font-medium">開催場所:</span> {tournament.location}
+                        </p>
+                        <p className="text-muted-foreground italic text-xs">
+                          {tournament.notes}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>

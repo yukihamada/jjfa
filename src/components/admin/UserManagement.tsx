@@ -24,12 +24,12 @@ type UserRole = {
   role_type: string;
 };
 
-type Profile = {
+interface Profile {
   id: string;
   email: string;
   full_name: string | null;
   user_roles: UserRole[];
-};
+}
 
 export const UserManagement = () => {
   const [updating, setUpdating] = useState<string | null>(null);
@@ -37,16 +37,22 @@ export const UserManagement = () => {
   const { data: profiles, isLoading } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
-      const { data: profiles } = await supabase
+      const { data: profiles, error } = await supabase
         .from("profiles")
         .select(`
           id,
           email,
           full_name,
           user_roles (
+            user_id,
             role_type
           )
         `);
+
+      if (error) {
+        console.error("Error fetching profiles:", error);
+        throw error;
+      }
 
       return profiles as Profile[];
     },

@@ -21,7 +21,7 @@ export const TechniqueSelect = ({
       const { data, error } = await supabase
         .from("technique_details")
         .select("category")
-        .eq('category', 'category');
+        .order('category');
       
       if (error) throw error;
       
@@ -37,7 +37,8 @@ export const TechniqueSelect = ({
       const { data, error } = await supabase
         .from("technique_details")
         .select("*")
-        .eq("category", selectedCategory);
+        .eq("category", selectedCategory)
+        .order('technique_name');
       
       if (error) throw error;
       return data;

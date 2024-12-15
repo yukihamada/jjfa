@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { CircleDot, CircleDashed, CircleDotDashed, CircleOff, Circle } from "lucide-react";
 
 const SKILL_LEVELS = ["beginner", "intermediate", "advanced", "expert", "master"] as const;
 export type SkillLevel = typeof SKILL_LEVELS[number];
@@ -12,6 +12,21 @@ export const SkillLevelSelect = ({
   skillLevel,
   onSkillLevelChange,
 }: SkillLevelSelectProps) => {
+  const getIcon = (level: SkillLevel) => {
+    switch (level) {
+      case "beginner":
+        return <CircleOff className="h-6 w-6" />;
+      case "intermediate":
+        return <CircleDashed className="h-6 w-6" />;
+      case "advanced":
+        return <CircleDotDashed className="h-6 w-6" />;
+      case "expert":
+        return <CircleDot className="h-6 w-6" />;
+      case "master":
+        return <Circle className="h-6 w-6 fill-current" />;
+    }
+  };
+
   return (
     <div>
       <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -24,12 +39,12 @@ export const SkillLevelSelect = ({
             type="button"
             onClick={() => onSkillLevelChange(level)}
             className={`p-2 rounded-full transition-colors ${
-              index < SKILL_LEVELS.indexOf(skillLevel) + 1
-                ? "text-yellow-400"
+              index <= SKILL_LEVELS.indexOf(skillLevel)
+                ? "text-blue-500"
                 : "text-gray-300"
             }`}
           >
-            <Star className="h-6 w-6 fill-current" />
+            {getIcon(level)}
           </button>
         ))}
       </div>

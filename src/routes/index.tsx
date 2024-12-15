@@ -26,7 +26,7 @@ import Membership from "@/pages/profile/Membership";
 import Settings from "@/pages/profile/Settings";
 import Archives from "@/pages/profile/Archives";
 import PublicProfile from "@/pages/profile/PublicProfile";
-import ProgressDetail from "@/pages/progress/ProgressDetail";
+import { ProgressDetail } from "@/pages/progress/ProgressDetail";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;

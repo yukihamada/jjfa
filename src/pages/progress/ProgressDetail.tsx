@@ -10,6 +10,10 @@ interface ProgressDetail {
   notes: string;
   learned_at: string;
   skill_level: string;
+  created_at: string;
+  description: string | null;
+  video_url: string | null;
+  user_id: string;
   user: {
     full_name: string | null;
   } | null;
@@ -33,7 +37,14 @@ export const ProgressDetail = () => {
         .single();
 
       if (error) throw error;
-      return data as ProgressDetail;
+      
+      // Transform the array result into a single object
+      const transformedData = {
+        ...data,
+        user: data.user?.[0] || null
+      } as ProgressDetail;
+      
+      return transformedData;
     },
   });
 

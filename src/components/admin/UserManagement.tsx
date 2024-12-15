@@ -39,10 +39,12 @@ export const UserManagement = () => {
     queryKey: ["admin-users"],
     queryFn: async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
+        // 現在のユーザーを取得
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError) throw userError;
         if (!user) throw new Error("認証が必要です");
 
-        // 管理者権限の確認
+        // 管理者権限の確認 - より詳細なエラーハンドリング
         const { data: roleCheck, error: roleError } = await supabase
           .from("user_roles")
           .select("role_type")
@@ -50,16 +52,20 @@ export const UserManagement = () => {
           .eq("role_type", "admin")
           .single();
 
-        if (roleError || !roleCheck) {
+        if (roleError) {
           console.error("Role check error:", roleError);
-          throw new Error("管理者権限がありません");
+          throw new Error(`管理者権限の確認中にエラーが発生しました: ${roleError.message}`);
+        }
+
+        if (!roleCheck) {
+          throw new Error("管理者権限がありません。適切な権限が必要です。");
         }
 
         // ユーザー一覧の取得
-        const { data: { users }, error: usersError } = await supabase.auth.admin.listUsers();
+        const { data: { users: userList }, error: usersError } = await supabase.auth.admin.listUsers();
         if (usersError) {
           console.error("Users fetch error:", usersError);
-          throw usersError;
+          throw new Error(`ユーザー一覧の取得中にエラーが発生しました: ${usersError.message}`);
         }
 
         // ユーザーの役割を取得
@@ -69,10 +75,11 @@ export const UserManagement = () => {
 
         if (rolesError) {
           console.error("Roles fetch error:", rolesError);
-          throw rolesError;
+          throw new Error(`役割情報の取得中にエラーが発生しました: ${rolesError.message}`);
         }
 
-        return users.map((user: AuthUser) => ({
+        // ユーザーデータと役割を結合
+        return userList.map((user: AuthUser) => ({
           id: user.id,
           email: user.email,
           full_name: user.user_metadata?.full_name,
@@ -85,30 +92,24 @@ export const UserManagement = () => {
     },
   });
 
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-[200px] text-red-500">
-        <p>エラーが発生しました：{(error as Error).message}</p>
-      </div>
-    );
-  }
-
   const handleRoleChange = async (userId: string, role: string) => {
     setUpdating(userId);
     try {
-      // Delete existing roles
-      await supabase
+      // 既存の役割を削除
+      const { error: deleteError } = await supabase
         .from("user_roles")
         .delete()
         .eq("user_id", userId);
 
-      // Insert new role
+      if (deleteError) throw deleteError;
+
+      // 新しい役割を追加（"none"以外の場合）
       if (role !== "none") {
-        const { error } = await supabase
+        const { error: insertError } = await supabase
           .from("user_roles")
           .insert({ user_id: userId, role_type: role });
 
-        if (error) throw error;
+        if (insertError) throw insertError;
       }
 
       toast.success("役割を更新しました");
@@ -119,6 +120,14 @@ export const UserManagement = () => {
       setUpdating(null);
     }
   };
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px] text-red-500">
+        <p>{(error as Error).message}</p>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -147,7 +156,9 @@ export const UserManagement = () => {
           <TableBody>
             {users?.map((user) => (
               <TableRow key={user.id}>
-                <TableCell className="whitespace-nowrap p-2 sm:p-4">{user.full_name || "未設定"}</TableCell>
+                <TableCell className="whitespace-nowrap p-2 sm:p-4">
+                  {user.full_name || "未設定"}
+                </TableCell>
                 <TableCell className="break-all p-2 sm:p-4">{user.email}</TableCell>
                 <TableCell className="p-2 sm:p-4">
                   <Select

@@ -2,24 +2,18 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Loader2, Star, Upload } from "lucide-react";
-
-const SKILL_LEVELS = ["beginner", "intermediate", "advanced", "expert", "master"] as const;
+import { Loader2, Upload } from "lucide-react";
+import { TechniqueSelect } from "./technique-tracker/TechniqueSelect";
+import { SkillLevelSelect, type SkillLevel } from "./technique-tracker/SkillLevelSelect";
+import { ProgressList } from "./technique-tracker/ProgressList";
 
 export const TechniqueLearningProgress = () => {
   const [selectedTechnique, setSelectedTechnique] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [skillLevel, setSkillLevel] = useState<typeof SKILL_LEVELS[number]>("beginner");
+  const [skillLevel, setSkillLevel] = useState<SkillLevel>("beginner");
   const [notes, setNotes] = useState("");
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -33,10 +27,13 @@ export const TechniqueLearningProgress = () => {
       const { data, error } = await supabase
         .from("technique_details")
         .select("category")
-        .distinct();
+        .eq('category', 'category');
       
       if (error) throw error;
-      return data.map(item => item.category);
+      
+      // Get unique categories
+      const uniqueCategories = Array.from(new Set(data.map(item => item.category)));
+      return uniqueCategories;
     }
   });
 
@@ -144,69 +141,19 @@ export const TechniqueLearningProgress = () => {
       <h2 className="text-2xl font-bold text-slate-800">柔術技術の習熟度トラッカー</h2>
       
       <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
-            技術カテゴリー
-          </label>
-          <Select
-            value={selectedCategory || ""}
-            onValueChange={setSelectedCategory}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="カテゴリーを選択" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories?.map((category) => (
-                <SelectItem key={category} value={category}>
-                  {category}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <TechniqueSelect
+          categories={categories}
+          techniques={techniques}
+          selectedCategory={selectedCategory}
+          selectedTechnique={selectedTechnique}
+          onCategoryChange={setSelectedCategory}
+          onTechniqueChange={setSelectedTechnique}
+        />
 
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
-            技術
-          </label>
-          <Select
-            value={selectedTechnique}
-            onValueChange={setSelectedTechnique}
-            disabled={!selectedCategory}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="技術を選択" />
-            </SelectTrigger>
-            <SelectContent>
-              {techniques?.map((technique) => (
-                <SelectItem key={technique.id} value={technique.technique_name}>
-                  {technique.technique_name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
-            習熟度
-          </label>
-          <div className="flex gap-1">
-            {SKILL_LEVELS.map((level, index) => (
-              <button
-                key={level}
-                onClick={() => setSkillLevel(level)}
-                className={`p-2 rounded-full transition-colors ${
-                  index < SKILL_LEVELS.indexOf(skillLevel) + 1
-                    ? "text-yellow-400"
-                    : "text-gray-300"
-                }`}
-              >
-                <Star className="h-6 w-6 fill-current" />
-              </button>
-            ))}
-          </div>
-        </div>
+        <SkillLevelSelect
+          skillLevel={skillLevel}
+          onSkillLevelChange={setSkillLevel}
+        />
 
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -258,51 +205,7 @@ export const TechniqueLearningProgress = () => {
         </Button>
       </div>
 
-      {userProgress && userProgress.length > 0 && (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold text-slate-800 mb-4">最近の進捗</h3>
-          <div className="space-y-4">
-            {userProgress.map((progress) => (
-              <div
-                key={progress.id}
-                className="p-4 border rounded-lg bg-slate-50"
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-medium text-slate-900">
-                      {progress.technique}
-                    </h4>
-                    <p className="text-sm text-slate-600">{progress.notes}</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {SKILL_LEVELS.map((_, index) => (
-                      <Star
-                        key={index}
-                        className={`h-4 w-4 ${
-                          index < SKILL_LEVELS.indexOf(progress.skill_level) + 1
-                            ? "text-yellow-400 fill-current"
-                            : "text-gray-300"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-                {progress.video_url && (
-                  <div className="mt-2">
-                    <video
-                      controls
-                      className="w-full rounded"
-                      src={progress.video_url}
-                    >
-                      お使いのブラウザは動画の再生に対応していません。
-                    </video>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <ProgressList userProgress={userProgress} />
     </div>
   );
 };

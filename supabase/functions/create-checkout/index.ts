@@ -118,6 +118,20 @@ serve(async (req) => {
     }
 
     try {
+      // Create purchase record first
+      const { error: purchaseError } = await supabaseClient
+        .from('nft_purchases')
+        .insert({
+          user_id: user.id,
+          amount: 100000,
+          status: 'pending'
+        })
+
+      if (purchaseError) {
+        console.error('購入記録作成エラー:', purchaseError)
+        throw new Error('購入記録の作成に失敗しました')
+      }
+
       // Create Stripe checkout session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -142,24 +156,16 @@ serve(async (req) => {
         },
       })
 
-      // Create purchase record
-      const { error: purchaseError } = await supabaseClient
+      // Update purchase record with session ID
+      const { error: updateError } = await supabaseClient
         .from('nft_purchases')
-        .insert({
-          user_id: user.id,
-          amount: 100000,
-          stripe_session_id: session.id,
-        })
+        .update({ stripe_session_id: session.id })
+        .eq('user_id', user.id)
+        .eq('status', 'pending')
 
-      if (purchaseError) {
-        console.error('購入記録作成エラー:', purchaseError)
-        return new Response(
-          JSON.stringify({ error: '購入記録の作成に失敗しました' }), 
-          { 
-            status: 500, 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-          }
-        )
+      if (updateError) {
+        console.error('購入記録更新エラー:', updateError)
+        throw new Error('購入記録の更新に失敗しました')
       }
 
       return new Response(
@@ -168,10 +174,10 @@ serve(async (req) => {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       )
-    } catch (stripeError) {
-      console.error('Stripeエラー:', stripeError)
+    } catch (error) {
+      console.error('Stripeセッション作成エラー:', error)
       return new Response(
-        JSON.stringify({ error: 'Stripeでの決済処理に失敗しました。もう一度お試しください。' }), 
+        JSON.stringify({ error: error instanceof Error ? error.message : 'チェックアウトセッションの作成に失敗しました' }), 
         { 
           status: 500, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }

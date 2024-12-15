@@ -5,7 +5,7 @@ import { Loader2, BookOpen } from "lucide-react";
 import { TechniqueForm } from "./technique/TechniqueForm";
 import { TechniqueTable } from "./technique/TechniqueTable";
 
-interface TechniqueDetail {
+export interface TechniqueDetail {
   id: string;
   technique_name: string;
   description: string;
@@ -14,6 +14,7 @@ interface TechniqueDetail {
 
 export const TechniqueManagement = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingTechnique, setEditingTechnique] = useState<TechniqueDetail | null>(null);
 
   const { data: techniques, isLoading } = useQuery({
     queryKey: ["technique-details"],
@@ -47,10 +48,16 @@ export const TechniqueManagement = () => {
         <TechniqueForm 
           isOpen={isDialogOpen}
           onOpenChange={setIsDialogOpen}
+          editingTechnique={editingTechnique}
+          onEditComplete={() => setEditingTechnique(null)}
         />
       </div>
 
-      <TechniqueTable techniques={techniques || []} />
+      <TechniqueTable 
+        techniques={techniques || []} 
+        onEdit={setEditingTechnique}
+        onEditClick={() => setIsDialogOpen(true)}
+      />
     </div>
   );
 };

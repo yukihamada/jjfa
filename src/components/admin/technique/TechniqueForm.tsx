@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -11,50 +11,78 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-interface TechniqueDetail {
-  id: string;
-  technique_name: string;
-  description: string;
-  category: string;
-}
+import type { TechniqueDetail } from "../TechniqueManagement";
 
 interface TechniqueFormProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  editingTechnique?: TechniqueDetail | null;
+  onEditComplete?: () => void;
 }
 
-export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
-  const [newTechnique, setNewTechnique] = useState({
+export const TechniqueForm = ({ 
+  isOpen, 
+  onOpenChange, 
+  editingTechnique,
+  onEditComplete 
+}: TechniqueFormProps) => {
+  const [technique, setTechnique] = useState({
     technique_name: "",
     description: "",
     category: "",
   });
+  
   const queryClient = useQueryClient();
 
-  const addTechniqueMutation = useMutation({
-    mutationFn: async (technique: Omit<TechniqueDetail, "id">) => {
-      const { error } = await supabase
-        .from("technique_details")
-        .insert(technique);
+  useEffect(() => {
+    if (editingTechnique) {
+      setTechnique({
+        technique_name: editingTechnique.technique_name,
+        description: editingTechnique.description,
+        category: editingTechnique.category,
+      });
+    } else {
+      setTechnique({
+        technique_name: "",
+        description: "",
+        category: "",
+      });
+    }
+  }, [editingTechnique]);
 
-      if (error) throw error;
+  const mutation = useMutation({
+    mutationFn: async (technique: Omit<TechniqueDetail, "id">) => {
+      if (editingTechnique) {
+        const { error } = await supabase
+          .from("technique_details")
+          .update(technique)
+          .eq("id", editingTechnique.id);
+
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from("technique_details")
+          .insert(technique);
+
+        if (error) throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["technique-details"] });
-      toast.success("技を追加しました");
+      toast.success(editingTechnique ? "技を更新しました" : "技を追加しました");
       onOpenChange(false);
-      setNewTechnique({ technique_name: "", description: "", category: "" });
+      setTechnique({ technique_name: "", description: "", category: "" });
+      if (onEditComplete) onEditComplete();
     },
     onError: (error) => {
-      console.error("Error adding technique:", error);
-      toast.error("技の追加に失敗しました");
+      console.error("Error saving technique:", error);
+      toast.error(editingTechnique ? "技の更新に失敗しました" : "技の追加に失敗しました");
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addTechniqueMutation.mutate(newTechnique);
+    mutation.mutate(technique);
   };
 
   return (
@@ -64,7 +92,7 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] w-[95vw] max-w-[95vw] sm:w-full">
         <DialogHeader>
-          <DialogTitle>新しい技を追加</DialogTitle>
+          <DialogTitle>{editingTechnique ? "技を編集" : "新しい技を追加"}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -72,9 +100,9 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
               カテゴリー
             </label>
             <Input
-              value={newTechnique.category}
+              value={technique.category}
               onChange={(e) =>
-                setNewTechnique({ ...newTechnique, category: e.target.value })
+                setTechnique({ ...technique, category: e.target.value })
               }
               required
               className="w-full"
@@ -83,10 +111,10 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
           <div>
             <label className="block text-sm font-medium mb-1">技名</label>
             <Input
-              value={newTechnique.technique_name}
+              value={technique.technique_name}
               onChange={(e) =>
-                setNewTechnique({
-                  ...newTechnique,
+                setTechnique({
+                  ...technique,
                   technique_name: e.target.value,
                 })
               }
@@ -97,10 +125,10 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
           <div>
             <label className="block text-sm font-medium mb-1">説明</label>
             <Input
-              value={newTechnique.description}
+              value={technique.description}
               onChange={(e) =>
-                setNewTechnique({
-                  ...newTechnique,
+                setTechnique({
+                  ...technique,
                   description: e.target.value,
                 })
               }
@@ -109,7 +137,7 @@ export const TechniqueForm = ({ isOpen, onOpenChange }: TechniqueFormProps) => {
             />
           </div>
           <Button type="submit" className="w-full">
-            追加
+            {editingTechnique ? "更新" : "追加"}
           </Button>
         </form>
       </DialogContent>

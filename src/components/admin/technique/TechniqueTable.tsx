@@ -10,19 +10,16 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-
-interface TechniqueDetail {
-  id: string;
-  technique_name: string;
-  description: string;
-  category: string;
-}
+import { Pencil, Trash2 } from "lucide-react";
+import type { TechniqueDetail } from "../TechniqueManagement";
 
 interface TechniqueTableProps {
   techniques: TechniqueDetail[];
+  onEdit: (technique: TechniqueDetail) => void;
+  onEditClick: () => void;
 }
 
-export const TechniqueTable = ({ techniques }: TechniqueTableProps) => {
+export const TechniqueTable = ({ techniques, onEdit, onEditClick }: TechniqueTableProps) => {
   const queryClient = useQueryClient();
 
   const deleteTechniqueMutation = useMutation({
@@ -44,14 +41,19 @@ export const TechniqueTable = ({ techniques }: TechniqueTableProps) => {
     },
   });
 
+  const handleEdit = (technique: TechniqueDetail) => {
+    onEdit(technique);
+    onEditClick();
+  };
+
   return (
     <div className="overflow-x-auto rounded-lg border">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="whitespace-nowrap min-w-[100px] p-2 sm:p-4">カテゴリー</TableHead>
-            <TableHead className="whitespace-nowrap min-w-[100px] p-2 sm:p-4">技名</TableHead>
-            <TableHead className="min-w-[200px] p-2 sm:p-4">説明</TableHead>
+            <TableHead className="whitespace-nowrap w-[120px] p-2 sm:p-4">カテゴリー</TableHead>
+            <TableHead className="whitespace-nowrap w-[120px] p-2 sm:p-4">技名</TableHead>
+            <TableHead className="min-w-[200px] p-2 sm:p-4 hidden sm:table-cell">説明</TableHead>
             <TableHead className="w-[100px] p-2 sm:p-4">アクション</TableHead>
           </TableRow>
         </TableHeader>
@@ -60,16 +62,30 @@ export const TechniqueTable = ({ techniques }: TechniqueTableProps) => {
             <TableRow key={technique.id}>
               <TableCell className="font-medium p-2 sm:p-4">{technique.category}</TableCell>
               <TableCell className="p-2 sm:p-4">{technique.technique_name}</TableCell>
-              <TableCell className="break-words p-2 sm:p-4">{technique.description}</TableCell>
+              <TableCell className="break-words p-2 sm:p-4 hidden sm:table-cell">
+                {technique.description}
+              </TableCell>
               <TableCell className="p-2 sm:p-4">
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => deleteTechniqueMutation.mutate(technique.id)}
-                  className="whitespace-nowrap w-full sm:w-auto"
-                >
-                  削除
-                </Button>
+                <div className="flex gap-2 flex-col sm:flex-row">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEdit(technique)}
+                    className="whitespace-nowrap w-full sm:w-auto"
+                  >
+                    <Pencil className="h-4 w-4" />
+                    <span className="sr-only">編集</span>
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => deleteTechniqueMutation.mutate(technique.id)}
+                    className="whitespace-nowrap w-full sm:w-auto"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">削除</span>
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

@@ -17,7 +17,7 @@ type ProgressDetail = {
   description: string | null;
   video_url: string | null;
   created_at: string;
-  profiles: {
+  user: {
     full_name: string | null;
   } | null;
 };
@@ -32,7 +32,7 @@ const ProgressDetail = () => {
         .from('learning_progress')
         .select(`
           *,
-          profiles:user_id (
+          user:user_id (
             full_name
           )
         `)
@@ -125,7 +125,7 @@ const ProgressDetail = () => {
             <h1 className="text-2xl font-bold text-slate-900">{progress.technique}</h1>
             <p className="text-slate-600 whitespace-pre-wrap">{progress.notes}</p>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span>{progress.profiles?.full_name || "ユーザー"}</span>
+              <span>{progress.user?.full_name || "ユーザー"}</span>
               <span>•</span>
               <span>{format(new Date(progress.learned_at), 'yyyy年MM月dd日')}</span>
             </div>

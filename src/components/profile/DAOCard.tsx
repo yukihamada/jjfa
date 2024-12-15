@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { DAOBenefits } from "./dao/DAOBenefits";
 import { DAOSalesInfo } from "./dao/DAOSalesInfo";
 import { useNFTPurchase } from "@/hooks/useNFTPurchase";
+import { toast } from "sonner";
 
 interface DAOCardProps {
   onPurchaseNFT: () => void;
@@ -27,6 +28,14 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
     },
   });
 
+  const handleClick = async () => {
+    try {
+      await handlePurchase();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "購入処理中にエラーが発生しました");
+    }
+  };
+
   const isSoldOut = salesConfig && (salesConfig.current_supply || 0) >= salesConfig.max_supply;
   const isSaleEnded = salesConfig && new Date() > new Date(salesConfig.end_date);
   const isDisabled = loading || isLoadingSalesConfig || isSoldOut || isSaleEnded;
@@ -42,7 +51,7 @@ export const DAOCard = ({ onPurchaseNFT }: DAOCardProps) => {
         {salesConfig && <DAOSalesInfo salesConfig={salesConfig} />}
         
         <Button 
-          onClick={handlePurchase}
+          onClick={handleClick}
           className="w-full"
           disabled={isDisabled}
         >

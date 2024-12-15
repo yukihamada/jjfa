@@ -111,8 +111,8 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ error: 'すでにDAO会員として登録されています' }), 
         { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 400 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       )
     }

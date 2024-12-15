@@ -76,7 +76,7 @@ export const GlobalNav = () => {
           <Link to="/" className="flex items-center gap-2">
             <NavLogo />
           </Link>
-          <NavItems menuItems={navItems} onItemClick={() => setIsMenuOpen(false)} />
+          <NavItems menuItems={navItems.filter(item => !(user && item.to === '/calendar'))} onItemClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />

@@ -35,18 +35,26 @@ type UserRole = {
 export const UserManagement = () => {
   const [updating, setUpdating] = useState<string | null>(null);
 
-  const { data: users, isLoading } = useQuery({
+  const { data: users, isLoading, error } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
+      // まず、現在のユーザーが管理者かどうかを確認
+      const { data: adminCheck } = await supabase
+        .from("admins")
+        .select("id")
+        .single();
+
+      if (!adminCheck) {
+        throw new Error("管理者権限がありません");
+      }
+
       const { data: { users }, error } = await supabase.auth.admin.listUsers();
       if (error) throw error;
 
-      // Fetch roles for all users
       const { data: roles } = await supabase
         .from("user_roles")
         .select("user_id, role_type");
 
-      // Map roles to users
       return users.map((user: AuthUser) => ({
         id: user.id,
         email: user.email,
@@ -55,6 +63,14 @@ export const UserManagement = () => {
       }));
     },
   });
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px] text-red-500">
+        <p>エラーが発生しました：{(error as Error).message}</p>
+      </div>
+    );
+  }
 
   const handleRoleChange = async (userId: string, role: string) => {
     setUpdating(userId);

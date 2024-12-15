@@ -1,6 +1,8 @@
 import { Star, Trash2, Edit2, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SkillLevel } from "./SkillLevelSelect";
+import { format } from "date-fns";
+import { ja } from "date-fns/locale";
 
 interface ProgressItemProps {
   progress: any;
@@ -21,6 +23,9 @@ export const ProgressItem = ({
         <div>
           <h4 className="font-medium text-slate-900">{progress.technique}</h4>
           <p className="text-sm text-slate-600">{progress.notes}</p>
+          <p className="text-xs text-slate-500 mt-1">
+            {format(new Date(progress.created_at), 'yyyy年MM月dd日 HH:mm', { locale: ja })}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex gap-1">

@@ -40,13 +40,16 @@ export const TechniqueLearningProgress = () => {
   }
 
   return (
-    <div className="space-y-6 p-6 bg-white rounded-lg shadow-sm">
-      <h2 className="text-2xl font-bold text-slate-800">柔術技術の習熟度トラッカー</h2>
+    <div className="space-y-6 p-4 sm:p-6 bg-white rounded-lg shadow-sm">
+      <h2 className="text-xl sm:text-2xl font-bold text-slate-800 break-keep">技術トラッカー</h2>
       <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
-      <ProgressList 
-        userProgress={userProgress} 
-        onEdit={setEditingProgress}
-      />
+      <div className="mt-8">
+        <h3 className="text-lg sm:text-xl font-semibold text-slate-800 mb-4">進捗一覧</h3>
+        <ProgressList 
+          userProgress={userProgress} 
+          onEdit={setEditingProgress}
+        />
+      </div>
     </div>
   );
 };

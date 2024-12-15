@@ -21,7 +21,7 @@ const Index = () => {
       return session;
     },
     staleTime: 0,
-    cacheTime: 0
+    gcTime: 0
   });
 
   if (isLoading) {

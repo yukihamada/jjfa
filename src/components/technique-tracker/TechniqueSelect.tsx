@@ -1,8 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface TechniqueSelectProps {
-  categories: string[] | undefined;
-  techniques: any[] | undefined;
   selectedCategory: string | null;
   selectedTechnique: string;
   onCategoryChange: (value: string) => void;
@@ -10,13 +10,41 @@ interface TechniqueSelectProps {
 }
 
 export const TechniqueSelect = ({
-  categories,
-  techniques,
   selectedCategory,
   selectedTechnique,
   onCategoryChange,
   onTechniqueChange,
 }: TechniqueSelectProps) => {
+  const { data: categories } = useQuery({
+    queryKey: ["techniqueCategories"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("technique_details")
+        .select("category")
+        .eq('category', 'category');
+      
+      if (error) throw error;
+      
+      const uniqueCategories = Array.from(new Set(data.map(item => item.category)));
+      return uniqueCategories;
+    }
+  });
+
+  const { data: techniques } = useQuery({
+    queryKey: ["techniques", selectedCategory],
+    queryFn: async () => {
+      if (!selectedCategory) return [];
+      const { data, error } = await supabase
+        .from("technique_details")
+        .select("*")
+        .eq("category", selectedCategory);
+      
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!selectedCategory
+  });
+
   return (
     <div className="space-y-4">
       <div>

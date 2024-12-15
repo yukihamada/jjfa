@@ -7,6 +7,18 @@ import { format } from "date-fns";
 import { CircleOff, CircleDashed, CircleDotDashed, CircleDot, Circle } from "lucide-react";
 import { ProgressComments } from "@/components/technique-tracker/ProgressComments";
 
+type ProgressDetail = {
+  id: string;
+  technique: string;
+  notes: string;
+  learned_at: string;
+  skill_level: string;
+  profiles: {
+    full_name: string | null;
+    username: string | null;
+  };
+}
+
 const ProgressDetail = () => {
   const { id } = useParams();
 
@@ -26,7 +38,7 @@ const ProgressDetail = () => {
         .single();
 
       if (error) throw error;
-      return data;
+      return data as ProgressDetail;
     },
   });
 

@@ -21,7 +21,7 @@ serve(async (req) => {
     // Initialize Supabase client
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? ''
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
     // Verify authentication
@@ -88,51 +88,8 @@ serve(async (req) => {
       )
     }
 
-    // Check if user already has an active DAO membership
-    const { data: existingMembership, error: membershipError } = await supabaseClient
-      .from('dao_memberships')
-      .select('*')
-      .eq('user_id', user.id)
-      .eq('status', 'active')
-      .single()
-
-    if (membershipError && membershipError.code !== 'PGRST116') {
-      console.error('会員情報チェックエラー:', membershipError)
-      return new Response(
-        JSON.stringify({ error: '会員情報の確認中にエラーが発生しました' }), 
-        { 
-          status: 500, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      )
-    }
-
-    if (existingMembership) {
-      return new Response(
-        JSON.stringify({ error: 'すでにDAO会員として登録されています' }), 
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      )
-    }
-
     try {
-      // Create purchase record first
-      const { error: purchaseError } = await supabaseClient
-        .from('nft_purchases')
-        .insert({
-          user_id: user.id,
-          amount: 100000,
-          status: 'pending'
-        })
-
-      if (purchaseError) {
-        console.error('購入記録作成エラー:', purchaseError)
-        throw new Error('購入記録の作成に失敗しました')
-      }
-
-      // Create Stripe checkout session
+      // Create Stripe checkout session first
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -156,16 +113,25 @@ serve(async (req) => {
         },
       })
 
-      // Update purchase record with session ID
-      const { error: updateError } = await supabaseClient
+      // Only create purchase record after successful session creation
+      const { error: purchaseError } = await supabaseClient
         .from('nft_purchases')
-        .update({ stripe_session_id: session.id })
-        .eq('user_id', user.id)
-        .eq('status', 'pending')
+        .insert({
+          user_id: user.id,
+          amount: 100000,
+          status: 'pending',
+          stripe_session_id: session.id
+        })
 
-      if (updateError) {
-        console.error('購入記録更新エラー:', updateError)
-        throw new Error('購入記録の更新に失敗しました')
+      if (purchaseError) {
+        console.error('購入記録作成エラー:', purchaseError)
+        return new Response(
+          JSON.stringify({ error: '購入記録の作成に失敗しました' }), 
+          { 
+            status: 500, 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        )
       }
 
       return new Response(

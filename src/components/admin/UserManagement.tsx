@@ -38,18 +38,23 @@ export const UserManagement = () => {
   const { data: users, isLoading, error } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
-      // まず、現在のユーザーが管理者かどうかを確認
-      const { data: adminCheck } = await supabase
-        .from("admins")
-        .select("id")
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("認証が必要です");
+
+      // 管理者権限の確認
+      const { data: roleCheck } = await supabase
+        .from("user_roles")
+        .select("role_type")
+        .eq("user_id", user.id)
+        .eq("role_type", "admin")
         .single();
 
-      if (!adminCheck) {
+      if (!roleCheck) {
         throw new Error("管理者権限がありません");
       }
 
-      const { data: { users }, error } = await supabase.auth.admin.listUsers();
-      if (error) throw error;
+      const { data: { users }, error: usersError } = await supabase.auth.admin.listUsers();
+      if (usersError) throw usersError;
 
       const { data: roles } = await supabase
         .from("user_roles")

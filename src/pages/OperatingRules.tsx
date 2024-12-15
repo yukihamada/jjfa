@@ -34,7 +34,7 @@ const OperatingRules = () => {
             </div>
 
             <div className="mt-12 pt-8 border-t">
-              <RelatedDocuments isJapanese={isJapanese} />
+              <RelatedDocuments isJapanese={isJapanese} currentPage="operating-rules" />
             </div>
           </CardContent>
         </Card>

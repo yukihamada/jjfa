@@ -8,7 +8,12 @@ interface RelatedDocument {
   link: string;
 }
 
-export const RelatedDocuments = ({ isJapanese }: { isJapanese: boolean }) => {
+interface RelatedDocumentsProps {
+  isJapanese: boolean;
+  currentPage?: string;
+}
+
+export const RelatedDocuments = ({ isJapanese, currentPage }: RelatedDocumentsProps) => {
   const relatedDocs: RelatedDocument[] = [
     {
       title: isJapanese ? "ホワイトペーパー" : "Whitepaper",
@@ -30,11 +35,16 @@ export const RelatedDocuments = ({ isJapanese }: { isJapanese: boolean }) => {
     }
   ];
 
+  // Filter out the current page from related documents
+  const filteredDocs = currentPage 
+    ? relatedDocs.filter(doc => !doc.link.includes(currentPage))
+    : relatedDocs;
+
   return (
     <section className="mt-12">
       <h2 className="text-2xl font-bold mb-6">{isJapanese ? "関連ドキュメント" : "Related Documents"}</h2>
       <div className="grid md:grid-cols-3 gap-4">
-        {relatedDocs.map((doc) => {
+        {filteredDocs.map((doc) => {
           const Icon = doc.icon;
           return (
             <Link 

@@ -38,14 +38,14 @@ const ExternalLinks = () => {
 
           <Card className="bg-white shadow-lg">
             <CardHeader>
-              <CardTitle className="text-slate-800">2. JiuJitsu Lab</CardTitle>
+              <CardTitle className="text-slate-800">2. 村田良蔵監修の学習トレーニングツール</CardTitle>
               <CardDescription>
-                初心者から上級者まで有益な情報が得られる包括的な柔術プラットフォーム。テクニック解説や最新ニュースを随時更新しています。
+                村田良蔵監修による柔術の学習・トレーニングプラットフォーム。初心者から上級者まで、体系的な技術習得をサポートします。
               </CardDescription>
             </CardHeader>
             <CardContent>
               <a 
-                href="https://jiujitsu-lab.jjforall.com" 
+                href="https://ryozo.jjforall.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block w-full"

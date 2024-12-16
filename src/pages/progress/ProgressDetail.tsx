@@ -18,7 +18,7 @@ interface ProgressDetail {
 export const ProgressDetail = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { data: progress, isLoading } = useQuery({
+  const { data: progress, isLoading, error } = useQuery({
     queryKey: ["progress", id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -34,7 +34,9 @@ export const ProgressDetail = () => {
         .eq("id", id)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
       
       // Transform the data to match our interface
       const transformedData: ProgressDetail = {
@@ -58,7 +60,7 @@ export const ProgressDetail = () => {
     );
   }
 
-  if (!progress) {
+  if (error || !progress) {
     return <div>Progress not found</div>;
   }
 

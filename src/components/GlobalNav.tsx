@@ -7,8 +7,7 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
-import { Home, Info, FileText, Users, MessageCircle, Calendar } from "lucide-react";
-import { TournamentSchedule } from "./navigation/TournamentSchedule";
+import { Home, Info, FileText, Users, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -60,34 +59,32 @@ export const GlobalNav = () => {
   };
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-transform duration-300",
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      )}
-    >
-      <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-8">
-          <Link to="/" className="flex items-center gap-2">
-            <NavLogo />
-          </Link>
-          <NavItems menuItems={navItems} onItemClick={() => setIsMenuOpen(false)} />
-        </div>
-        <div className="flex items-center gap-4">
-          <LanguageSelector />
-          {user && <TournamentSchedule />}
-          <UserMenu user={user} />
-          <MobileMenu 
-            menuItems={[...navItems, {
-              label: t("nav.calendar"),
-              to: "/calendar",
-              icon: Calendar,
-            }]} 
-            isOpen={isMenuOpen}
-            onItemClick={handleMenuClick} 
-          />
-        </div>
-      </nav>
-    </header>
+    <>
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-transform duration-300",
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        )}
+      >
+        <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-8">
+            <Link to="/" className="flex items-center gap-2">
+              <NavLogo />
+            </Link>
+            <NavItems menuItems={navItems} onItemClick={() => setIsMenuOpen(false)} />
+          </div>
+          <div className="flex items-center gap-4">
+            <LanguageSelector />
+            <UserMenu user={user} />
+            <MobileMenu 
+              menuItems={navItems} 
+              isOpen={isMenuOpen}
+              onItemClick={handleMenuClick} 
+            />
+          </div>
+        </nav>
+      </header>
+      <div className="h-16" /> {/* This creates space for the fixed header */}
+    </>
   );
 };

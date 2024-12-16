@@ -74,6 +74,18 @@ export const UserMenu = ({ user }: UserMenuProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">
+        {isAdmin && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link to="/admin" className="flex items-center">
+                <Settings className="mr-2 h-4 w-4" />
+                <span>管理者</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
+        
         <DropdownMenuItem asChild>
           <Link to="/community" className="flex items-center">
             <PenSquare className="mr-2 h-4 w-4" />
@@ -87,18 +99,6 @@ export const UserMenu = ({ user }: UserMenuProps) => {
             <span>プロフィール</span>
           </Link>
         </DropdownMenuItem>
-        
-        {isAdmin && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link to="/admin" className="flex items-center">
-                <Settings className="mr-2 h-4 w-4" />
-                <span>管理者</span>
-              </Link>
-            </DropdownMenuItem>
-          </>
-        )}
         
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="text-red-600">

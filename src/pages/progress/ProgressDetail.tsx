@@ -10,10 +10,6 @@ interface ProgressDetail {
   notes: string;
   learned_at: string;
   skill_level: string;
-  created_at: string;
-  description: string | null;
-  video_url: string | null;
-  user_id: string;
   user: {
     full_name: string | null;
   } | null;
@@ -28,21 +24,21 @@ export const ProgressDetail = () => {
       const { data, error } = await supabase
         .from("learning_progress")
         .select(`
-          *,
-          user:profiles(full_name)
+          id,
+          technique,
+          notes,
+          learned_at,
+          skill_level,
+          user:user_id (
+            full_name
+          )
         `)
         .eq("id", id)
         .single();
 
       if (error) throw error;
       
-      // Transform the data to match our interface
-      const transformedData: ProgressDetail = {
-        ...data,
-        user: data.user ? { full_name: data.user.full_name } : null
-      };
-      
-      return transformedData;
+      return data as ProgressDetail;
     },
   });
 

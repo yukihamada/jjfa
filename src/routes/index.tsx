@@ -27,7 +27,8 @@ import Membership from "@/pages/profile/Membership";
 import Settings from "@/pages/profile/Settings";
 import Archives from "@/pages/profile/Archives";
 import PublicProfile from "@/pages/profile/PublicProfile";
-import { ProgressDetail } from "@/pages/progress/ProgressDetail";
+import ProgressDetail from "@/pages/progress/ProgressDetail";
+import TermsOfService from "@/pages/TermsOfService";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -47,6 +48,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/tournament-rules" element={<TournamentRules />} />
       <Route path="/operating-rules" element={<OperatingRules />} />
       <Route path="/token-rules" element={<TokenRules />} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/whitepaper" element={<Whitepaper />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/calendar" element={<Calendar />} />

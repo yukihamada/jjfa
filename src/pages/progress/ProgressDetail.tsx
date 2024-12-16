@@ -1,61 +1,45 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { format } from "date-fns";
+import { ja } from "date-fns/locale";
+import { ProgressComments } from "@/components/technique-tracker/ProgressComments";
 import { ProgressContent } from "@/components/technique-tracker/ProgressContent";
-import { Loader2 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-interface ProgressDetail {
-  id: string;
-  technique: string;
-  notes: string;
-  learned_at: string;
-  skill_level: string;
-  user: {
-    full_name: string | null;
-  } | null;
-}
-
-export const ProgressDetail = () => {
+const ProgressDetail = () => {
   const { id } = useParams<{ id: string }>();
 
   const { data: progress, isLoading } = useQuery({
-    queryKey: ["progress", id],
+    queryKey: ['progress', id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("learning_progress")
+        .from('learning_progress')
         .select(`
           id,
           technique,
+          description,
+          video_url,
           notes,
           learned_at,
           skill_level,
-          user:user_id (
+          profiles!learning_progress_user_id_fkey (
             full_name
           )
         `)
-        .eq("id", id)
+        .eq('id', id)
         .single();
 
       if (error) throw error;
-      
-      // Transform the data to match our interface
-      const transformedData: ProgressDetail = {
-        id: data.id,
-        technique: data.technique,
-        notes: data.notes,
-        learned_at: data.learned_at,
-        skill_level: data.skill_level,
-        user: data.user ? { full_name: data.user.full_name } : null
-      };
-      
-      return transformedData;
+      return data;
     },
   });
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="container mx-auto px-4 py-8">
+        <Skeleton className="h-[400px] w-full" />
       </div>
     );
   }
@@ -64,5 +48,28 @@ export const ProgressDetail = () => {
     return <div>Progress not found</div>;
   }
 
-  return <ProgressContent progress={progress} />;
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">
+            {progress.technique}
+          </CardTitle>
+          <div className="text-sm text-muted-foreground">
+            <span>By {progress.profiles?.full_name || 'Anonymous'}</span>
+            <span className="mx-2">•</span>
+            <span>
+              {format(new Date(progress.learned_at), 'PPP', { locale: ja })}
+            </span>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <ProgressContent progress={progress} />
+          <ProgressComments progressId={progress.id} />
+        </CardContent>
+      </Card>
+    </div>
+  );
 };
+
+export default ProgressDetail;

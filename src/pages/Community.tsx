@@ -4,13 +4,11 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { DiscussionForm } from "@/components/community/DiscussionForm";
 import { DiscussionList } from "@/components/community/DiscussionList";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { NotificationBell } from "@/components/community/NotificationBell";
 import { OnlineUsersDisplay } from "@/components/community/OnlineUsersDisplay";
-import { Button } from "@/components/ui/button";
-import { PenSquare, Users, AlertCircle } from "lucide-react";
+import { Users } from "lucide-react";
 import { CommunityGuidelines } from "@/components/community/CommunityGuidelines";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -21,7 +19,6 @@ const Community = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("discussions");
   const [showTodoDialog, setShowTodoDialog] = useState(false);
   const navigate = useNavigate();
 
@@ -62,7 +59,6 @@ const Community = () => {
     if (!user) {
       toast.error("TODOリストを表示するにはログインが必要です", {
         description: "会員登録を完了してください",
-        icon: <AlertCircle className="h-5 w-5" />,
       });
       navigate('/community-registration');
       return;
@@ -106,46 +102,17 @@ const Community = () => {
           <CommunityGuidelines />
           
           <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6">
-            <Tabs 
-              value={activeTab} 
-              onValueChange={setActiveTab} 
-              className="space-y-6"
-            >
-              <TabsList className="grid w-full grid-cols-2 bg-slate-100/50">
-                <TabsTrigger 
-                  value="discussions"
-                  className="data-[state=active]:bg-white data-[state=active]:text-primary"
-                >
-                  投稿一覧
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="create"
-                  className="data-[state=active]:bg-white data-[state=active]:text-primary"
-                >
-                  新規投稿
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="discussions" className="mt-6">
-                <DiscussionList />
-              </TabsContent>
-              <TabsContent value="create" className="mt-6">
-                <DiscussionForm onSuccess={() => setActiveTab("discussions")} />
-              </TabsContent>
-            </Tabs>
+            {/* Post creation form at the top */}
+            <div className="mb-8">
+              <DiscussionForm onSuccess={() => {}} />
+            </div>
+            
+            {/* Discussion list below */}
+            <DiscussionList />
           </div>
         </div>
       </div>
       
-      {activeTab !== "create" && (
-        <Button
-          onClick={() => setActiveTab("create")}
-          className="fixed bottom-6 right-6 rounded-full w-16 h-16 shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90 text-white"
-          size="icon"
-        >
-          <PenSquare className="w-6 h-6" />
-        </Button>
-      )}
-
       <Dialog open={showTodoDialog} onOpenChange={setShowTodoDialog}>
         <DialogContent className="max-w-md">
           <DialogHeader>

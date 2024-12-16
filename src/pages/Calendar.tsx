@@ -180,6 +180,14 @@ const Calendar = () => {
       location: "春日市総合スポーツセンター（福岡県）",
       notes: "地域密着型の柔術大会",
       timestamp: new Date('2025-02-11')
+    },
+    {
+      organization: "JJFA",
+      name: "Super Yawara Cup 2025",
+      date: "2025年2月16日",
+      location: "大田区総合体育館PiO（東京都大田区）",
+      notes: "JJFAが主催する大会",
+      timestamp: new Date('2025-02-16')
     }
   ];
 

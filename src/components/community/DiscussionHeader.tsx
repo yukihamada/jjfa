@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { formatDistanceToNow } from "date-fns";
-import { ja } from "date-fns/locale";
+import { TimeAgoLink } from "./TimeAgoLink";
 
 interface DiscussionHeaderProps {
   discussion: any;
@@ -9,10 +8,6 @@ interface DiscussionHeaderProps {
 
 export const DiscussionHeader = ({ discussion }: DiscussionHeaderProps) => {
   const profile = discussion.profile || {};
-  const timeAgo = formatDistanceToNow(new Date(discussion.created_at), {
-    addSuffix: true,
-    locale: ja,
-  });
 
   return (
     <div className="flex items-start gap-3">
@@ -31,7 +26,7 @@ export const DiscussionHeader = ({ discussion }: DiscussionHeaderProps) => {
             {profile.username || "匿名ユーザー"}
           </Link>
           <span className="text-sm text-muted-foreground">・</span>
-          <span className="text-sm text-muted-foreground">{timeAgo}</span>
+          <TimeAgoLink date={discussion.created_at} discussionId={discussion.id} />
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
 
 interface TimeAgoLinkProps {
-  date: string;
+  date: string | Date;
   discussionId: string;
 }
 
@@ -16,7 +16,7 @@ export const TimeAgoLink = ({ date, discussionId }: TimeAgoLinkProps) => {
   return (
     <Link 
       to={`/community/discussion/${discussionId}`}
-      className="text-sm text-slate-400 hover:text-slate-600 transition-colors"
+      className="text-sm text-muted-foreground hover:underline"
     >
       {timeAgo}
     </Link>

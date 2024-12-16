@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const RegistrationForm = () => {
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ export const RegistrationForm = () => {
                 sign_up: {
                   email_label: t('community.form.email'),
                   password_label: t('community.form.password'),
-                  button_label: "新規登録",
+                  button_label: "無料会員登録",
                   link_text: "すでにアカウントをお持ちの方",
                   password_input_placeholder: t('community.form.passwordPlaceholder'),
                   email_input_placeholder: t('community.form.emailPlaceholder'),
@@ -78,6 +79,12 @@ export const RegistrationForm = () => {
               }
             }}
           />
+          <div className="text-center text-sm text-slate-600">
+            <Link to="/terms-of-service" className="hover:text-slate-800 underline">
+              利用規約
+            </Link>
+            {" "}をご確認の上、登録してください。
+          </div>
         </div>
       </CardContent>
     </Card>

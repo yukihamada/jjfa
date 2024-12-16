@@ -5,7 +5,7 @@ interface NavItemsProps {
   menuItems: Array<{
     to: string;
     label: string;
-    icon?: LucideIcon;  // Made icon optional with ?
+    icon?: LucideIcon;
   }>;
   onItemClick: () => void;
 }

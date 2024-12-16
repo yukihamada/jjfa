@@ -29,7 +29,7 @@ export const ProgressDetail = () => {
           notes,
           learned_at,
           skill_level,
-          user:profiles(full_name)
+          user:profiles!learning_progress_user_id_fkey(full_name)
         `)
         .eq("id", id)
         .single();

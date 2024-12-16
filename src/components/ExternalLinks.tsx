@@ -20,7 +20,7 @@ const ExternalLinks = () => {
             </CardHeader>
             <CardContent>
               <a 
-                href="https://jiueventpro.com" 
+                href="https://jiuevent.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block w-full"

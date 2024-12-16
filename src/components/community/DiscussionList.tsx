@@ -11,7 +11,11 @@ export const DiscussionList = () => {
       const { data, error } = await supabase
         .from('discussions')
         .select(`
-          *,
+          id,
+          content,
+          user_id,
+          created_at,
+          attachments,
           profile:profiles(
             id,
             username,

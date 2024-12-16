@@ -35,19 +35,23 @@ export const GlobalNav = () => {
   const navItems = [
     {
       label: t("nav.about"),
-      to: "/about"
+      to: "/about",
+      icon: undefined
     },
     {
       label: t("nav.project"),
-      to: "/whitepaper"
+      to: "/whitepaper",
+      icon: undefined
     },
     {
       label: t("nav.community"),
-      to: "/community"
+      to: "/community",
+      icon: undefined
     },
     {
       label: t("nav.contact"),
-      to: "/contact"
+      to: "/contact",
+      icon: undefined
     },
   ];
 

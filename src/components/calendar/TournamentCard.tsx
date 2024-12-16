@@ -17,13 +17,13 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
   const dayOfWeek = tournament.timestamp.toLocaleDateString('ja-JP', { weekday: 'short' });
   const dateWithDay = `${tournament.date}（${dayOfWeek}）`;
 
-  // Update SJJJF to use red color
+  // Update JJFA color to match the logo
   const getOrgColor = (org: string) => {
     switch (org) {
       case 'JJFA':
-        return 'bg-blue-600 text-white'; // Keep JJFA as is
+        return 'bg-slate-800 text-white'; // Match NavLogo color
       case 'SJJJF':
-        return 'bg-red-600 text-white'; // SJJJF now uses red
+        return 'bg-red-600 text-white'; // SJJJF uses red
       case 'IBJJF':
       case 'JBJJF':
       case 'ASJJF':
@@ -34,7 +34,7 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
   };
 
   return (
-    <Card className={`border shadow-sm hover:shadow-md transition-shadow ${isJJFA ? 'border-blue-500 bg-blue-50' : ''}`}>
+    <Card className={`border shadow-sm hover:shadow-md transition-shadow ${isJJFA ? 'border-slate-800 bg-slate-50' : ''}`}>
       <CardHeader className="pb-2 px-4">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <div className="space-y-1">

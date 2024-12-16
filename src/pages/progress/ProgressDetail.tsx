@@ -1,83 +1,72 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { format } from "date-fns";
-import { ja } from "date-fns/locale";
+import { Loader2 } from "lucide-react";
 import { ProgressComments } from "@/components/technique-tracker/ProgressComments";
 import { ProgressContent } from "@/components/technique-tracker/ProgressContent";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const ProgressDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const { data: progress, isLoading } = useQuery({
-    queryKey: ['progress', id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('learning_progress')
-        .select(`
-          id,
-          technique,
-          description,
-          video_url,
-          notes,
-          learned_at,
-          skill_level,
-          user_id,
-          user:user_id (
-            profile:profiles (
-              full_name
+  useEffect(() => {
+    const fetchProgress = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('learning_progress')
+          .select(`
+            *,
+            user:user_id (
+              profile:profiles (
+                full_name,
+                username
+              )
             )
-          )
-        `)
-        .eq('id', id)
-        .single();
+          `)
+          .eq('id', id)
+          .single();
 
-      if (error) throw error;
+        if (error) throw error;
+        setProgress(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      // Transform the data to match the expected structure
-      return {
-        ...data,
-        user: {
-          full_name: data.user?.profile?.full_name || 'ユーザー'
-        }
-      };
-    },
-  });
+    fetchProgress();
+  }, [id]);
 
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <Skeleton className="h-[400px] w-full" />
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="w-8 h-8 animate-spin" />
       </div>
     );
   }
 
-  if (!progress) {
-    return <div>Progress not found</div>;
+  if (error || !progress) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-red-500">Error: {error || 'Progress not found'}</p>
+      </div>
+    );
   }
+
+  const userName = progress.user?.profile?.full_name || progress.user?.profile?.username || 'Unknown User';
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">
-            {progress.technique}
-          </CardTitle>
-          <div className="text-sm text-muted-foreground">
-            <span>By {progress.user.full_name}</span>
-            <span className="mx-2">•</span>
-            <span>
-              {format(new Date(progress.learned_at), 'PPP', { locale: ja })}
-            </span>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <ProgressContent progress={progress} />
-          <ProgressComments progressId={progress.id} />
-        </CardContent>
-      </Card>
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-2xl font-bold mb-4">
+          {userName}の{progress.technique}の上達記録
+        </h1>
+        <ProgressContent progress={progress} />
+        <ProgressComments progressId={progress.id} />
+      </div>
     </div>
   );
 };

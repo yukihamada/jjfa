@@ -41,7 +41,10 @@ const DiscussionDetail = () => {
         .eq('id', id)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching discussion:", error);
+        throw error;
+      }
       return data;
     },
   });
@@ -50,7 +53,7 @@ const DiscussionDetail = () => {
     return (
       <Alert variant="destructive" className="max-w-4xl mx-auto mt-8">
         <AlertDescription>
-          投稿の取得中にエラーが発生しました。({error.message})
+          投稿の取得中にエラーが発生しました。
         </AlertDescription>
       </Alert>
     );

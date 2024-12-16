@@ -47,7 +47,7 @@ const Whitepaper = () => {
         <Card className="bg-white/90 backdrop-blur-md">
           <CardContent className="p-6">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">{t('whitepaper.title').replace('JJFA', '')}</h1>
+              <h1 className="text-3xl font-bold mb-2">{t('whitepaper.title')}</h1>
               <p className="text-xl text-slate-600">{t('whitepaper.subtitle')}</p>
             </div>
 
@@ -58,75 +58,78 @@ const Whitepaper = () => {
                 <p className="mb-4">{t('whitepaper.intro.backgroundText')}</p>
 
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-2">{t('whitepaper.intro.challenges.title')}</h4>
-                  <p className="mb-4">{t('whitepaper.intro.challenges.description')}</p>
+                  <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.web3.title')}</h3>
+                  <p className="mb-4">{t('whitepaper.intro.web3.description')}</p>
+                  
+                  <div className="mb-4">
+                    <h4 className="text-lg font-semibold mb-2">{t('whitepaper.intro.web3.comparison.title')}</h4>
+                    <ul className="list-disc pl-6 mb-4">
+                      {t('whitepaper.intro.web3.comparison.items', { returnObjects: true })?.map((item: string, index: number) => (
+                        <li key={index} className="mb-2">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <p className="mb-4">{t('whitepaper.intro.web3.example')}</p>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.organizations.title')}</h3>
                   <ul className="list-disc pl-6 mb-4">
-                    {(t('whitepaper.intro.challenges.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
+                    {t('whitepaper.intro.organizations.items', { returnObjects: true })?.map((item: string, index: number) => (
                       <li key={index} className="mb-2">{item}</li>
                     ))}
                   </ul>
-                  <p className="mb-4">{t('whitepaper.intro.challenges.conclusion')}</p>
                 </div>
-                
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.overview')}</h3>
-                <p className="mb-4">{t('whitepaper.intro.overviewText')}</p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.currentState.title')}</h2>
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.globalSpread.title')}</h3>
-                <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.currentState.globalSpread.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                    <li key={index} className="mb-2">{item}</li>
-                  ))}
-                </ul>
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.marketSize.title')}</h3>
+                  <p className="mb-4">{t('whitepaper.currentState.marketSize.description')}</p>
+                </div>
 
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.currentIssues.title')}</h3>
-                <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.currentState.currentIssues.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                    <li key={index} className="mb-2">{item}</li>
-                  ))}
-                </ul>
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.issues.title')}</h3>
+                  <ul className="list-disc pl-6 mb-4">
+                    {t('whitepaper.currentState.issues.items', { returnObjects: true })?.map((item: string, index: number) => (
+                      <li key={index} className="mb-2">{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.growth.title')}</h3>
+                  <ul className="list-disc pl-6 mb-4">
+                    {t('whitepaper.currentState.growth.items', { returnObjects: true })?.map((item: string, index: number) => (
+                      <li key={index} className="mb-2">{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">{t('whitepaper.vision.title')}</h2>
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.overview.title')}</h3>
-                <p className="mb-4">{t('whitepaper.vision.overview.description')}</p>
+                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.mission')}</h3>
+                <p className="mb-4">{t('whitepaper.vision.description')}</p>
 
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.mission.title')}</h3>
-                <p className="mb-4">{t('whitepaper.vision.mission.description')}</p>
-
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.longTermGoals.title')}</h3>
-                <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.vision.longTermGoals.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                    <li key={index} className="mb-2">{item}</li>
-                  ))}
-                </ul>
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.strategy.title')}</h3>
+                  <ul className="list-disc pl-6 mb-4">
+                    {t('whitepaper.vision.strategy.items', { returnObjects: true })?.map((item: string, index: number) => (
+                      <li key={index} className="mb-2">{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </section>
 
               <section className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">{t('whitepaper.token.title')}</h2>
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.token.purpose.title')}</h3>
-                <p className="mb-4">{t('whitepaper.token.purpose.description')}</p>
-
-                <h3 className="text-xl font-semibold mb-2">{t('whitepaper.token.types.title')}</h3>
-                <p className="mb-4">{t('whitepaper.token.types.description')}</p>
-                <ul className="list-disc pl-6 mb-4">
-                  {(t('whitepaper.token.types.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                    <li key={index} className="mb-2">{item}</li>
-                  ))}
-                </ul>
-                <p className="mb-4">{t('whitepaper.token.types.additionalInfo')}</p>
+                <h2 className="text-2xl font-bold mb-4">{t('whitepaper.conclusion.title')}</h2>
+                <p className="mb-4">{t('whitepaper.conclusion.content')}</p>
+                <p className="mb-4">{t('whitepaper.conclusion.callToAction')}</p>
               </section>
 
-              <section className="mb-8">
-                <h2 className="text-2xl font-bold mb-4">{t('whitepaper.governance.title')}</h2>
-                <p className="mb-4">{t('whitepaper.governance.description')}</p>
-                <p className="mb-4">{t('whitepaper.governance.additionalInfo')}</p>
-              </section>
-
-              {/* ドキュメントグリッド - 最後に移動 */}
               <section className="mt-12">
                 <h2 className="text-2xl font-bold mb-6">関連ドキュメント</h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -160,15 +163,6 @@ const Whitepaper = () => {
                   <li>{t('whitepaper.contact.email')}</li>
                   <li>{t('whitepaper.contact.address')}</li>
                 </ul>
-              </section>
-
-              <section className="mt-8 text-sm text-slate-600">
-                <h2 className="text-lg font-bold mb-2">{t('whitepaper.disclaimer.title')}</h2>
-                <p>{t('whitepaper.disclaimer.content')}</p>
-              </section>
-
-              <section className="mt-8 p-6 bg-slate-50 rounded-lg">
-                <p className="text-slate-700">{t('whitepaper.footer.text')}</p>
               </section>
             </div>
           </CardContent>

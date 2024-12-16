@@ -40,12 +40,12 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
       <CardHeader className="pb-2 px-4">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <div className="space-y-1">
-            <CardTitle className={`text-base sm:text-lg font-bold line-clamp-2 ${getOrgColor(tournament.organization)}`}>
+            <CardTitle className="text-base sm:text-lg font-bold line-clamp-2">
               {tournament.name}
             </CardTitle>
             <Badge 
               variant={isJJFA ? "default" : "outline"} 
-              className={`text-xs font-semibold ${isJJFA ? 'bg-blue-600' : ''}`}
+              className={`text-xs font-semibold ${isJJFA ? 'bg-blue-600' : ''} ${getOrgColor(tournament.organization)}`}
             >
               {tournament.organization}
             </Badge>

@@ -36,7 +36,13 @@ export const ProgressDetail = () => {
 
       if (error) throw error;
       
-      return data as ProgressDetail;
+      // Transform the data to match our interface
+      const transformedData: ProgressDetail = {
+        ...data,
+        user: data.user ? { full_name: data.user.full_name } : null
+      };
+      
+      return transformedData;
     },
   });
 

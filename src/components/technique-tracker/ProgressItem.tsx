@@ -11,6 +11,7 @@ interface ProgressItemProps {
     notes?: string;
     learned_at: string;
     skill_level: string;
+    video_url?: string | null;
   };
   onDelete: (id: string) => void;
   onEdit: (id: string) => void;
@@ -77,6 +78,17 @@ export const ProgressItem = ({
           </div>
           <h4 className="font-medium text-slate-900 break-all">{progress.technique}</h4>
           <p className="text-sm text-slate-600 break-all">{progress.notes}</p>
+          {progress.video_url && (
+            <video 
+              src={progress.video_url} 
+              controls 
+              className="w-full rounded-lg mt-2"
+              preload="metadata"
+            >
+              <source src={progress.video_url} type="video/mp4" />
+              お使いのブラウザは動画の再生に対応していません。
+            </video>
+          )}
           <p className="text-xs text-slate-500">
             {format(new Date(progress.learned_at), 'yyyy年MM月dd日')}に学習
           </p>

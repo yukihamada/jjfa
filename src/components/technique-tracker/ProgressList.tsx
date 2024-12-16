@@ -42,19 +42,16 @@ export const ProgressList = ({ userProgress, onEdit }: ProgressListProps) => {
   if (!userProgress || userProgress.length === 0) return null;
 
   return (
-    <div className="mt-8">
-      <h3 className="text-xl font-semibold text-slate-800 mb-4">最近の進捗</h3>
-      <div className="space-y-4">
-        {userProgress.map((progress) => (
-          <ProgressItem
-            key={progress.id}
-            progress={progress}
-            onDelete={(id) => deleteProgress.mutate(id)}
-            onEdit={onEdit}
-            onCommentClick={setSelectedProgress}
-          />
-        ))}
-      </div>
+    <div className="space-y-4">
+      {userProgress.map((progress) => (
+        <ProgressItem
+          key={progress.id}
+          progress={progress}
+          onDelete={(id) => deleteProgress.mutate(id)}
+          onEdit={onEdit}
+          onCommentClick={setSelectedProgress}
+        />
+      ))}
 
       <Dialog open={!!selectedProgress} onOpenChange={() => setSelectedProgress(null)}>
         <DialogContent className="sm:max-w-[425px]">

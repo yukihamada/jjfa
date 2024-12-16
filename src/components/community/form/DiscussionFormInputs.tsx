@@ -2,10 +2,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { AttachmentUpload } from "../AttachmentUpload";
 import { AttachmentPreview } from "../AttachmentPreview";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Loader2 } from "lucide-react";
+import { ImageIcon, Loader2, Globe, Users, Lock } from "lucide-react";
 import { DiscussionFormState } from "./useDiscussionForm";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Globe, Users } from "lucide-react";
 
 interface DiscussionFormInputsProps {
   formState: DiscussionFormState;
@@ -56,7 +55,7 @@ export const DiscussionFormInputs = ({
       <div className="flex items-center gap-4">
         <Select 
           value={formState.visibility} 
-          onValueChange={(value: 'public' | 'dojo') => 
+          onValueChange={(value: 'public' | 'dojo' | 'private') => 
             setFormState(prev => ({ ...prev, visibility: value }))
           }
         >
@@ -73,7 +72,13 @@ export const DiscussionFormInputs = ({
             <SelectItem value="dojo">
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
-                <span>道場内のみ</span>
+                <span>道場のみ</span>
+              </div>
+            </SelectItem>
+            <SelectItem value="private">
+              <div className="flex items-center gap-2">
+                <Lock className="h-4 w-4" />
+                <span>限定公開</span>
               </div>
             </SelectItem>
           </SelectContent>

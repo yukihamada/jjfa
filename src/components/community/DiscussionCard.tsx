@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
-import { MessageSquare, Heart, Trash2 } from "lucide-react";
+import { MessageSquare, Heart, Trash2, Globe, Users, Lock } from "lucide-react";
 import { AttachmentPreview } from "./AttachmentPreview";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -20,6 +20,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 
 interface DiscussionCardProps {
   discussion: any;
@@ -33,6 +34,32 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
     addSuffix: true,
     locale: ja,
   });
+
+  const getVisibilityIcon = (visibility: string) => {
+    switch (visibility) {
+      case 'public':
+        return <Globe className="h-3 w-3" />;
+      case 'dojo':
+        return <Users className="h-3 w-3" />;
+      case 'private':
+        return <Lock className="h-3 w-3" />;
+      default:
+        return <Globe className="h-3 w-3" />;
+    }
+  };
+
+  const getVisibilityText = (visibility: string) => {
+    switch (visibility) {
+      case 'public':
+        return '全体に公開';
+      case 'dojo':
+        return '道場のみ';
+      case 'private':
+        return '限定公開';
+      default:
+        return '全体に公開';
+    }
+  };
 
   const handleLike = async () => {
     try {
@@ -112,6 +139,10 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
             </Link>
             <span className="text-sm text-slate-400">・</span>
             <span className="text-sm text-slate-400">{timeAgo}</span>
+            <Badge variant="secondary" className="ml-2 flex items-center gap-1">
+              {getVisibilityIcon(discussion.visibility)}
+              <span className="text-xs">{getVisibilityText(discussion.visibility)}</span>
+            </Badge>
           </div>
           
           <Link to={`/community/discussion/${discussion.id}`} className="block group">

@@ -18,7 +18,7 @@ interface ProgressDetail {
 export const ProgressDetail = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { data: progress, isLoading, error } = useQuery({
+  const { data: progress, isLoading } = useQuery({
     queryKey: ["progress", id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -29,20 +29,26 @@ export const ProgressDetail = () => {
           notes,
           learned_at,
           skill_level,
-          user:profiles!learning_progress_user_id_fkey(full_name)
+          user:profiles!learning_progress_user_id_fkey (
+            full_name
+          )
         `)
         .eq("id", id)
         .single();
 
-      if (error) {
-        throw error;
-      }
-
-      if (!data) {
-        throw new Error("Progress not found");
-      }
-
-      return data as ProgressDetail;
+      if (error) throw error;
+      
+      // Transform the data to match our interface
+      const transformedData: ProgressDetail = {
+        id: data.id,
+        technique: data.technique,
+        notes: data.notes,
+        learned_at: data.learned_at,
+        skill_level: data.skill_level,
+        user: data.user ? { full_name: data.user.full_name } : null
+      };
+      
+      return transformedData;
     },
   });
 
@@ -54,7 +60,7 @@ export const ProgressDetail = () => {
     );
   }
 
-  if (error || !progress) {
+  if (!progress) {
     return <div>Progress not found</div>;
   }
 

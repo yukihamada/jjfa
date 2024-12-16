@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./navigation/MobileMenu";
@@ -7,6 +7,8 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
+import { Home, Info, FileText, Users, MessageCircle, Calendar } from "lucide-react";
+import { TournamentSchedule } from "./navigation/TournamentSchedule";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -15,8 +17,6 @@ export const GlobalNav = () => {
   const isVisible = useScrollDirection();
   const [user, setUser] = useState<any>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-  const isProfileRoute = location.pathname.startsWith('/profile');
 
   useEffect(() => {
     const getUser = async () => {
@@ -35,19 +35,23 @@ export const GlobalNav = () => {
   const navItems = [
     {
       label: t("nav.about"),
-      to: "/about"
+      to: "/about",
+      icon: Info,
     },
     {
       label: t("nav.project"),
-      to: "/whitepaper"
+      to: "/whitepaper",
+      icon: FileText,
     },
     {
       label: t("nav.community"),
-      to: "/community"
+      to: "/community",
+      icon: Users,
     },
     {
       label: t("nav.contact"),
-      to: "/contact"
+      to: "/contact",
+      icon: MessageCircle,
     },
   ];
 
@@ -64,18 +68,21 @@ export const GlobalNav = () => {
     >
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <div className="flex items-center gap-8">
-          {(!user || !isProfileRoute) && (
-            <Link to="/" className="flex items-center gap-2">
-              <NavLogo />
-            </Link>
-          )}
+          <Link to="/" className="flex items-center gap-2">
+            <NavLogo />
+          </Link>
           <NavItems menuItems={navItems} onItemClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />
+          {user && <TournamentSchedule />}
           <UserMenu user={user} />
           <MobileMenu 
-            menuItems={navItems} 
+            menuItems={[...navItems, {
+              label: t("nav.calendar"),
+              to: "/calendar",
+              icon: Calendar,
+            }]} 
             isOpen={isMenuOpen}
             onItemClick={handleMenuClick} 
           />

@@ -20,7 +20,7 @@ export const AttachmentPreview = ({ attachments, onRemove, readonly }: Attachmen
       {attachments.map((attachment, index) => (
         <div key={index} className="relative group">
           {attachment.type === 'image' ? (
-            <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
+            <div className="relative aspect-video bg-black/5 rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
               <img
                 src={attachment.url}
                 alt={`添付画像 ${index + 1}`}
@@ -28,7 +28,7 @@ export const AttachmentPreview = ({ attachments, onRemove, readonly }: Attachmen
               />
             </div>
           ) : attachment.type === 'video' ? (
-            <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
+            <div className="relative aspect-video bg-black/5 rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 hover:shadow-lg">
               <video
                 src={attachment.url}
                 controls
@@ -42,7 +42,7 @@ export const AttachmentPreview = ({ attachments, onRemove, readonly }: Attachmen
             <Button
               variant="destructive"
               size="icon"
-              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity rounded-full shadow-lg"
               onClick={() => onRemove(index)}
             >
               <X className="h-4 w-4" />

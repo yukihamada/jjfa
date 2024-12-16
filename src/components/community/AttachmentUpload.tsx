@@ -11,6 +11,7 @@ interface AttachmentUploadProps {
 
 export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploadProps) => {
   const [isUploading, setIsUploading] = useState(false);
+  const MAX_FILE_SIZE = 1024 * 1024 * 1024; // 1GB in bytes
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -27,9 +28,9 @@ export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploa
           continue;
         }
 
-        // Check file size (10MB limit for videos)
-        if (file.type.startsWith('video/') && file.size > 10 * 1024 * 1024) {
-          toast.error('動画ファイルは10MB以下にしてください');
+        // Check file size (1GB limit)
+        if (file.size > MAX_FILE_SIZE) {
+          toast.error('ファイルサイズは1GB以下にしてください');
           continue;
         }
 
@@ -87,21 +88,25 @@ export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploa
     <div className="relative">
       <Button
         variant="outline"
-        className="w-full h-24 border-dashed flex flex-col gap-2 hover:border-primary hover:bg-primary/5"
+        className="w-full h-32 border-2 border-dashed rounded-2xl flex flex-col gap-3 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
         disabled={isUploading}
       >
         <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
           {isUploading ? (
             <>
-              <Loader2 className="w-6 h-6 mb-2 animate-spin" />
-              <span className="text-sm">アップロード中...</span>
+              <Loader2 className="w-8 h-8 mb-3 animate-spin text-primary" />
+              <span className="text-base font-medium text-primary">アップロード中...</span>
             </>
           ) : (
             <>
-              <Upload className="w-6 h-6 mb-2" />
-              <span className="text-sm">クリックまたはドラッグ＆ドロップでファイルを添付</span>
-              <span className="text-xs text-muted-foreground mt-1">
-                対応形式: 画像（PNG, JPG）、動画（MP4）
+              <div className="w-12 h-12 mb-3 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <Upload className="w-6 h-6 text-primary" />
+              </div>
+              <span className="text-base font-medium mb-1">
+                クリックまたはドラッグ＆ドロップでファイルを添付
+              </span>
+              <span className="text-sm text-muted-foreground">
+                対応形式: 画像（PNG, JPG）、動画（MP4） - 上限: 1GB
               </span>
             </>
           )}

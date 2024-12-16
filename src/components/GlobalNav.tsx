@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { NavItems } from "./navigation/NavItems";
@@ -15,7 +15,6 @@ import { useAuth } from "@/hooks/useAuth";
 export const GlobalNav = () => {
   const { t } = useTranslation();
   const scrollDirection = useScrollDirection();
-  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useAuth();
 
@@ -34,7 +33,7 @@ export const GlobalNav = () => {
     <header
       className={cn(
         "sticky z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
-        scrollDirection === "down" ? "-top-20" : "top-0",
+        scrollDirection ? "-top-20" : "top-0",
         "transition-all duration-500"
       )}
     >

@@ -21,7 +21,11 @@ const DiscussionDetail = () => {
         .from('discussions')
         .select(`
           *,
-          profile:profiles (id, username, avatar_url),
+          profile:profiles (
+            id,
+            username,
+            avatar_url
+          ),
           likes (user_id),
           comments (
             id,

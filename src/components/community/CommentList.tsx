@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,6 +28,15 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
   const queryClient = useQueryClient();
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setCurrentUserId(user?.id || null);
+    };
+    getCurrentUser();
+  }, []);
 
   const handleDelete = async (commentId: string) => {
     const { error } = await supabase
@@ -84,11 +93,6 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
     setEditContent("");
   };
 
-  const canModify = async (userId: string) => {
-    const { data: { user } } = await supabase.auth.getUser();
-    return user?.id === userId;
-  };
-
   return (
     <div className="space-y-4">
       {comments.map((comment) => (
@@ -135,7 +139,7 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
                 <p className="text-gray-700 whitespace-pre-wrap">{comment.content}</p>
               )}
             </div>
-            {canModify(comment.user_id) && editingCommentId !== comment.id && (
+            {currentUserId === comment.user_id && editingCommentId !== comment.id && (
               <div className="flex gap-1">
                 <Button
                   variant="ghost"

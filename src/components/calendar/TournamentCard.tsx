@@ -17,21 +17,21 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
   const dayOfWeek = tournament.timestamp.toLocaleDateString('ja-JP', { weekday: 'short' });
   const dateWithDay = `${tournament.date}（${dayOfWeek}）`;
 
-  // Organization-specific colors
+  // Organization-specific background colors with white text
   const getOrgColor = (org: string) => {
     switch (org) {
       case 'JJFA':
-        return 'text-blue-600'; // Traditional blue for official organization
+        return 'bg-blue-600 text-white'; // Official blue with white text
       case 'IBJJF':
-        return 'text-purple-600'; // Royal purple for international prestige
+        return 'bg-purple-600 text-white'; // Royal purple with white text
       case 'JBJJF':
-        return 'text-red-600'; // Energetic red for national spirit
+        return 'bg-red-600 text-white'; // Energetic red with white text
       case 'SJJJF':
-        return 'text-emerald-600'; // Fresh emerald for innovation
+        return 'bg-emerald-600 text-white'; // Fresh emerald with white text
       case 'ASJJF':
-        return 'text-orange-600'; // Vibrant orange for dynamism
+        return 'bg-orange-600 text-white'; // Vibrant orange with white text
       default:
-        return 'text-gray-600'; // Neutral gray for others
+        return 'bg-gray-600 text-white'; // Neutral gray with white text
     }
   };
 
@@ -45,7 +45,7 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
             </CardTitle>
             <Badge 
               variant={isJJFA ? "default" : "outline"} 
-              className={`text-xs font-semibold ${isJJFA ? 'bg-blue-600' : ''} ${getOrgColor(tournament.organization)}`}
+              className={`text-xs font-semibold ${getOrgColor(tournament.organization)}`}
             >
               {tournament.organization}
             </Badge>

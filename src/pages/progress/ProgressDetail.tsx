@@ -10,6 +10,7 @@ interface ProgressDetail {
   notes: string;
   learned_at: string;
   skill_level: string;
+  user_id: string;
   user: {
     full_name: string | null;
   } | null;
@@ -29,7 +30,8 @@ export const ProgressDetail = () => {
           notes,
           learned_at,
           skill_level,
-          user:profiles!learning_progress_user_id_fkey (
+          user_id,
+          user:profiles (
             full_name
           )
         `)

@@ -7,7 +7,7 @@ export const MAX_CONTENT_LENGTH = 2000;
 
 export interface DiscussionFormState {
   content: string;
-  visibility: 'public' | 'dojo';
+  visibility: 'public' | 'dojo' | 'private';
   attachments: { url: string; type: string }[];
   showConfirmDialog: boolean;
 }

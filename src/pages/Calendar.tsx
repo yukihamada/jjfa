@@ -186,6 +186,46 @@ const Calendar = () => {
       location: "大田区総合体育館PiO（東京都大田区）",
       notes: "JJFAが主催する大会",
       timestamp: new Date('2025-02-16')
+    },
+    {
+      organization: "ASJJF",
+      name: "MARIANAS PRO NAGOYA 2025",
+      date: "2025年3月8日",
+      location: "愛知県武道館（愛知県名古屋市）",
+      notes: "国際的な柔術大会で、多くの海外選手も参加予定です",
+      timestamp: new Date('2025-03-08')
+    },
+    {
+      organization: "ASJJF",
+      name: "アジアマスター柔術選手権 2025",
+      date: "2025年3月9日",
+      location: "愛知県武道館（愛知県名古屋市）",
+      notes: "30歳以上の選手を対象としたアジア規模の大会です",
+      timestamp: new Date('2025-03-09')
+    },
+    {
+      organization: "ASJJF",
+      name: "アジアキッズ柔術選手権 2025",
+      date: "2025年3月9日",
+      location: "愛知県武道館（愛知県名古屋市）",
+      notes: "子供たちを対象としたアジア規模の大会で、未来のスター選手が集います",
+      timestamp: new Date('2025-03-09')
+    },
+    {
+      organization: "JBJJF",
+      name: "北海道柔術選手権 2025",
+      date: "2025年3月16日",
+      location: "北ガスアリーナ札幌46（北海道札幌市）",
+      notes: "北海道地域で開催される柔術大会で、地元選手の活躍が期待されます",
+      timestamp: new Date('2025-03-16')
+    },
+    {
+      organization: "JBJJF",
+      name: "四国ノーギ選手権 2025",
+      date: "2025年3月16日",
+      location: "ソイジョイ武道館（徳島県）",
+      notes: "道着を着用しないノーギ部門の大会で、四国地域の選手が集います",
+      timestamp: new Date('2025-03-16')
     }
   ];
 

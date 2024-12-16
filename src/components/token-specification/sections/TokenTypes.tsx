@@ -12,7 +12,7 @@ export const TokenTypes = () => {
       <div className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>5.1 JJFAメンバートークン</CardTitle>
+            <CardTitle>5.1 JJFAメンバートークン (JJM)</CardTitle>
           </CardHeader>
           <CardContent>
             <h3 className="font-semibold mb-2">主な用途:</h3>
@@ -30,7 +30,7 @@ export const TokenTypes = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>5.2 JJFAガバナンストークン</CardTitle>
+            <CardTitle>5.2 JJFAガバナンストークン (JJG)</CardTitle>
           </CardHeader>
           <CardContent>
             <h3 className="font-semibold mb-2">主な用途:</h3>
@@ -47,7 +47,7 @@ export const TokenTypes = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>5.3 JJFAユーティリティトークン</CardTitle>
+            <CardTitle>5.3 JJFAユーティリティトークン (JJU)</CardTitle>
           </CardHeader>
           <CardContent>
             <h3 className="font-semibold mb-2">主な用途:</h3>

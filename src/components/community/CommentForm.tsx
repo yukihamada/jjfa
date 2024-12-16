@@ -32,31 +32,37 @@ export const CommentForm = ({ discussionId, onCancel }: CommentFormProps) => {
       return;
     }
 
-    const { error } = await supabase
-      .from('comments')
-      .insert([
-        {
-          discussion_id: discussionId,
-          user_id: user.id,
-          content: content.trim()
-        }
-      ]);
+    try {
+      const { error } = await supabase
+        .from('comments')
+        .insert([
+          {
+            discussion_id: discussionId,
+            user_id: user.id,
+            content: content.trim()
+          }
+        ]);
 
-    if (error) {
-      console.error('Comment error:', error);
-      toast.error("コメントの投稿に失敗しました");
-    } else {
-      toast.success("コメントを投稿しました");
-      setContent("");
-      // Invalidate both discussions and comments queries
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ['discussions'] }),
-        queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
-        queryClient.invalidateQueries({ queryKey: ['comments'] })
-      ]);
-      if (onCancel) onCancel();
+      if (error) {
+        console.error('Comment error:', error);
+        toast.error("コメントの投稿に失敗しました");
+      } else {
+        toast.success("コメントを投稿しました");
+        setContent("");
+        // Invalidate both discussions and comments queries
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: ['discussions'] }),
+          queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
+          queryClient.invalidateQueries({ queryKey: ['comments'] })
+        ]);
+        if (onCancel) onCancel();
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error("予期せぬエラーが発生しました");
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   return (

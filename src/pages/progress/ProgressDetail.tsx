@@ -31,7 +31,7 @@ export const ProgressDetail = () => {
           learned_at,
           skill_level,
           user_id,
-          user:profiles!learning_progress_user_id_fkey (
+          user:profiles (
             full_name
           )
         `)
@@ -46,7 +46,10 @@ export const ProgressDetail = () => {
         throw new Error("Progress not found");
       }
 
-      return data as ProgressDetail;
+      return {
+        ...data,
+        user: data.user || { full_name: null }
+      } as ProgressDetail;
     },
   });
 

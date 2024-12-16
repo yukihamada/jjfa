@@ -16,23 +16,49 @@ const PublicProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data, error } = await supabase
+        // First try to fetch by username
+        let { data: profileData, error: profileError } = await supabase
           .from("profiles")
-          .select(`
-            *,
-            fighters (
-              *,
-              belt:belts (name, color),
-              dojo:dojos (name)
-            )
-          `)
+          .select("*")
           .eq("username", username)
           .single();
 
-        if (error) throw error;
-        setProfile(data);
+        if (profileError) {
+          // If username not found, try to fetch by id
+          const { data: idProfileData, error: idProfileError } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", username)
+            .single();
+
+          if (idProfileError) {
+            console.error("Error fetching profile:", idProfileError);
+            setProfile(null);
+            setLoading(false);
+            return;
+          }
+          profileData = idProfileData;
+        }
+
+        // If we found a profile, fetch the fighter data
+        if (profileData) {
+          const { data: fighterData } = await supabase
+            .from("fighters")
+            .select(`
+              *,
+              belt:belts (name, color),
+              dojo:dojos (name)
+            `)
+            .eq("user_id", profileData.id)
+            .single();
+
+          setProfile({
+            ...profileData,
+            fighters: fighterData ? [fighterData] : []
+          });
+        }
       } catch (error) {
-        console.error("Error fetching profile:", error);
+        console.error("Error in profile fetch:", error);
       } finally {
         setLoading(false);
       }

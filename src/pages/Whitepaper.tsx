@@ -64,7 +64,7 @@ const Whitepaper = () => {
                   <div className="mb-4">
                     <h4 className="text-lg font-semibold mb-2">{t('whitepaper.intro.web3.comparison.title')}</h4>
                     <ul className="list-disc pl-6 mb-4">
-                      {t('whitepaper.intro.web3.comparison.items', { returnObjects: true })?.map((item: string, index: number) => (
+                      {(t('whitepaper.intro.web3.comparison.items', { returnObjects: true }) as string[] || []).map((item: string, index: number) => (
                         <li key={index} className="mb-2">{item}</li>
                       ))}
                     </ul>
@@ -76,7 +76,7 @@ const Whitepaper = () => {
                 <div className="mb-6">
                   <h3 className="text-xl font-semibold mb-2">{t('whitepaper.intro.organizations.title')}</h3>
                   <ul className="list-disc pl-6 mb-4">
-                    {t('whitepaper.intro.organizations.items', { returnObjects: true })?.map((item: string, index: number) => (
+                    {(t('whitepaper.intro.organizations.items', { returnObjects: true }) as string[] || []).map((item: string, index: number) => (
                       <li key={index} className="mb-2">{item}</li>
                     ))}
                   </ul>
@@ -93,7 +93,7 @@ const Whitepaper = () => {
                 <div className="mb-6">
                   <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.issues.title')}</h3>
                   <ul className="list-disc pl-6 mb-4">
-                    {t('whitepaper.currentState.issues.items', { returnObjects: true })?.map((item: string, index: number) => (
+                    {(t('whitepaper.currentState.issues.items', { returnObjects: true }) as string[] || []).map((item: string, index: number) => (
                       <li key={index} className="mb-2">{item}</li>
                     ))}
                   </ul>
@@ -102,7 +102,7 @@ const Whitepaper = () => {
                 <div className="mb-6">
                   <h3 className="text-xl font-semibold mb-2">{t('whitepaper.currentState.growth.title')}</h3>
                   <ul className="list-disc pl-6 mb-4">
-                    {t('whitepaper.currentState.growth.items', { returnObjects: true })?.map((item: string, index: number) => (
+                    {(t('whitepaper.currentState.growth.items', { returnObjects: true }) as string[] || []).map((item: string, index: number) => (
                       <li key={index} className="mb-2">{item}</li>
                     ))}
                   </ul>
@@ -117,7 +117,7 @@ const Whitepaper = () => {
                 <div className="mb-6">
                   <h3 className="text-xl font-semibold mb-2">{t('whitepaper.vision.strategy.title')}</h3>
                   <ul className="list-disc pl-6 mb-4">
-                    {t('whitepaper.vision.strategy.items', { returnObjects: true })?.map((item: string, index: number) => (
+                    {(t('whitepaper.vision.strategy.items', { returnObjects: true }) as string[] || []).map((item: string, index: number) => (
                       <li key={index} className="mb-2">{item}</li>
                     ))}
                   </ul>

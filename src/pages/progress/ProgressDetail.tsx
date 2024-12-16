@@ -29,7 +29,7 @@ export const ProgressDetail = () => {
           notes,
           learned_at,
           skill_level,
-          user:profiles!learning_progress_user_id_fkey (
+          user:user_id (
             full_name
           )
         `)
@@ -45,7 +45,7 @@ export const ProgressDetail = () => {
         notes: data.notes,
         learned_at: data.learned_at,
         skill_level: data.skill_level,
-        user: data.user ? { full_name: data.user.full_name } : null
+        user: data.user
       };
       
       return transformedData;

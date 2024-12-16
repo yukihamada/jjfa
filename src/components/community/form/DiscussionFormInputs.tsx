@@ -4,12 +4,13 @@ import { AttachmentPreview } from "../AttachmentPreview";
 import { Button } from "@/components/ui/button";
 import { ImageIcon, Loader2 } from "lucide-react";
 import { DiscussionFormState } from "./useDiscussionForm";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Globe, Users } from "lucide-react";
 
 interface DiscussionFormInputsProps {
   formState: DiscussionFormState;
   setFormState: (state: DiscussionFormState | ((prev: DiscussionFormState) => DiscussionFormState)) => void;
-  errors: { title?: string; content?: string };
-  MAX_TITLE_LENGTH: number;
+  errors: { content?: string };
   MAX_CONTENT_LENGTH: number;
   isSubmitting: boolean;
   onSubmit: (e: React.FormEvent) => void;
@@ -50,6 +51,33 @@ export const DiscussionFormInputs = ({
         <span className={`absolute right-3 bottom-3 text-sm ${contentCharCountColor}`}>
           {contentCharCount}/{MAX_CONTENT_LENGTH}
         </span>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <Select 
+          value={formState.visibility} 
+          onValueChange={(value: 'public' | 'dojo') => 
+            setFormState(prev => ({ ...prev, visibility: value }))
+          }
+        >
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="公開範囲を選択" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="public">
+              <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                <span>全体に公開</span>
+              </div>
+            </SelectItem>
+            <SelectItem value="dojo">
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                <span>道場内のみ</span>
+              </div>
+            </SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="flex items-center justify-between pt-2">

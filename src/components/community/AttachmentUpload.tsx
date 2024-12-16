@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 interface AttachmentUploadProps {
   onUploadComplete: (urls: { url: string; type: string }[]) => void;
-  children?: React.ReactNode; // Added children prop
+  children?: React.ReactNode;
 }
 
 export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploadProps) => {
@@ -21,6 +21,18 @@ export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploa
 
     try {
       for (const file of files) {
+        // Check file type
+        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+          toast.error('画像または動画ファイルのみアップロード可能です');
+          continue;
+        }
+
+        // Check file size (10MB limit for videos)
+        if (file.type.startsWith('video/') && file.size > 10 * 1024 * 1024) {
+          toast.error('動画ファイルは10MB以下にしてください');
+          continue;
+        }
+
         const fileExt = file.name.split('.').pop();
         const fileName = `${Math.random()}.${fileExt}`;
         const filePath = `${fileName}`;
@@ -42,8 +54,10 @@ export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploa
         });
       }
 
-      onUploadComplete(uploadedFiles);
-      toast.success('ファイルのアップロードが完了しました');
+      if (uploadedFiles.length > 0) {
+        onUploadComplete(uploadedFiles);
+        toast.success('ファイルのアップロードが完了しました');
+      }
     } catch (error) {
       console.error('Upload error:', error);
       toast.error('ファイルのアップロードに失敗しました');

@@ -25,8 +25,10 @@ const ProgressDetail = () => {
           learned_at,
           skill_level,
           user_id,
-          profiles!learning_progress_user_id_fkey (
-            full_name
+          user:user_id (
+            profile:profiles (
+              full_name
+            )
           )
         `)
         .eq('id', id)
@@ -38,7 +40,7 @@ const ProgressDetail = () => {
       return {
         ...data,
         user: {
-          full_name: data.profiles?.full_name || 'ユーザー'
+          full_name: data.user?.profile?.full_name || 'ユーザー'
         }
       };
     },

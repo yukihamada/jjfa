@@ -32,7 +32,7 @@ export const GlobalNav = () => {
   return (
     <header
       className={cn(
-        "sticky z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+        "fixed z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
         scrollDirection === "down" ? "-top-20" : "top-0",
         "transition-all duration-500"
       )}

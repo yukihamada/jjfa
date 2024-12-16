@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -29,7 +29,7 @@ export const MobileMenu = ({ isOpen, menuItems, onItemClick }: MobileMenuProps) 
   }, [isOpen, onItemClick]);
 
   return (
-    <div className="md:hidden" ref={menuRef}>
+    <div className="md:hidden relative" ref={menuRef}>
       <Button
         variant="ghost"
         size="icon"

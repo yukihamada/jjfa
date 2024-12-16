@@ -17,21 +17,18 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
   const dayOfWeek = tournament.timestamp.toLocaleDateString('ja-JP', { weekday: 'short' });
   const dateWithDay = `${tournament.date}（${dayOfWeek}）`;
 
-  // Organization-specific background colors with white text
+  // All organizations now use blue with white text
   const getOrgColor = (org: string) => {
     switch (org) {
       case 'JJFA':
-        return 'bg-blue-600 text-white'; // Official blue with white text
+        return 'bg-blue-600 text-white'; // Keep JJFA as is
       case 'IBJJF':
-        return 'bg-purple-600 text-white'; // Royal purple with white text
       case 'JBJJF':
-        return 'bg-red-600 text-white'; // Energetic red with white text
       case 'SJJJF':
-        return 'bg-emerald-600 text-white'; // Fresh emerald with white text
       case 'ASJJF':
-        return 'bg-orange-600 text-white'; // Vibrant orange with white text
+        return 'bg-blue-500 text-white'; // All other orgs use the same blue
       default:
-        return 'bg-gray-600 text-white'; // Neutral gray with white text
+        return 'bg-gray-600 text-white'; // Keep default for unknown orgs
     }
   };
 

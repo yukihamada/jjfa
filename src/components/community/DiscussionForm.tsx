@@ -1,4 +1,3 @@
-import { Card } from "@/components/ui/card";
 import { useDiscussionForm } from "./form/useDiscussionForm";
 import { DiscussionFormInputs } from "./form/DiscussionFormInputs";
 
@@ -12,7 +11,6 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
     setFormState,
     errors,
     isValid,
-    MAX_TITLE_LENGTH,
     MAX_CONTENT_LENGTH,
     createDiscussion,
     handleSubmit,
@@ -23,7 +21,6 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
       formState={formState}
       setFormState={setFormState}
       errors={errors}
-      MAX_TITLE_LENGTH={MAX_TITLE_LENGTH}
       MAX_CONTENT_LENGTH={MAX_CONTENT_LENGTH}
       isSubmitting={createDiscussion.isPending}
       onSubmit={handleSubmit}

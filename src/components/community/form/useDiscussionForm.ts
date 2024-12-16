@@ -45,15 +45,13 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
 
       const { error: discussionError } = await supabase
         .from("discussions")
-        .insert([
-          {
-            content: formState.content,
-            user_id: user.id,
-            profile_id: profile.id,
-            visibility: formState.visibility,
-            attachments: formState.attachments,
-          },
-        ]);
+        .insert({
+          content: formState.content,
+          user_id: user.id,
+          profile_id: profile.id,
+          visibility: formState.visibility,
+          attachments: formState.attachments,
+        });
 
       if (discussionError) throw discussionError;
     },

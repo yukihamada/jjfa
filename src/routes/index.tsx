@@ -41,7 +41,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/nft" element={<NFT />} />
-      <Route path="/benefits" element={<JiujitsuBenefits />} />
+      <Route path="/jiujitsu-benefits" element={<JiujitsuBenefits />} />
       <Route path="/live" element={<LiveStreaming />} />
       <Route path="/streaming-studio" element={<StreamingStudio />} />
       <Route path="/token-specification" element={<TokenSpecification />} />

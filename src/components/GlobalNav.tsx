@@ -7,7 +7,7 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
-import { Home, Info, FileText, Users, MessageCircle } from "lucide-react";
+import { Info, FileText, Users, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -84,7 +84,7 @@ export const GlobalNav = () => {
           </div>
         </nav>
       </header>
-      <div className="h-4" /> {/* スペースを8から4に調整 */}
+      <div className="h-4" />
     </>
   );
 };

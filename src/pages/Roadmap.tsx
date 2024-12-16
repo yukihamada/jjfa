@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 import { PageTitle } from "@/components/PageTitle";
 import { Card, CardContent } from "@/components/ui/card";
 import { Milestone, Globe, Users, Rocket, Flag, Calendar, Check, Trophy, Building, Sparkles } from "lucide-react";
@@ -47,7 +45,6 @@ const Roadmap = () => {
                           .filter(key => key !== 'title')
                           .map(key => {
                             const text = t(`roadmap.phase${phase}.${key}`);
-                            // 完了したタスクの処理
                             const isCompleted = (
                               text.includes("コミュニティ掲示板") ||
                               text.includes("トークン規程") ||
@@ -56,7 +53,6 @@ const Roadmap = () => {
                               text.includes("大会ルール")
                             );
 
-                            // リンクの生成
                             let content = text;
                             if (text.includes("コミュニティ掲示板")) {
                               content = text.replace(

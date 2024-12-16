@@ -1,6 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { AnimatePresence } from "framer-motion";
-import { FormTips } from "./form/FormTips";
 import { useDiscussionForm } from "./form/useDiscussionForm";
 import { DiscussionFormInputs } from "./form/DiscussionFormInputs";
 import { DiscussionFormPreview } from "./form/DiscussionFormPreview";
@@ -25,15 +24,8 @@ export const DiscussionForm = ({ onSuccess }: DiscussionFormProps) => {
 
   return (
     <>
-      <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">新しい投稿を作成</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            コミュニティと知識を共有しましょう
-          </p>
-        </CardHeader>
-        <CardContent>
-          <FormTips />
+      <Card className="bg-white/80 backdrop-blur-sm shadow-sm border-gray-100">
+        <CardContent className="pt-4">
           <DiscussionFormInputs
             formState={formState}
             setFormState={setFormState}

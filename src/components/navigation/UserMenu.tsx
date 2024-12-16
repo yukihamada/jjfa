@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { User, LogOut, Settings } from "lucide-react";
+import { User, LogOut, Settings, PenSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   DropdownMenu,
@@ -74,6 +74,13 @@ export const UserMenu = ({ user }: UserMenuProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">
+        <DropdownMenuItem asChild>
+          <Link to="/community" className="flex items-center">
+            <PenSquare className="mr-2 h-4 w-4" />
+            <span>投稿する</span>
+          </Link>
+        </DropdownMenuItem>
+        
         <DropdownMenuItem asChild>
           <Link to="/profile" className="flex items-center">
             <User className="mr-2 h-4 w-4" />

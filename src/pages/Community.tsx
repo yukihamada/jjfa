@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { PageTitle } from "@/components/PageTitle";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { DiscussionForm } from "@/components/community/DiscussionForm";
@@ -7,19 +6,11 @@ import { DiscussionList } from "@/components/community/DiscussionList";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { NotificationBell } from "@/components/community/NotificationBell";
-import { OnlineUsersDisplay } from "@/components/community/OnlineUsersDisplay";
-import { Users } from "lucide-react";
-import { CommunityGuidelines } from "@/components/community/CommunityGuidelines";
-import { EventsSection } from "@/components/sections/EventsSection";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const Community = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showTodoDialog, setShowTodoDialog] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,88 +46,26 @@ const Community = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const handleEventClick = () => {
-    if (!user) {
-      toast.error("TODOリストを表示するにはログインが必要です", {
-        description: "会員登録を完了してください",
-      });
-      navigate('/community-registration');
-      return;
-    }
-    setShowTodoDialog(true);
-  };
-
-  const todoItems = [
-    { id: 1, label: "JJFA会員登録を完了する" },
-    { id: 2, label: "大会エントリーを行う" },
-    { id: 3, label: "健康診断書を提出する" },
-    { id: 4, label: "出場費用を支払う" },
-    { id: 5, label: "計量の予約を行う" },
-    { id: 6, label: "試合用のギを準備する" },
-    { id: 7, label: "保険に加入する" }
-  ];
-
   if (isLoading) {
     return null;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 via-white/50 to-slate-100/50 pt-20">
-      <div className="container mx-auto px-4 space-y-8">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Users className="h-6 w-6 text-primary" />
-              <PageTitle title="コミュニティ掲示板" />
-            </div>
-            <OnlineUsersDisplay />
-          </div>
+    <div className="min-h-screen bg-gray-50 pt-20">
+      <div className="container max-w-2xl mx-auto px-4">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-xl font-bold">コミュニティ</h1>
           <NotificationBell />
         </div>
 
-        <div className="max-w-6xl mx-auto space-y-6">
-          <div onClick={handleEventClick} className="cursor-pointer">
-            <EventsSection />
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg border border-gray-100 p-4">
+            <DiscussionForm onSuccess={() => {}} />
           </div>
           
-          <CommunityGuidelines />
-          
-          <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6">
-            {/* Post creation form at the top */}
-            <div className="mb-8">
-              <DiscussionForm onSuccess={() => {}} />
-            </div>
-            
-            {/* Discussion list below */}
-            <DiscussionList />
-          </div>
+          <DiscussionList />
         </div>
       </div>
-      
-      <Dialog open={showTodoDialog} onOpenChange={setShowTodoDialog}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>JiuFight 2025 参加準備リスト</DialogTitle>
-          </DialogHeader>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                {todoItems.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-2">
-                    <Checkbox id={`todo-${item.id}`} />
-                    <label
-                      htmlFor={`todo-${item.id}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {item.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

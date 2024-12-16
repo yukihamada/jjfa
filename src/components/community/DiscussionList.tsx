@@ -18,11 +18,7 @@ export const DiscussionList = () => {
             avatar_url
           ),
           likes (user_id),
-          comments (id),
-          tags (
-            id,
-            name
-          )
+          comments (id)
         `)
         .order('created_at', { ascending: false });
 
@@ -46,6 +42,14 @@ export const DiscussionList = () => {
         {[...Array(3)].map((_, i) => (
           <Skeleton key={i} className="h-[200px] w-full" />
         ))}
+      </div>
+    );
+  }
+
+  if (!discussions || discussions.length === 0) {
+    return (
+      <div className="text-center py-8 text-gray-500">
+        まだ投稿がありません。最初の投稿を作成しましょう！
       </div>
     );
   }

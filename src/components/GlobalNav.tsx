@@ -84,7 +84,7 @@ export const GlobalNav = () => {
           </div>
         </nav>
       </header>
-      <div className="h-12" /> {/* スペースを16から12に調整 */}
+      <div className="h-8" /> {/* スペースを12から8に調整 */}
     </>
   );
 };

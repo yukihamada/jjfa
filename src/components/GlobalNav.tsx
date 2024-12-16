@@ -7,7 +7,6 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
-import { Info, FileText, Users, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -36,23 +35,19 @@ export const GlobalNav = () => {
   const navItems = [
     {
       label: t("nav.about"),
-      to: "/about",
-      icon: Info,
+      to: "/about"
     },
     {
       label: t("nav.project"),
-      to: "/whitepaper",
-      icon: FileText,
+      to: "/whitepaper"
     },
     {
       label: t("nav.community"),
-      to: "/community",
-      icon: Users,
+      to: "/community"
     },
     {
       label: t("nav.contact"),
-      to: "/contact",
-      icon: MessageCircle,
+      to: "/contact"
     },
   ];
 

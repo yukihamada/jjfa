@@ -41,18 +41,8 @@ export const ProgressDetail = () => {
       if (!data) {
         throw new Error("Progress not found");
       }
-      
-      // Transform the data to match our interface
-      const transformedData: ProgressDetail = {
-        id: data.id,
-        technique: data.technique,
-        notes: data.notes || "",
-        learned_at: data.learned_at,
-        skill_level: data.skill_level,
-        user: data.user
-      };
-      
-      return transformedData;
+
+      return data as ProgressDetail;
     },
   });
 

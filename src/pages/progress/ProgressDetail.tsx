@@ -29,7 +29,7 @@ export const ProgressDetail = () => {
         .from("learning_progress")
         .select(`
           *,
-          user:user_id(
+          user:profiles!learning_progress_user_id_fkey(
             full_name
           )
         `)

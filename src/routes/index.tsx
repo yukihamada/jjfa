@@ -29,6 +29,7 @@ import Archives from "@/pages/profile/Archives";
 import PublicProfile from "@/pages/profile/PublicProfile";
 import ProgressDetail from "@/pages/progress/ProgressDetail";
 import TermsOfService from "@/pages/TermsOfService";
+import Roadmap from "@/pages/Roadmap";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
@@ -50,6 +51,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       <Route path="/token-rules" element={<TokenRules />} />
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/whitepaper" element={<Whitepaper />} />
+      <Route path="/roadmap" element={<Roadmap />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/calendar" element={<Calendar />} />
       <Route 

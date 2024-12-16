@@ -84,7 +84,7 @@ export const GlobalNav = () => {
           </div>
         </nav>
       </header>
-      <div className="h-16" /> {/* This creates space for the fixed header */}
+      <div className="h-12" /> {/* スペースを16から12に調整 */}
     </>
   );
 };

@@ -1,15 +1,15 @@
 export const token = {
   title: "JJFAトークンの特典",
   member: {
-    title: "JJFA Member Token",
+    title: "JJFAメンバートークン",
     description: "社員資格を表し、利益配分や議決権を伴う"
   },
   governance: {
-    title: "Governance Token",
+    title: "JJFAガバナンストークン",
     description: "特定の議決権およびDAO内での意思決定をサポートする"
   },
-  jjfa: {
-    title: "JJFAトークン",
+  utility: {
+    title: "JJFAユーティリティトークン",
     description: "プラットフォーム内での支払いに使用するトークン"
   }
 };

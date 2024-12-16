@@ -53,11 +53,6 @@ export const GlobalNav = () => {
       to: "/contact",
       icon: MessageCircle,
     },
-    {
-      label: t("nav.calendar"),
-      to: "/calendar",
-      icon: Calendar,
-    },
   ];
 
   const handleMenuClick = () => {
@@ -76,14 +71,18 @@ export const GlobalNav = () => {
           <Link to="/" className="flex items-center gap-2">
             <NavLogo />
           </Link>
-          <NavItems menuItems={navItems.filter(item => !(user && item.to === '/calendar'))} onItemClick={() => setIsMenuOpen(false)} />
+          <NavItems menuItems={navItems} onItemClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />
           {user && <TournamentSchedule />}
           <UserMenu user={user} />
           <MobileMenu 
-            menuItems={navItems} 
+            menuItems={[...navItems, {
+              label: t("nav.calendar"),
+              to: "/calendar",
+              icon: Calendar,
+            }]} 
             isOpen={isMenuOpen}
             onItemClick={handleMenuClick} 
           />

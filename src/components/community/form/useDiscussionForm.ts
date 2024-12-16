@@ -9,6 +9,7 @@ export interface DiscussionFormState {
   content: string;
   visibility: 'public' | 'dojo';
   attachments: { url: string; type: string }[];
+  showConfirmDialog: boolean;
 }
 
 export interface FormErrors {
@@ -21,6 +22,7 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
     content: "",
     visibility: "public",
     attachments: [],
+    showConfirmDialog: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -46,6 +48,7 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
       const { error: discussionError } = await supabase
         .from("discussions")
         .insert({
+          title: "無題", // Add a default title
           content: formState.content,
           user_id: user.id,
           profile_id: profile.id,
@@ -62,6 +65,7 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
         content: "",
         visibility: "public",
         attachments: [],
+        showConfirmDialog: false,
       });
       onSuccess?.();
     },

@@ -6,9 +6,9 @@ interface DiscussionFormPreviewProps {
 }
 
 export const DiscussionFormPreview = ({ formState }: DiscussionFormPreviewProps) => {
-  const { title, content, visibility } = formState;
+  const { content, visibility } = formState;
 
-  if (!title && !content) {
+  if (!content) {
     return (
       <div className="text-center text-gray-500 p-4">
         プレビューはここに表示されます
@@ -19,9 +19,9 @@ export const DiscussionFormPreview = ({ formState }: DiscussionFormPreviewProps)
   return (
     <div className="space-y-4">
       <PostPreview
-        title={title || "無題"}
-        content={content || ""}
-        visibility={visibility || "public"}
+        title="無題"
+        content={content}
+        visibility={visibility}
       />
     </div>
   );

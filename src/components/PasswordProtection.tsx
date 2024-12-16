@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -13,9 +13,18 @@ export const PasswordProtection = ({
   const [open, setOpen] = useState(true);
   const { toast } = useToast();
 
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("jjfa-authenticated");
+    if (isAuthenticated === "true") {
+      onAuthenticated();
+      setOpen(false);
+    }
+  }, [onAuthenticated]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === "jjfa") {
+      localStorage.setItem("jjfa-authenticated", "true");
       onAuthenticated();
       setOpen(false);
       toast({

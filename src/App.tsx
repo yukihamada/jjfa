@@ -38,6 +38,7 @@ const App = () => {
           setTimeout(() => {
             supabase.auth.signOut();
             setIsAuthenticated(false);
+            localStorage.removeItem("jjfa-authenticated");
             toast.error("セッションが終了しました。再度ログインしてください。");
           }, 1800000);
         }
@@ -57,6 +58,7 @@ const App = () => {
       } else if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
         setIsAuthenticated(!!session);
         if (!session) {
+          localStorage.removeItem("jjfa-authenticated");
           toast.error("セッションが終了しました。再度ログインしてください。");
         }
       }

@@ -29,7 +29,9 @@ export const ProgressDetail = () => {
         .from("learning_progress")
         .select(`
           *,
-          user:profiles(full_name)
+          user:user_id(
+            full_name
+          )
         `)
         .eq("id", id)
         .single();
@@ -40,7 +42,6 @@ export const ProgressDetail = () => {
         ...data,
         user: data.user ? { full_name: data.user.full_name } : null
       } as ProgressDetail;
-      
     },
   });
 

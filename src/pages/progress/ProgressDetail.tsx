@@ -31,7 +31,7 @@ export const ProgressDetail = () => {
           learned_at,
           skill_level,
           user_id,
-          user:profiles (
+          user:profiles!learning_progress_user_id_fkey (
             full_name
           )
         `)

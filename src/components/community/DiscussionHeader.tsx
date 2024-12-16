@@ -19,7 +19,7 @@ export const DiscussionHeader = ({ discussion }: DiscussionHeaderProps) => {
       <Link to={`/profile/${profile.id}`} className="shrink-0">
         <Avatar className="h-10 w-10">
           <AvatarImage src={profile.avatar_url} alt={profile.username || "ユーザー"} />
-          <AvatarFallback>{(profile.username || "?")[0]}</AvatarFallback>
+          <AvatarFallback>{(profile.username || "?")?.[0]}</AvatarFallback>
         </Avatar>
       </Link>
       <div className="flex-grow">
@@ -33,7 +33,6 @@ export const DiscussionHeader = ({ discussion }: DiscussionHeaderProps) => {
           <span className="text-sm text-muted-foreground">・</span>
           <span className="text-sm text-muted-foreground">{timeAgo}</span>
         </div>
-        <h2 className="text-xl font-semibold mt-2">{discussion.title}</h2>
       </div>
     </div>
   );

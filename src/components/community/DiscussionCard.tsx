@@ -115,11 +115,6 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
           </div>
           
           <Link to={`/community/discussion/${discussion.id}`} className="block group">
-            {discussion.title && (
-              <h2 className="font-medium mb-2 group-hover:text-primary transition-colors">
-                {discussion.title}
-              </h2>
-            )}
             <p className="text-slate-600 whitespace-pre-wrap break-words">
               {discussion.content}
             </p>

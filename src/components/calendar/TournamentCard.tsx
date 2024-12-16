@@ -17,12 +17,30 @@ export const TournamentCard = ({ tournament }: TournamentCardProps) => {
   const dayOfWeek = tournament.timestamp.toLocaleDateString('ja-JP', { weekday: 'short' });
   const dateWithDay = `${tournament.date}（${dayOfWeek}）`;
 
+  // Organization-specific colors
+  const getOrgColor = (org: string) => {
+    switch (org) {
+      case 'JJFA':
+        return 'text-blue-600'; // Traditional blue for official organization
+      case 'IBJJF':
+        return 'text-purple-600'; // Royal purple for international prestige
+      case 'JBJJF':
+        return 'text-red-600'; // Energetic red for national spirit
+      case 'SJJJF':
+        return 'text-emerald-600'; // Fresh emerald for innovation
+      case 'ASJJF':
+        return 'text-orange-600'; // Vibrant orange for dynamism
+      default:
+        return 'text-gray-600'; // Neutral gray for others
+    }
+  };
+
   return (
     <Card className={`border shadow-sm hover:shadow-md transition-shadow ${isJJFA ? 'border-blue-500 bg-blue-50' : ''}`}>
       <CardHeader className="pb-2 px-4">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <div className="space-y-1">
-            <CardTitle className="text-base sm:text-lg font-bold line-clamp-2">
+            <CardTitle className={`text-base sm:text-lg font-bold line-clamp-2 ${getOrgColor(tournament.organization)}`}>
               {tournament.name}
             </CardTitle>
             <Badge 

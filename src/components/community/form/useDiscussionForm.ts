@@ -44,3 +44,5 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
     handleSubmit,
   };
 };
+
+export type { DiscussionFormState, FormErrors };

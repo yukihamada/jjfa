@@ -10,7 +10,6 @@ interface ProgressDetail {
   notes: string;
   learned_at: string;
   skill_level: string;
-  user_id: string;
   user: {
     full_name: string | null;
   } | null;
@@ -30,10 +29,7 @@ export const ProgressDetail = () => {
           notes,
           learned_at,
           skill_level,
-          user_id,
-          user:profiles (
-            full_name
-          )
+          user:profiles(full_name)
         `)
         .eq("id", id)
         .single();
@@ -46,10 +42,7 @@ export const ProgressDetail = () => {
         throw new Error("Progress not found");
       }
 
-      return {
-        ...data,
-        user: data.user || { full_name: null }
-      } as ProgressDetail;
+      return data as ProgressDetail;
     },
   });
 

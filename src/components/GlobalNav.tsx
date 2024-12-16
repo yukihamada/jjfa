@@ -1,62 +1,86 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
+import { cn } from "@/lib/utils";
+import { MobileMenu } from "./navigation/MobileMenu";
 import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
-import { MobileMenu } from "./navigation/MobileMenu";
 import { LanguageSelector } from "./LanguageSelector";
-import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { cn } from "@/lib/utils";
-import { Home, Calendar, Users, Video } from "lucide-react";
-import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const GlobalNav = () => {
   const { t } = useTranslation();
-  const scrollDirection = useScrollDirection();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const isVisible = useScrollDirection();
+  const [user, setUser] = useState<any>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isProfileRoute = location.pathname.startsWith('/profile');
 
-  const menuItems = [
-    { to: "/", label: t("nav.home"), icon: Home },
-    { to: "/calendar", label: t("nav.calendar"), icon: Calendar },
-    { to: "/community", label: t("nav.community"), icon: Users },
-    { to: "/live-streaming", label: t("nav.live"), icon: Video },
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+    };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const navItems = [
+    {
+      label: t("nav.about"),
+      to: "/about"
+    },
+    {
+      label: t("nav.project"),
+      to: "/whitepaper"
+    },
+    {
+      label: t("nav.community"),
+      to: "/community"
+    },
+    {
+      label: t("nav.contact"),
+      to: "/contact"
+    },
   ];
 
-  const handleMenuItemClick = () => {
-    setIsMobileMenuOpen(false);
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <header
       className={cn(
-        "fixed z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
-        scrollDirection === "down" ? "-top-20" : "top-0",
-        "transition-all duration-500"
+        "fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-transform duration-300",
+        isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
-      <div className="container flex h-14 items-center justify-between">
-        <NavLogo />
-        <div className="hidden md:flex">
-          <NavItems 
-            menuItems={menuItems}
-            onItemClick={handleMenuItemClick}
-          />
+      <nav className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-8">
+          {(!user || !isProfileRoute) && (
+            <Link to="/" className="flex items-center gap-2">
+              <NavLogo />
+            </Link>
+          )}
+          <NavItems menuItems={navItems} onItemClick={() => setIsMenuOpen(false)} />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <LanguageSelector />
+          <UserMenu user={user} />
           <MobileMenu 
-            isOpen={isMobileMenuOpen}
-            menuItems={menuItems}
-            onItemClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            menuItems={navItems} 
+            isOpen={isMenuOpen}
+            onItemClick={handleMenuClick} 
           />
-          <div className="hidden md:block">
-            <UserMenu user={user} />
-          </div>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };

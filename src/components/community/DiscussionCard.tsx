@@ -56,10 +56,10 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-100 p-4 hover:border-gray-200 transition-colors">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-slate-100 p-4 shadow-sm hover:shadow-md transition-all duration-300">
       <div className="flex items-start gap-3">
         <Link to={`/profile/${discussion.profile?.id}`}>
-          <Avatar className="h-10 w-10">
+          <Avatar className="h-10 w-10 ring-2 ring-white">
             <AvatarImage src={discussion.profile?.avatar_url} alt={discussion.profile?.username || "ユーザー"} />
             <AvatarFallback>{(discussion.profile?.username || "?")?.[0]}</AvatarFallback>
           </Avatar>
@@ -69,19 +69,21 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
           <div className="flex items-center gap-2 mb-1">
             <Link 
               to={`/profile/${discussion.profile?.id}`}
-              className="font-medium hover:underline"
+              className="font-medium hover:text-primary transition-colors"
             >
               {discussion.profile?.username || "匿名ユーザー"}
             </Link>
-            <span className="text-sm text-gray-500">・</span>
-            <span className="text-sm text-gray-500">{timeAgo}</span>
+            <span className="text-sm text-slate-400">・</span>
+            <span className="text-sm text-slate-400">{timeAgo}</span>
           </div>
           
-          <Link to={`/community/discussion/${discussion.id}`} className="block">
+          <Link to={`/community/discussion/${discussion.id}`} className="block group">
             {discussion.title && (
-              <h2 className="font-medium mb-2">{discussion.title}</h2>
+              <h2 className="font-medium mb-2 group-hover:text-primary transition-colors">
+                {discussion.title}
+              </h2>
             )}
-            <p className="text-gray-700 whitespace-pre-wrap break-words">
+            <p className="text-slate-600 whitespace-pre-wrap break-words">
               {discussion.content}
             </p>
             {discussion.attachments && discussion.attachments.length > 0 && (
@@ -95,7 +97,7 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
             <Button
               variant="ghost"
               size="sm"
-              className="text-gray-500 hover:text-pink-600 -ml-3"
+              className="text-slate-500 hover:text-pink-600 -ml-3"
               onClick={handleLike}
               disabled={isLiking}
             >
@@ -107,7 +109,7 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-gray-500 hover:text-blue-600 -ml-3"
+                className="text-slate-500 hover:text-primary -ml-3"
               >
                 <MessageSquare className="w-4 h-4 mr-1.5" />
                 <span>{discussion.comments?.length || 0}</span>

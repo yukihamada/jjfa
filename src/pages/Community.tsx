@@ -51,15 +51,17 @@ const Community = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container max-w-2xl mx-auto px-4 py-4">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-lg font-medium">コミュニティ</h1>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50/50 to-slate-100/50">
+      <div className="container max-w-2xl mx-auto px-4 py-6">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
+            コミュニティ
+          </h1>
           <NotificationBell />
         </div>
 
-        <div className="space-y-4">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+        <div className="space-y-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-slate-100 shadow-sm transition-all hover:shadow-md">
             <DiscussionForm onSuccess={() => {}} />
           </div>
           

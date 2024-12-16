@@ -1,23 +1,12 @@
-import { format } from "date-fns";
-import { ja } from "date-fns/locale";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { CommentItem } from "./comment/CommentItem";
+import { DeleteCommentDialog } from "./comment/DeleteCommentDialog";
+import { EditCommentForm } from "./comment/EditCommentForm";
 
 interface CommentListProps {
   comments: any[];
@@ -96,91 +85,37 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
   return (
     <div className="space-y-4">
       {comments.map((comment) => (
-        <div
+        <CommentItem
           key={comment.id}
-          className="bg-white/50 p-4 rounded-lg border border-gray-100"
+          comment={comment}
+          isEditing={editingCommentId === comment.id}
         >
-          <div className="flex justify-between items-start">
-            <div className="space-y-1">
-              <div className="flex items-center space-x-2">
-                {comment.profiles?.avatar_url ? (
-                  <img
-                    src={comment.profiles.avatar_url}
-                    alt={comment.profiles?.username || '匿名'}
-                    className="w-6 h-6 rounded-full"
-                  />
-                ) : (
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-200 to-purple-200" />
-                )}
-                <span className="font-medium text-sm">
-                  {comment.profiles?.username || '匿名'}
-                </span>
-                <span className="text-sm text-gray-500">
-                  {format(new Date(comment.created_at), 'PPP', { locale: ja })}
-                </span>
-              </div>
-              {editingCommentId === comment.id ? (
-                <div className="space-y-2">
-                  <Textarea
-                    value={editContent}
-                    onChange={(e) => setEditContent(e.target.value)}
-                    className="min-h-[100px]"
-                  />
-                  <div className="flex gap-2">
-                    <Button size="sm" onClick={() => handleEdit(comment.id)}>
-                      保存
-                    </Button>
-                    <Button size="sm" variant="outline" onClick={cancelEdit}>
-                      キャンセル
-                    </Button>
-                  </div>
+          {editingCommentId === comment.id ? (
+            <EditCommentForm
+              content={editContent}
+              onChange={setEditContent}
+              onSave={() => handleEdit(comment.id)}
+              onCancel={cancelEdit}
+            />
+          ) : (
+            <>
+              <p className="text-gray-700 whitespace-pre-wrap">{comment.content}</p>
+              {currentUserId === comment.user_id && (
+                <div className="flex gap-1 mt-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-gray-500 hover:text-blue-600"
+                    onClick={() => startEdit(comment)}
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                  <DeleteCommentDialog onDelete={() => handleDelete(comment.id)} />
                 </div>
-              ) : (
-                <p className="text-gray-700 whitespace-pre-wrap">{comment.content}</p>
               )}
-            </div>
-            {currentUserId === comment.user_id && editingCommentId !== comment.id && (
-              <div className="flex gap-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-gray-500 hover:text-blue-600"
-                  onClick={() => startEdit(comment)}
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-gray-500 hover:text-red-600"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>コメントを削除しますか？</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        この操作は取り消すことができません。
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>キャンセル</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => handleDelete(comment.id)}
-                        className="bg-red-500 hover:bg-red-600"
-                      >
-                        削除する
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>
-            )}
-          </div>
-        </div>
+            </>
+          )}
+        </CommentItem>
       ))}
     </div>
   );

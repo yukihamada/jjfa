@@ -7,8 +7,7 @@ import { NavItems } from "./navigation/NavItems";
 import { NavLogo } from "./navigation/NavLogo";
 import { UserMenu } from "./navigation/UserMenu";
 import { LanguageSelector } from "./LanguageSelector";
-import { Info, FileText, Users, MessageCircle, Calendar } from "lucide-react";
-import { TournamentSchedule } from "./navigation/TournamentSchedule";
+import { Info, FileText, Users, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -79,14 +78,9 @@ export const GlobalNav = () => {
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />
-          {user && !isProfileRoute && <TournamentSchedule />}
           <UserMenu user={user} />
           <MobileMenu 
-            menuItems={[...navItems, ...((!user || !isProfileRoute) ? [{
-              label: t("nav.calendar"),
-              to: "/calendar",
-              icon: Calendar,
-            }] : [])]} 
+            menuItems={navItems} 
             isOpen={isMenuOpen}
             onItemClick={handleMenuClick} 
           />

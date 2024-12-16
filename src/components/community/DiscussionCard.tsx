@@ -2,13 +2,24 @@ import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
-import { MessageSquare, Heart } from "lucide-react";
+import { MessageSquare, Heart, Trash2 } from "lucide-react";
 import { AttachmentPreview } from "./AttachmentPreview";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface DiscussionCardProps {
   discussion: any;
@@ -16,6 +27,7 @@ interface DiscussionCardProps {
 
 export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
   const [isLiking, setIsLiking] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const queryClient = useQueryClient();
   const timeAgo = formatDistanceToNow(new Date(discussion.created_at), {
     addSuffix: true,
@@ -53,6 +65,31 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
     } finally {
       setIsLiking(false);
     }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+      const { error } = await supabase
+        .from('discussions')
+        .delete()
+        .eq('id', discussion.id);
+
+      if (error) throw error;
+
+      await queryClient.invalidateQueries({ queryKey: ['discussions'] });
+      toast.success("投稿を削除しました");
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error("投稿の削除に失敗しました");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const canDelete = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    return user?.id === discussion.user_id;
   };
 
   return (
@@ -115,6 +152,38 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
                 <span>{discussion.comments?.length || 0}</span>
               </Button>
             </Link>
+
+            {canDelete() && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-slate-500 hover:text-red-600 -ml-3"
+                    disabled={isDeleting}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>投稿を削除しますか？</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      この操作は取り消すことができません。
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>キャンセル</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleDelete}
+                      className="bg-red-500 hover:bg-red-600"
+                    >
+                      削除する
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
           </div>
         </div>
       </div>

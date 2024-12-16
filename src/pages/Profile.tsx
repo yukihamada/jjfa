@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, PenSquare } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Profile } from "@/integrations/supabase/types/profiles";
 import { ProfileLayout } from "@/components/profile/ProfileLayout";
 import { Outlet } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -102,15 +101,6 @@ const ProfilePage = () => {
 
   return (
     <ProfileLayout>
-      <div className="mb-6">
-        <Button
-          onClick={() => navigate("/community")}
-          className="w-full gap-2"
-        >
-          <PenSquare className="w-4 h-4" />
-          投稿する
-        </Button>
-      </div>
       <Outlet context={{
         user,
         profile,

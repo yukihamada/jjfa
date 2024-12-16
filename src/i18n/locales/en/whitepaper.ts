@@ -1,86 +1,81 @@
 export const whitepaper = {
   title: "JJFA White Paper",
-  subtitle: "Building the Future of Jiu-Jitsu through Web3",
+  subtitle: "Jiu-Jitsu for All — Building a New Community Ecosystem with Web3",
   intro: {
     title: "1. Introduction",
     background: "Background",
-    backgroundText: "Brazilian Jiu-Jitsu is experiencing global growth as a martial art and competitive sport. However, the community faces various challenges in terms of sustainable growth and fair distribution of value.",
-    overview: "Project Overview",
-    overviewText: "JJFA (Jiu-Jitsu For ALL) aims to address these challenges by creating a decentralized platform that connects practitioners, academies, and tournament organizers worldwide."
-  },
-  links: {
-    articles: "View Articles",
-    operatingRules: "View Operating Rules",
-    tokenRules: "View Token Rules",
-    roadmap: "View Roadmap"
-  },
-  governance: {
-    title: "5. Governance Structure",
-    description: "JJFA operates as a Decentralized Autonomous Organization (DAO) utilizing Web3 technology. For detailed operational policies, please refer to the Operating Rules.",
-    additionalInfo: "The basic organizational framework is defined in the Articles of Incorporation, while token-specific details are outlined in the Token Rules."
+    backgroundText: "Brazilian Jiu-Jitsu (BJJ) combines traditional martial arts elements with competitive sports aspects and is rapidly growing worldwide. Currently practiced in over 170 countries, the number of academies and tournaments continues to increase. Various organizations, including the International Brazilian Jiu-Jitsu Federation (IBJJF), are driving this growth through tournament organization.",
+    web3: {
+      title: "What is Web3?",
+      description: "Web3 represents a new form of internet that differs from its predecessors (Web1, Web2) by enabling collective management and operation.",
+      comparison: {
+        title: "Evolution of the Internet",
+        items: [
+          "Web1: Read-only internet",
+          "Web2: Social media and participatory platforms, but controlled by large corporations",
+          "Web3: Blockchain-based systems where rules and data are collectively managed"
+        ]
+      },
+      example: "In the context of jiu-jitsu, while Web2 era saw rules and financial flows controlled by specific large organizations or gym owners, Web3 era enables practitioners, tournament participants, and supporters to collectively decide on resource allocation and rule-making."
+    },
+    organizations: {
+      title: "Major Organizations",
+      items: [
+        "UAEJJF: Hosts Abu Dhabi World Pro Championship with over 10,000 annual participants",
+        "ADCC: Organizes no-gi grappling championships with 500,000+ online viewers",
+        "SJJIF: Working towards Olympic recognition with 50+ participating countries",
+        "NAGA: Hosts 100+ tournaments annually in America",
+        "AGA: Contributes to grassroots development through local tournaments"
+      ]
+    }
   },
   currentState: {
-    title: "2. Current State and Challenges of the Jiu-Jitsu Community",
-    globalSpread: {
-      title: "Global Spread of Jiu-Jitsu",
+    title: "2. Current State and Challenges",
+    marketSize: {
+      title: "Market Size",
+      description: "Estimated at $1 billion as of 2023, with projected CAGR of 7.5% until 2028"
+    },
+    issues: {
+      title: "Current Challenges",
       items: [
-        "Growing Market: Increasing number of Jiu-Jitsu academies and tournaments worldwide",
-        "Diverse Participants: Participation from children to adults, regardless of gender"
+        "Funding Difficulties: Small academies face high operating costs of $50,000 annually",
+        "Community Fragmentation: Geographic and organizational barriers limit knowledge sharing",
+        "Early Supporter Recognition: Initial investors often struggle to recover $20,000+ investments"
       ]
     },
-    currentIssues: {
-      title: "Current Issues",
+    growth: {
+      title: "Growth Rates",
       items: [
-        "Funding Challenges: Lack of funds for tournament operations and academy management",
-        "Community Fragmentation: Insufficient sharing of information and techniques",
-        "Early Supporter Recognition: Early supporters not receiving proper recognition"
+        "IBJJF: 300+ annual tournaments, 500,000 participants (15% YoY growth)",
+        "UAEJJF: 50+ tournaments, 100,000+ participants",
+        "ADCC: 500,000+ viewers for world championships",
+        "SJJIF: World championships with 50+ participating countries",
+        "NAGA: Tens of thousands of participants across 100+ annual tournaments"
       ]
     }
   },
   vision: {
-    title: "3. JJFA Vision and Mission",
-    overview: {
-      title: "Organization Overview",
-      description: "JJFA is a limited liability company dedicated to promoting Jiu-Jitsu and developing its community."
-    },
-    mission: {
-      title: "Mission Statement",
-      description: "'Jiu-Jitsu for ALL' - We aim to bring Jiu-Jitsu's techniques and spirit to people worldwide while strengthening community bonds."
-    },
-    longTermGoals: {
-      title: "Long-term Goals",
+    title: "4. JJFA Vision and Mission",
+    mission: "Jiu-Jitsu for All",
+    description: "We aim to spread jiu-jitsu's techniques and spirit worldwide, connecting communities and ensuring fair value distribution for all participants.",
+    strategy: {
+      title: "Strategic Direction",
       items: [
-        "Expand Jiu-Jitsu Population: Increase Jiu-Jitsu enthusiasts worldwide",
-        "Strengthen Community: Build global networks",
-        "Preserve Technique and Culture: Pass on to next generations through education"
+        "Transparent value distribution through Web3 technology",
+        "Fair reward system based on contributions",
+        "Building global community networks"
       ]
     }
   },
-  token: {
-    title: "4. JJFA Token Details",
-    purpose: {
-      title: "Token Purpose and Use Cases",
-      description: "JJFA token is a utility token that enables value exchange, incentive distribution, and governance participation within the Jiu-Jitsu community."
-    },
-    types: {
-      title: "Token Types and Distribution Plan",
-      description: "JJFA will issue the following three types of tokens:",
-      items: [
-        "MASTER NFT: NFT with governance participation rights and profit distribution claims",
-        "VOTE Token: Token with rights to participate in daily operations",
-        "BJJ Token: Token used for payments within the platform"
-      ],
-      additionalInfo: "For detailed information about token issuance plans, rights, and distribution conditions, please refer to the Token Rules."
-    }
+  conclusion: {
+    title: "5. Conclusion",
+    content: "While the jiu-jitsu market continues to grow, various challenges remain. JJFA will leverage Web3 technology to address these challenges and create an open jiu-jitsu ecosystem for everyone.",
+    callToAction: "Let's build the future of jiu-jitsu together with all who love this art."
   },
   contact: {
     title: "Contact Information",
     website: "Official Website: www.jjforall.com",
     email: "Email: info@jjforall.com",
     address: "Address: Kudan Kaikan Terrace, 1-6-5 Kudanminami, Chiyoda-ku, Tokyo 102-0074"
-  },
-  disclaimer: {
-    title: "Disclaimer",
-    content: "This white paper is for informational purposes only and does not constitute an investment solicitation. Please make your own judgment regarding the purchase and use of JJFA tokens after fully understanding the associated risks and legal obligations."
   }
 };

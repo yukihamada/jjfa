@@ -29,19 +29,14 @@ export const ProgressDetail = () => {
         .from("learning_progress")
         .select(`
           *,
-          user:profiles!learning_progress_user_id_fkey(
-            full_name
-          )
+          user:profiles(full_name)
         `)
         .eq("id", id)
         .single();
 
       if (error) throw error;
       
-      return {
-        ...data,
-        user: data.user ? { full_name: data.user.full_name } : null
-      } as ProgressDetail;
+      return data as ProgressDetail;
     },
   });
 

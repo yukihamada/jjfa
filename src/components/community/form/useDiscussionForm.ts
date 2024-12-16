@@ -1,23 +1,9 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-
-export const MAX_CONTENT_LENGTH = 2000;
-
-export interface DiscussionFormState {
-  content: string;
-  visibility: 'public' | 'dojo' | 'private';
-  attachments: { url: string; type: string }[];
-  showConfirmDialog: boolean;
-}
-
-export interface FormErrors {
-  content?: string;
-}
+import { DiscussionFormState, FormErrors } from "./types/FormTypes";
+import { useFormValidation } from "./validation/useFormValidation";
+import { useDiscussionSubmit } from "./submission/useDiscussionSubmit";
 
 export const useDiscussionForm = (onSuccess?: () => void) => {
-  const queryClient = useQueryClient();
   const [formState, setFormState] = useState<DiscussionFormState>({
     content: "",
     visibility: "public",
@@ -26,70 +12,22 @@ export const useDiscussionForm = (onSuccess?: () => void) => {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+  const { validateForm, MAX_CONTENT_LENGTH } = useFormValidation();
+  const { createDiscussion } = useDiscussionSubmit(onSuccess);
 
-  const createDiscussion = useMutation({
-    mutationFn: async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        throw new Error("ログインが必要です");
-      }
-
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (profileError) {
-        console.error('Profile fetch error:', profileError);
-        throw new Error("プロフィールの取得に失敗しました");
-      }
-
-      const { error: discussionError } = await supabase
-        .from("discussions")
-        .insert({
-          title: "無題", // Add a default title
-          content: formState.content,
-          user_id: user.id,
-          profile_id: profile.id,
-          visibility: formState.visibility,
-          attachments: formState.attachments,
-        });
-
-      if (discussionError) throw discussionError;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['discussions'] });
-      toast.success("投稿が完了しました");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { errors: validationErrors, isValid } = validateForm(formState.content);
+    setErrors(validationErrors);
+    
+    if (isValid) {
+      createDiscussion.mutate(formState);
       setFormState({
         content: "",
         visibility: "public",
         attachments: [],
         showConfirmDialog: false,
       });
-      onSuccess?.();
-    },
-    onError: (error) => {
-      console.error("Error submitting discussion:", error);
-      toast.error("投稿中にエラーが発生しました");
-    },
-  });
-
-  const validateForm = () => {
-    const newErrors: FormErrors = {};
-    if (!formState.content) {
-      newErrors.content = "内容を入力してください";
-    } else if (formState.content.length > MAX_CONTENT_LENGTH) {
-      newErrors.content = `本文は${MAX_CONTENT_LENGTH}文字以内で入力してください`;
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      createDiscussion.mutate();
     }
   };
 

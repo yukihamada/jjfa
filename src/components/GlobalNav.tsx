@@ -8,11 +8,27 @@ import { MobileMenu } from "./navigation/MobileMenu";
 import { LanguageSelector } from "./LanguageSelector";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { cn } from "@/lib/utils";
+import { Home, Calendar, Users, Video } from "lucide-react";
+import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export const GlobalNav = () => {
   const { t } = useTranslation();
   const scrollDirection = useScrollDirection();
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user } = useAuth();
+
+  const menuItems = [
+    { to: "/", label: t("nav.home"), icon: Home },
+    { to: "/calendar", label: t("nav.calendar"), icon: Calendar },
+    { to: "/community", label: t("nav.community"), icon: Users },
+    { to: "/live-streaming", label: t("nav.live"), icon: Video },
+  ];
+
+  const handleMenuItemClick = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -25,15 +41,22 @@ export const GlobalNav = () => {
       <div className="container flex h-14 items-center">
         <NavLogo />
         <div className="mr-4 hidden md:flex">
-          <NavItems />
+          <NavItems 
+            menuItems={menuItems}
+            onItemClick={handleMenuItemClick}
+          />
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            <MobileMenu />
+            <MobileMenu 
+              isOpen={isMobileMenuOpen}
+              menuItems={menuItems}
+              onItemClick={handleMenuItemClick}
+            />
           </div>
           <div className="flex items-center gap-2">
             <LanguageSelector />
-            <UserMenu />
+            <UserMenu user={user} />
           </div>
         </div>
       </div>

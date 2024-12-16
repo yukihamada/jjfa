@@ -6,9 +6,10 @@ import { toast } from "sonner";
 
 interface AttachmentUploadProps {
   onUploadComplete: (urls: { url: string; type: string }[]) => void;
+  children?: React.ReactNode; // Added children prop
 }
 
-export const AttachmentUpload = ({ onUploadComplete }: AttachmentUploadProps) => {
+export const AttachmentUpload = ({ onUploadComplete, children }: AttachmentUploadProps) => {
   const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +51,23 @@ export const AttachmentUpload = ({ onUploadComplete }: AttachmentUploadProps) =>
       setIsUploading(false);
     }
   };
+
+  if (children) {
+    return (
+      <div onClick={() => document.getElementById('file-upload')?.click()}>
+        {children}
+        <input
+          id="file-upload"
+          type="file"
+          multiple
+          accept="image/*,video/*"
+          className="hidden"
+          onChange={handleFileChange}
+          disabled={isUploading}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="relative">

@@ -24,6 +24,7 @@ const ProgressDetail = () => {
           notes,
           learned_at,
           skill_level,
+          user_id,
           profiles!learning_progress_user_id_fkey (
             full_name
           )
@@ -32,7 +33,14 @@ const ProgressDetail = () => {
         .single();
 
       if (error) throw error;
-      return data;
+
+      // Transform the data to match the expected structure
+      return {
+        ...data,
+        user: {
+          full_name: data.profiles?.full_name || 'ユーザー'
+        }
+      };
     },
   });
 
@@ -56,7 +64,7 @@ const ProgressDetail = () => {
             {progress.technique}
           </CardTitle>
           <div className="text-sm text-muted-foreground">
-            <span>By {progress.profiles?.full_name || 'Anonymous'}</span>
+            <span>By {progress.user.full_name}</span>
             <span className="mx-2">•</span>
             <span>
               {format(new Date(progress.learned_at), 'PPP', { locale: ja })}

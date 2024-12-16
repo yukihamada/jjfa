@@ -1,9 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
+import { TournamentList } from "@/components/calendar/TournamentList";
 
 const Calendar = () => {
   const { t, i18n } = useTranslation();
@@ -219,74 +217,10 @@ const Calendar = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="upcoming">
-            <ScrollArea className="h-[calc(100vh-10rem)]">
-              <div className="space-y-4">
-                {upcomingTournaments.map((tournament, index) => (
-                  <Card key={index} className="border shadow-sm hover:shadow-md transition-shadow">
-                    <CardHeader className="pb-2 px-4">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                        <div className="space-y-1">
-                          <CardTitle className="text-base sm:text-lg font-bold line-clamp-2">
-                            {tournament.name}
-                          </CardTitle>
-                          <Badge variant="outline" className="text-xs font-semibold">
-                            {tournament.organization}
-                          </Badge>
-                        </div>
-                        <p className="text-sm font-medium text-primary whitespace-nowrap">
-                          {tournament.date}
-                        </p>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="px-4 pt-2">
-                      <div className="space-y-2 text-sm">
-                        <p className="text-muted-foreground">
-                          <span className="font-medium">開催場所:</span> {tournament.location}
-                        </p>
-                        <p className="text-muted-foreground italic text-xs">
-                          {tournament.notes}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </ScrollArea>
+            <TournamentList tournaments={upcomingTournaments} />
           </TabsContent>
           <TabsContent value="past">
-            <ScrollArea className="h-[calc(100vh-10rem)]">
-              <div className="space-y-4">
-                {pastTournaments.map((tournament, index) => (
-                  <Card key={index} className="border shadow-sm hover:shadow-md transition-shadow">
-                    <CardHeader className="pb-2 px-4">
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-                        <div className="space-y-1">
-                          <CardTitle className="text-base sm:text-lg font-bold line-clamp-2">
-                            {tournament.name}
-                          </CardTitle>
-                          <Badge variant="outline" className="text-xs font-semibold">
-                            {tournament.organization}
-                          </Badge>
-                        </div>
-                        <p className="text-sm font-medium text-primary whitespace-nowrap">
-                          {tournament.date}
-                        </p>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="px-4 pt-2">
-                      <div className="space-y-2 text-sm">
-                        <p className="text-muted-foreground">
-                          <span className="font-medium">開催場所:</span> {tournament.location}
-                        </p>
-                        <p className="text-muted-foreground italic text-xs">
-                          {tournament.notes}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </ScrollArea>
+            <TournamentList tournaments={pastTournaments} />
           </TabsContent>
         </Tabs>
       </div>

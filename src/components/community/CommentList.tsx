@@ -28,21 +28,27 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
   }, []);
 
   const handleDelete = async (commentId: string) => {
-    const { error } = await supabase
-      .from('comments')
-      .delete()
-      .eq('id', commentId);
+    try {
+      const { error } = await supabase
+        .from('comments')
+        .delete()
+        .eq('id', commentId);
 
-    if (error) {
-      console.error('Delete comment error:', error);
-      toast.error("コメントの削除に失敗しました");
-    } else {
+      if (error) {
+        console.error('Delete comment error:', error);
+        toast.error("コメントの削除に失敗しました");
+        return;
+      }
+
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['discussions'] }),
         queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
         queryClient.invalidateQueries({ queryKey: ['comments'] })
       ]);
       toast.success("コメントを削除しました");
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error("予期せぬエラーが発生しました");
     }
   };
 
@@ -52,15 +58,18 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
       return;
     }
 
-    const { error } = await supabase
-      .from('comments')
-      .update({ content: editContent.trim() })
-      .eq('id', commentId);
+    try {
+      const { error } = await supabase
+        .from('comments')
+        .update({ content: editContent.trim() })
+        .eq('id', commentId);
 
-    if (error) {
-      console.error('Edit comment error:', error);
-      toast.error("コメントの編集に失敗しました");
-    } else {
+      if (error) {
+        console.error('Edit comment error:', error);
+        toast.error("コメントの編集に失敗しました");
+        return;
+      }
+
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['discussions'] }),
         queryClient.invalidateQueries({ queryKey: ['discussion', discussionId] }),
@@ -69,6 +78,9 @@ export const CommentList = ({ comments, discussionId }: CommentListProps) => {
       toast.success("コメントを編集しました");
       setEditingCommentId(null);
       setEditContent("");
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error("予期せぬエラーが発生しました");
     }
   };
 

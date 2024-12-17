@@ -28,14 +28,5 @@ export const AnimatedPlaceholder = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <span
-      className={cn(
-        "transition-opacity duration-300",
-        isChanging ? "opacity-0" : "opacity-100"
-      )}
-    >
-      {currentPrompt}
-    </span>
-  );
+  return currentPrompt;
 };

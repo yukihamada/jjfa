@@ -42,13 +42,12 @@ export const DiscussionFormInputs = ({
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="relative">
         <Textarea
-          placeholder="投稿内容を入力してください..."
+          placeholder={<AnimatedPlaceholder /> as unknown as string}
           value={formState.content}
           onChange={(e) => setFormState(prev => ({ ...prev, content: e.target.value }))}
           className={`min-h-[100px] resize-none text-base leading-relaxed pr-12 ${errors.content ? 'border-red-500' : ''}`}
           maxLength={MAX_CONTENT_LENGTH}
         />
-        <AnimatedPlaceholder />
         <span className={`absolute right-3 bottom-3 text-sm ${contentCharCountColor}`}>
           {contentCharCount}/{MAX_CONTENT_LENGTH}
         </span>

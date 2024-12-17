@@ -28,16 +28,28 @@ const BasicInfo = () => {
           onPhotoUpdate={onPhotoUpdate}
         />
       </div>
-      <ProfileForm profile={profile} user={user} />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <TechniqueLearningProgress />
-        <TrainingTracker />
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <ProfileForm profile={profile} user={user} />
+        </div>
+        
+        <div className="space-y-6">
+          <FighterCard 
+            fighter={fighter} 
+            onRegistrationSuccess={onFighterUpdate} 
+          />
+          <DAOCard onPurchaseNFT={onPurchaseNFT} />
+        </div>
+
+        <div className="lg:col-span-2">
+          <TechniqueLearningProgress />
+        </div>
+
+        <div>
+          <TrainingTracker />
+        </div>
       </div>
-      <FighterCard 
-        fighter={fighter} 
-        onRegistrationSuccess={onFighterUpdate} 
-      />
-      <DAOCard onPurchaseNFT={onPurchaseNFT} />
     </div>
   );
 };

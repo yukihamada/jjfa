@@ -9,7 +9,7 @@ interface CommentItemProps {
 
 export const CommentItem = ({ comment, isEditing, children }: CommentItemProps) => {
   return (
-    <div className="bg-white/50 p-4 rounded-lg border border-gray-100">
+    <div className="bg-white/50 p-4 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
           <div className="flex items-center space-x-2">

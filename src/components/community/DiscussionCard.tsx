@@ -18,6 +18,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import { CommentForm } from "./CommentForm";
+import { CommentList } from "./CommentList";
 
 interface DiscussionCardProps {
   discussion: any;
@@ -67,7 +69,7 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
 
   return (
     <>
-      <Card className="bg-white/80 backdrop-blur-sm">
+      <Card className="bg-white/80 backdrop-blur-sm hover:shadow-md transition-all">
         <CardContent className="pt-6">
           <div className="flex justify-between items-start">
             <DiscussionHeader discussion={discussion} />
@@ -88,6 +90,19 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
             showCommentForm={showCommentForm}
             onCommentClick={handleCommentClick}
           />
+          {showCommentForm && (
+            <div className="mt-4">
+              <CommentForm 
+                discussionId={discussion.id} 
+                onCancel={() => setShowCommentForm(false)}
+              />
+            </div>
+          )}
+          {discussion.comments && discussion.comments.length > 0 && (
+            <div className="mt-4">
+              <CommentList comments={discussion.comments} discussionId={discussion.id} />
+            </div>
+          )}
         </CardContent>
       </Card>
 

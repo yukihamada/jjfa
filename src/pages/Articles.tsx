@@ -71,7 +71,7 @@ const Articles = () => {
                 </ol>
 
                 <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第3条（本店所在）' : 'Article 3 (Location of Head Office)'}</h3>
-                <p>{isJapanese ? '当社の本店は東京都●区●町●番地に設置します。また、オンライン上の活動基盤として公式サイト「jjforall.com」を拠点とし、グローバルにアクセス可能なネットワークを運営します。' : 'The company\'s head office shall be located at ●-●-●, ●-ku, Tokyo. Additionally, we operate a globally accessible network with our official website "jjforall.com" serving as our online activity base.'}</p>
+                <p>{isJapanese ? '当社の本店は東京都千代田区九段南１丁目６–5 九段会館テラスに設置します。また、オンライン上の活動基盤として公式サイト「jjforall.com」を拠点とし、グローバルにアクセス可能なネットワークを運営します。' : 'The company\'s head office shall be located at ●-●-●, ●-ku, Tokyo. Additionally, we operate a globally accessible network with our official website "jjforall.com" serving as our online activity base.'}</p>
 
                 <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第4条（公告の方法）' : 'Article 4 (Method of Public Notice)'}</h3>
                 <p>{isJapanese ? '当社のお知らせは、まず公式サイト「jjforall.com」へ掲載する形で行います。万一オンラインでの掲載が難しい場合は、官報への掲載で告知します。' : 'The company\'s notices shall be primarily posted on our official website "jjforall.com". If online posting is not possible, notices shall be published in the Official Gazette.'}</p>
@@ -152,7 +152,7 @@ const Articles = () => {
                 <p>{isJapanese ? '当社の設立時の資本金は金●円です。この初期資本が当社の活動を支える基盤となり、そこから新たな価値創出を目指します。' : 'The company\'s initial capital shall be ● yen. This initial capital shall serve as the foundation supporting the company\'s activities, aiming to create new value from there.'}</p>
 
                 <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第18条（本店及びウェブ拠点）' : 'Article 18 (Head Office and Web Base)'}</h3>
-                <p>{isJapanese ? '本店所在地は東京都●区●町●番地とします。オンライン上では「jjforall.com」を主たる拠点とし、様々な国や地域から誰もが参加できる場を提供します。' : 'The head office shall be located at ●-●-●, ●-ku, Tokyo. Online, "jjforall.com" shall serve as the main base, providing a space where anyone from various countries and regions can participate.'}</p>
+                <p>{isJapanese ? '本店所在地は東京都千代田区九段南１丁目６–5 九段会館テラスとします。オンライン上では「jjforall.com」を主たる拠点とし、様々な国や地域から誰もが参加できる場を提供します。' : 'The head office shall be located at ●-●-●, ●-ku, Tokyo. Online, "jjforall.com" shall serve as the main base, providing a space where anyone from various countries and regions can participate.'}</p>
 
                 <h3 className="font-bold mt-6 mb-2">{isJapanese ? '第19条（法令等の適用）' : 'Article 19 (Application of Laws)'}</h3>
                 <p>{isJapanese ? 'この定款に書かれていないことは、会社法や関係する法律、そしてトークン規程や一般的なDAOガバナンスの慣習を参考にして解釈・対応します。' : 'Matters not stipulated in these articles shall be interpreted and handled with reference to the Companies Act, related laws, token regulations, and general DAO governance practices.'}</p>

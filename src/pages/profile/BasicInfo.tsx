@@ -3,8 +3,8 @@ import { ProfilePhotoUpload } from "@/components/profile/ProfilePhotoUpload";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { FighterCard } from "@/components/profile/FighterCard";
 import { DAOCard } from "@/components/profile/DAOCard";
+import { TrainingDashboard } from "@/components/profile/training/TrainingDashboard";
 import { Profile } from "@/integrations/supabase/types/profiles";
-import { TechniqueLearningProgress } from "@/components/TechniqueLearningProgress";
 
 interface OutletContextType {
   user: any;
@@ -20,7 +20,6 @@ const BasicInfo = () => {
 
   return (
     <div className="space-y-6">
-      <TechniqueLearningProgress />
       <div className="mb-8">
         <ProfilePhotoUpload
           userId={user.id}
@@ -34,6 +33,7 @@ const BasicInfo = () => {
         onRegistrationSuccess={onFighterUpdate} 
       />
       <DAOCard onPurchaseNFT={onPurchaseNFT} />
+      <TrainingDashboard />
     </div>
   );
 };

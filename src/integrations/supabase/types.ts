@@ -1393,6 +1393,84 @@ export type Database = {
         }
         Relationships: []
       }
+      training_goals: {
+        Row: {
+          created_at: string
+          current_value: number | null
+          end_date: string
+          goal_type: string
+          id: string
+          start_date: string
+          status: string | null
+          target_value: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_value?: number | null
+          end_date: string
+          goal_type: string
+          id?: string
+          start_date?: string
+          status?: string | null
+          target_value: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_value?: number | null
+          end_date?: string
+          goal_type?: string
+          id?: string
+          start_date?: string
+          status?: string | null
+          target_value?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      training_records: {
+        Row: {
+          created_at: string
+          duration: number
+          id: string
+          intensity: string | null
+          notes: string | null
+          tokens_earned: number | null
+          training_date: string
+          training_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration: number
+          id?: string
+          intensity?: string | null
+          notes?: string | null
+          tokens_earned?: number | null
+          training_date?: string
+          training_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration?: number
+          id?: string
+          intensity?: string | null
+          notes?: string | null
+          tokens_earned?: number | null
+          training_date?: string
+          training_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       typing_progress: {
         Row: {
           accuracy: number

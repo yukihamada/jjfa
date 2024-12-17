@@ -54,12 +54,12 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
 
       queryClient.invalidateQueries({ queryKey: ['discussions'] });
       toast.success("投稿を削除しました");
+      setShowDeleteDialog(false);
     } catch (error) {
       console.error('Delete error:', error);
       toast.error("削除に失敗しました");
     } finally {
       setIsDeleting(false);
-      setShowDeleteDialog(false);
     }
   };
 

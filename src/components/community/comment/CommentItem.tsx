@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { ja } from "date-fns/locale";
 
 interface CommentItemProps {
@@ -8,6 +8,11 @@ interface CommentItemProps {
 }
 
 export const CommentItem = ({ comment, isEditing, children }: CommentItemProps) => {
+  const parsedDate = new Date(comment.created_at);
+  const formattedDate = isValid(parsedDate)
+    ? format(parsedDate, 'PPP', { locale: ja })
+    : "日付不明";
+
   return (
     <div className="bg-white/50 p-4 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors">
       <div className="flex justify-between items-start">
@@ -26,7 +31,7 @@ export const CommentItem = ({ comment, isEditing, children }: CommentItemProps) 
               {comment.profiles?.username || '匿名'}
             </span>
             <span className="text-sm text-gray-500">
-              {format(new Date(comment.created_at), 'PPP', { locale: ja })}
+              {formattedDate}
             </span>
           </div>
           {children}

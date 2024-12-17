@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, isValid } from "date-fns";
 import { ja } from "date-fns/locale";
 
 interface TimeAgoLinkProps {
@@ -8,10 +8,14 @@ interface TimeAgoLinkProps {
 }
 
 export const TimeAgoLink = ({ date, discussionId }: TimeAgoLinkProps) => {
-  const timeAgo = formatDistanceToNow(new Date(date), {
-    addSuffix: true,
-    locale: ja,
-  });
+  const parsedDate = new Date(date);
+  
+  const timeAgo = isValid(parsedDate) 
+    ? formatDistanceToNow(parsedDate, {
+        addSuffix: true,
+        locale: ja,
+      })
+    : "日付不明";
 
   return (
     <Link 

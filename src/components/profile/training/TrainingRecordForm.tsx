@@ -21,10 +21,14 @@ export const TrainingRecordForm = ({ onRecordAdded }: { onRecordAdded: () => voi
   const onSubmit = async (data: TrainingRecord) => {
     setIsSubmitting(true);
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
       const { error } = await supabase
         .from("training_records")
         .insert([{
           ...data,
+          user_id: user.id,
           duration: parseInt(data.duration.toString()),
           tokens_earned: Math.floor(parseInt(data.duration.toString()) / 10) // 10分ごとに1トークン
         }]);

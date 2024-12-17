@@ -18,9 +18,16 @@ export const TrainingGoalForm = ({ onGoalAdded }: { onGoalAdded: () => void }) =
   const onSubmit = async (data: TrainingGoal) => {
     setIsSubmitting(true);
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
       const { error } = await supabase
         .from("training_goals")
-        .insert([data]);
+        .insert([{
+          ...data,
+          user_id: user.id,
+          target_value: parseInt(data.target_value.toString())
+        }]);
 
       if (error) throw error;
 

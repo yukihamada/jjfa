@@ -19,7 +19,15 @@ export const DiscussionList = () => {
           ),
           likes (user_id),
           comments (
-            id
+            id,
+            content,
+            created_at,
+            user_id,
+            profiles (
+              id,
+              username,
+              avatar_url
+            )
           )
         `)
         .order('created_at', { ascending: false });

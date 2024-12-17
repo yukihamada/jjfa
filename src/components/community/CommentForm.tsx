@@ -33,6 +33,27 @@ export const CommentForm = ({ discussionId, onCancel }: CommentFormProps) => {
     }
 
     try {
+      // First ensure the user has a profile
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', user.id)
+        .single();
+
+      if (!profile) {
+        // Create profile if it doesn't exist
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([{ id: user.id }]);
+
+        if (profileError) {
+          console.error('Profile creation error:', profileError);
+          toast.error("プロフィールの作成に失敗しました");
+          setIsSubmitting(false);
+          return;
+        }
+      }
+
       const { error: commentError } = await supabase
         .from('comments')
         .insert([

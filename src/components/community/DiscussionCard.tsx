@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DiscussionHeader } from "./DiscussionHeader";
 import { DiscussionContent } from "./DiscussionContent";
 import { DiscussionActions } from "./DiscussionActions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   AlertDialog,
@@ -27,7 +27,16 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setCurrentUser(user);
+    };
+    getUser();
+  }, []);
 
   const handleCommentClick = () => {
     setShowCommentForm(!showCommentForm);
@@ -54,8 +63,7 @@ export const DiscussionCard = ({ discussion }: DiscussionCardProps) => {
     }
   };
 
-  const { data: { user } } = await supabase.auth.getUser();
-  const isOwner = user?.id === discussion.user_id;
+  const isOwner = currentUser?.id === discussion.user_id;
 
   return (
     <>

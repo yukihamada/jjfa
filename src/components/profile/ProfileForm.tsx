@@ -53,7 +53,7 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
     setUpdating(false);
   };
 
-  const publicProfileUrl = profile?.username ? `${window.location.origin}/profile/${profile.username}` : null;
+  const publicProfileUrl = profile?.username ? `/profile/${profile.username}` : null;
 
   return (
     <form onSubmit={handleUpdate}>
@@ -75,7 +75,7 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
                 </Link>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <LinkIcon className="w-4 h-4 shrink-0" />
-                  <code className="text-xs bg-muted px-2 py-1 rounded break-all">{publicProfileUrl}</code>
+                  <code className="text-xs bg-muted px-2 py-1 rounded break-all">{window.location.origin}/profile/{profile.username}</code>
                 </div>
               </div>
             )}

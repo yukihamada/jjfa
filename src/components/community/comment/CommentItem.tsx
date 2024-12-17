@@ -28,7 +28,7 @@ export const CommentItem = ({ comment, isEditing, children }: CommentItemProps) 
               <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-200 to-purple-200" />
             )}
             <span className="font-medium text-sm">
-              {comment.profiles?.username || '匿名'}
+              {comment.profiles?.username || '匿名ユーザー'}
             </span>
             <span className="text-sm text-gray-500">
               {formattedDate}

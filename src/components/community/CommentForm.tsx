@@ -33,27 +33,12 @@ export const CommentForm = ({ discussionId, onCancel }: CommentFormProps) => {
     }
 
     try {
-      // First get the user's profile
-      const { data: profileData, error: profileError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('id', user.id)
-        .single();
-
-      if (profileError || !profileData) {
-        console.error('Profile error:', profileError);
-        toast.error("プロフィールの取得に失敗しました");
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Then create the comment with the profile ID
       const { error: commentError } = await supabase
         .from('comments')
         .insert([
           {
             discussion_id: discussionId,
-            user_id: profileData.id,
+            user_id: user.id,
             content: content.trim()
           }
         ]);

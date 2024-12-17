@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ImageIcon, Loader2, Globe, Users, Lock } from "lucide-react";
 import { DiscussionFormState } from "./useDiscussionForm";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { AnimatedPlaceholder } from "../AnimatedPlaceholder";
 
 interface DiscussionFormInputsProps {
   formState: DiscussionFormState;
@@ -41,7 +42,7 @@ export const DiscussionFormInputs = ({
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="relative">
         <Textarea
-          placeholder="今何を考えていますか？"
+          placeholder={<AnimatedPlaceholder />}
           value={formState.content}
           onChange={(e) => setFormState(prev => ({ ...prev, content: e.target.value }))}
           className={`min-h-[100px] resize-none text-base leading-relaxed pr-12 ${errors.content ? 'border-red-500' : ''}`}
@@ -88,14 +89,19 @@ export const DiscussionFormInputs = ({
       <div className="flex items-center justify-between pt-2">
         <div className="flex items-center gap-2">
           <AttachmentUpload onUploadComplete={handleAttachmentUpload}>
-            <Button type="button" variant="ghost" size="icon" className="text-gray-500 hover:text-blue-600">
+            <Button 
+              type="button" 
+              variant="ghost" 
+              size="icon" 
+              className="text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+            >
               <ImageIcon className="w-5 h-5" />
             </Button>
           </AttachmentUpload>
         </div>
         <Button 
           type="submit" 
-          className="px-6"
+          className="px-6 ml-4"
           disabled={isSubmitting || !formState.content.trim()}
         >
           {isSubmitting ? (

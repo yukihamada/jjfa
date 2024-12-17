@@ -42,7 +42,7 @@ export const DiscussionFormInputs = ({
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="relative">
         <Textarea
-          placeholder={<AnimatedPlaceholder /> as unknown as string}
+          placeholder={AnimatedPlaceholder()}
           value={formState.content}
           onChange={(e) => setFormState(prev => ({ ...prev, content: e.target.value }))}
           className={`min-h-[100px] resize-none text-base leading-relaxed pr-12 ${errors.content ? 'border-red-500' : ''}`}

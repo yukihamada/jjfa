@@ -62,7 +62,7 @@ export const AppRoutes = ({ isAuthenticated }: AppRoutesProps) => {
       />
       <Route path="/community-registration" element={<CommunityRegistration />} />
       <Route 
-        path="/discussion/:id" 
+        path="/community/discussion/:id" 
         element={
           isAuthenticated ? <DiscussionDetail /> : <Navigate to="/community-registration" />
         } 

@@ -1393,33 +1393,6 @@ export type Database = {
         }
         Relationships: []
       }
-      typing_progress: {
-        Row: {
-          accuracy: number
-          created_at: string
-          id: string
-          practice_date: string
-          user_id: string
-          wpm: number
-        }
-        Insert: {
-          accuracy: number
-          created_at?: string
-          id?: string
-          practice_date?: string
-          user_id: string
-          wpm: number
-        }
-        Update: {
-          accuracy?: number
-          created_at?: string
-          id?: string
-          practice_date?: string
-          user_id?: string
-          wpm?: number
-        }
-        Relationships: []
-      }
       user_class_tickets: {
         Row: {
           created_at: string

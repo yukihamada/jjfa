@@ -6,7 +6,7 @@ export const contact = {
   faq: {
     title: "Frequently Asked Questions",
     q1: "What is JJFA?",
-    a1: "JJFA (Jiu-Jitsu For All) is a platform dedicated to making Jiu-Jitsu accessible to everyone.",
+    a1: "JJFA stands for 'Jiu-Jitsu For All'. We are an organization dedicated to developing and promoting jiu-jitsu as a safe, lifelong pursuit that's enjoyable both as a participant and spectator sport. Using Web3 technology, we aim to create a decentralized organization that doesn't depend on any single authority.",
     q2: "How can I join the community?",
     a2: "You can join our community by registering on our platform or attending one of our events.",
     q3: "Where are you located?",

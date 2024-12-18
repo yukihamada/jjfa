@@ -16,7 +16,7 @@ import { toast } from "sonner";
 
 export const TrainingRecordForm = () => {
   const queryClient = useQueryClient();
-  const [repetitions, setRepetitions] = useState("");
+  const [repetitions, setRepetitions] = useState("100");
   const [trainingType, setTrainingType] = useState("");
   const [intensity, setIntensity] = useState("");
   const [notes, setNotes] = useState("");
@@ -41,7 +41,7 @@ export const TrainingRecordForm = () => {
       if (error) throw error;
 
       toast.success("トレーニング記録を保存しました");
-      setRepetitions("");
+      setRepetitions("100");
       setTrainingType("");
       setIntensity("");
       setNotes("");
@@ -76,7 +76,7 @@ export const TrainingRecordForm = () => {
           type="number"
           value={repetitions}
           onChange={(e) => setRepetitions(e.target.value)}
-          placeholder="10"
+          placeholder="100"
           required
         />
       </div>

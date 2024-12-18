@@ -83,7 +83,9 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">ユーザーネーム (半角英数字とアンダースコアのみ)</label>
+            <label className="text-sm font-medium whitespace-nowrap">
+              ユーザーネーム <span className="text-xs text-muted-foreground">(半角英数字とアンダースコアのみ)</span>
+            </label>
             <div className="flex gap-2">
               <User className="w-4 h-4 mt-3 text-gray-500" />
               <Input

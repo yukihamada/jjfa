@@ -12,8 +12,8 @@ export const SEO = ({
   title, 
   description, 
   keywords = "柔術,JJFA,Jiu-Jitsu,大会,トーナメント,コミュニティ,教育",
-  image = "https://jjfa.com/OGP.png",
-  url = "https://jjfa.com"
+  image = "/OGP.png",
+  url = window.location.origin
 }: SEOProps) => {
   const fullTitle = `${title} | JJFA - 柔術 for ALL`;
 

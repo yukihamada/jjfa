@@ -50,11 +50,13 @@ export const TechniqueLearningProgress = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-xl sm:text-2xl font-bold text-slate-800">技術トラッカー</h2>
-      <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
-      <ProgressList 
-        userProgress={userProgress} 
-        onEdit={handleEdit}
-      />
+      <div className="space-y-6">
+        <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
+        <ProgressList 
+          userProgress={userProgress} 
+          onEdit={handleEdit}
+        />
+      </div>
     </div>
   );
 };

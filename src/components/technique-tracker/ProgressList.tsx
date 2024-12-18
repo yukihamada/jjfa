@@ -42,7 +42,7 @@ export const ProgressList = ({ userProgress, onEdit }: ProgressListProps) => {
   if (!userProgress || userProgress.length === 0) return null;
 
   return (
-    <div className="space-y-4">
+    <div className="divide-y divide-gray-100">
       {userProgress.map((progress) => (
         <ProgressItem
           key={progress.id}

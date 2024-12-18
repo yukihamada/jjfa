@@ -18,7 +18,7 @@ export const TechniqueLearningProgress = () => {
 
       const { data, error } = await supabase
         .from("learning_progress")
-        .select("*, user:user_id(id)")
+        .select("*")
         .eq("user_id", user.id)
         .order('created_at', { ascending: false });
       
@@ -27,7 +27,7 @@ export const TechniqueLearningProgress = () => {
         throw error;
       }
 
-      console.log("Fetched learning progress:", data); // デバッグ用
+      console.log("Fetched learning progress:", data);
       return data;
     }
   });

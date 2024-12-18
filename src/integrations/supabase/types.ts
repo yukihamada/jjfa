@@ -601,6 +601,44 @@ export type Database = {
         }
         Relationships: []
       }
+      drill_progress: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          practiced_at: string
+          repetitions: number | null
+          technique_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          practiced_at?: string
+          repetitions?: number | null
+          technique_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          practiced_at?: string
+          repetitions?: number | null
+          technique_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drill_progress_technique_id_fkey"
+            columns: ["technique_id"]
+            isOneToOne: false
+            referencedRelation: "technique_details"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fighters: {
         Row: {
           achievements: string[] | null
@@ -1372,26 +1410,46 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          is_drill: boolean | null
+          order_number: number | null
+          parent_id: string | null
           technique_name: string
           updated_at: string
+          video_url: string | null
         }
         Insert: {
           category: string
           created_at?: string
           description: string
           id?: string
+          is_drill?: boolean | null
+          order_number?: number | null
+          parent_id?: string | null
           technique_name: string
           updated_at?: string
+          video_url?: string | null
         }
         Update: {
           category?: string
           created_at?: string
           description?: string
           id?: string
+          is_drill?: boolean | null
+          order_number?: number | null
+          parent_id?: string | null
           technique_name?: string
           updated_at?: string
+          video_url?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "technique_details_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "technique_details"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       training_goals: {
         Row: {

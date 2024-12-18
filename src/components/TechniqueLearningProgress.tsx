@@ -48,8 +48,8 @@ export const TechniqueLearningProgress = () => {
   }
 
   return (
-    <div className="space-y-6 p-4 sm:p-6 bg-white rounded-lg shadow-sm">
-      <h2 className="text-xl sm:text-2xl font-bold text-slate-800 break-keep">技術トラッカー</h2>
+    <div className="space-y-6">
+      <h2 className="text-xl sm:text-2xl font-bold text-slate-800">技術トラッカー</h2>
       <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
       <ProgressList 
         userProgress={userProgress} 

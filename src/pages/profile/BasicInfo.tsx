@@ -46,7 +46,7 @@ const BasicInfo = () => {
           <TechniqueLearningProgress />
         </div>
 
-        <div>
+        <div className="lg:col-span-1">
           <TrainingTracker />
         </div>
       </div>

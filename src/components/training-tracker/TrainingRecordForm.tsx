@@ -32,9 +32,9 @@ export const TrainingRecordForm = () => {
         .from("training_records")
         .insert({
           user_id: user.id,
-          duration: parseInt(repetitions), // Using duration field to store repetitions
+          duration: parseInt(repetitions),
           training_type: trainingType,
-          intensity,
+          intensity: intensity || null,
           notes,
         });
 

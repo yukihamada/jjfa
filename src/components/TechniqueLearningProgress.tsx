@@ -18,10 +18,7 @@ export const TechniqueLearningProgress = () => {
 
       const { data, error } = await supabase
         .from("learning_progress")
-        .select(`
-          *,
-          user:profiles(full_name)
-        `)
+        .select("*, user:user_id(id)")
         .eq("user_id", user.id)
         .order('created_at', { ascending: false });
       
@@ -29,6 +26,8 @@ export const TechniqueLearningProgress = () => {
         console.error("Error fetching learning progress:", error);
         throw error;
       }
+
+      console.log("Fetched learning progress:", data); // デバッグ用
       return data;
     }
   });

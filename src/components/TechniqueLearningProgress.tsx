@@ -17,7 +17,10 @@ export const TechniqueLearningProgress = () => {
 
       const { data, error } = await supabase
         .from("learning_progress")
-        .select("*")
+        .select(`
+          *,
+          user:profiles(full_name)
+        `)
         .eq("user_id", user.id)
         .order('created_at', { ascending: false });
       

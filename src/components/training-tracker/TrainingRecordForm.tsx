@@ -16,7 +16,7 @@ import { toast } from "sonner";
 
 export const TrainingRecordForm = () => {
   const queryClient = useQueryClient();
-  const [duration, setDuration] = useState("");
+  const [repetitions, setRepetitions] = useState("");
   const [trainingType, setTrainingType] = useState("");
   const [intensity, setIntensity] = useState("");
   const [notes, setNotes] = useState("");
@@ -32,7 +32,7 @@ export const TrainingRecordForm = () => {
         .from("training_records")
         .insert({
           user_id: user.id,
-          duration: parseInt(duration),
+          duration: parseInt(repetitions), // Using duration field to store repetitions
           training_type: trainingType,
           intensity,
           notes,
@@ -41,7 +41,7 @@ export const TrainingRecordForm = () => {
       if (error) throw error;
 
       toast.success("トレーニング記録を保存しました");
-      setDuration("");
+      setRepetitions("");
       setTrainingType("");
       setIntensity("");
       setNotes("");
@@ -70,13 +70,13 @@ export const TrainingRecordForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="duration">時間（分）</Label>
+        <Label htmlFor="repetitions">回数</Label>
         <Input
-          id="duration"
+          id="repetitions"
           type="number"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-          placeholder="60"
+          value={repetitions}
+          onChange={(e) => setRepetitions(e.target.value)}
+          placeholder="10"
           required
         />
       </div>
@@ -102,7 +102,7 @@ export const TrainingRecordForm = () => {
           id="notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="今日の練習の感想など"
+          placeholder="今日のトレーニングの感想など"
         />
       </div>
 

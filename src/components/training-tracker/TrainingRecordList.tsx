@@ -63,7 +63,7 @@ export const TrainingRecordList = () => {
               <div>
                 <p className="font-medium">{getTrainingTypeText(record.training_type)}</p>
                 <p className="text-sm text-gray-600">
-                  {format(new Date(record.training_date), "yyyy/MM/dd")} - {record.duration}分
+                  {format(new Date(record.training_date), "yyyy/MM/dd")} - {record.duration}回
                 </p>
               </div>
               {record.intensity && (

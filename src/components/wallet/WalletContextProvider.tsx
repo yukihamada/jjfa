@@ -13,8 +13,8 @@ interface Props {
 }
 
 export const WalletContextProvider: FC<Props> = ({ children }) => {
-  // デフォルトでDevnetを使用
-  const network = WalletAdapterNetwork.Devnet;
+  // 本番環境用にMainnetを使用
+  const network = WalletAdapterNetwork.Mainnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   
   const wallets = useMemo(

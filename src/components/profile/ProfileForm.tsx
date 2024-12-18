@@ -60,9 +60,9 @@ export const ProfileForm = ({ profile, user }: ProfileFormProps) => {
       <Card>
         <CardHeader>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <CardTitle>プロフィール情報</CardTitle>
-              <CardDescription>基本的な情報を更新</CardDescription>
+            <div className="min-w-[200px]">
+              <CardTitle className="whitespace-nowrap">プロフィール情報</CardTitle>
+              <CardDescription className="whitespace-nowrap">基本的な情報を更新</CardDescription>
             </div>
             {profile?.username && (
               <div className="space-y-2 min-w-[200px]">

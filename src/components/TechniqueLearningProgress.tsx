@@ -25,7 +25,10 @@ export const TechniqueLearningProgress = () => {
         .eq("user_id", user.id)
         .order('created_at', { ascending: false });
       
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching learning progress:", error);
+        throw error;
+      }
       return data;
     }
   });
@@ -58,10 +61,14 @@ export const TechniqueLearningProgress = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
-        <ProgressList 
-          userProgress={userProgress} 
-          onEdit={handleEdit}
-        />
+        {userProgress && userProgress.length > 0 ? (
+          <ProgressList 
+            userProgress={userProgress} 
+            onEdit={handleEdit}
+          />
+        ) : (
+          <p className="text-center text-slate-500">まだ記録がありません</p>
+        )}
       </CardContent>
     </Card>
   );

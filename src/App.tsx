@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { AppRoutes } from "./routes";
 import { Loader2 } from "lucide-react";
+import { WalletContextProvider } from "./components/wallet/WalletContextProvider";
 
 const queryClient = new QueryClient();
 
@@ -82,23 +83,25 @@ const App = () => {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <Toaster />
-          <BrowserRouter>
-            <ScrollToTop />
-            <div className="flex flex-col min-h-screen">
-              <GlobalNav />
-              <main className="flex-grow pt-16">
-                <AppRoutes isAuthenticated={isAuthenticated} />
-              </main>
-              <GlobalFooter />
-            </div>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+    <WalletContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <BrowserRouter>
+              <ScrollToTop />
+              <div className="flex flex-col min-h-screen">
+                <GlobalNav />
+                <main className="flex-grow pt-16">
+                  <AppRoutes isAuthenticated={isAuthenticated} />
+                </main>
+                <GlobalFooter />
+              </div>
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
+    </WalletContextProvider>
   );
 };
 

@@ -18,7 +18,7 @@ export const TrainingRecordForm = () => {
   const queryClient = useQueryClient();
   const [repetitions, setRepetitions] = useState("100");
   const [trainingType, setTrainingType] = useState("");
-  const [intensity, setIntensity] = useState("");
+  const [intensity, setIntensity] = useState<string | undefined>(undefined);
   const [notes, setNotes] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,6 +27,14 @@ export const TrainingRecordForm = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
+
+      console.log("Submitting training record:", {
+        user_id: user.id,
+        duration: parseInt(repetitions),
+        training_type: trainingType,
+        intensity: intensity || null,
+        notes,
+      });
 
       const { error } = await supabase
         .from("training_records")
@@ -43,7 +51,7 @@ export const TrainingRecordForm = () => {
       toast.success("トレーニング記録を保存しました");
       setRepetitions("100");
       setTrainingType("");
-      setIntensity("");
+      setIntensity(undefined);
       setNotes("");
       queryClient.invalidateQueries({ queryKey: ["trainingRecords"] });
     } catch (error) {
@@ -83,7 +91,10 @@ export const TrainingRecordForm = () => {
 
       <div className="space-y-2">
         <Label htmlFor="intensity">強度</Label>
-        <Select value={intensity} onValueChange={setIntensity}>
+        <Select 
+          value={intensity} 
+          onValueChange={setIntensity}
+        >
           <SelectTrigger>
             <SelectValue placeholder="選択してください" />
           </SelectTrigger>

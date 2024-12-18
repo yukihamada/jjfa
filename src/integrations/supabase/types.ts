@@ -1408,9 +1408,11 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          created_by_user_id: string | null
           description: string
           id: string
           is_drill: boolean | null
+          is_preset: boolean | null
           order_number: number | null
           parent_id: string | null
           technique_name: string
@@ -1420,9 +1422,11 @@ export type Database = {
         Insert: {
           category: string
           created_at?: string
+          created_by_user_id?: string | null
           description: string
           id?: string
           is_drill?: boolean | null
+          is_preset?: boolean | null
           order_number?: number | null
           parent_id?: string | null
           technique_name: string
@@ -1432,9 +1436,11 @@ export type Database = {
         Update: {
           category?: string
           created_at?: string
+          created_by_user_id?: string | null
           description?: string
           id?: string
           is_drill?: boolean | null
+          is_preset?: boolean | null
           order_number?: number | null
           parent_id?: string | null
           technique_name?: string

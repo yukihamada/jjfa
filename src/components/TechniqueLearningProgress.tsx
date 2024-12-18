@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import { TechniqueForm } from "./technique-tracker/TechniqueForm";
 import { ProgressList } from "./technique-tracker/ProgressList";
 import { useState } from "react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export const TechniqueLearningProgress = () => {
   const queryClient = useQueryClient();
@@ -51,15 +52,17 @@ export const TechniqueLearningProgress = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl sm:text-2xl font-bold text-slate-800">技術トラッカー</h2>
-      <div className="space-y-6">
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="text-xl sm:text-2xl font-bold text-slate-800">技術トラッカー</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
         <TechniqueForm onSuccess={handleSuccess} editingProgress={editingProgress} />
         <ProgressList 
           userProgress={userProgress} 
           onEdit={handleEdit}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

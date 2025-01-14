@@ -330,6 +330,7 @@ export type Database = {
       }
       competition_entries: {
         Row: {
+          belt_id: string | null
           competition_id: number | null
           created_at: string
           entry_status: string | null
@@ -340,6 +341,7 @@ export type Database = {
           weight_division: string | null
         }
         Insert: {
+          belt_id?: string | null
           competition_id?: number | null
           created_at?: string
           entry_status?: string | null
@@ -350,6 +352,7 @@ export type Database = {
           weight_division?: string | null
         }
         Update: {
+          belt_id?: string | null
           competition_id?: number | null
           created_at?: string
           entry_status?: string | null
@@ -379,6 +382,62 @@ export type Database = {
             columns: ["jjfa_member_id"]
             isOneToOne: false
             referencedRelation: "jjfa_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competition_registrations: {
+        Row: {
+          age: number
+          belt_level: string
+          competition_id: number | null
+          created_at: string
+          email: string
+          fighter_name: string
+          id: string
+          payment_status: string | null
+          phone: string | null
+          status: Database["public"]["Enums"]["entry_status"] | null
+          updated_at: string
+          user_id: string | null
+          weight: number
+        }
+        Insert: {
+          age: number
+          belt_level: string
+          competition_id?: number | null
+          created_at?: string
+          email: string
+          fighter_name: string
+          id?: string
+          payment_status?: string | null
+          phone?: string | null
+          status?: Database["public"]["Enums"]["entry_status"] | null
+          updated_at?: string
+          user_id?: string | null
+          weight: number
+        }
+        Update: {
+          age?: number
+          belt_level?: string
+          competition_id?: number | null
+          created_at?: string
+          email?: string
+          fighter_name?: string
+          id?: string
+          payment_status?: string | null
+          phone?: string | null
+          status?: Database["public"]["Enums"]["entry_status"] | null
+          updated_at?: string
+          user_id?: string | null
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competition_registrations_competition_id_fkey"
+            columns: ["competition_id"]
+            isOneToOne: false
+            referencedRelation: "competitions"
             referencedColumns: ["id"]
           },
         ]
@@ -479,6 +538,33 @@ export type Database = {
         }
         Relationships: []
       }
+      direct_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          read_at: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
       discussions: {
         Row: {
           attachments: Json | null
@@ -486,7 +572,6 @@ export type Database = {
           created_at: string
           id: string
           profile_id: string | null
-          title: string
           updated_at: string
           user_id: string
           visibility: string
@@ -497,7 +582,6 @@ export type Database = {
           created_at?: string
           id?: string
           profile_id?: string | null
-          title: string
           updated_at?: string
           user_id: string
           visibility?: string
@@ -508,7 +592,6 @@ export type Database = {
           created_at?: string
           id?: string
           profile_id?: string | null
-          title?: string
           updated_at?: string
           user_id?: string
           visibility?: string
@@ -744,6 +827,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      follows: {
+        Row: {
+          created_at: string
+          follower_id: string
+          following_id: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          follower_id: string
+          following_id: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          follower_id?: string
+          following_id?: string
+          id?: string
+        }
+        Relationships: []
       }
       jjfa_members: {
         Row: {
@@ -1288,28 +1392,76 @@ export type Database = {
           },
         ]
       }
-      profiles: {
+      profile_private_info: {
         Row: {
           address: string | null
-          avatar_url: string | null
-          bio: string | null
-          company_name: string | null
           created_at: string
           email: string | null
           emergency_contact: string | null
           emergency_phone: string | null
           emergency_relation: string | null
-          full_name: string | null
           guardian_address: string | null
           guardian_email: string | null
           guardian_name: string | null
           guardian_phone: string | null
           guardian_relation: string | null
           id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          emergency_contact?: string | null
+          emergency_phone?: string | null
+          emergency_relation?: string | null
+          guardian_address?: string | null
+          guardian_email?: string | null
+          guardian_name?: string | null
+          guardian_phone?: string | null
+          guardian_relation?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          emergency_contact?: string | null
+          emergency_phone?: string | null
+          emergency_relation?: string | null
+          guardian_address?: string | null
+          guardian_email?: string | null
+          guardian_name?: string | null
+          guardian_phone?: string | null
+          guardian_relation?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_private_info_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          company_name: string | null
+          created_at: string
+          full_name: string | null
+          id: string
           is_minor: boolean | null
           membership_number: string | null
           membership_status: string | null
-          phone: string | null
           position: string | null
           signup_domain: string | null
           subscription_plan: string | null
@@ -1317,26 +1469,15 @@ export type Database = {
           username: string | null
         }
         Insert: {
-          address?: string | null
           avatar_url?: string | null
           bio?: string | null
           company_name?: string | null
           created_at?: string
-          email?: string | null
-          emergency_contact?: string | null
-          emergency_phone?: string | null
-          emergency_relation?: string | null
           full_name?: string | null
-          guardian_address?: string | null
-          guardian_email?: string | null
-          guardian_name?: string | null
-          guardian_phone?: string | null
-          guardian_relation?: string | null
           id: string
           is_minor?: boolean | null
           membership_number?: string | null
           membership_status?: string | null
-          phone?: string | null
           position?: string | null
           signup_domain?: string | null
           subscription_plan?: string | null
@@ -1344,26 +1485,15 @@ export type Database = {
           username?: string | null
         }
         Update: {
-          address?: string | null
           avatar_url?: string | null
           bio?: string | null
           company_name?: string | null
           created_at?: string
-          email?: string | null
-          emergency_contact?: string | null
-          emergency_phone?: string | null
-          emergency_relation?: string | null
           full_name?: string | null
-          guardian_address?: string | null
-          guardian_email?: string | null
-          guardian_name?: string | null
-          guardian_phone?: string | null
-          guardian_relation?: string | null
           id?: string
           is_minor?: boolean | null
           membership_number?: string | null
           membership_status?: string | null
-          phone?: string | null
           position?: string | null
           signup_domain?: string | null
           subscription_plan?: string | null
@@ -1406,48 +1536,91 @@ export type Database = {
       }
       technique_details: {
         Row: {
+          black_belt_points: number | null
+          blue_belt_points: number | null
+          brown_belt_points: number | null
           category: string
           created_at: string
           created_by_user_id: string | null
           description: string
+          difficulty: string | null
+          dojo_id: string | null
           id: string
           is_drill: boolean | null
+          is_premium: boolean
           is_preset: boolean | null
+          jiu_jitsu_level: number | null
           order_number: number | null
           parent_id: string | null
+          price: number | null
+          purple_belt_points: number | null
+          subcategory: string | null
           technique_name: string
           updated_at: string
           video_url: string | null
+          visibility: string
+          white_belt_points: number | null
         }
         Insert: {
+          black_belt_points?: number | null
+          blue_belt_points?: number | null
+          brown_belt_points?: number | null
           category: string
           created_at?: string
           created_by_user_id?: string | null
           description: string
+          difficulty?: string | null
+          dojo_id?: string | null
           id?: string
           is_drill?: boolean | null
+          is_premium?: boolean
           is_preset?: boolean | null
+          jiu_jitsu_level?: number | null
           order_number?: number | null
           parent_id?: string | null
+          price?: number | null
+          purple_belt_points?: number | null
+          subcategory?: string | null
           technique_name: string
           updated_at?: string
           video_url?: string | null
+          visibility?: string
+          white_belt_points?: number | null
         }
         Update: {
+          black_belt_points?: number | null
+          blue_belt_points?: number | null
+          brown_belt_points?: number | null
           category?: string
           created_at?: string
           created_by_user_id?: string | null
           description?: string
+          difficulty?: string | null
+          dojo_id?: string | null
           id?: string
           is_drill?: boolean | null
+          is_premium?: boolean
           is_preset?: boolean | null
+          jiu_jitsu_level?: number | null
           order_number?: number | null
           parent_id?: string | null
+          price?: number | null
+          purple_belt_points?: number | null
+          subcategory?: string | null
           technique_name?: string
           updated_at?: string
           video_url?: string | null
+          visibility?: string
+          white_belt_points?: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: "technique_details_dojo_id_fkey"
+            columns: ["dojo_id"]
+            isOneToOne: false
+            referencedRelation: "dojos"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "technique_details_parent_id_fkey"
             columns: ["parent_id"]
@@ -1456,6 +1629,57 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      tournament_entries: {
+        Row: {
+          age: number | null
+          age_division: string | null
+          belt_rank: string
+          created_at: string
+          gender: string
+          id: string
+          name: string
+          payment_status: string | null
+          stripe_session_id: string | null
+          tournament_id: string | null
+          updated_at: string
+          user_id: string | null
+          weight_category: string | null
+          weight_division: string | null
+        }
+        Insert: {
+          age?: number | null
+          age_division?: string | null
+          belt_rank: string
+          created_at?: string
+          gender: string
+          id?: string
+          name: string
+          payment_status?: string | null
+          stripe_session_id?: string | null
+          tournament_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+          weight_category?: string | null
+          weight_division?: string | null
+        }
+        Update: {
+          age?: number | null
+          age_division?: string | null
+          belt_rank?: string
+          created_at?: string
+          gender?: string
+          id?: string
+          name?: string
+          payment_status?: string | null
+          stripe_session_id?: string | null
+          tournament_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+          weight_category?: string | null
+          weight_division?: string | null
+        }
+        Relationships: []
       }
       training_goals: {
         Row: {
@@ -1508,6 +1732,7 @@ export type Database = {
           training_type: string
           updated_at: string
           user_id: string
+          video_url: string | null
         }
         Insert: {
           created_at?: string
@@ -1520,6 +1745,7 @@ export type Database = {
           training_type: string
           updated_at?: string
           user_id: string
+          video_url?: string | null
         }
         Update: {
           created_at?: string
@@ -1532,6 +1758,7 @@ export type Database = {
           training_type?: string
           updated_at?: string
           user_id?: string
+          video_url?: string | null
         }
         Relationships: []
       }
@@ -1637,45 +1864,57 @@ export type Database = {
       videos: {
         Row: {
           category: string | null
+          competition_name: string | null
           competition_type: string | null
           created_at: string | null
           description: string | null
           id: string
+          is_sparring: boolean | null
           short_id: string
+          tagged_users: string[] | null
           thumbnail_url: string | null
           title: string
           updated_at: string | null
           user_id: string | null
           video_url: string
           views: number | null
+          visibility: string
         }
         Insert: {
           category?: string | null
+          competition_name?: string | null
           competition_type?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
+          is_sparring?: boolean | null
           short_id: string
+          tagged_users?: string[] | null
           thumbnail_url?: string | null
           title: string
           updated_at?: string | null
           user_id?: string | null
           video_url: string
           views?: number | null
+          visibility?: string
         }
         Update: {
           category?: string | null
+          competition_name?: string | null
           competition_type?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
+          is_sparring?: boolean | null
           short_id?: string
+          tagged_users?: string[] | null
           thumbnail_url?: string | null
           title?: string
           updated_at?: string | null
           user_id?: string | null
           video_url?: string
           views?: number | null
+          visibility?: string
         }
         Relationships: []
       }
@@ -1822,7 +2061,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      entry_status: "pending" | "approved" | "rejected" | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never

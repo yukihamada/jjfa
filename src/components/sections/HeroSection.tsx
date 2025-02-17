@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
@@ -12,11 +13,11 @@ export const HeroSection = () => {
           JJFA - 柔術 for ALL
         </h1>
         <p className="text-2xl mb-6 text-slate-600 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-          すべての人に柔術の可能性を
+          柔術の素晴らしさをすべての人へ
         </p>
         <div className="prose prose-lg max-w-2xl mx-auto mb-8 text-slate-600">
           <p className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-            JJFA（Jiu-Jitsu for All）は、年齢・性別・経験を問わず、柔術を通じて人と人を結び、健康的で豊かなコミュニティを築くことを目指しています。柔術は「フィジカルチェス」と称される戦略的な競技で、技術によって体格差を超える独特の魅力があります。
+            JJFA（Jiu-Jitsu for All）は、年齢・性別・経験を問わず誰でもブラジリアン柔術を楽しめることを目指した取り組みです。柔術は「身体を使ったチェス」と例えられるほど戦略性が高く、力任せではなく技術や工夫で相手を制する奥深さがあります。難しい技術や強い力は必要ないので、経験の有無や年齢・性別を問わず、どなたでも楽しく始められます。
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-400">

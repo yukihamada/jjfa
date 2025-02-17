@@ -1502,6 +1502,36 @@ export type Database = {
         }
         Relationships: []
       }
+      skill_level_descriptions: {
+        Row: {
+          catchphrase: string
+          created_at: string
+          description: string
+          id: string
+          key_points: string[]
+          level: Database["public"]["Enums"]["skill_level"]
+          updated_at: string
+        }
+        Insert: {
+          catchphrase: string
+          created_at?: string
+          description: string
+          id?: string
+          key_points: string[]
+          level: Database["public"]["Enums"]["skill_level"]
+          updated_at?: string
+        }
+        Update: {
+          catchphrase?: string
+          created_at?: string
+          description?: string
+          id?: string
+          key_points?: string[]
+          level?: Database["public"]["Enums"]["skill_level"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       stream_rewards: {
         Row: {
           created_at: string
@@ -1534,12 +1564,54 @@ export type Database = {
           },
         ]
       }
+      stream_tickets: {
+        Row: {
+          expires_at: string | null
+          id: string
+          price: number
+          purchased_at: string
+          status: string | null
+          stream_id: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          expires_at?: string | null
+          id?: string
+          price: number
+          purchased_at?: string
+          status?: string | null
+          stream_id: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          expires_at?: string | null
+          id?: string
+          price?: number
+          purchased_at?: string
+          status?: string | null
+          stream_id?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stream_tickets_stream_id_fkey"
+            columns: ["stream_id"]
+            isOneToOne: false
+            referencedRelation: "live_streams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       technique_details: {
         Row: {
           black_belt_points: number | null
           blue_belt_points: number | null
           brown_belt_points: number | null
           category: string
+          category_type: string | null
           created_at: string
           created_by_user_id: string | null
           description: string
@@ -1551,6 +1623,7 @@ export type Database = {
           is_preset: boolean | null
           jiu_jitsu_level: number | null
           order_number: number | null
+          parent_category: string | null
           parent_id: string | null
           price: number | null
           purple_belt_points: number | null
@@ -1566,6 +1639,7 @@ export type Database = {
           blue_belt_points?: number | null
           brown_belt_points?: number | null
           category: string
+          category_type?: string | null
           created_at?: string
           created_by_user_id?: string | null
           description: string
@@ -1577,6 +1651,7 @@ export type Database = {
           is_preset?: boolean | null
           jiu_jitsu_level?: number | null
           order_number?: number | null
+          parent_category?: string | null
           parent_id?: string | null
           price?: number | null
           purple_belt_points?: number | null
@@ -1592,6 +1667,7 @@ export type Database = {
           blue_belt_points?: number | null
           brown_belt_points?: number | null
           category?: string
+          category_type?: string | null
           created_at?: string
           created_by_user_id?: string | null
           description?: string
@@ -1603,6 +1679,7 @@ export type Database = {
           is_preset?: boolean | null
           jiu_jitsu_level?: number | null
           order_number?: number | null
+          parent_category?: string | null
           parent_id?: string | null
           price?: number | null
           purple_belt_points?: number | null
@@ -1629,6 +1706,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      technique_requirements: {
+        Row: {
+          created_at: string
+          id: string
+          level: Database["public"]["Enums"]["skill_level"]
+          specific_requirements: string[]
+          technique_name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          level: Database["public"]["Enums"]["skill_level"]
+          specific_requirements: string[]
+          technique_name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          level?: Database["public"]["Enums"]["skill_level"]
+          specific_requirements?: string[]
+          technique_name?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       tournament_entries: {
         Row: {
@@ -2062,6 +2166,12 @@ export type Database = {
     }
     Enums: {
       entry_status: "pending" | "approved" | "rejected" | "cancelled"
+      skill_level:
+        | "ベーシック"
+        | "ファンダメンタル"
+        | "アドバンス"
+        | "エキスパート"
+        | "マスター"
     }
     CompositeTypes: {
       [_ in never]: never

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -53,9 +54,9 @@ export const useFighterRegistration = (onSuccess: () => void) => {
         return;
       }
 
-      // Update profile with contact information
-      const { error: profileError } = await supabase
-        .from("profiles")
+      // Update profile private info with contact information
+      const { error: privateInfoError } = await supabase
+        .from("profile_private_info")
         .update({
           phone: data.phone,
           address: data.address,
@@ -65,8 +66,8 @@ export const useFighterRegistration = (onSuccess: () => void) => {
         })
         .eq("id", user.id);
 
-      if (profileError) {
-        console.error("Profile update error:", profileError);
+      if (privateInfoError) {
+        console.error("Profile private info update error:", privateInfoError);
         toast.error("プロフィール情報の更新に失敗しました");
         return;
       }

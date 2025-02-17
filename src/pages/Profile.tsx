@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -27,7 +28,14 @@ const ProfilePage = () => {
       // Get profile data
       const { data: profile } = await supabase
         .from("profiles")
-        .select("*")
+        .select(`
+          *,
+          phone,
+          address,
+          emergency_contact,
+          emergency_phone,
+          emergency_relation
+        `)
         .eq("id", user.id)
         .single();
       setProfile(profile);
